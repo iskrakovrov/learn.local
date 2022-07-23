@@ -1,12 +1,14 @@
 <?php
 
+$f = 40923337;
+
+
 include_once('inc/init.php');
 require_once('inc/db.php');
 require_once('function/function.php');
 
 $sql = "SELECT * FROM accounts";
 $query = selectAll($sql);
-
 
 foreach ($query as $a) {
     if (!empty ($a['avatar'])) {
@@ -96,3 +98,5 @@ $data = array(
 // Convert PHP array to JSON array
 $json_data = json_encode($data);
 print $json_data;
+
+
