@@ -1,0 +1,100 @@
+* {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #f7f7f7;
+    padding: 50px;
+}
+.App {
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    padding: 20px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    border-radius: 3px;
+    text-align: center;
+}
+.App h1 {
+    background-color: #f9f9f9;
+    text-align: center;
+    padding: 20px;
+    margin: 0;
+    font-size: 23px;
+}
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0;
+    flex-direction: column;
+    align-items: center;
+}
+p {
+    font-size: 18px;
+    color: black;
+    font-weight: 600;
+    line-height: 27px;
+    margin: 0 0 17px 0;
+}
+h4 {
+    font-size: 21px;
+    font-weight: 600;
+}
+.btn__default {
+    cursor: pointer;
+    display: flex;
+    font-size: 1.3em;
+    padding: 10px 20px;
+    border-radius: 7px;
+    border-color: transparent;
+    position: relative;
+    border: 0;
+    outline: 0;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 10%), 0 1px 2px 0 rgb(0 0 0 / 6%);
+    background-image: linear-gradient(to bottom right, #03a9f4 0%, #2196f3 100%) !important;
+    color: white;
+}
+label {
+    font-size: 18px;
+    margin-bottom: 10px;
+    display: flex;
+    font-weight: 600;
+}
+input.form__field__img {
+    width: 637px;
+    font-size: 20px;
+    border: 1px solid #f7f7f7;
+    background-color: #ffffff;
+    padding: 17px;
+    border-radius: 7px;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 10%), 0 2px 4px -1px rgb(0 0 0 / 6%);
+    margin-bottom: 27px;
+}
+.form__field {
+    display: flex;
+    align-items: stretch;
+    flex-direction: column;
+    padding: 27px 0px 10px 0px;
+}
+.status__msg {
+    font-size: 18px;
+    color: #017ada;
+    border: 1px dashed;
+    padding: 10px;
+    margin-bottom: 27px;
+}
+.gallery img {
+    max-width: 100%;
+    height: 260px;
+    object-fit: contain;
+    margin-right: 17px;
+    margin-left: 17px;
+}
+.gallery h2{
+    margin-top: 0px;
+}

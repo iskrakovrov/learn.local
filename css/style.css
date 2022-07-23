@@ -1,0 +1,60 @@
+html {
+	font-size: 0.9em;
+}
+
+td {
+    text-align: center;
+    /* center checkbox horizontally */
+    vertical-align: middle;
+    /* center checkbox vertically */
+}
+
+body{
+    background-color: #f4f7f6;
+    margin-top:20px;
+
+}
+
+
+
+table.dataTable td {
+  font-size: 0.8em;
+}
+table.dataTable tr.dtrg-level-0 td {
+    font-size: 0.8em;
+}
+
+footer {
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+tfoot {
+    display: table-header-group;
+}
+.checkbox-lg .custom-control-label::before,
+.checkbox-lg .custom-control-label::after {
+    top: .8rem;
+    width: 1.55rem;
+    height: 1.55rem;
+}
+
+.checkbox-lg .custom-control-label {
+    padding-top: 13px;
+    padding-left: 6px;
+}
+
+
+.checkbox-xl .custom-control-label::before,
+.checkbox-xl .custom-control-label::after {
+    top: 1.2rem;
+    width: 1.85rem;
+    height: 1.85rem;
+}
+
+.checkbox-xl .custom-control-label {
+    padding-top: 23px;
+    padding-left: 10px;
+}
