@@ -174,7 +174,7 @@ function parse_proxy($pr, $comm)
     }
     $time = Time();
     $sql1 = "SELECT * FROM proxy WHERE proxy = '$pr'";
-    $sql = "INSERT INTO `proxy` (`id_proxy`, `protocol`, `proxy`, `ip`, `port`, `login`, `pswd`, `link_proxy`, `status`, `work_proxy`, `created`, `comment`, 'use_proxy', 'ban') VALUES (NULL, '$mode', '$pr', '$host', '$port', '$user', '$pass', '$link', 'ok','0', '$time', '$comm', 0, 0)";
+    $sql = "INSERT INTO `proxy` (`id`, `protocol`, `proxy`, `ip`, `port`, `login`, `pswd`, `link_proxy`, `status`, `work`, `created`, `comment`, 'use_proxy', 'ban') VALUES (NULL, '$mode', '$pr', '$host', '$port', '$user', '$pass', '$link', 'ok','0', '$time', '$comm', 0, 0)";
     return [$sql, $sql1];
 }
 
@@ -266,7 +266,7 @@ if (empty($fa)) {
 
     $time = Time();
 
-    $sql = "INSERT INTO accounts (id_acc, login_fb, pass_fb, id_fb, name, bd, mb, yb, gender, avatar, created, comment, group_acc, server, id_proxy, status, works, useacc, friends, last_start, id_mail, id_phone, coockie, tocken, 2fa, ua, mail, mail_pass, imap_mail, phone, adv) VALUES (NULL,'$login', '$pass', NULL, NULL, NULL, NULL, NULL, NULL, NULL, $time, '$comm', $group, $serv,NULL, 1, 0, 0, NULL, NULL, NULL, NULL, '$cock', NULL, $fa, NULL, '$mail', '$passmail', '$imappass', '$phone', 0)";
+    $sql = "INSERT INTO accounts (id, login_fb, pass_fb, id_fb, name, bd, mb, yb, gender, avatar, created, comment, group_acc, server, id_proxy, status, works, useacc, friends, last_start, id_mail, id_phone, coockie, tocken, 2fa, ua, mail, mail_pass, imap_mail, phone, adv) VALUES (NULL,'$login', '$pass', NULL, NULL, NULL, NULL, NULL, NULL, NULL, $time, '$comm', $group, $serv,NULL, 1, 0, 0, NULL, NULL, NULL, NULL, '$cock', NULL, $fa, NULL, '$mail', '$passmail', '$imappass', '$phone', 0)";
 
     return [$sql];
 
