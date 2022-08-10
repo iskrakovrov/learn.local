@@ -1,30 +1,29 @@
 <?php
-include_once ('inc/init.php');
+include_once('inc/init.php');
 require_once('inc/db.php');
 require_once('function/function.php');
-if (!empty($_REQUEST['key'])){
+if (!empty($_REQUEST['key'])) {
 
-        $array = explode("\r\n", $_REQUEST['key']);
+    $array = explode("\r\n", $_REQUEST['key']);
 
-        for ($i = 0; $i <= count($array); $i++)
-            $c = (trim($array[$p]) . "<br/>");
-        $c = preg_replace('/<br[^>]*>/', '', $c);
-        $i = 0;
-        foreach ($array as $key) {
-            $i++;
-            $res = parse_key($key);
-            $sql = $res[0];
+    for ($i = 0; $i <= count($array); $i++)
+        $c = (trim($array[$p]) . "<br/>");
+    $c = preg_replace('/<br[^>]*>/', '', $c);
+    $i = 0;
+    foreach ($array as $key) {
+        $i++;
+        $res = parse_key($key);
+        $sql = $res[0];
 
-            if (!empty($sql)) {
-                $ins = insert($sql);
-
-            }
-
+        if (!empty($sql)) {
+            $ins = insert($sql);
 
         }
 
 
+    }
 
+    header("Refresh: 0");
 }
 
 ?>
@@ -51,7 +50,7 @@ if (!empty($_REQUEST['key'])){
 include_once 'inc/header.php';
 $cat = $_REQUEST['cat'];
 $sql = "SELECT * FROM value_lists WHERE list = $cat";
-$ser=selectAll($sql);
+$ser = selectAll($sql);
 
 ?>
 <main class="container-fluid ">
@@ -76,10 +75,10 @@ $ser=selectAll($sql);
             <form method="post">
     <textarea class="form-control rounded-0" id="key" name="key" rows="10"
               placeholder="Введите нужные записи"></textarea>
-            <br>
-            <br>
-            <button type="submit"  class="btn btn-primary">Submit</button>
-            <br>
+                <br>
+                <br>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <br>
             </form>
         </div>
     </div>
@@ -88,60 +87,68 @@ $ser=selectAll($sql);
         <div class="col text-center">
             <form>
                 <a class="btn btn-secondary" href="add_server.php" role="button">Add server</a>
-                <a class="btn btn-danger"  href="del_server.php" role="button">Delete servers</a>
+                <a class="btn btn-danger" href="del_server.php" role="button">Delete servers</a>
         </div>
     </div>
     <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-6 text-center">
 
 
+                <table id="example" class="cell-border" style="width:100%">
+                    <thead>
+                    <tr>
+                        <th class="check" style="text-align: center;">
+                            <input type="checkbox" id="all" value=""/>
+                        </th>
+                        <th>Value</th>
 
-        <table id="example" class="cell-border" style="width:100%">
-            <thead>
-            <tr>
-                <th class="check" style="text-align: center;">
-                    <input type="checkbox" id="all" value=""/>
-                </th>
-                <th>Value</th>
-
-                <th>Action</th>
-            </tr>
-            </thead>
-            <tbody>
-            <?php
-            $i = 0;
-            foreach ($ser as $a) {
-                $i++; ?>
-                <tr>
-                    <td style="text-align: center;"><input type="checkbox" name="a[]" value="<?php echo $a['id'] ?>">
-                    </td>
-                    <td><?php echo $a['value'] ?></td>
-
-
-                    <td>
-                        <div class="col">
-                            <button type="button" class="btn btn-success">Edit server</button>
-
-                            <a href="del_server.php?id=<?php echo $a['id'] ?>" class="btn btn-danger" title="Delete value" onClick="return confirm( 'WARNING!!! DELETE SERVER? Аккаунты привязанные к данному серверу будут свободными, пока вы не привяжете их к новому серверу' )">Delete Server <i class="bi bi-x-circle-fill"></i></a>
-                        </div>
-                    </td>
-                </tr>
-            <?php } ?>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                    $i = 0;
+                    foreach ($ser as $a) {
+                        $i++; ?>
+                        <tr>
+                            <td style="text-align: center;"><input type="checkbox" name="a[]"
+                                                                   value="<?php echo $a['id'] ?>">
+                            </td>
+                            <td><?php echo $a['value'] ?></td>
 
 
-            </tbody>
-            <tfoot>
-            <tr>
-                <th></th>
-                <th>Value</th>
+                            <td>
+                                <div class="col">
+                                    <button type="button" class="btn btn-success">Edit server</button>
 
-                <th>Action</th>
-            </tr>
-            </tfoot>
-        </table>
+                                    <a href="del_server.php?id=<?php echo $a['id'] ?>" class="btn btn-danger"
+                                       title="Delete value"
+                                       onClick="return confirm( 'WARNING!!! DELETE SERVER? Аккаунты привязанные к данному серверу будут свободными, пока вы не привяжете их к новому серверу' )">Delete
+                                        Server <i class="bi bi-x-circle-fill"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                    <?php } ?>
+
+
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <th></th>
+                        <th>Value</th>
+
+                        <th>Action</th>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
         </form>
     </div>
 
-
+    <br>
+    <br>
 </main>
 
 

@@ -3,6 +3,8 @@
 include_once('inc/init.php');
 require_once('inc/db.php');
 require_once('function/function.php');
+$lang = $_SESSION['lang'] . '.php';
+require_once($lang);
 
 
 
@@ -67,19 +69,17 @@ include_once 'inc/header.php'
 
 
             <div class="alert alert-info" role="alert">
-                Формат в котором должны быть записаны прокси:<br/><strong>protocol://login:pass@ip:port</strong> - для
-                прокси с логином/паролем<br/><strong>protocol://ip:port</strong> - для прокси без
-                логина/пароля<br/><span class="text-danger">Важно:</span> если у вас http или https прокси, то это не указывайте!!!
+               <? echo $txtaddpr ?>
             </div>
         <form method="post"
             <div class="form-group">
 
 
                  <textarea class="form-control rounded-0" id="proxy" name="proxy1" rows="10"
-                           placeholder="Каждая прокси с новой строки"></textarea>
+                           placeholder="<?echo $txtnewline ?>"></textarea>
                     <br>
 
-                    <input type="text" class="form-control" id="comms" name="comms1" placeholder="Комментарий">
+                    <input type="text" class="form-control" id="comms" name="comms1" placeholder="<?echo $txtcomm?>">
 
 
 

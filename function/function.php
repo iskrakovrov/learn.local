@@ -23,7 +23,7 @@ function dbCheckError($query)
 }
 
 // Запрос Select к бд
-function select($sel, $params = [])
+function select($sel)
 {
     global $pdo;
     $sql = $sel;
@@ -34,7 +34,7 @@ function select($sel, $params = [])
     return $data;
 }
 
-function selectAll($sel, $params = [])
+function selectAll($sel)
 {
     global $pdo;
     $sql = $sel;
@@ -124,6 +124,7 @@ function processForm($array)
 {
 
     // обрабатываешь данные формы и возвращаешь сообщение о результате
+
     if ($a === 1) {
 
         // Если регистрация прошла успешно
@@ -337,16 +338,17 @@ function add_task($add_task, $json_data, $time, $account)
 function parse_key($key)
 {
     $key = $key;
-    $cat = $_REQUEST['cat'];
-    $sql = "SELECT * FROM volue_list WHERE list = $cat AND volue = $key";
-    $query = select($sql);
-    if (empty($query)){
-        $sql = "INSERT INTO value_list (id,value,list) VALUES (NULL, '$key', $cat )";
-    }
-    else{
+    if (empty($key)) {
         $sql = null;
+    } else {
+        $cat = $_REQUEST['cat'];
+        $sql = "SELECT * FROM value_lists WHERE list = $cat AND value = '$key'";
+        $query = select($sql);
+        if (empty($query)) {
+            $sql = "INSERT INTO value_lists (id,value,list) VALUES (NULL, '$key', $cat )";
+        } else {
+            $sql = null;
+        }
     }
-return[$sql];
-
-
+    return [$sql];
 }

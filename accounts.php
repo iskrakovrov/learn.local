@@ -2,6 +2,8 @@
 include_once('inc/init.php');
 require_once('inc/db.php');
 require_once('function/function.php');
+$lang = $_SESSION['lang'] . '.php';
+require_once($lang);
 
 ?>
 <!doctype html>
@@ -29,7 +31,7 @@ include_once 'inc/header.php'
 
 <main class="container-fluid ">
     <div class="row text-center">
-        <h2>Accounts</h2>
+        <h2><?echo $txtacc ?></h2>
     </div>
     <div class="row">
         <div class="col text-center">
@@ -37,7 +39,7 @@ include_once 'inc/header.php'
             <div class="row justify-content-center">
                 <div class="col-6 text-center">
                     <div class="alert alert-info" role="alert">
-                        Инструкция
+                        <?echo $txtacci ?>
                     </div>
                 </div>
             </div>

@@ -15,7 +15,12 @@ if (!empty($_REQUEST["submit"])) {
 
     }
     if ($error == "") {
+        $sql = "SELECT lang FROM users";
+        $lang = select($sql);
         $_SESSION["admin"] = 1;
+        $lang = $lang['lang'];
+        $_SESSION["lang"] = $lang;
+
         header("Location: ./accounts.php");
     }
 }

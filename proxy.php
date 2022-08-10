@@ -36,7 +36,7 @@ $ser = selectAll($sql);
     <div class="row">
         <div class="col text-center">
             <a class="btn btn-secondary" href="add_one_proxy.php" role="button">Add one proxy</a>
-            <a class="btn btn-secondary" href="#" role="button">Add multi proxy</a>
+            <a class="btn btn-secondary" href="add_multi_proxy.php" role="button">Add multi proxy</a>
             <a class="btn btn-success" href="#" role="button">Multi good proxy</a>
             <a class="btn btn-danger" href="#" role="button">Delete proxy</a>
         </div>

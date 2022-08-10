@@ -1,3 +1,37 @@
+<?php
+include_once ('inc/init.php');
+require_once('inc/db.php');
+require_once('function/function.php');
+$lang = $_SESSION['lang'] . '.php';
+require_once($lang);
+
+if (!empty($_POST['login']))
+{
+    $login = $_POST['login'];
+    $sql = "UPDATE users set login = '$login' where id = 1";
+    $qw=update($sql);
+}
+if (!empty($_POST['pass']))
+{
+    $pass = $_POST['pass'];
+    $sql = "UPDATE users set pass = '$pass' where id = 1";
+    $qw=update($sql);
+}
+if ($_POST['lng']<>'Select')
+{
+    $lng = $_POST['lng'];
+    $sql = "UPDATE users set lang = '$lng' where id = 1";
+    $qw=update($sql);
+    $sql = "SELECT lang FROM users";
+    $lang = select($sql);
+    $_SESSION["admin"] = 1;
+    $lang = $lang['lang'];
+    $_SESSION["lang"] = $lang;
+    header("Refresh: 0");
+}
+$sql = "SELECT * FROM users limit 1";
+$user = select($sql);
+?>
 <!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
@@ -20,11 +54,48 @@
 include_once 'inc/header.php'
 ?>
 <main class="container-fluid ">
+    <div class="row text-center">
+        <h2>Settings</h2>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-6 text-center">
 
-Пауза между действиями в пределах режима
 
+            <div class="alert alert-info" role="alert">
+                <strong><?echo $txtsett?></strong><br>
 
-</main>
+                <br>
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <div class="row justify-content-center">
+        <div class="col-6 text-center">
+            <form method="post">
+    <input type="text" class="form-control rounded-0" id="login" name="login"
+              value="<?echo $user['login']?>"></textarea>
+
+                <br>
+                <input type="text" class="form-control rounded-0" id="pass" name="pass"
+                          value="<?echo $user['pass']?>"></textarea>
+                <br>
+                <div class="form-floating">
+                <select class="form-select" id="lng" name="lng">
+                    <option>Select</option>
+                    <option value = 0>Russian</option>
+                    <option value = 1>English</option>
+                </select>
+                </div>
+                <br>
+                <br>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <br>
+            </form>
+        </div>
+    </div>
+    <br>
+
 
 
 <!-- Option 1: Bootstrap Bundle with Popper -->

@@ -110,10 +110,10 @@ $gr = selectAll($sql);
 
                     <strong><label>Аккаунты</label></strong>
                     <textarea class="form-control rounded-0" id="proxy" name="accs" rows="10"
-                              placeholder="Каждый аккаунт с новой строки"></textarea>
+                              placeholder="<?echo $txtnewline ?>"></textarea>
                     <br>
                     <strong><label>Не обязательно</label></strong>
-                    <input type="text" class="form-control" id="comms" name="comms1" placeholder="Комментарий">
+                    <input type="text" class="form-control" id="comms1" name="comms1" placeholder="<?echo $txtcomm?>">
 
 
                     <br>
