@@ -3,7 +3,7 @@ include_once('inc/init.php');
 require_once('inc/db.php');
 require_once('function/function.php');
 $id = $_REQUEST['id'];
-$sql = "SELECT * FROM accounts WHERE id_acc = '$id'";
+$sql = "SELECT * FROM accounts WHERE id = '$id'";
 $qu = select($sql);
 if (!empty($_POST)) {
     $login = $_POST['login'];

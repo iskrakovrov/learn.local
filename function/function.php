@@ -231,7 +231,7 @@ function parse_acc2($acc, $comm, $serv, $group, $cock)
     $mail = $accs[2];
     $passmail = $accs [3];
     $imappass = $accs[4];
-   $fa = $accs[5];
+    $fa = $accs[5];
     $phone = $accs [6];
     $cock = $accs [7];
     $sql = "SELECT * FROM accounts WHERE login_fb = '$login'";
@@ -260,9 +260,9 @@ function parse_acc2($acc, $comm, $serv, $group, $cock)
     if (empty($cock)) {
         $cock = "NULL";
     }
-if (empty($fa)) {
-    $fa = "NULL";
-}
+    if (empty($fa)) {
+        $fa = "NULL";
+    }
 
     $time = Time();
 
@@ -271,6 +271,7 @@ if (empty($fa)) {
     return [$sql];
 
 }
+
 function mails($m1, $p1)
 {
     if (empty($m1)) {
@@ -333,3 +334,19 @@ function add_task($add_task, $json_data, $time, $account)
     }
 }
 
+function parse_key($key)
+{
+    $key = $key;
+    $cat = $_REQUEST['cat'];
+    $sql = "SELECT * FROM volue_list WHERE list = $cat AND volue = $key";
+    $query = select($sql);
+    if (empty($query)){
+        $sql = "INSERT INTO value_list (id,value,list) VALUES (NULL, '$key', $cat )";
+    }
+    else{
+        $sql = null;
+    }
+return[$sql];
+
+
+}

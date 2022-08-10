@@ -78,7 +78,7 @@
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="#">Дополнительные lists</a></li>
+                            <li><a class="dropdown-item" href="#">Additional lists</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">

@@ -52,7 +52,7 @@ include_once 'inc/header.php'
             <tbody>
             <tr>
                 <td>Minimum friends:</td>
-                <td><input type="text" id="min" name="min"></td>
+                <td><label for="min"></label><input type="text" id="min" name="min"></td>
             </tr>
             <tr>
                 <td>Maximum friends:</td>
@@ -67,7 +67,7 @@ include_once 'inc/header.php'
                 <select name="add_task" class="custom-select">
                     <option value="" selected>[Что делать с отмеченными]</option>
                     <option value="add_t.php">Добавить задание</option>
-                    <option value="acc_free.php">Установить состояние "Свободен"</option>
+                    <option value="acc_free.php">Установить состояние &quot;Свободен"</option>
 
 
                     <option value="clear_tasks.php">Удалить все задания</option>
@@ -75,7 +75,7 @@ include_once 'inc/header.php'
 
                     <option value="" disabled="disabled">----------</option>
                     <option value="add_to_group_1">Добавить в группу "Киев"</option>
-                    <option value="add_to_group_2">Добавить в группу "Одесса"</option>
+                    <option value="add_to_group_2">Добавить в группу &quot;Одесса&quot;</option>
                     <option value="add_to_group_3">Добавить в группу "Днепр"</option>
                     <option value="add_to_group_4">Добавить в группу "Харьков"</option>
                     <option value="add_to_group_5">Добавить в группу "FBCOMBO"</option>
@@ -107,7 +107,7 @@ include_once 'inc/header.php'
 
 
                     <button class="btn btn-danger" onClick="return confirm( 'WARNING!!! DELETE ACCOUNT?' )"
-                            name="del_accs" id="dell_accs" method="post">DELETE ACCOUNTS
+                            name="del_accs" id="dell_accs" >DELETE ACCOUNTS
                     </button>
                 </div>
             </div>
@@ -115,9 +115,7 @@ include_once 'inc/header.php'
 
     </div>
 
-    <br>
-            <button id="cl">Clear State Save</button>
-    <br>
+
     <table id="dr_table" class="table table-responsive table-striped table-bordered table-hover" style="width:100%">
 
         <thead>

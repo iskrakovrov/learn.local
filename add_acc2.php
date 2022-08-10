@@ -90,7 +90,7 @@ $gr = selectAll($sql);
                         $i = 0;
                         foreach ($ser as $a) {
                             $i++; ?>
-                            <option value="<?php echo $a['id_server'] ?>"><?php echo $a['name_server'] ?></option>
+                            <option value="<?php echo $a['id'] ?>"><?php echo $a['name_server'] ?></option>
                         <?php }
                         ?>
                     </select>
@@ -102,7 +102,7 @@ $gr = selectAll($sql);
                         $i = 0;
                         foreach ($gr as $b) {
                             $i++; ?>
-                            <option value="<?php echo $b['id_gr'] ?>"><?php echo $b['name_group'] ?></option>
+                            <option value="<?php echo $b['id'] ?>"><?php echo $b['name_group'] ?></option>
                         <?php }
                         ?>
 
