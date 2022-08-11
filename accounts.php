@@ -5,6 +5,8 @@ require_once('function/function.php');
 $lang = $_SESSION['lang'] . '.php';
 require_once($lang);
 
+
+
 ?>
 <!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
@@ -31,7 +33,7 @@ include_once 'inc/header.php'
 
 <main class="container-fluid ">
     <div class="row text-center">
-        <h2><?echo $txtacc ?></h2>
+        <h2><? echo $txtacc ?></h2>
     </div>
     <div class="row">
         <div class="col text-center">
@@ -39,7 +41,7 @@ include_once 'inc/header.php'
             <div class="row justify-content-center">
                 <div class="col-6 text-center">
                     <div class="alert alert-info" role="alert">
-                        <?echo $txtacci ?>
+                        <? echo $txtacci ?>
                     </div>
                 </div>
             </div>
@@ -94,83 +96,85 @@ include_once 'inc/header.php'
                 </select>
 
 
-            <div class="input-group-append">
-                <button class="btn btn-secondary" name="submit1" value="1" type="submit">&raquo;</button>
-            </div>
+                <div class="input-group-append">
+                    <button class="btn btn-secondary" name="submit1" value="1" type="submit">&raquo;</button>
+                </div>
                 <br>
 
-            <div class="row">
-                <div class="col text-center">
-                    <a class="btn btn-secondary" href="add_acc2.php" role="button">Add accounts</a>
-                    <button class="btn btn-secondary" name="add_task" id="add_task" value="add_task.php">ADD TASK</button>
+                <div class="row">
+                    <div class="col text-center">
+                        <a class="btn btn-secondary" href="add_acc2.php" role="button">Add accounts</a>
+                        <button class="btn btn-secondary" name="add_task" id="add_task" value="add_task.php">ADD TASK
+                        </button>
 
 
-                    <a class="btn btn-secondary" href="#" role="button">Check double</a>
+                        <a class="btn btn-secondary" href="#" role="button">Check double</a>
 
 
-                    <button class="btn btn-danger" onClick="return confirm( 'WARNING!!! DELETE ACCOUNT?' )"
-                            name="del_accs" id="dell_accs" >DELETE ACCOUNTS
-                    </button>
+                        <button class="btn btn-danger" onClick="return confirm( 'WARNING!!! DELETE ACCOUNT?' )"
+                                name="del_accs" id="dell_accs">DELETE ACCOUNTS
+                        </button>
+                    </div>
                 </div>
+
+
             </div>
 
 
-    </div>
+            <table id="dr_table" class="table table-responsive table-striped table-bordered table-hover"
+                   style="width:100%">
+
+                <thead>
+                <tr>
+                    <th class="check" style="text-align: center;">
+                        <input type="checkbox" id="all" value=""/>
+                    </th>
+                    <th>Login</th>
+                    <th>Mail</th>
+                    <th>Phone</th>
+                    <th>Gender</th>
+                    <th>Avatar</th>
+                    <th>Proxy</th>
+                    <th>Server</th>
+                    <th>Group</th>
+                    <th>Status</th>
+                    <th>Task</th>
+                    <th>Use</th>
+                    <th>Create</th>
+                    <th>Friends</th>
+                    <th>Tocken</th>
+                    <th>Adv</th>
+                    <th>Last Start</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+
+                <tfoot>
+                <tr>
+                    <th></th>
+                    <th>Login</th>
+                    <th>Mail</th>
+                    <th>Phone</th>
+                    <th>gender</th>
+                    <th>Avatar</th>
+                    <th>Proxy</th>
+                    <th>Server</th>
+                    <th>Group</th>
+                    <th>Status</th>
+                    <th>Task</th>
+                    <th>Use</th>
+                    <th>Create</th>
+                    <th>Friends</th>
+                    <th>Tocken</th>
+                    <th>Adv</th>
+                    <th>Last Start</th>
+                    <th>Action</th>
+                </tr>
+                </tfoot>
 
 
-    <table id="dr_table" class="table table-responsive table-striped table-bordered table-hover" style="width:100%">
-
-        <thead>
-        <tr>
-            <th class="check" style="text-align: center;">
-                <input type="checkbox" id="all" value=""/>
-            </th>
-            <th>Login</th>
-            <th>Mail</th>
-            <th>Phone</th>
-            <th>Gender</th>
-            <th>Avatar</th>
-            <th>Proxy</th>
-            <th>Server</th>
-            <th>Group</th>
-            <th>Status</th>
-            <th>Task</th>
-            <th>Use</th>
-            <th>Create</th>
-            <th>Friends</th>
-            <th>Tocken</th>
-            <th>Adv</th>
-            <th>Last Start</th>
-            <th>Action</th>
-        </tr>
-        </thead>
-
-        <tfoot>
-        <tr>
-            <th></th>
-            <th>Login</th>
-            <th>Mail</th>
-            <th>Phone</th>
-            <th>gender</th>
-            <th>Avatar</th>
-            <th>Proxy</th>
-            <th>Server</th>
-            <th>Group</th>
-            <th>Status</th>
-            <th>Task</th>
-            <th>Use</th>
-            <th>Create</th>
-            <th>Friends</th>
-            <th>Tocken</th>
-            <th>Adv</th>
-            <th>Last Start</th>
-            <th>Action</th>
-        </tr>
-        </tfoot>
-
-
-    </table>
-    </form>
+            </table>
+        </form>
     </div>
 
 
@@ -208,8 +212,7 @@ include_once 'inc/header.php'
     dr_table = $('#dr_table').DataTable({
 
 
-
-        bProcessing:  false,
+        bProcessing: false,
 
 
         stateSave: true,
@@ -251,11 +254,10 @@ include_once 'inc/header.php'
         "sInfoFiltered": "(filtered from _MAX_ total records)",
 
 
-        'columnDefs': [ {
-            'targets': [0,4,5,6,7,8,9,11, 14, 15], // column index (start from 0)
+        'columnDefs': [{
+            'targets': [0, 4, 5, 6, 7, 8, 9, 11, 14, 15], // column index (start from 0)
             'orderable': false, // set orderable false for selected columns
         }],
-
 
 
         initComplete: function () {
