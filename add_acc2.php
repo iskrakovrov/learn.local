@@ -6,6 +6,8 @@ $nr = $_REQUEST['accs'];
 $serv = $_REQUEST['server'];
 $group = $_REQUEST['group'];
 $comm = $_REQUEST['comms1'];
+
+
 if (!empty($nr) && !empty($serv) && !empty($group)) {
 
 
@@ -69,14 +71,16 @@ $gr = selectAll($sql);
 
 
             <div class="alert alert-info" role="alert">
-                Формат в котором должны быть записаны аккаунты<br/><strong>login;password;mail;password mail;IMAP pass;2fa;Phone</strong><br>
+                Формат в котором должны быть записаны аккаунты<br/><strong>login;password;mail;password mail;IMAP
+                    pass;2fa;Phone</strong><br>
                 Если не создана группа <br>
                 <a class="btn btn-secondary" href="gr.php" role="button" data-placement="right"
                    title="Если не указали группу">Add account group</a>
                 <br>
                 Если не создан сервер
                 <br>
-                <a class="btn btn-secondary" href="servers.php" role="button" data-toggle="tooltip" data-placement="right"
+                <a class="btn btn-secondary" href="servers.php" role="button" data-toggle="tooltip"
+                   data-placement="right"
                    title="Если не указали сервер">Add Server</a>
                 <br>
             </div>
@@ -110,10 +114,10 @@ $gr = selectAll($sql);
 
                     <strong><label>Аккаунты</label></strong>
                     <textarea class="form-control rounded-0" id="proxy" name="accs" rows="10"
-                              placeholder="<?echo $txtnewline ?>"></textarea>
+                              placeholder="<? echo $txtnewline ?>"></textarea>
                     <br>
                     <strong><label>Не обязательно</label></strong>
-                    <input type="text" class="form-control" id="comms1" name="comms1" placeholder="<?echo $txtcomm?>">
+                    <input type="text" class="form-control" id="comms1" name="comms1" placeholder="<? echo $txtcomm ?>">
 
 
                     <br>
