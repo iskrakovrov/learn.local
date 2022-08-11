@@ -3,6 +3,10 @@
 include_once('inc/init.php');
 require_once('inc/db.php');
 require_once('function/function.php');
+$lang = $_SESSION['lang'] . '.php';
+require_once($lang);
+
+
 $ids = $_SESSION['ids'];
 $add_task = $_POST['add_task'];
 if ($add_task == "login") {

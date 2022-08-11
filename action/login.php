@@ -7,7 +7,7 @@
 
 
             <div class="alert alert-info" role="alert">
-                Выберите опции логина.
+                <?echo $txtlogin?>
             </div>
             
 
@@ -18,61 +18,61 @@
                             <input class="form-check-input" name="action[0]" type="checkbox" value="sbor"
                                    id="action[0]">
                             <label class="form-check-label" for="action[0]">
-                                Сбор информации одноразово
+                                <?echo $txtlogin1?>
                             </label>
                         </div>
                         <div class="form-check col-sm-4 text-center">
                             <input class="form-check-input" name="action[1]" type="checkbox" value="delphone"
                                    id="action[1]">
                             <label class="form-check-label" for="action[1]">
-                                Удалять телефон если подключена почта
+                                <?echo $txtlogin2?>
                             </label>
                         </div>
                         <div class="form-check col-sm-4 text-center">
                             <input class="form-check-input" name="action[2]" type="checkbox" value="smart"
                                    id="action[2]">
                             <label class="form-check-label" for="action[2]">
-                                Быстрый логин (без определения и прохождения бана)
+                                <?echo $txtlogin3?>
                             </label>
                         </div>
                         <div class="form-check col-sm-4 text-center">
                             <input class="form-check-input" name="action[3]" type="checkbox" value="tock"
                                    id="action[3]">
                             <label class="form-check-label" for="action[3]">
-                                Сбор токена
+                                <?echo $txtlogin4?>
                             </label>
                         </div>
                         <div class="form-check col-sm-4 text-center">
                             <label class="form-check-label" for="action[4]">
-                                Максимум invite за 24 часа
+                                <?echo $txtlogin5?>
                             </label>
                             <input class="form-control" name="action[4]" type="text" id="action[4]">
 
                         </div>
                         <div class="form-check col-sm-4 text-center">
                             <label class="form-check-label" for="action[5]">
-                                Максимум like за 24 часа
+                                <?echo $txtlogin6?>
                             </label>
                             <input class="form-control" name="action[5]" type="text" id="action[5]">
 
                         </div>
                         <div class="form-check col-sm-4 text-center">
                             <label class="form-check-label" for="action[6]">
-                                Максимум комментариев за 24 часа
+                                <?echo $txtlogin7?>
                             </label>
                             <input class="form-control" name="action[6]" type="text" id="action[6]">
 
                         </div>
                         <div class="form-check col-sm-4 text-center">
                             <label class="form-check-label" for="action[7]">
-                                Максимум личных сообщений за 24 часа
+                                <?echo $txtlogin8?>
                             </label>
                             <input class="form-control" name="action[7]" type="text" id="action[7]">
 
                         </div>
                         <div class="form-check col-sm-4 text-center">
                             <label class="form-check-label" for="action[8]">
-                                Ззапуск задач не раньше чем через секунд после предыдущей
+                                <?echo $txtlogin9?>
                             </label>
                             <input class="form-control" name="action[8]" type="text" id="action[8]">
 
