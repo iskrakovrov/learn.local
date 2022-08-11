@@ -2,6 +2,8 @@
 include_once('inc/init.php');
 require_once('inc/db.php');
 require_once('function/function.php');
+$lang = $_SESSION['lang'] . '.php';
+require_once($lang);
 $nr = $_REQUEST['accs'];
 $serv = $_REQUEST['server'];
 $group = $_REQUEST['group'];
@@ -64,30 +66,28 @@ $gr = selectAll($sql);
 ?>
 <main class="container-fluid ">
     <div class="row text-center">
-        <h2>Add accounts</h2>
+        <h2><?echo $txtaddacc?></h2>
     </div>
     <div class="row justify-content-center">
         <div class="col-6 text-center">
 
 
             <div class="alert alert-info" role="alert">
-                Формат в котором должны быть записаны аккаунты<br/><strong>login;password;mail;password mail;IMAP
-                    pass;2fa;Phone</strong><br>
-                Если не создана группа <br>
+                <?echo  $txtaddacc1?>
                 <a class="btn btn-secondary" href="gr.php" role="button" data-placement="right"
-                   title="Если не указали группу">Add account group</a>
+                   title="<?echo  $txtaddacc1?>">Add account group</a>
                 <br>
-                Если не создан сервер
+                <?echo  $txtaddacc2?>
                 <br>
                 <a class="btn btn-secondary" href="servers.php" role="button" data-toggle="tooltip"
                    data-placement="right"
-                   title="Если не указали сервер">Add Server</a>
+                   title="<?echo  $txtaddacc2?>">Add Server</a>
                 <br>
             </div>
             <form method="post">
                 <div class="form-group">
                     <br>
-                    <strong><label>На какой сервер добавить аккаунты</label></strong>
+                    <strong><label><?echo  $txtaddacc3?></label></strong>
                     <select class="form-select" name="server">
                         <option disabled selected value>Open this select menu</option>
                         <?php
@@ -99,7 +99,7 @@ $gr = selectAll($sql);
                         ?>
                     </select>
 
-                    <strong><label>Выберите к какой группе добавить аккаунты</label></strong>
+                    <strong><label><?echo  $txtaddacc4?></label></strong>
                     <select class="form-select" name="group">
                         <option disabled selected value>Open this select menu</option>
                         <?php
@@ -111,12 +111,14 @@ $gr = selectAll($sql);
                         ?>
 
                     </select>
+                    <br>
 
-                    <strong><label>Аккаунты</label></strong>
-                    <textarea class="form-control rounded-0" id="proxy" name="accs" rows="10"
+                    <strong><label><?echo $txtacc?></label></strong>
+                    <textarea class="form-control rounded-0" id="accs" name="accs" rows="10"
                               placeholder="<? echo $txtnewline ?>"></textarea>
                     <br>
-                    <strong><label>Не обязательно</label></strong>
+
+                    <strong><label><?echo $txtnoreq?></label></strong>
                     <input type="text" class="form-control" id="comms1" name="comms1" placeholder="<? echo $txtcomm ?>">
 
 
