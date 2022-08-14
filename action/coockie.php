@@ -1,9 +1,9 @@
 <main class="container-fluid ">
     <div class="row text-center">
-        <h2>Add task</h2>
+        <h2>Add task Farm cookies</h2>
     </div>
     <?php
-    $sql = "SELECT * FROM lists WHERE cat = 8";
+    $sql = "SELECT * FROM lists WHERE cat = 8 OR cat = 9";
     $qw = selectAll($sql);
 
     ?>
@@ -14,14 +14,14 @@
 
 
                 <div class="alert alert-info" role="alert">
-                    Выберите опции для фарма аккаунтов
+                    <?php echo $txtcook?>
                 </div>
 
 
                 <form method="post">
                     <div class="form-row justify-content-center">
 
-                        <label for="cat" class="col-sm-6 control-label">Your keywords</label>
+                        <label for="cat" class="col-sm-6 control-label"><?php echo $txtcook3?></label>
                         <div class="col-sm-4 text-center">
 
                             <select name="cat" id="cat" class="form-control">
@@ -36,7 +36,7 @@
                         <br>
                         <div class="col-sm-4 text-center">
                             <div class="form-check">
-                                <label for="num_s">Количество сайтов</label>
+                                <label for="num_s"><? echo $txtcook2?></label>
                                 <input type="text" name="num_s" id="num_s" class="form-control" placeholder="5-10 required">
                             </div>
                         </div>

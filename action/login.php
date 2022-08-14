@@ -7,9 +7,9 @@
 
 
             <div class="alert alert-info" role="alert">
-                <?echo $txtlogin?>
+                <? echo $txtlogin ?>
             </div>
-            
+
 
             <div class="row d-flex justify-content-center">
                 <form method="post">
@@ -18,65 +18,93 @@
                             <input class="form-check-input" name="action[0]" type="checkbox" value="sbor"
                                    id="action[0]">
                             <label class="form-check-label" for="action[0]">
-                                <?echo $txtlogin1?>
+                                <? echo $txtlogin1 ?>
                             </label>
                         </div>
                         <div class="form-check col-sm-4 text-center">
                             <input class="form-check-input" name="action[1]" type="checkbox" value="delphone"
                                    id="action[1]">
                             <label class="form-check-label" for="action[1]">
-                                <?echo $txtlogin2?>
+                                <? echo $txtlogin2 ?>
                             </label>
                         </div>
                         <div class="form-check col-sm-4 text-center">
                             <input class="form-check-input" name="action[2]" type="checkbox" value="smart"
                                    id="action[2]">
                             <label class="form-check-label" for="action[2]">
-                                <?echo $txtlogin3?>
+                                <? echo $txtlogin3 ?>
                             </label>
                         </div>
                         <div class="form-check col-sm-4 text-center">
                             <input class="form-check-input" name="action[3]" type="checkbox" value="tock"
                                    id="action[3]">
                             <label class="form-check-label" for="action[3]">
-                                <?echo $txtlogin4?>
+                                <? echo $txtlogin4 ?>
                             </label>
                         </div>
                         <div class="form-check col-sm-4 text-center">
                             <label class="form-check-label" for="action[4]">
-                                <?echo $txtlogin5?>
+                                <? echo $txtlogin5 ?>
                             </label>
                             <input class="form-control" name="action[4]" type="text" id="action[4]">
 
                         </div>
                         <div class="form-check col-sm-4 text-center">
                             <label class="form-check-label" for="action[5]">
-                                <?echo $txtlogin6?>
+                                <? echo $txtlogin6 ?>
                             </label>
                             <input class="form-control" name="action[5]" type="text" id="action[5]">
 
                         </div>
                         <div class="form-check col-sm-4 text-center">
                             <label class="form-check-label" for="action[6]">
-                                <?echo $txtlogin7?>
+                                <? echo $txtlogin7 ?>
                             </label>
                             <input class="form-control" name="action[6]" type="text" id="action[6]">
 
                         </div>
                         <div class="form-check col-sm-4 text-center">
                             <label class="form-check-label" for="action[7]">
-                                <?echo $txtlogin8?>
+                                <? echo $txtlogin8 ?>
                             </label>
                             <input class="form-control" name="action[7]" type="text" id="action[7]">
 
                         </div>
                         <div class="form-check col-sm-4 text-center">
                             <label class="form-check-label" for="action[8]">
-                                <?echo $txtlogin9?>
+                                <? echo $txtlogin9 ?>
                             </label>
                             <input class="form-control" name="action[8]" type="text" id="action[8]">
 
                         </div>
+                        <div class="form-check col-sm-4 text-center">
+                            <label class="form-check-label" for="action[9]">
+                                <? echo $txtlogin10 ?>
+                            </label>
+                            <input class="form-control" name="action[9]" type="text" id="action[9]">
+
+                        </div>
+                        <div class="form-check col-sm-4 text-center">
+                            <label class="form-check-label" for="action[10]">
+                                <? echo $txtlogin12 ?>
+                            </label>
+                            <input class="form-control" name="action[10]" type="text" id="action[10]">
+
+                        </div>
+                        <div class="form-check col-sm-4 text-center">
+                            <label class="form-check-label" for="action[11]">
+                                <? echo $txtlogin11 ?>
+                            </label>
+                            <input class="form-control" type="text" name="action[11]" id="action[11]">
+                        </div>
+                        <div class="form-check col-sm-4 text-center">
+                            <label class="form-check-label" for="action[11]">
+                                <? echo $txtlogin9 ?>
+                            </label>
+                            <input class="form-control" type="text" name="action[12]" id="action[12]"
+                                   placeholder="3600">
+                        </div>
+
                         <br>
 
 
