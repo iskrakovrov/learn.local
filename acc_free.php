@@ -8,3 +8,4 @@ foreach ($ids as $id) {
     $query = update($sql);
 }
 header("Location: /accounts.php");
+
