@@ -62,14 +62,14 @@ include_once 'inc/header.php'
 ?>
 <main class="container-fluid ">
     <div class="row text-center">
-        <h2>Multi add proxy</h2>
+        <h2><? echo $txtaddpr?></h2>
     </div>
     <div class="row justify-content-center">
         <div class="col-6 text-center">
 
 
             <div class="alert alert-info" role="alert">
-               <? echo $txtaddpr ?>
+               <? echo $txtaddpr1 ?>
             </div>
         <form method="post"
             <div class="form-group">

@@ -173,9 +173,12 @@ function parse_proxy($pr, $comm)
     if (empty($link)) {
         $link = 'NULL';
     }
+    if (empty($comm)) {
+        $comm = 'NULL';
+    }
     $time = Time();
     $sql1 = "SELECT * FROM proxy WHERE proxy = '$pr'";
-    $sql = "INSERT INTO `proxy` (`id`, `protocol`, `proxy`, `ip`, `port`, `login`, `pswd`, `link_proxy`, `status`, `work`, `created`, `comment`, 'use_proxy', 'ban') VALUES (NULL, '$mode', '$pr', '$host', '$port', '$user', '$pass', '$link', 'ok','0', '$time', '$comm', 0, 0)";
+    $sql = "INSERT INTO `proxy` (`id`, `protocol`, `proxy`, `ip`, `port`, `login`, `pswd`, `link_proxy`, `status`, `work`, `created`, `comment`, `use_proxy`, `ban`) VALUES (NULL, '$mode', '$pr', '$host', '$port', '$user', '$pass', '$link', 'ok','0', '$time', '$comm', 0, 0)";
     return [$sql, $sql1];
 }
 

@@ -42,10 +42,7 @@ $_SESSION['ids'] = $ids;
 
 
             <div class="alert alert-info" role="alert">
-                Формат в котором должны быть записаны прокси:<br/><strong>protocol://login:pass@ip:port</strong> - для
-                прокси с логином/паролем<br/><strong>protocol://ip:port</strong> - для прокси без
-                логина/пароля<br/><span class="text-danger">Важно:</span> если у вас http или https прокси, то это не
-                указывайте!!!
+                <?echo $txttask1?>
             </div>
 
             <form method="post" action="tasks.php">
@@ -63,26 +60,32 @@ $_SESSION['ids'] = $ids;
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="coockie.php" id="coo">
                             <label class="form-check-label" for="coo">
-                                Farm coockie
+                                <?echo $txttask2?>
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="farm.php" id="farm">
                             <label class="form-check-label" for="farm">
-                                Farm interest
+                                <?echo $txttask3?>
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="invite1" id="task3">
                             <label class="form-check-label" for="defaultCheck1">
-                                Подготовка новорегов
+                                <?echo $txttask4?>
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="invite_suggestions.php"
                                    id="invite_suggestions">
                             <label class="form-check-label" for="defaultCheck2">
-                                Invite suggestions
+                                <?echo $txttask5?>
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" name="task[]" type="checkbox" value="invite1" id="task3">
+                            <label class="form-check-label" for="defaultCheck1">
+                                <?echo $txttask6?>
                             </label>
                         </div>
                         <div class="form-check">
@@ -94,133 +97,139 @@ $_SESSION['ids'] = $ids;
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="" id="task4">
                             <label class="form-check-label" for="defaultCheck2">
-                                Удалить из друзей
+                                <?echo $txttask7?>
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="" id="task5">
                             <label class="form-check-label" for="defaultCheck1">
-                                Пригласить на страницу
+                                <?echo $txttask8?>
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="" id="task6">
                             <label class="form-check-label" for="defaultCheck2">
-                                Пригласить в группы
+                                <?echo $txttask9?>
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="" id="task6">
                             <label class="form-check-label" for="defaultCheck2">
-                                Пригласить на Донат
+                                <?echo $txttask10?>
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="" id="task6">
                             <label class="form-check-label" for="defaultCheck2">
-                                Публикация постов
+                                <?echo $txttask11?>
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="" id="task6">
                             <label class="form-check-label" for="defaultCheck2">
-                                Вступить в группы
+                                <?echo $txttask12?>
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="" id="task6">
                             <label class="form-check-label" for="defaultCheck2">
-                                Постинг в группы
+                                <?echo $txttask13?>
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="" id="task6">
                             <label class="form-check-label" for="defaultCheck2">
-                                Комментирование
+                                <?echo $txttask14?>
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="" id="task6">
                             <label class="form-check-label" for="defaultCheck2">
-                                Лайкинг
+                                <?echo $txttask15?>
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="" id="task6">
                             <label class="form-check-label" for="defaultCheck2">
-                                Заполнение аккаунтов
+                                <?echo $txttask16?>
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="" id="task6">
                             <label class="form-check-label" for="defaultCheck2">
-                                Like2Fan
+                                <?echo $txttask17?>
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="" id="task6">
                             <label class="form-check-label" for="defaultCheck2">
-                                Личка
+                                <?echo $txttask18?>
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="" id="task6">
                             <label class="form-check-label" for="defaultCheck2">
-                                Голосование
+                                <?echo $txttask19?>
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="" id="task6">
                             <label class="form-check-label" for="defaultCheck2">
-                                Замена (установка) почты
+                                <?echo $txttask20?>
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="" id="task6">
                             <label class="form-check-label" for="defaultCheck2">
-                                Прием в друзья
+                                <?echo $txttask21?>
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="" id="task6">
                             <label class="form-check-label" for="defaultCheck2">
-                                Очистка Ленты
+                                <?echo $txttask22?>
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="" id="task6">
                             <label class="form-check-label" for="defaultCheck2">
-                                Создать страницы
+                                <?echo $txttask23?>
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="" id="task6">
                             <label class="form-check-label" for="defaultCheck2">
-                                Парсинг
+                                <?echo $txttask24?>
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="" id="task6">
                             <label class="form-check-label" for="defaultCheck2">
-                                Сбор лички
+                                <?echo $txttask25?>
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="" id="task6">
                             <label class="form-check-label" for="defaultCheck2">
-                                Сбор комментариев
+                                <?echo $txttask26?>
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="" id="task6">
                             <label class="form-check-label" for="defaultCheck2">
-                                Поздравить с Днем рождения
+                                <?echo $txttask27?>
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="" id="task6">
                             <label class="form-check-label" for="defaultCheck2">
-                                БанХаммер
+                                <?echo $txttask27?>
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" name="task[]" type="checkbox" value="" id="task6">
+                            <label class="form-check-label" for="defaultCheck2">
+                                <?echo $txttask28?>
                             </label>
                         </div>
 
