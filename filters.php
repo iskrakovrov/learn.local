@@ -8,7 +8,6 @@ require_once($lang);
 ?>
 
 
-
 <!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
@@ -44,31 +43,87 @@ include_once 'inc/header.php'
             </div>
         </div>
     </div>
+    <form method="post">
     <div class="row justify-content-center">
         <div class="col-6 text-center">
-            <form method="post">
+
                 <div class="form-group">
-                    <label for="name_server">Введите имя сервера. В настройках Zenno укажите такой же. Максимум 5 символов.</label>
-                    <input type="text" class="form-control"  name = "name_server"  id="name_server"  maxlength = 5  placeholder="Enter name server">
+                    <div class="form-floating">
+                        <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                            <option selected>Open this select menu</option>
+                            <option value="1">All</option>
+                            <option value="2">Cyr</option>
+                            <option value="3">Lat</option>
+                            <option value="4">Cyr + Lat</option>
+                            <option value="5">Black</option>
+                            <option value="6">White</option>
+                            <option value="7">Black + White</option>
+                        </select>
+                        <label for="floatingSelect">Works with selects</label>
+                    </div>
+
                 </div>
-                <div class="form-group">
-                    <label for="com_server">Комментарий Максимум 50 символов.</label>
-                    <input type="text" class="form-control"  name = "com_server"  id="com_server"  maxlength = 50  placeholder="Enter name server">
-                </div>
+
                 <br>
+            <div class="form-group">
+                <div class="form-floating">
+                    <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                        <option selected>Блек</option>
+                        <option value="1">Список</option>
+                        <option value="2">Список</option>
+
+                    </select>
+                    <label for="floatingSelect">Works with selects</label>
+                </div>
+
+
+            </div>
+            <br>
+            <div class="form-group">
+                <div class="form-floating">
+                    <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                        <option selected>Вайт</option>
+                        <option value="1">Список</option>
+                        <option value="2">Список</option>
+
+                    </select>
+                    <label for="floatingSelect">Works with selects</label>
+                </div>
+
+
+            </div>
+            <br>
+            <div class="form-group">
+                <div class="form-floating">
+                    <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                        <option selected>Open this select menu</option>
+                        <option value="1">Confirm</option>
+                        <option value="2">Cancel</option>
+
+                    </select>
+                    <label for="floatingSelect">Works with selects</label>
+                </div>
+
+
+            </div>
+
+            <br>
+            <div class="form-group">
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="floatingInput" placeholder="">
+                    <label for="floatingInput">Количество конфирмов</label>
+                </div>
+
+            <br>
                 <div class="form-group">
 
                     <button type="submit" class="btn btn-primary">Add server</button>
                 </div>
-            </form>
 
-        </div>
+
+
     </div>
-
-
-
-
-
+    </form>
 
 
 </main>
