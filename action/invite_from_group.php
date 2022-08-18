@@ -32,8 +32,43 @@ $qw = selectAll($sql);
                     </div>
                 </div>
                 <br>
-
-
+                <div class="form-check col-sm-4 text-center">
+                    <div class="form-floating">
+                        <select class="form-select" id="type" name="type"
+                                aria-label="<?php echo $txtgr ?>">
+                            <option selected>Open this select menu</option>
+                            <option value="1">ALL</option>
+                            <option value="2">Active</option>
+                        </select>
+                        <label for="groups"><?php echo $txtigr?></label>
+                    </div>
+                </div>
+                <br>
+                <div class="form-check col-sm-4 text-center">
+                    <div class="form-floating">
+                        <select class="form-select" id="type" name="type"
+                                aria-label="<?php echo $txtgr ?>">
+                            <option selected>Open this select menu</option>
+                            <option value="1">Список Гео</option>
+                            <option value="2">Список Гео</option>
+                            <option value="3">Список Гео</option>
+                        </select>
+                        <label for="groups"><?php echo $txtgeo?></label>
+                    </div>
+                </div>
+                <br>
+                <div class="form-check col-sm-4 text-center">
+                    <div class="form-floating">
+                        <select class="form-select" id="bl" name="bl"
+                                aria-label="<?php echo $txtgr ?>">
+                            <option selected>Open this select menu</option>
+                            <option value="1">Выбор Блек листа</option>
+                            <option value="2">Выбор Блек листа</option>
+                            <option value="3">Выбор Блек листа</option>
+                        </select>
+                        <label for="groups">Select Black list id</label>
+                    </div>
+                </div>
                 <br>
 
 

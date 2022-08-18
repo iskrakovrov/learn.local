@@ -73,7 +73,8 @@ include_once 'inc/header.php'
                             <option value="6">Comments lists</option>
                             <option value="7">Keywords lists</option>
                             <option value="8">Site lists</option>
-                            <option value="9">Другие lists</option>
+                            <option value="10">Lists Groups</option>
+                            <option value="9">Additional lists</option>
                         </select>
                     </div>
                     <br>
@@ -104,6 +105,7 @@ include_once 'inc/header.php'
                             <option value="6">Comments lists</option>
                             <option value="7">Keywords lists</option>
                             <option value="8">Site lists</option>
+                            <option value="10">Lists Groups</option>
                             <option value="9">Другие lists</option>
                         </select>
                     </div>
