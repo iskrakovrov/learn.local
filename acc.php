@@ -23,7 +23,7 @@ foreach ($query as $a) {
     if ($a['useacc'] === '0') {
         $use = "FREE";
     } else {
-        $use = "WORK";
+        $use = "WORK"; //ooo
     }
     $find = "EAAB";
     $pos1 = stripos($a['tocken'], $find);
