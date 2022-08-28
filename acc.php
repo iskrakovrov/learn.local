@@ -18,7 +18,7 @@ foreach ($query as $a) {
     if (empty($a['id_proxy'])) {
         $pr = "NO";
     } else {
-        $pr = "OK"; //ооо
+        $pr = "OK";
     }
     if ($a['useacc'] === '0') {
         $use = "FREE";
