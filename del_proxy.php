@@ -4,6 +4,6 @@ require_once('inc/db.php');
 require_once('function/function.php');
 
 $id=$_GET['id'];
-$sql="DELETE FROM proxy WHERE id_proxy='$id'";
+$sql="DELETE FROM proxy WHERE id='$id'";
 $querty = delete($sql);
 header("Location: ".$_SERVER['HTTP_REFERER']);

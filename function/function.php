@@ -30,8 +30,7 @@ function select($sel)
     $query = $pdo->prepare($sql);
     $query->execute();
     dbCheckError($query);
-    $data = $query->fetch();
-    return $data;
+    return $query->fetch();
 }
 
 function selectAll($sel)
@@ -41,8 +40,7 @@ function selectAll($sel)
     $query = $pdo->prepare($sql);
     $query->execute();
     dbCheckError($query);
-    $data = $query->fetchAll();
-    return $data;
+    return $query->fetchAll();
 }
 
 function insert($ins)
@@ -129,11 +127,10 @@ function processForm($array)
 
         // Если регистрация прошла успешно
         return '<p class="alert alert-success">СЕРВЕР НЕ ДОБАВЛЕН</p>';
-    } else {
-
-        // Если регистрация не удалась
-        return '<p class="alert alert-danger">Сервер  добавлен</p>';
     }
+
+// Если регистрация не удалась
+    return '<p class="alert alert-danger">Сервер  добавлен</p>';
 
 }
 
@@ -151,8 +148,6 @@ function delete($del)
 
 function parse_proxy($pr, $comm)
 {
-    $comm = $comm;
-    $proxy = $pr;
     $link = explode("|", $pr);
     $prx = $link[0];
     $arr_pr = parse_url($prx);
@@ -164,7 +159,7 @@ function parse_proxy($pr, $comm)
     $link = $link[1];
     if (empty ($host)) {
         $sql = null;
-        return;
+        return $sql;
     }
     if (empty($mode)) {
         $mode = 'http';
@@ -184,29 +179,28 @@ function parse_proxy($pr, $comm)
 
 function parse_acc1($acc, $comm, $serv, $group)
 {
-    $comm = $comm;
-    $serv = $serv;
-    $group = $group;
+
+
     $accs = explode(";", $acc);
     $login = $accs[0];
     $pass = $accs[1];
     if (empty($login)) {
         $sql = null;
-        return;
+        return $sql;
 
     }
     if (empty($pass)) {
         $sql = null;
-        return;
+        return $sql;
     }
     $sql = "SELECT * FROM accounts WHERE login_fb = '$login'";
     $querty = selectAll($sql);
     if (!empty($querty)) {
         $sql = null;
-        return;
+        return $sql;
     }
     $time = Time();
-    $sql = "INSERT INTO `accounts` (`id_acc`, `login_fb`, `pass_fb`, `id_fb`, `name`, `bd`, `mb`, `yb`, `gender`, `avatar`, `created`, `comment`, `group_acc`, `server`, `id_proxy`, `status`, `works`, `useacc`, `friends`, `last_start`) VALUES (NULL, '$login', '$pass', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '$time', '$comm', '$group', '$serv', NULL, '1', NULL, NULL, NULL, NULL)";
+    $sql = "INSERT INTO `accounts` (`id`, `login_fb`, `pass_fb`, `id_fb`, `name`, `bd`, `mb`, `yb`, `gender`, `avatar`, `created`, `comment`, `group_acc`, `server`, `id_proxy`, `status`, `works`, `useacc`, `friends`, `last_start`) VALUES (NULL, '$login', '$pass', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '$time', '$comm', '$group', '$serv', NULL, '1', NULL, NULL, NULL, NULL)";
     return [$sql];
 
 }
@@ -214,7 +208,6 @@ function parse_acc1($acc, $comm, $serv, $group)
 function parse_acc2($acc, $comm, $serv, $group, $cock)
 {
     $comm = $comm;
-    $serv = $serv;
     $group = $group;
     if (empty($comm)) {
         $comm = null;

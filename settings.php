@@ -15,13 +15,13 @@ if (!empty($_POST['pass']))
 {
     $pass = $_POST['pass'];
     $sql = "UPDATE users set pass = '$pass' where id = 1";
-    $qw=update($sql);
+    $qw = update($sql);
 }
-if ($_POST['lng']<>'Select')
+if ($_POST['lng'] !== 'Select')
 {
     $lng = $_POST['lng'];
     $sql = "UPDATE users set lang = '$lng' where id = 1";
-    $qw=update($sql);
+    $qw = update($sql);
     $sql = "SELECT lang FROM users";
     $lang = select($sql);
     $_SESSION["admin"] = 1;
@@ -62,7 +62,7 @@ include_once 'inc/header.php'
 
 
             <div class="alert alert-info" role="alert">
-                <strong><?echo $txtsett?></strong><br>
+                <strong><?php echo $txtsett?></strong><br>
 
                 <br>
             </div>
@@ -74,11 +74,11 @@ include_once 'inc/header.php'
         <div class="col-6 text-center">
             <form method="post">
     <input type="text" class="form-control rounded-0" id="login" name="login"
-              value="<?echo $user['login']?>"></textarea>
+              value="<?php echo $user['login']?>">
 
                 <br>
                 <input type="text" class="form-control rounded-0" id="pass" name="pass"
-                          value="<?echo $user['pass']?>"></textarea>
+                          value="<?php echo $user['pass']?>">
                 <br>
                 <div class="form-floating">
                 <select class="form-select" id="lng" name="lng">

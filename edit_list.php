@@ -6,8 +6,10 @@ if (!empty($_REQUEST['key'])) {
 
     $array = explode("\r\n", $_REQUEST['key']);
 
-    for ($i = 0; $i <= count($array); $i++)
+    for ($i = 0, $iMax = count($array); $i <= $iMax; $i++)
+    {
         $c = (trim($array[$p]) . "<br/>");
+    }
     $c = preg_replace('/<br[^>]*>/', '', $c);
     $i = 0;
     foreach ($array as $key) {

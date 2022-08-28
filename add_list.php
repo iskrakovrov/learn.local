@@ -58,7 +58,7 @@ include_once 'inc/header.php'
         <div class="col-4 text-center">
             <form>
                 <div class="form-row">
-                    <label for="name" name = "name" class="col-sm-2 control-label">Name</label>
+                    <label for="name"  class="col-sm-2 control-label">Name</label>
                     <div class="col">
                         <input type="text" name = "name"  id="name" class="form-control" placeholder="Name list">
                     </div>

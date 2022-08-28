@@ -14,7 +14,7 @@ if (!empty($_REQUEST["submit"])) {
         $error = "Неправильный логин или пароль";
 
     }
-    if ($error == "") {
+    if ($error === "") {
         $sql = "SELECT lang FROM users";
         $lang = select($sql);
         $_SESSION["admin"] = 1;
@@ -29,7 +29,7 @@ if (!empty($_REQUEST["submit"])) {
 
 ?>
 
-<!doctype html>
+<html lang="en">
 <head>
     <?php
     require_once('inc/meta.php');

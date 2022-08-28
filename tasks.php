@@ -9,7 +9,7 @@ require_once($lang);
 
 $ids = $_SESSION['ids'];
 $add_task = $_POST['add_task'];
-if ($add_task == "login") {
+if ($add_task === "login") {
     $setup = $_POST['action'];
 
     $st[] = array(
@@ -40,7 +40,7 @@ if ($add_task == "login") {
     }
 }
 
-if ($add_task == "coockie") {
+if ($add_task === "coockie") {
     $st[] = array(
         'cat' => $_REQUEST['cat'],
         'num_s' => $_REQUEST['num_s'],
@@ -63,7 +63,7 @@ if ($add_task == "coockie") {
 }
 
 
-if ($add_task == 'farm') {
+if ($add_task === 'farm') {
     $st[] = array(
         'cat' => $_REQUEST['cat'],
         'like_page' => $_REQUEST['like_page'],
@@ -91,7 +91,7 @@ if ($add_task == 'farm') {
 
     }
 }
-if ($add_task == 'invite_suggestions') {
+if ($add_task === 'invite_suggestions') {
     $setup = $_POST['action'];
     $st[] = array(
 
@@ -157,16 +157,10 @@ if (!empty($w)) {
     $url = 'action' . '/' . $w;
     array_shift($task);
     include_once($url);
-    session_start();
-    $_SESSION['task'] = $task;
-    $_SESSION['ids'] = $ids;
-} else {
-
-    session_start();
-    $_SESSION['task'] = $task;
-    $_SESSION['ids'] = $ids;
-
 }
+session_start();
+$_SESSION['task'] = $task;
+$_SESSION['ids'] = $ids;
 
 
 ?>

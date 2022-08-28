@@ -16,7 +16,7 @@ $comm = $_REQUEST['comms1'];
 if (isset($_POST['proxy1'])) {
     $array = explode("\r\n", $_POST['proxy1']);
 
-    for ($i = 0; $i <= count($array); $i++)
+    for ($i = 0, $iMax = count($array); $i <= $iMax; $i++)
         $c = (trim($array[$p]) . "<br/>");
     $c = preg_replace('/<br[^>]*>/', '', $c);
     $i = 0;
@@ -62,24 +62,24 @@ include_once 'inc/header.php'
 ?>
 <main class="container-fluid ">
     <div class="row text-center">
-        <h2><? echo $txtaddpr?></h2>
+        <h2><?php echo $txtaddpr?></h2>
     </div>
     <div class="row justify-content-center">
         <div class="col-6 text-center">
 
 
             <div class="alert alert-info" role="alert">
-               <? echo $txtaddpr1 ?>
+                <?php echo $txtaddpr1 ?>
             </div>
-        <form method="post"
+        <form method="post">
             <div class="form-group">
 
 
                  <textarea class="form-control rounded-0" id="proxy" name="proxy1" rows="10"
-                           placeholder="<?echo $txtnewline ?>"></textarea>
+                           placeholder="<?php echo $txtnewline ?>"></textarea>
                     <br>
 
-                    <input type="text" class="form-control" id="comms" name="comms1" placeholder="<?echo $txtcomm?>">
+                    <input type="text" class="form-control" id="comms" name="comms1" placeholder="<?php echo $txtcomm?>">
 
 
 
@@ -88,7 +88,8 @@ include_once 'inc/header.php'
                 <button type="submit" name="proxy" class="btn btn-primary">Submit</button>
                 <br>
             </div>
-            </form>
+        </form>
+        </div>
 
 
 </main>

@@ -33,7 +33,7 @@ include_once 'inc/header.php'
 
 <main class="container-fluid ">
     <div class="row text-center">
-        <h2><? echo $txtacc ?></h2>
+        <h2><?php echo $txtacc ?></h2>
     </div>
     <div class="row">
         <div class="col text-center">
@@ -41,7 +41,7 @@ include_once 'inc/header.php'
             <div class="row justify-content-center">
                 <div class="col-6 text-center">
                     <div class="alert alert-info" role="alert">
-                        <? echo $txtacci ?>
+                        <?php echo $txtacci ?>
                     </div>
                 </div>
             </div>
@@ -52,7 +52,7 @@ include_once 'inc/header.php'
 
     <div class="container-fluid">
 
-        <table border="0" cellspacing="5" cellpadding="5">
+        <table>
             <tbody>
             <tr>
                 <td>Minimum friends:</td>
@@ -185,7 +185,7 @@ include_once 'inc/header.php'
 <script src="js/jquery.js"></script>
 <script src="js/dtjquery.js"></script>
 <script src="js/dataTables.bootstrap.js"></script>
-<script type="text/javascript" src="dataTables.dataSourcePlugins.js"></script>
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"

@@ -5,7 +5,7 @@ require_once('inc/db.php');
 require_once('function/function.php');
 
 $sql = $_GET["sql"];
-$sql = "$sql";
+$sql = (string)$sql;
 
 $sel = selectAll($sql);
 

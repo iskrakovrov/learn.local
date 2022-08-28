@@ -6,7 +6,7 @@ $query = select($sql);
 $count = $query['use_proxy'];
 $count = ++$count;
 $id = $query['id_proxy'];
-$sql = "UPDATE proxy SET use_proxy = $count WHERE id_proxy = $id";
+$sql = "UPDATE proxy SET use_proxy = $count WHERE id = $id";
 $query1 = update($sql);
 $json_data = json_encode($query);
 echo $json_data;

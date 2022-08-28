@@ -42,7 +42,7 @@ $_SESSION['ids'] = $ids;
 
 
             <div class="alert alert-info" role="alert">
-                <?echo $txttask1?>
+                <?php echo $txttask1?>
             </div>
 
             <form method="post" action="tasks.php">
@@ -60,32 +60,32 @@ $_SESSION['ids'] = $ids;
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="coockie.php" id="coo">
                             <label class="form-check-label" for="coo">
-                                <?echo $txttask2?>
+                                <?php echo $txttask2?>
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="farm.php" id="farm">
                             <label class="form-check-label" for="farm">
-                                <?echo $txttask3?>
+                                <?php echo $txttask3?>
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="invite1" id="task3">
                             <label class="form-check-label" for="defaultCheck1">
-                                <?echo $txttask4?>
+                                <?php echo $txttask4?>
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="invite_suggestions.php"
                                    id="invite_suggestions">
                             <label class="form-check-label" for="defaultCheck2">
-                                <?echo $txttask5?>
+                                <?php echo $txttask5?>
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="invite1" id="task3">
                             <label class="form-check-label" for="defaultCheck1">
-                                <?echo $txttask6?>
+                                <?php echo $txttask6?>
                             </label>
                         </div>
                         <div class="form-check">
@@ -97,139 +97,139 @@ $_SESSION['ids'] = $ids;
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="" id="task4">
                             <label class="form-check-label" for="defaultCheck2">
-                                <?echo $txttask7?>
+                                <?php echo $txttask7?>
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="" id="task5">
                             <label class="form-check-label" for="defaultCheck1">
-                                <?echo $txttask8?>
+                                <?php echo $txttask8?>
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="" id="task6">
                             <label class="form-check-label" for="defaultCheck2">
-                                <?echo $txttask9?>
+                                <?php echo $txttask9?>
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="" id="task6">
                             <label class="form-check-label" for="defaultCheck2">
-                                <?echo $txttask10?>
+                                <?php echo $txttask10?>
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="" id="task6">
                             <label class="form-check-label" for="defaultCheck2">
-                                <?echo $txttask11?>
+                                <?php echo $txttask11?>
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="" id="task6">
                             <label class="form-check-label" for="defaultCheck2">
-                                <?echo $txttask12?>
+                                <?php echo $txttask12?>
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="" id="task6">
                             <label class="form-check-label" for="defaultCheck2">
-                                <?echo $txttask13?>
+                                <?php echo $txttask13?>
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="" id="task6">
                             <label class="form-check-label" for="defaultCheck2">
-                                <?echo $txttask14?>
+                                <?php echo $txttask14?>
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="" id="task6">
                             <label class="form-check-label" for="defaultCheck2">
-                                <?echo $txttask15?>
+                                <?php echo $txttask15?>
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="" id="task6">
                             <label class="form-check-label" for="defaultCheck2">
-                                <?echo $txttask16?>
+                                <?php echo $txttask16?>
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="" id="task6">
                             <label class="form-check-label" for="defaultCheck2">
-                                <?echo $txttask17?>
+                                <?php echo $txttask17?>
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="" id="task6">
                             <label class="form-check-label" for="defaultCheck2">
-                                <?echo $txttask18?>
+                                <?php echo $txttask18?>
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="" id="task6">
                             <label class="form-check-label" for="defaultCheck2">
-                                <?echo $txttask19?>
+                                <?php echo $txttask19?>
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="" id="task6">
                             <label class="form-check-label" for="defaultCheck2">
-                                <?echo $txttask20?>
+                                <?php echo $txttask20?>
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="" id="task6">
                             <label class="form-check-label" for="defaultCheck2">
-                                <?echo $txttask21?>
+                                <?php echo $txttask21?>
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="" id="task6">
                             <label class="form-check-label" for="defaultCheck2">
-                                <?echo $txttask22?>
+                                <?php echo $txttask22?>
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="" id="task6">
                             <label class="form-check-label" for="defaultCheck2">
-                                <?echo $txttask23?>
+                                <?php echo $txttask23?>
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="" id="task6">
                             <label class="form-check-label" for="defaultCheck2">
-                                <?echo $txttask24?>
+                                <?php echo $txttask24?>
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="" id="task6">
                             <label class="form-check-label" for="defaultCheck2">
-                                <?echo $txttask25?>
+                                <?php echo $txttask25?>
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="" id="task6">
                             <label class="form-check-label" for="defaultCheck2">
-                                <?echo $txttask26?>
+                                <?php echo $txttask26?>
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="" id="task6">
                             <label class="form-check-label" for="defaultCheck2">
-                                <?echo $txttask27?>
+                                <?php echo $txttask27?>
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="" id="task6">
                             <label class="form-check-label" for="defaultCheck2">
-                                <?echo $txttask27?>
+                                <?php echo $txttask27?>
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="" id="task6">
                             <label class="form-check-label" for="defaultCheck2">
-                                <?echo $txttask28?>
+                                <?php echo $txttask28?>
                             </label>
                         </div>
 
