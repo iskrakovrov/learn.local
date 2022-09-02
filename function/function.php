@@ -312,9 +312,6 @@ function addphone($prone)
 
 function add_task($add_task, $json_data, $time, $account)
 {
-    $add_task = $add_task;
-    $json_data = $json_data;
-    $time = $time;
     $a = $account;
 
 

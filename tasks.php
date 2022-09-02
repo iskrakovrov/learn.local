@@ -18,11 +18,15 @@ if ($add_task === "login") {
         'delphone' => $setup[1],
         'smart' => $setup[2],
         'tock' => $setup[3],
-        'mlike' => $setup[4],
-        'minvite' => $setup[5],
+        'minvite' => $setup[4],
+        'mlike' => $setup[5],
         'mcomments' => $setup[6],
         'mmessage' => $setup[7],
         'tstart' => $setup[8],
+        'nproxy' => $setup[9],
+        'get' => $setup[10],
+        'bat' => $setup[11],
+
 
     );
     $data = array(
@@ -81,7 +85,7 @@ if ($add_task === 'farm') {
         "data" => $st,
     );
     $json_data = json_encode($data);
-    
+
 
     foreach ($ids as $a) {
         $add_task = $_POST['add_task'];

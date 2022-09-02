@@ -7,102 +7,115 @@
 
 
             <div class="alert alert-info" role="alert">
-                <? echo $txtlogin ?>
+                <?php echo $txtlogin ?>
             </div>
 
 
             <div class="row d-flex justify-content-center">
                 <form method="post">
+
+                    <!-- Сбор информации одноразово -->
                     <div class="form-group">
                         <div class="form-check col-sm-4 text-center">
                             <input class="form-check-input" name="action[0]" type="checkbox" value="sbor"
                                    id="action[0]">
                             <label class="form-check-label" for="action[0]">
-                                <? echo $txtlogin1 ?>
+                                <?php echo $txtlogin1 ?>
                             </label>
                         </div>
+                        <!-- Удалять телефон -->
                         <div class="form-check col-sm-4 text-center">
                             <input class="form-check-input" name="action[1]" type="checkbox" value="delphone"
                                    id="action[1]">
                             <label class="form-check-label" for="action[1]">
-                                <? echo $txtlogin2 ?>
+                                <?php echo $txtlogin2 ?>
                             </label>
                         </div>
+                        <!-- Быстрый логин -->
                         <div class="form-check col-sm-4 text-center">
                             <input class="form-check-input" name="action[2]" type="checkbox" value="smart"
                                    id="action[2]">
                             <label class="form-check-label" for="action[2]">
-                                <? echo $txtlogin3 ?>
+                                <?php echo $txtlogin3 ?>
                             </label>
                         </div>
+                        <!-- Собрать Токен -->
                         <div class="form-check col-sm-4 text-center">
                             <input class="form-check-input" name="action[3]" type="checkbox" value="tock"
                                    id="action[3]">
                             <label class="form-check-label" for="action[3]">
-                                <? echo $txtlogin4 ?>
+                                <?php echo $txtlogin4 ?>
                             </label>
                         </div>
+                        <!-- Макс инвайтов -->
                         <div class="form-check col-sm-4 text-center">
                             <label class="form-check-label" for="action[4]">
-                                <? echo $txtlogin5 ?>
+                                <?php echo $txtlogin5 ?>
                             </label>
-                            <input class="form-control" name="action[4]" type="text" id="action[4]">
+                            <input class="form-control" name="action[4]" type="number" id="action[4]">
 
                         </div>
+                        <!-- Макс лайков -->
                         <div class="form-check col-sm-4 text-center">
                             <label class="form-check-label" for="action[5]">
-                                <? echo $txtlogin6 ?>
+                                <?php echo $txtlogin6 ?>
                             </label>
-                            <input class="form-control" name="action[5]" type="text" id="action[5]">
+                            <input class="form-control" name="action[5]" type="number" id="action[5]">
 
                         </div>
+                        <!-- Макс комментариев -->
                         <div class="form-check col-sm-4 text-center">
                             <label class="form-check-label" for="action[6]">
-                                <? echo $txtlogin7 ?>
+                                <?php echo $txtlogin7 ?>
                             </label>
-                            <input class="form-control" name="action[6]" type="text" id="action[6]">
+                            <input class="form-control" name="action[6]" type="number" id="action[6]">
 
                         </div>
+                        <!-- Макс лички -->
                         <div class="form-check col-sm-4 text-center">
                             <label class="form-check-label" for="action[7]">
-                                <? echo $txtlogin8 ?>
+                                <?php echo $txtlogin8 ?>
                             </label>
-                            <input class="form-control" name="action[7]" type="text" id="action[7]">
+                            <input class="form-control" name="action[7]" type="number" id="action[7]">
 
                         </div>
+                        <!-- Время до запуска -->
                         <div class="form-check col-sm-4 text-center">
                             <label class="form-check-label" for="action[8]">
-                                <? echo $txtlogin9 ?>
+                                <?php echo $txtlogin9 ?>
                             </label>
-                            <input class="form-control" name="action[8]" type="text" id="action[8]">
+                            <input class="form-control" name="action[8]" type="number" id="action[8]">
 
                         </div>
-                        <div class="form-check col-sm-4 text-center">
-                            <label class="form-check-label" for="action[9]">
-                                <? echo $txtlogin10 ?>
-                            </label>
-                            <input class="form-control" name="action[9]" type="text" id="action[9]">
 
-                        </div>
+                        <!-- Можно без прокси -->
+
+                            <div class="form-check col-sm-4 text-center">
+                                <input class="form-check-input" name="action[9]" type="checkbox" value="noproxy"
+                                       id="action[9]">
+                                <label class="form-check-label" for="action[9]">
+                                    <?php echo $txtlogin10 ?>
+                                </label>
+                            </div>
+
+
+
+
+                        <!-- GET -->
                         <div class="form-check col-sm-4 text-center">
                             <label class="form-check-label" for="action[10]">
-                                <? echo $txtlogin12 ?>
+                                <?php echo $txtlogin11 ?>
                             </label>
                             <input class="form-control" name="action[10]" type="text" id="action[10]">
 
                         </div>
+                        <!-- bat -->
                         <div class="form-check col-sm-4 text-center">
+                            <input class="form-check-input" name="action[11]" type="checkbox" value="bat"
+                                   id="action[11]">
                             <label class="form-check-label" for="action[11]">
-                                <? echo $txtlogin11 ?>
+                                <?php echo $txtlogin12 ?>
                             </label>
-                            <input class="form-control" type="text" name="action[11]" id="action[11]">
-                        </div>
-                        <div class="form-check col-sm-4 text-center">
-                            <label class="form-check-label" for="action[11]">
-                                <? echo $txtlogin9 ?>
-                            </label>
-                            <input class="form-control" type="text" name="action[12]" id="action[12]"
-                                   placeholder="3600">
                         </div>
 
                         <br>

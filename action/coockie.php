@@ -36,7 +36,7 @@
                         <br>
                         <div class="col-sm-4 text-center">
                             <div class="form-check">
-                                <label for="num_s"><? echo $txtcook2?></label>
+                                <label for="num_s"><?php echo $txtcook2?></label>
                                 <input type="text" name="num_s" id="num_s" class="form-control" placeholder="5-10 required">
                             </div>
                         </div>
