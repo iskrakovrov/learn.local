@@ -49,8 +49,8 @@ include_once 'inc/header.php'
 
                 <div class="form-group">
                     <div class="form-floating">
-                        <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
-                            <option selected>Open this select menu</option>
+                        <select class="form-select" id="filter" name="filter" aria-label="Floating label select example">
+
                             <option value="1">All</option>
                             <option value="2">Cyr</option>
                             <option value="3">Lat</option>
@@ -59,7 +59,7 @@ include_once 'inc/header.php'
                             <option value="6">White</option>
                             <option value="7">Black + White</option>
                         </select>
-                        <label for="floatingSelect">Works with selects</label>
+                        <label for="floatingSelect"><?php echo $txtfilter2 ?></label>
                     </div>
 
                 </div>

@@ -74,7 +74,7 @@ if ($add_task === 'farm') {
         'num_lp' => $_REQUEST['num_lp'],
         'like_gr' => $_REQUEST['like_gr'],
         'num_gr' => $_REQUEST['num_gr'],
-        'like_feed' => $_REQUEST['like_feed'],
+        'like_feed' => $_REQUEST['feed'],
         'num_l' => $_REQUEST['num_l'],
         'like_adv' => $_REQUEST['like_adv'],
         'p_like_adv' => $_REQUEST['p_like_adv'],
