@@ -1,7 +1,9 @@
 <?php
-include_once ('inc/init.php');
+include_once('inc/init.php');
 require_once('inc/db.php');
 require_once('function/function.php');
+$lang = $_SESSION['lang'] . '.php';
+require_once($lang);
 ?>
 <!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
@@ -33,70 +35,81 @@ $ser = selectAll($sql);
     <div class="row text-center">
         <h2>Proxy</h2>
     </div>
-    <div class="row">
-        <div class="col text-center">
-            <a class="btn btn-secondary" href="add_one_proxy.php" role="button">Add one proxy</a>
-            <a class="btn btn-secondary" href="add_multi_proxy.php" role="button">Add multi proxy</a>
-            <a class="btn btn-success" href="#" role="button">Multi good proxy</a>
-            <a class="btn btn-danger" href="#" role="button">Delete proxy</a>
+    <form method="post" action="del_pr.php">
+        <div class="row">
+
+            <div class="col text-center">
+
+
+                <a class="btn btn-secondary" href="add_multi_proxy.php" role="button">Add proxy</a>
+                <a class="btn btn-success" href="#" role="button">Multi good proxy</a>
+
+                <button type="submit" class="btn btn-danger" title="Delete proxy"
+                        onClick="return confirm( 'WARNING!!! DELETE PROXY? ' )">Delete Proxy <i
+                            class="bi bi-x-circle-fill"></i></button>
+
+
+            </div>
         </div>
-    </div>
 
-    <div class="container-fluid">
-
-        <table id="example" class="cell-border" style="width:100%">
-            <thead>
-            <tr>
-                <th class="check" style="text-align: center;">
-                    <input type="checkbox" id="all" value=""/>
-                </th>
-                <th>Protocol</th>
-                <th>Proxy</th>
-                <th>Link</th>
-                <th>Status</th>
-                <th>Comment</th>
-                <th>Action</th>
-            </tr>
-            </thead>
-            <tbody>
-            <?php
-            $i = 0;
-            foreach ($ser as $a) {
-            $i++; ?>
-            <tr>
-                <td style="text-align: center;"><input type="checkbox" name="a[]" value="<?php echo $a['id_proxy'] ?>">
-                </td>
-                <td><?php echo $a['protocol'] ?></td>
-                <td><?php echo $a['proxy'] ?></td>
-                <td><?php echo $a['link_proxy'] ?></td>
-                <td><?php echo $a['status'] ?></td>
-                <td><?php echo $a['comment'] ?></td>
-                <td>
-                    <div class="col">
-                        <button type="button" class="btn btn-success">Good proxy</button>
-                        <a href="del_proxy.php?id=<?php echo $a['id_proxy'] ?>" class="btn btn-danger" title="Delete proxy" onClick="return confirm( 'WARNING!!! DELETE PROXY? ' )">Delete Proxy <i class="bi bi-x-circle-fill"></i></a>
-                    </div>
-                </td>
-            </tr>
-            <?php } ?>
+        <div class="container-fluid">
 
 
+            <table id="example" class="cell-border" style="width:100%">
+                <thead>
+                <tr>
+                    <th class="check" style="text-align: center;">
+                        <input type="checkbox" id="all" value=""/>
+                    </th>
+                    <th>Protocol</th>
+                    <th>Proxy</th>
+                    <th>Link</th>
+                    <th>Status</th>
+                    <th>Comment</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                $i = 0;
+                foreach ($ser as $a) {
+                    $i++; ?>
+                    <tr>
+                        <td style="text-align: center;"><input type="checkbox" name="a[]"
+                                                               value="<?php echo $a['id'] ?>">
+                        </td>
+                        <td><?php echo $a['protocol'] ?></td>
+                        <td><?php echo $a['proxy'] ?></td>
+                        <td><?php echo $a['link_proxy'] ?></td>
+                        <td><?php echo $a['status'] ?></td>
+                        <td><?php echo $a['comment'] ?></td>
+                        <td>
+                            <div class="col">
+                                <button type="button" class="btn btn-success">Good proxy</button>
+                                <a href="del_proxy.php?id=<?php echo $a['id'] ?>" class="btn btn-danger"
+                                   title="Delete proxy" onClick="return confirm( 'WARNING!!! DELETE PROXY? ' )">Delete
+                                    Proxy
+                                    <i class="bi bi-x-circle-fill"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                <?php } ?>
 
-            </tbody>
-            <tfoot>
-            <tr>
-                <th></th>
-                <th>Protocol</th>
-                <th>Proxy</th>
-                <th>Link</th>
-                <th>Status</th>
-                <th>Comment</th>
-                <th>Action</th>
-            </tr>
-            </tfoot>
-        </table>
 
-    </div>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th></th>
+                    <th>Protocol</th>
+                    <th>Proxy</th>
+                    <th>Link</th>
+                    <th>Status</th>
+                    <th>Comment</th>
+                    <th>Action</th>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
 
 
 </main>

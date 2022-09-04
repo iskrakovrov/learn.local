@@ -69,6 +69,14 @@ $_SESSION['ids'] = $ids;
                                 <?php echo $txttask3?>
                             </label>
                         </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" name="task[]" type="checkbox" value="filter.php" id="filter">
+                            <label class="form-check-label" for="filter">
+                                <?php echo $txttask29 ?>
+                            </label>
+                        </div>
+
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="invite1" id="task3">
                             <label class="form-check-label" for="defaultCheck1">

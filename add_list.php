@@ -2,22 +2,47 @@
 include_once('inc/init.php');
 require_once('inc/db.php');
 require_once('function/function.php');
+$lang = $_SESSION['lang'] . '.php';
+require_once($lang);
 
-if (!empty($_REQUEST['name'])){
+
+if (!empty($_REQUEST['name'])) {
     $name = $_REQUEST['name'];
     $cat = $_REQUEST['cat'];
     $sql = "SELECT * FROM lists WHERE cat = $cat AND name = '$name'";
     $query = select($sql);
-    if (empty($query)){
-       $sql = "INSERT INTO lists (cat, name) VALUES ($cat, '$name')";
-       $query = select($sql);
-       header('Location: add_list.php');
+    if (empty($query)) {
+        $sql = "INSERT INTO lists (cat, name) VALUES ($cat, '$name')";
+        $query = select($sql);
+        header('Location: add_list.php');
     }
 }
-if (!empty($_REQUEST['catedit'])){
+if (!empty($_REQUEST['catedit'])) {
     $catedit = $_REQUEST['catedit'];
-    $url = 'edit_list.php?cat=' . $catedit;
+    if ($catedit === 3) {
+        $url = 'edit_list_name.php';
+        header("Location: $url");
+        exit();
+    }
+    if ($catedit === 5) {
+        $url = 'edit_list_posts.php';
+        header("Location: $url");
+        exit();
+    }
+    if ($catedit === 6) {
+        $url = 'edit_list_comm.php';
+        header("Location: $url");
+        exit();
+    }
+    if ($catedit === 1) {
+        $url = 'edit_list_bl.php';
+        header("Location: $url");
+        exit();
+    }
+
+    $url = 'e_list.php?cat=' . $catedit;
     header("Location: $url");
+    exit();
 }
 
 ?>
@@ -58,13 +83,13 @@ include_once 'inc/header.php'
         <div class="col-4 text-center">
             <form>
                 <div class="form-row">
-                    <label for="name"  class="col-sm-2 control-label">Name</label>
+                    <label for="name" class="col-sm-2 control-label">Name</label>
                     <div class="col">
-                        <input type="text" name = "name"  id="name" class="form-control" placeholder="Name list">
+                        <input type="text" name="name" id="name" class="form-control" placeholder="Name list">
                     </div>
                     <label for="cat" class="col-sm-2 control-label">Category</label>
                     <div class="col">
-                        <select name = "cat" id="cat" class="form-control">
+                        <select name="cat" id="cat" class="form-control">
                             <option value="1">Black lists</option>
                             <option value="2">Geo lists</option>
                             <option value="3">Name lists</option>
@@ -96,7 +121,7 @@ include_once 'inc/header.php'
 
                     <label for="catedit" class="col-sm-2 control-label">Category</label>
                     <div class="col">
-                        <select name = "catedit" id="cat" class="form-control">
+                        <select name="catedit" id="cat" class="form-control">
                             <option value="1">Black lists</option>
                             <option value="2">Geo lists</option>
                             <option value="3">Name lists</option>

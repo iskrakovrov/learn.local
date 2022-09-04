@@ -330,15 +330,33 @@ function add_task($add_task, $json_data, $time, $account)
 
 function parse_key($key)
 {
-    $key = $key;
+
     if (empty($key)) {
         $sql = null;
     } else {
-        $cat = $_REQUEST['cat'];
+        $cat = $_REQUEST['id'];
         $sql = "SELECT * FROM value_lists WHERE list = $cat AND value = '$key'";
         $query = select($sql);
         if (empty($query)) {
             $sql = "INSERT INTO value_lists (id,value,list) VALUES (NULL, '$key', $cat )";
+        } else {
+            $sql = null;
+        }
+    }
+    return [$sql];
+}
+
+function parse_name($key)
+{
+
+    if (empty($key)) {
+        $sql = null;
+    } else {
+        $cat = $_REQUEST['cat'];
+        $sql = "SELECT * FROM name_lists WHERE id_list = $cat AND value = '$key'";
+        $query = select($sql);
+        if (empty($query)) {
+            $sql = "INSERT INTO name_lists (id,value,id_list) VALUES (NULL, '$key', $cat )";
         } else {
             $sql = null;
         }

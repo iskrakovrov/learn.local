@@ -19,7 +19,7 @@
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="servers.php">Servers</a></li>
                             <li><a class="dropdown-item" href="groups.php">Accounts group</a></li>
-                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                            <li><a class="dropdown-item" href="settings.php">Settings</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
@@ -46,43 +46,43 @@
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="#">Black lists ID</a></li>
+                            <li><a class="dropdown-item" href="edit_list_bl.php">Black lists ID</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="#">Geo lists</a></li>
+                            <li><a class="dropdown-item" href="e_list.php?cat=2">Geo lists</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="#">Name Lists</a></li>
+                            <li><a class="dropdown-item" href="edit_list_name.php">Name Lists</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="#">ID lists</a></li>
+                            <li><a class="dropdown-item" href="e_list.php?cat=4">ID lists</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="#">Post lists</a></li>
+                            <li><a class="dropdown-item" href="edit_list_posts.php">Post lists</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="#">Comments lists</a></li>
+                            <li><a class="dropdown-item" href="edit_list_comm.php">Comments lists</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="#">Keywords lists</a></li>
+                            <li><a class="dropdown-item" href="e_list.php?cat=7">Keywords lists</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="#">Site lists</a></li>
+                            <li><a class="dropdown-item" href="e_list.php?cat=8">Site lists</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="#">Additional lists</a></li>
+                            <li><a class="dropdown-item" href="e_list.php?cat=9">Additional lists</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="#">Lists Groups</a></li>
+                            <li><a class="dropdown-item" href="e_list.php?cat=10">Lis0ts Groups</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
@@ -93,10 +93,10 @@
                         <a class="nav-link active" aria-current="page" href="filters.php">Filters</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Posts</a>
+                        <a class="nav-link active" aria-current="posts" href="edit_list_posts.php">Posts</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Comments</a>
+                        <a class="nav-link active" aria-current="comm" href="edit_list_comm.php">Comments</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#">Messenger</a>

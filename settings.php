@@ -2,6 +2,14 @@
 include_once ('inc/init.php');
 require_once('inc/db.php');
 require_once('function/function.php');
+
+$l = $_SESSION['lang'];
+if ($l == 0){
+    $sql = "SELECT lang FROM users";
+    $res = select($sql);
+    $lang = $res['lang'];
+    $_SESSION["lang"] = $lang;
+}
 $lang = $_SESSION['lang'] . '.php';
 require_once($lang);
 
@@ -17,7 +25,7 @@ if (!empty($_POST['pass']))
     $sql = "UPDATE users set pass = '$pass' where id = 1";
     $qw = update($sql);
 }
-if ($_POST['lng'] !== 'Select')
+if ($_POST['lng'] !== 'Select' AND (!empty($_POST['lng'])))
 {
     $lng = $_POST['lng'];
     $sql = "UPDATE users set lang = '$lng' where id = 1";
@@ -73,18 +81,22 @@ include_once 'inc/header.php'
     <div class="row justify-content-center">
         <div class="col-6 text-center">
             <form method="post">
+                <label for="login">Login</label>
     <input type="text" class="form-control rounded-0" id="login" name="login"
               value="<?php echo $user['login']?>">
 
                 <br>
+                <label for="pass">Login</label>
                 <input type="text" class="form-control rounded-0" id="pass" name="pass"
                           value="<?php echo $user['pass']?>">
                 <br>
+                <label for="lng">Language</label>
                 <div class="form-floating">
+
                 <select class="form-select" id="lng" name="lng">
-                    <option>Select</option>
-                    <option value = 0>Russian</option>
-                    <option value = 1>English</option>
+
+                    <option value = 1>Russian</option>
+                    <option value = 2>English</option>
                 </select>
                 </div>
                 <br>

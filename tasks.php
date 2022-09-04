@@ -65,7 +65,27 @@ if ($add_task === "coockie") {
 
 
 }
+if ($add_task === "filter") {
+    $st[] = array(
+        'cat' => $_REQUEST['cat'],
+        'num_s' => $_REQUEST['num_s'],
 
+    );
+    $data = array(
+
+        "data" => $st,
+    );
+    $json_data = json_encode($data);
+
+    foreach ($ids as $a) {
+        $add_task = $_POST['add_task'];
+        $time = Time();
+        $r = add_task($add_task, $json_data, $time, $a);
+
+    }
+
+
+}
 
 if ($add_task === 'farm') {
     $st[] = array(

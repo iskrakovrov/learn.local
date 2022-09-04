@@ -18,7 +18,7 @@ if (!empty($_REQUEST['key'])) {
     $i = 0;
     foreach ($array as $key) {
         $i++;
-        $res = parse_key($key);
+        $res = parse_name($key);
         $sql = $res[0];
 
         if (!empty($sql)) {
@@ -54,8 +54,8 @@ if (!empty($_REQUEST['key'])) {
 <body>
 <?php
 include_once 'inc/header.php';
-$cat = $_REQUEST['id'];
-$sql = "SELECT * FROM value_lists WHERE list = $cat";
+$cat = $_REQUEST['cat'];
+$sql = "SELECT * FROM name_lists WHERE id_list = $cat";
 $ser = selectAll($sql);
 
 ?>
@@ -89,7 +89,13 @@ $ser = selectAll($sql);
         </div>
     </div>
     <br>
-
+    <div class="row">
+        <div class="col text-center">
+            <form>
+                <a class="btn btn-secondary" href="add_server.php" role="button">Add server</a>
+                <a class="btn btn-danger" href="del_server.php" role="button">Delete servers</a>
+        </div>
+    </div>
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-6 text-center">
@@ -120,12 +126,12 @@ $ser = selectAll($sql);
 
                             <td>
                                 <div class="col">
+                                    <button type="button" class="btn btn-success">Edit server</button>
 
-
-                                    <a href="del_val.php?id=<?php echo $a['id'] ?>" class="btn btn-danger"
+                                    <a href="del_server.php?id=<?php echo $a['id'] ?>" class="btn btn-danger"
                                        title="Delete value"
-                                       onClick="return confirm( 'WARNING!!! DELETE VALUE?' )">Delete
-                                        Value <i class="bi bi-x-circle-fill"></i></a>
+                                       onClick="return confirm( 'WARNING!!! DELETE SERVER? Аккаунты привязанные к данному серверу будут свободными, пока вы не привяжете их к новому серверу' )">Delete
+                                        Server <i class="bi bi-x-circle-fill"></i></a>
                                 </div>
                             </td>
                         </tr>
@@ -180,3 +186,4 @@ $ser = selectAll($sql);
 </script>
 </body>
 </html>
+
