@@ -10,31 +10,28 @@ $group = $_REQUEST['group'];
 $comm = $_REQUEST['comms1'];
 
 
-if (!empty($nr) && !empty($serv) && !empty($group)) {
+if (!empty($nr) && !empty($serv) && !empty($group) && isset($_POST['accs'])) {
+    $array = explode("\r\n", $_POST['accs']);
 
+    for ($i = 0, $iMax = count($array); $i <= $iMax; $i++) {
+        $c = (trim($array[$p]) . "<br/>");
+    }
+    $c = preg_replace('/<br[^>]*>/', '', $c);
+    $i = 0;
+    foreach ($array as $pr) {
+        $i++;
+        $res = parse_acc2($pr, $comm, $serv, $group, $cock);
+        $sql = $res[0];
 
-    if (isset($_POST['accs'])) {
-        $array = explode("\r\n", $_POST['accs']);
-
-        for ($i = 0; $i <= count($array); $i++)
-            $c = (trim($array[$p]) . "<br/>");
-        $c = preg_replace('/<br[^>]*>/', '', $c);
-        $i = 0;
-        foreach ($array as $pr) {
-            $i++;
-            $res = parse_acc2($pr, $comm, $serv, $group, $cock);
-            $sql = $res[0];
-
-            if (!empty($sql)) {
-                $ins = insert($sql);
-
-            }
-
+        if (!empty($sql)) {
+            $ins = insert($sql);
 
         }
 
 
     }
+
+
 }
 
 ?>
@@ -66,28 +63,28 @@ $gr = selectAll($sql);
 ?>
 <main class="container-fluid ">
     <div class="row text-center">
-        <h2><?echo $txtaddacc?></h2>
+        <h2><?php echo $txtaddacc?></h2>
     </div>
     <div class="row justify-content-center">
         <div class="col-6 text-center">
 
 
             <div class="alert alert-info" role="alert">
-                <?echo  $txtaddacc1?>
+                <?php echo  $txtaddacc1?>
                 <a class="btn btn-secondary" href="gr.php" role="button" data-placement="right"
-                   title="<?echo  $txtaddacc1?>">Add account group</a>
+                   title="<?php echo  $txtaddacc1?>">Add account group</a>
                 <br>
-                <?echo  $txtaddacc2?>
+                <?php echo  $txtaddacc2?>
                 <br>
                 <a class="btn btn-secondary" href="servers.php" role="button" data-toggle="tooltip"
                    data-placement="right"
-                   title="<?echo  $txtaddacc2?>">Add Server</a>
+                   title="<?php echo  $txtaddacc2?>">Add Server</a>
                 <br>
             </div>
             <form method="post">
                 <div class="form-group">
                     <br>
-                    <strong><label><?echo  $txtaddacc3?></label></strong>
+                    <strong><label><?php echo  $txtaddacc3?></label></strong>
                     <select class="form-select" name="server">
                         <option disabled selected value>Open this select menu</option>
                         <?php
@@ -99,7 +96,7 @@ $gr = selectAll($sql);
                         ?>
                     </select>
 
-                    <strong><label><?echo  $txtaddacc4?></label></strong>
+                    <strong><label><?php echo  $txtaddacc4?></label></strong>
                     <select class="form-select" name="group">
                         <option disabled selected value>Open this select menu</option>
                         <?php
@@ -113,13 +110,13 @@ $gr = selectAll($sql);
                     </select>
                     <br>
 
-                    <strong><label><?echo $txtacc?></label></strong>
+                    <strong><label><?php echo $txtacc?></label></strong>
                     <textarea class="form-control rounded-0" id="accs" name="accs" rows="10"
-                              placeholder="<? echo $txtnewline ?>"></textarea>
+                              placeholder="<?php echo $txtnewline ?>"></textarea>
                     <br>
 
-                    <strong><label><?echo $txtnoreq?></label></strong>
-                    <input type="text" class="form-control" id="comms1" name="comms1" placeholder="<? echo $txtcomm ?>">
+                    <strong><label><?php echo $txtnoreq?></label></strong>
+                    <input type="text" class="form-control" id="comms1" name="comms1" placeholder="<?php echo $txtcomm ?>">
 
 
                     <br>

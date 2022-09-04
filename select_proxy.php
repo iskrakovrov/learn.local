@@ -10,5 +10,5 @@ $sql = "SELECT count(works) FROM accounts WHERE id_proxy = '$pr'";
 
 $sel = select($sql);
 
-$json_data = json_encode($sel);
+$json_data = json_encode($sel, JSON_THROW_ON_ERROR);
 print $json_data;

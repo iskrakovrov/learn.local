@@ -9,5 +9,5 @@ $sql = (string)$sql;
 
 $sel = selectAll($sql);
 
-$json_data = json_encode($sel);
+$json_data = json_encode($sel, JSON_THROW_ON_ERROR);
 print $json_data;

@@ -8,5 +8,5 @@ $sql = $_GET["sql"];
 
 $upd = update($sql);
 
-$json_data = json_encode($upd);
+$json_data = json_encode($upd, JSON_THROW_ON_ERROR);
 print $json_data;

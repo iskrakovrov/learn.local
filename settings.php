@@ -4,7 +4,7 @@ require_once('inc/db.php');
 require_once('function/function.php');
 
 $l = $_SESSION['lang'];
-if ($l == 0){
+if ($l === 0){
     $sql = "SELECT lang FROM users";
     $res = select($sql);
     $lang = $res['lang'];
@@ -25,7 +25,7 @@ if (!empty($_POST['pass']))
     $sql = "UPDATE users set pass = '$pass' where id = 1";
     $qw = update($sql);
 }
-if ($_POST['lng'] !== 'Select' AND (!empty($_POST['lng'])))
+if ($_POST['lng'] !== 'Select' && (!empty($_POST['lng'])))
 {
     $lng = $_POST['lng'];
     $sql = "UPDATE users set lang = '$lng' where id = 1";

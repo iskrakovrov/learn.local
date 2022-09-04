@@ -16,8 +16,9 @@ $comm = $_REQUEST['comms1'];
 if (isset($_POST['proxy1'])) {
     $array = explode("\r\n", $_POST['proxy1']);
 
-    for ($i = 0, $iMax = count($array); $i <= $iMax; $i++)
+    for ($i = 0, $iMax = count($array); $i <= $iMax; $i++) {
         $c = (trim($array[$p]) . "<br/>");
+    }
     $c = preg_replace('/<br[^>]*>/', '', $c);
     $i = 0;
     foreach ($array as $pr) {

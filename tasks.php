@@ -34,7 +34,7 @@ if ($add_task === "login") {
         "data" => $st,
     );
 
-    $json_data = json_encode($data);
+    $json_data = json_encode($data, JSON_THROW_ON_ERROR);
 
     foreach ($ids as $a) {
         $add_task = $_POST['add_task'];
