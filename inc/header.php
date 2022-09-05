@@ -87,6 +87,10 @@
                                 <hr class="dropdown-divider">
                             </li>
                             <li><a class="dropdown-item" href="#">Lists IMG</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Lists service</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">

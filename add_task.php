@@ -6,6 +6,10 @@ require_once('function/function.php');
 $lang = $_SESSION['lang'] . '.php';
 require_once($lang);
 
+
+
+
+
 ?>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
