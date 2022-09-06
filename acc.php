@@ -5,9 +5,15 @@ require_once('inc/db.php');
 require_once('function/function.php');
 
 
-
 $sql = "SELECT * FROM accounts";
 $query = selectAll($sql);
+$sql = "SELECT * FROM group_acc";
+$gr1 = selectAll($sql);
+$sql = "SELECT * FROM servers";
+$ser1 = selectAll($sql);
+$sql = "SELECT * FROM status";
+$st1 = selectAll($sql);
+
 
 foreach ($query as $a) {
     if (!empty ($a['avatar'])) {
@@ -38,15 +44,33 @@ foreach ($query as $a) {
     $tk = $tk[0];
     $tk = $tk['count(task)'];
     $id_gr = $a['group_acc'];
-    $sql = "SELECT name_group FROM group_acc where id = $id_gr LIMIT 1";
-    $gr = select($sql);
+
+
+    foreach ($gr1 as $z) {
+        if ($z['id'] === $id_gr) {
+            $gr = $z['name_group'];
+        }
+    }
+
+
     $data = date('d  M Y', $a["created"]);
     $id_s = $a['server'];
-    $sql = "SELECT name_server FROM servers where id = $id_s LIMIT 1";
-    $ser = select($sql);
+
+    foreach ($ser1 as $z) {
+        if ($z['id'] === $id_s) {
+            $ser = $z['name_server'];
+        }
+    }
+
+
     $st = $a['status'];
-    $sql = "SELECT status FROM status WHERE id = $st LIMIT 1";
-    $st = select($sql);
+
+    foreach ($st1 as $z) {
+        if ($z['id'] === $st) {
+            $st = $z['status'];
+        }
+    }
+
     $id = '<div style="text-align: center;"><input type="checkbox" name="a[]" value="';
     $id .= $a['id'];
     $id .= '"></div>';
@@ -75,9 +99,9 @@ foreach ($query as $a) {
         "gender" => $a["gender"],
         "avatar" => $ava,
         "proxy" => $pr,
-        "server" => $ser['name_server'],
-        "group" => $gr['name_group'],
-        "status" => $st['status'],
+        "server" => $ser,
+        "group" => $gr,
+        "status" => $st,
         "task" => $tk,
         "use" => $use,
         "create" => $data,

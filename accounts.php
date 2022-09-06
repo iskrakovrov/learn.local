@@ -224,7 +224,7 @@ include_once 'inc/header.php'
         iLeftWidth: 120,
         sLeftWidth: 'relative',
 
-        "ajax": "/acc.php",
+        "ajax": "acc.php",
         "columns": [
 
             {mData: 'ids'},

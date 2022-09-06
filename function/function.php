@@ -263,52 +263,13 @@ function parse_acc2($acc, $comm, $serv, $group, $cock)
 
     $time = Time();
 
-    $sql = "INSERT INTO accounts (id, login_fb, pass_fb, id_fb, name, bd, mb, yb, gender, avatar, created, comment, group_acc, server, id_proxy, status, works, useacc, friends, last_start, id_mail, id_phone, coockie, tocken, 2fa, ua, mail, mail_pass, imap_mail, phone, adv) VALUES (NULL,'$login', '$pass', NULL, NULL, NULL, NULL, NULL, NULL, NULL, $time, '$comm', $group, $serv,NULL, 1, 0, 0, NULL, NULL, NULL, NULL, '$cock', NULL, $fa, NULL, '$mail', '$passmail', '$imappass', '$phone', 0)";
+    $sql = "INSERT INTO accounts (id, login_fb, pass_fb, id_fb, name, bd, mb, yb, gender, avatar, created, comment, group_acc, server, id_proxy, status, works, useacc, friends, last_start, id_mail, id_phone, coockie, tocken, 2fa, ua, mail, mail_pass, imap_mail, phone, adv) VALUES (NULL,'$login', '$pass', NULL, NULL, NULL, NULL, NULL, NULL, NULL, $time, '$comm', $group, $serv,NULL, 1, 0, 0, NULL, NULL, NULL, NULL, '$cock', NULL, '$fa', NULL, '$mail', '$passmail', '$imappass', '$phone', 0)";
 
     return [$sql];
 
 }
 
-function mails($m1, $p1)
-{
-    if (empty($m1)) {
-        return;
-    }
-    $sql = "SELECT * FROM mail WHERE mail = '$m1'";
-    $query = selectAll($sql);
-    if (empty($query)) {
-        $m2 = 'good';
-        return [$m2];
-    }
-    $m2 = 'double';
-    return [$m2];
 
-}
-
-function phones($p1)
-{
-    if (empty ($p1)) {
-        return;
-    }
-    $sql = "SELECT * FROM phones WHERE phone = '$p1'";
-    $query = selectAll($sql);
-    if (empty($query)) {
-        $p2 = 'good';
-        return [$p2];
-    }
-    $p2 = 'double';
-    return [$p2];
-}
-
-function addmail($mail)
-{
-    return;
-}
-
-function addphone($prone)
-{
-    return;
-}
 
 function add_task($add_task, $json_data, $time, $account)
 {
