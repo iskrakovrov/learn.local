@@ -91,7 +91,14 @@ $bl = selectAll($sql);
                     </div>
                 </div>
                 <br>
-
+                <div class="col-sm-4 text-center">
+                    <div class="form-check">
+                        <label for="f24"><?php echo $txtfarmi11 ?></label>
+                        <input type="text" name="f24" id="f24" class="form-control"
+                               placeholder="3">
+                    </div>
+                </div>
+                <br>
 
                 <button class="btn btn-secondary" name="add_task" id="add_task" value="invite_from_group">ACTIVATE
                 </button>
