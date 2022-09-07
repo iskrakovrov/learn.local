@@ -59,7 +59,7 @@ require_once 'inc/header.php'
             <div class="col text-center">
 
 
-                <a class="btn btn-secondary" href="#" role="button">Add server</a>
+                <a class="btn btn-secondary" href="#" role="button">Servers</a>
             <button class="btn btn-secondary" name="add_task" id="add_task" value="add_task.php">Groups accounts
             </button>
                 <a class="btn btn-secondary" href="add_acc2.php" role="button">Add accounts</a>
