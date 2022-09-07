@@ -4,8 +4,8 @@ include_once('inc/init.php');
 require_once('inc/db.php');
 require_once('function/function.php');
 
-
-$sql = "SELECT * FROM accounts";
+$start = microtime(true);
+$sql = "SELECT id, login_fb, pass_fb, name, gender, avatar, created, group_acc, server, id_proxy, status, works, useacc, friends, last_start, tocken, mail, phone, adv FROM accounts";
 $query = selectAll($sql);
 $sql = "SELECT * FROM group_acc";
 $gr1 = selectAll($sql);
@@ -39,10 +39,10 @@ foreach ($query as $a) {
         $tocken = "YES";
     }
     $t = $a['id'];
-    $sql = "SELECT count(task) FROM task WHERE account = $t";
-    $tk = selectAll($sql);
-    $tk = $tk[0];
-    $tk = $tk['count(task)'];
+    //$sql = "SELECT count(task) FROM task WHERE account = $t";
+    $tk = 0;// selectAll($sql);
+   //$tk = $tk[0];
+  // $tk = $tk['count(task)'];
     $id_gr = $a['group_acc'];
 
 
@@ -119,7 +119,8 @@ $data = array(
 );
 
 // Convert PHP array to JSON array
-$json_data = json_encode($data);
+$json_data = json_encode($data, JSON_THROW_ON_ERROR);
 print $json_data;
+$time = microtime(true) - $start;
 
 
