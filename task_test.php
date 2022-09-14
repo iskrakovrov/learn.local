@@ -25,7 +25,7 @@ require_once($lang);
 <body>
 <?php
 include_once 'inc/header.php';
-require_once 'action/accept _friend.php'?>
+require_once 'action/coockie.php'?>
 
 
 
