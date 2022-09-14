@@ -25,9 +25,62 @@ require_once($lang);
 <body>
 <?php
 include_once 'inc/header.php';
-require_once 'action/page_invite.php'?>
+?>
+
+<table id="dr_table" class="cell-border" style="width:100%">
+    <thead>
+    <tr>
+        <th class="check" style="text-align: center;">
+            <input type="checkbox" id="all" value=""/>
+        </th>
+        <th>Login</th>
+        <th>Mail</th>
+        <th>Phone</th>
+        <th>Gender</th>
+        <th>Avatar</th>
+        <th>Proxy On</th>
+        <th>Server</th>
+        <th>Group</th>
+        <th>Status</th>
+        <th>Task</th>
+        <th>Use</th>
+        <th>Create</th>
+        <th>Friends</th>
+        <th>Tocken</th>
+        <th>ADV</th>
+        <th>Last Start</th>
+        <th>Action</th>
+
+    </tr>
+    </thead>
+    <tbody>
 
 
+    </tbody>
+    <tfoot>
+    <tr>
+        <th></th>
+        <th>Login</th>
+        <th>Mail</th>
+        <th>Phone</th>
+        <th>Gender</th>
+        <th>Avatar</th>
+        <th>Proxy On</th>
+        <th>Server</th>
+        <th>Group</th>
+        <th>Status</th>
+        <th>Task</th>
+        <th>Use</th>
+        <th>Create</th>
+        <th>Friends</th>
+        <th>Tocken</th>
+        <th>ADV</th>
+        <th>Last Start</th>
+        <th>Action</th>
+
+    </tr>
+    </tfoot>
+</table>
 
 <!-- Option 1: Bootstrap Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
