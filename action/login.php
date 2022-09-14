@@ -55,6 +55,14 @@
                             <input class="form-control" name="action[4]" type="number" id="action[4]">
 
                         </div>
+                        <!-- Макс инвайтов -->
+                        <div class="form-check col-sm-4 text-center">
+                            <label class="form-check-label" for="action[4]">
+                                <?php echo $txtlogin5 ?>
+                            </label>
+                            <input class="form-control" name="action[4]" type="number" id="action[4]">
+
+                        </div>
                         <!-- Макс лайков -->
                         <div class="form-check col-sm-4 text-center">
                             <label class="form-check-label" for="action[5]">
