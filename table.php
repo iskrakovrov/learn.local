@@ -27,6 +27,75 @@ require_once($lang);
 include_once 'inc/header.php';
 ?>
 
+<br>
+<div class="container-fluid">
+    <div class="row justify-content-md-center">
+        <div class="col-1">
+            <div class="form-floating">
+                <input type="text" class="form-control" id="floatingInputGrid"  >
+                <label for="floatingInputGrid">Login</label>
+            </div>
+        </div>
+        <div class="col-1">
+            <div class="form-floating">
+                <input type="text" class="form-control" id="floatingInputGrid" >
+                <label for="floatingInputGrid">Email address</label>
+            </div>
+        </div>
+        <div class="col-1">
+            <div class="form-floating">
+                <input type="text" class="form-control" id="floatingInputGrid" >
+                <label for="floatingInputGrid">Phone</label>
+            </div>
+        </div>
+        <div class="col-1">
+            <div class="form-floating">
+                <select class="form-select" id="floatingSelectGrid" aria-label="Floating label select example">
+                    <option value="0" selected>Open this select menu</option>
+                    <option value="1">Male</option>
+                    <option value="2">Female</option>
+                    <option value="3">None</option>
+                </select>
+                <label for="floatingSelectGrid">Gender</label>
+            </div>
+        </div>
+        <div class="col-1">
+            <div class="form-floating">
+                <select class="form-select" id="floatingSelectGrid" aria-label="Floating label select example">
+                    <option selected>Open this select menu</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+                <label for="floatingSelectGrid">Works with selects</label>
+            </div>
+        </div>
+        <div class="col-1">
+            <div class="form-floating">
+                <select class="form-select" id="floatingSelectGrid" aria-label="Floating label select example">
+                    <option selected>Open this select menu</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+                <label for="floatingSelectGrid">Works with selects</label>
+            </div>
+        </div>
+        <div class="col-1">
+            <div class="form-floating">
+                <select class="form-select" id="floatingSelectGrid" aria-label="Floating label select example">
+                    <option selected>Open this select menu</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+                <label for="floatingSelectGrid">Works with selects</label>
+            </div>
+        </div>
+    </div>
+
+</div>
+<br>
 <table id="dr_table" class="cell-border" style="width:100%">
     <thead>
     <tr>

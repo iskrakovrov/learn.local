@@ -241,9 +241,10 @@ require_once 'inc/header.php'
 
         serverSide: false,
         orderCellsTop: true,
-        scrollX: true,
+        scrollX: false,
         iLeftWidth: 120,
         sLeftWidth: 'relative',
+        bDeferRender: true,
 
         "ajax": "acc.php",
         "columns": [
