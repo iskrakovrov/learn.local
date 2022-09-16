@@ -244,9 +244,10 @@ require_once 'inc/header.php'
         scrollX: false,
         iLeftWidth: 120,
         sLeftWidth: 'relative',
-        bDeferRender: true,
+
 
         "ajax": "acc.php",
+        "deferRender": true,
         "columns": [
 
             {mData: 'ids'},

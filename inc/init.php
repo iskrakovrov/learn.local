@@ -6,4 +6,4 @@ exit;
 }
 $lang = $_SESSION['lang'];
 $lang = $_SESSION['lang'] . '.php';
-
+gc_collect_cycles();
