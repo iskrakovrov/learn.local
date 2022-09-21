@@ -19,13 +19,14 @@ if ($add_task === "login") {
         'smart' => $setup[2],
         'tock' => $setup[3],
         'minvite' => $setup[4],
-        'mlike' => $setup[5],
-        'mcomments' => $setup[6],
-        'mmessage' => $setup[7],
-        'tstart' => $setup[8],
-        'nproxy' => $setup[9],
-        'get' => $setup[10],
-        'bat' => $setup[11],
+        'msuggest' => $setup[5],
+        'mlike' => $setup[6],
+        'mcomments' => $setup[7],
+        'mmessage' => $setup[8],
+        'tstart' => $setup[9],
+        'nproxy' => $setup[10],
+        'get' => $setup[11],
+        'bat' => $setup[12],
 
 
     );
@@ -185,7 +186,7 @@ if (!empty($w)) {
 session_start();
 $_SESSION['task'] = $task;
 $_SESSION['ids'] = $ids;
-
+header("Location: accounts.php");
 
 ?>
 

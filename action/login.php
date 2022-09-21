@@ -55,53 +55,53 @@
                             <input class="form-control" name="action[4]" type="number" id="action[4]">
 
                         </div>
-                        <!-- Макс инвайтов -->
-                        <div class="form-check col-sm-4 text-center">
-                            <label class="form-check-label" for="action[4]">
-                                <?php echo $txtlogin5 ?>
-                            </label>
-                            <input class="form-control" name="action[4]" type="number" id="action[4]">
-
-                        </div>
-                        <!-- Макс лайков -->
+                        <!-- Макс принятий -->
                         <div class="form-check col-sm-4 text-center">
                             <label class="form-check-label" for="action[5]">
-                                <?php echo $txtlogin6 ?>
+                                <?php echo $txtlogin11 ?>
                             </label>
                             <input class="form-control" name="action[5]" type="number" id="action[5]">
 
                         </div>
-                        <!-- Макс комментариев -->
+                        <!-- Макс лайков -->
                         <div class="form-check col-sm-4 text-center">
                             <label class="form-check-label" for="action[6]">
-                                <?php echo $txtlogin7 ?>
+                                <?php echo $txtlogin6 ?>
                             </label>
                             <input class="form-control" name="action[6]" type="number" id="action[6]">
 
                         </div>
-                        <!-- Макс лички -->
+                        <!-- Макс комментариев -->
                         <div class="form-check col-sm-4 text-center">
                             <label class="form-check-label" for="action[7]">
-                                <?php echo $txtlogin8 ?>
+                                <?php echo $txtlogin7 ?>
                             </label>
                             <input class="form-control" name="action[7]" type="number" id="action[7]">
 
                         </div>
-                        <!-- Время до запуска -->
+                        <!-- Макс лички -->
                         <div class="form-check col-sm-4 text-center">
                             <label class="form-check-label" for="action[8]">
-                                <?php echo $txtlogin9 ?>
+                                <?php echo $txtlogin8 ?>
                             </label>
                             <input class="form-control" name="action[8]" type="number" id="action[8]">
+
+                        </div>
+                        <!-- Время до запуска -->
+                        <div class="form-check col-sm-4 text-center">
+                            <label class="form-check-label" for="action[9]">
+                                <?php echo $txtlogin9 ?>
+                            </label>
+                            <input class="form-control" name="action[9]" type="number" id="action9]">
 
                         </div>
 
                         <!-- Можно без прокси -->
 
                             <div class="form-check col-sm-4 text-center">
-                                <input class="form-check-input" name="action[9]" type="checkbox" value="noproxy"
-                                       id="action[9]">
-                                <label class="form-check-label" for="action[9]">
+                                <input class="form-check-input" name="action[10]" type="checkbox" value="noproxy"
+                                       id="action[10]">
+                                <label class="form-check-label" for="action[10]">
                                     <?php echo $txtlogin10 ?>
                                 </label>
                             </div>

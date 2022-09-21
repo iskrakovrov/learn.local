@@ -19,6 +19,7 @@
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="servers.php">Servers</a></li>
                             <li><a class="dropdown-item" href="groups.php">Accounts group</a></li>
+                            <li><a class="dropdown-item" href="options.php">Options</a></li>
                             <li><a class="dropdown-item" href="settings.php">Settings</a></li>
                             <li>
                                 <hr class="dropdown-divider">

@@ -5,8 +5,9 @@ $sql = "SELECT * FROM proxy WHERE status = 'ok' AND use_proxy = (SELECT min(use_
 $query = select($sql);
 $count = $query['use_proxy'];
 $count = ++$count;
-$id = $query['id_proxy'];
+$id = $query['id'];
+
 $sql = "UPDATE proxy SET use_proxy = $count WHERE id = $id";
 $query1 = update($sql);
-$json_data = json_encode($query);
+$json_data = json_encode($query, JSON_THROW_ON_ERROR);
 echo $json_data;
