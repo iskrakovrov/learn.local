@@ -186,7 +186,7 @@ if (!empty($w)) {
 session_start();
 $_SESSION['task'] = $task;
 $_SESSION['ids'] = $ids;
-header("Location: accounts.php");
+
 
 ?>
 
