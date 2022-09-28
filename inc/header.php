@@ -7,7 +7,7 @@ $acc = select($sql);
 $sql = "SELECT COUNT(*) FROM proxy";
 $cpr = select($sql);
 
-//$a = $acc['COUNT(*)'];
+$a = $acc['COUNT(*)'];
 $cp = $cpr['COUNT(*)'];
 
 ?>

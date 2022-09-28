@@ -76,24 +76,28 @@ require_once 'inc/header.php'
 
         <form method="post" action="add_t.php">
             <div class="input-group">
-                <select name="add_task" class="custom-select">
-                    <option value="" selected>[Что делать с отмеченными]</option>
-                    <option value="add_t.php"><?php echo $txtaccounts ?></option>
-                    <option value="acc_free.php"><?php echo $txtaccounts1 ?></option>
+                <label for="add_task"></label>
 
 
-                    <option value="clear_tasks.php">Удалить все задания</option>
+                    <select name="add_task" id="add_task" class="custom-select">
+                        <option value="" selected>[Что делать с отмеченными]</option>
+                        <option value="add_task.php"><?php echo $txtaccounts ?></option>
+                        <option value="acc_free.php"><?php echo $txtaccounts1 ?></option>
 
 
-                    <option value="" disabled="disabled">----------</option>
-                    <option value="free_proxy.php"><?php echo $txtaccounts2 ?></option>
-                    <option value="no_free_proxy.php"><?php echo $txtaccounts8 ?></option>
+                        <option value="clear_tasks.php">Удалить все задания</option>
 
 
-                    <option value="" disabled="disabled">----------</option>
+                        <option value="" disabled="disabled">----------</option>
+                        <option value="free_proxy.php"><?php echo $txtaccounts2 ?></option>
+                        <option value="no_free_proxy.php"><?php echo $txtaccounts8 ?></option>
 
-                    <option value="del">Удалить</option>
-                </select>
+
+                        <option value="" disabled="disabled">----------</option>
+
+                        <option value="del">Удалить</option>
+                    </select>
+
 
 
                 <div class="input-group-append">
@@ -129,7 +133,7 @@ require_once 'inc/header.php'
                 </tr>
                 <tr>
                     <td>Maximum friends:</td>
-                    <td><input type="text" id="max" name="max"></td>
+                    <td><label for="max"></label><input type="text" id="max" name="max"></td>
                 </tr>
 
                 </tbody>
@@ -142,6 +146,7 @@ require_once 'inc/header.php'
                 <thead>
                 <tr>
                     <th class="check" style="text-align: center;">
+                        <label for="all"></label>
                         <input type="checkbox" id="all" value=""/>
                     </th>
                     <th>Login</th>
@@ -281,11 +286,11 @@ require_once 'inc/header.php'
             this.api()
                 .columns([4, 5, 6, 7, 8, 9, 11, 14, 15])
                 .every(function () {
-                    var column = this;
-                    var select = $('<select><option value=""></option></select>')
+                    const column = this;
+                    const select = $('<select><option value=""></option></select>')
                         .appendTo($(column.header()))
                         .on('change', function () {
-                            var val = $.fn.dataTable.util.escapeRegex($(this).val());
+                            const val = $.fn.dataTable.util.escapeRegex($(this).val());
 
                             column.search(val ? '^' + val + '$' : '', true, false).draw();
                         });
@@ -303,9 +308,9 @@ require_once 'inc/header.php'
 
 
     $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
-        var min = parseInt($('#min').val(), 10);
-        var max = parseInt($('#max').val(), 10);
-        var age = parseFloat(data[13]) || 0; // use data for the age column
+        const min = parseInt($('#min').val(), 10);
+        const max = parseInt($('#max').val(), 10);
+        const age = parseFloat(data[13]) || 0; // use data for the age column
 
         if (
             (isNaN(min) && isNaN(max)) ||
@@ -319,7 +324,7 @@ require_once 'inc/header.php'
     });
 
     $(document).ready(function () {
-        var table = $('#dr_table').DataTable();
+        const table = $('#dr_table').DataTable();
 
         // Event listener to the two range filtering inputs to redraw on input
         $('#min, #max').keyup(function () {
