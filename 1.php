@@ -102,6 +102,11 @@ $txtoptions1 = 'Максимальное количество аккаунтов
 $txtoptions2 = 'Глобальные';
 $txtoptions3 = 'Глобальные';
 $txtlogin11 = 'Максимум приемов в друзья';
+$txtaccounts = 'Добавить задание';
+$txtaccounts1 = 'Установить состояние "Свободен"';
+$txtaccounts2 = 'Разрешить работу без прокси';
+$txtaccounts3 = '[Что делать с отмеченными]';
+$txtaccounts3 = 'All acc proxy free';
 
 
 

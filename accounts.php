@@ -76,16 +76,17 @@ require_once 'inc/header.php'
         <div class="input-group">
             <select name="add_task" class="custom-select">
                 <option value="" selected>[Что делать с отмеченными]</option>
-                <option value="add_t.php">Добавить задание</option>
-                <option value="acc_free.php">Установить состояние &quot;Свободен"</option>
+                <option value="add_t.php"><?php echo $txtaccounts?></option>
+                <option value="acc_free.php"><?php echo $txtaccounts1?></option>
+
 
 
                 <option value="clear_tasks.php">Удалить все задания</option>
 
 
                 <option value="" disabled="disabled">----------</option>
-                <option value="add_to_group_1">Добавить в группу "Киев"</option>
-                <option value="add_to_group_2">Добавить в группу &quot;Одесса&quot;</option>
+                <option value="free_proxy.php"><?php echo $txtaccounts2?></option>
+                <option value="free_proxy.php"><?php echo $txtaccounts2?></option>
                 <option value="add_to_group_3">Добавить в группу "Днепр"</option>
                 <option value="add_to_group_4">Добавить в группу "Харьков"</option>
                 <option value="add_to_group_5">Добавить в группу "FBCOMBO"</option>
@@ -109,15 +110,14 @@ require_once 'inc/header.php'
 
             <div class="row">
                 <div class="col text-center">
-                    <a class="btn btn-secondary" href="add_acc2.php" role="button">Add accounts</a>
+                    <a class="btn btn-secondary" href="all_proxy_free.php" role="button" onClick="return confirm( 'WARNING!!! DELETE ACCOUNT?' )">All accounts without proxy</a>
+                    <a class="btn btn-secondary" href="all_proxy.php" role="button" onClick="return confirm( 'WARNING!!! DELETE ACCOUNT?' )">
+                        Proxy for all accounts</a>
                     <button class="btn btn-secondary" name="add_task" id="add_task" value="add_task.php">ADD TASK
                     </button>
 
 
-                    <a class="btn btn-secondary" href="#" role="button">Check double</a>
-
-
-                    <button class="btn btn-danger" onClick="return confirm( 'WARNING!!! DELETE ACCOUNT?' )"
+                                        <button class="btn btn-danger" onClick="return confirm( 'WARNING!!! DELETE ACCOUNT?' )"
                             name="del_accs" id="dell_accs">DELETE ACCOUNTS
                     </button>
                 </div>

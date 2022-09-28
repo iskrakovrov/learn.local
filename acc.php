@@ -26,14 +26,14 @@ foreach ($query as $a) {
     } else {
         $pr = "OK";
     }
-    if ($a['useacc'] === '0') {
+    if ($a['useacc'] == '0') {
         $use = "FREE";
     } else {
         $use = "WORK"; //ooo
     }
     $find = "EAAB";
     $pos1 = stripos($a['tocken'], $find);
-    if ($pos1 === false) {
+    if ($pos1 == false) {
         $tocken = "NO";
     } else {
         $tocken = "YES";
@@ -47,7 +47,7 @@ foreach ($query as $a) {
 
 
     foreach ($gr1 as $z) {
-        if ($z['id'] === $id_gr) {
+        if ($z['id'] == $id_gr) {
             $gr = $z['name_group'];
         }
     }
@@ -57,7 +57,7 @@ foreach ($query as $a) {
     $id_s = $a['server'];
 
     foreach ($ser1 as $z) {
-        if ($z['id'] === $id_s) {
+        if ($z['id'] == $id_s) {
             $ser = $z['name_server'];
         }
     }
@@ -66,7 +66,7 @@ foreach ($query as $a) {
     $st = $a['status'];
 
     foreach ($st1 as $z) {
-        if ($z['id'] === $st) {
+        if ($z['id'] == $st) {
             $st = $z['status'];
         }
     }
