@@ -15,7 +15,16 @@ include_once 'inc/header.php'
 ?>
 <main class="container-fluid ">
 
-sdfsffd
+    Текущая версия панели
+    <br>
+    Актуальная версия панели СКАЧАТЬ
+    <br>
+    КАК ОБНОВИТЬ
+    <br>
+    Инструкции
+    <br>
+    Техподдержка
+    <br>
 </main>
 
 

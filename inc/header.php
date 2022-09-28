@@ -1,3 +1,17 @@
+<?php
+include_once('inc/init.php');
+require_once('inc/db.php');
+require_once('function/function.php');
+$sql = "SELECT COUNT(*) FROM accounts";
+$acc = select($sql);
+$sql = "SELECT COUNT(*) FROM proxy";
+$cpr = select($sql);
+
+//$a = $acc['COUNT(*)'];
+$cp = $cpr['COUNT(*)'];
+
+?>
+
 <div class="outer">
     <header class="container-fluid bg-secondary" >
 
@@ -32,10 +46,10 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="accounts.php">Accounts</a>
+                        <a class="nav-link active" aria-current="page" href="accounts.php">Accounts <span class="badge badge-primary"><?php echo $a ?></span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="proxy.php">Proxy</a>
+                        <a class="nav-link active" aria-current="page" href="proxy.php">Proxy <span class="badge badge-primary"><?php echo $cp ?></span></a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link active active dropdown-toggle" href="#" id="navbarDropdown" role="button"

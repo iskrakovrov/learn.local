@@ -21,10 +21,15 @@ foreach ($query as $a) {
     } else {
         $ava = "NO";
     }
-    if (empty($a['id_proxy'])) {
+    if (is_null($a['id_proxy'])) {
         $pr = "NO";
     } else {
-        $pr = "OK";
+        if($a['id_proxy'] == 0){
+            $pr = 'FREE';
+        }
+        else {
+            $pr = "OK";
+        }
     }
     if ($a['useacc'] == '0') {
         $use = "FREE";
