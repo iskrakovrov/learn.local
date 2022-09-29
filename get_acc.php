@@ -8,7 +8,7 @@ $query = select($sql);
 $server = $query['id'];
 $sql = "SELECT accounts.* FROM accounts, task where accounts.id = task.account and accounts.useacc <> 1 and accounts.server = '$server' ORDER BY accounts.last_start LIMIT 1";
 $data = select($sql);
-$json_data = json_encode($data);
+$json_data = json_encode($data, JSON_THROW_ON_ERROR);
 if (empty($data)) {
     $json_data = 'no accounts';
 }
