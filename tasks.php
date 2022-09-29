@@ -183,6 +183,10 @@ if (!empty($w)) {
     array_shift($task);
     include_once($url);
 }
+else{
+    header("Location: accounts.php");
+    exit;
+}
 session_start();
 $_SESSION['task'] = $task;
 $_SESSION['ids'] = $ids;

@@ -43,6 +43,7 @@ $ser = selectAll($sql);
 
                 <a class="btn btn-secondary" href="add_multi_proxy.php" role="button">Add proxy</a>
                 <a class="btn btn-success" href="#" role="button">Multi good proxy</a>
+                <a class="btn btn-success" href="all_no_work_proxy.php" role="button">Multy FREE proxy</a>
 
                 <button type="submit" class="btn btn-danger" title="Delete proxy"
                         onClick="return confirm( 'WARNING!!! DELETE PROXY? ' )">Delete Proxy <i
