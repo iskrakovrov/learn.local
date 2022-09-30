@@ -1,7 +1,7 @@
 <?php
 require_once('inc/db.php');
 require_once('function/function.php');
-$sql = "SELECT * FROM proxy WHERE status = 'ok' AND use_proxy = (SELECT min(use_proxy) from proxy) AND work = (SELECT min(work) from proxy) LIMIT 1";
+$sql = "SELECT * FROM proxy WHERE status = 'ok' ORDER BY `use_proxy` ASC, `work` ASC LIMIT 1;";
 $query = select($sql);
 $count = $query['use_proxy'];
 $count = ++$count;
