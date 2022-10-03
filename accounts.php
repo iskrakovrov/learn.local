@@ -79,24 +79,24 @@ require_once 'inc/header.php'
                 <label for="add_task"></label>
 
 
-                    <select name="add_task" id="add_task" class="custom-select">
-                        <option value="" selected>[Что делать с отмеченными]</option>
-                        <option value="add_task.php"><?php echo $txtaccounts ?></option>
-                        <option value="acc_free.php"><?php echo $txtaccounts1 ?></option>
+                <select name="add_task" id="add_task" class="custom-select">
+                    <option value="" selected>[Что делать с отмеченными]</option>
+                    <option value="add_task.php"><?php echo $txtaccounts ?></option>
+                    <option value="acc_free.php"><?php echo $txtaccounts1 ?></option>
 
 
-                        <option value="clear_tasks.php">Удалить все задания</option>
+                    <option value="clear_tasks.php">Удалить все задания</option>
 
 
-                        <option value="" disabled="disabled">----------</option>
-                        <option value="free_proxy.php"><?php echo $txtaccounts2 ?></option>
-                        <option value="no_free_proxy.php"><?php echo $txtaccounts8 ?></option>
+                    <option value="" disabled="disabled">----------</option>
+                    <option value="free_proxy.php"><?php echo $txtaccounts2 ?></option>
+                    <option value="no_free_proxy.php"><?php echo $txtaccounts8 ?></option>
 
 
-                        <option value="" disabled="disabled">----------</option>
+                    <option value="" disabled="disabled">----------</option>
 
-                        <option value="del">Удалить</option>
-                    </select>
+                    <option value="del">Удалить</option>
+                </select>
 
 
 
@@ -235,7 +235,7 @@ require_once 'inc/header.php'
         bProcessing: false,
 
 
-        stateSave: true,
+
         searching: true,
 
         serverSide: false,
@@ -243,6 +243,7 @@ require_once 'inc/header.php'
         scrollX: false,
         iLeftWidth: 120,
         sLeftWidth: 'relative',
+        "lengthMenu": [[30, 100, 250, 500, 1000, -1], [30, 100, 250, 500, 1000, "All"]],
 
 
         "ajax": "acc.php",

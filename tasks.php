@@ -27,6 +27,7 @@ if ($add_task === "login") {
         'nproxy' => $setup[10],
         'get' => $setup[11],
         'bat' => $setup[12],
+        'ava' => $setup[13],
 
 
     );
@@ -100,6 +101,27 @@ if ($add_task === 'farm') {
         'like_adv' => $_REQUEST['like_adv'],
         'p_like_adv' => $_REQUEST['p_like_adv'],
         'f24' => $_REQUEST['f24'],
+    );
+    $data = array(
+
+        "data" => $st,
+    );
+    $json_data = json_encode($data);
+
+
+    foreach ($ids as $a) {
+        $add_task = $_POST['add_task'];
+        $time = Time();
+        $r = add_task($add_task, $json_data, $time, $a);
+
+
+    }
+}
+
+if ($add_task === 'erase_invite') {
+    $st[] = array(
+        'num_e' => $_REQUEST['num_e'],
+
     );
     $data = array(
 

@@ -134,6 +134,13 @@
                     </label>
 
                     <br>
+                    <!-- ava -->
+
+                    <input class="form-check-input" name="action[13]" type="checkbox"
+                           id="action[13]">
+                    <label class="form-check-label" for="action[13]">
+                        <?php echo $txtlogin13 ?>
+                    </label>
                 <br>
                     <br>
 

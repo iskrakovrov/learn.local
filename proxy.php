@@ -136,8 +136,7 @@ $ser = selectAll($sql);
 
     dr_table = $('#example').DataTable({
 
-        "lengthMenu": [[100, 300, 500, -1], [30, 100, 200, "All"]],
-        stateSave: true,
+        "lengthMenu": [[30, 100, 200, -1], [30, 100, 200, "All"]],
 
 
     });
