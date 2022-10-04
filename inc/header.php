@@ -43,6 +43,10 @@ $cp = $cpr['COUNT(*)'];
                                 <hr class="dropdown-divider">
                             </li>
                             <li><a class="dropdown-item" href="#">Смена пароля</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Database repair</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">

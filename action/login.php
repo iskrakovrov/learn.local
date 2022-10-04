@@ -143,18 +143,24 @@
                     </label>
                 <br>
                     <br>
-                    <div class="form-group">
-                        <div class="form-floating">
+
+                            <label for="floatingSelect"><?php echo $txtlogin14 ?></label>
                             <select class="form-select" id="action[14]" name="action[14]" aria-label="Floating label select example">
 
                                 <option value="male">Male</option>
                                 <option value="female">Female</option>
 
                             </select>
-                            <label for="floatingSelect"><?php echo $txtlogin14 ?></label>
-                        </div>
 
-                    </div>
+                    <br>
+                    <!-- Время до запуска -->
+
+                    <label class="form-check-label" for="action[15]">
+                        <?php echo $txtlogin15 ?>
+                    </label>
+                    <input class="form-control" name="action[15]" type="number" id="action[15]">
+
+                    <br>
 
                 <button class="btn btn-secondary" name="add_task" id="add_task" value="login">ACTIVATE</button>
 
