@@ -81,7 +81,7 @@ require_once 'inc/header.php'
                     <option value="acc_free.php"><?php echo $txtaccounts1 ?></option>
 
 
-                    <option value="clear_tasks.php">Удалить все задания</option>
+                    <option value="clear_task.php"><?php echo $txtlogin16 ?></option>
 
 
                     <option value="" disabled="disabled">----------</option>
