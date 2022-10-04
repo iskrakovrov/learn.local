@@ -28,6 +28,7 @@ if ($add_task === "login") {
         'get' => $setup[11],
         'bat' => $setup[12],
         'ava' => $setup[13],
+        'sf' => $setup[14],
 
 
     );

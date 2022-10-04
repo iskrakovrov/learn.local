@@ -19,11 +19,7 @@ require_once($lang);
     <title>FB Combo</title>
 
 </head>
-<?php
-//$sql = "SELECT id, login_fb, pass_fb, name, gender, avatar, created, group_acc, server, id_proxy, status, works, useacc, friends, last_start, tocken, mail, phone, adv FROM accounts";
-//$query = selectAll($sql);
 
-?>
 <body>
 <?php
 require_once 'inc/header.php'

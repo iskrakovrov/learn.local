@@ -143,7 +143,18 @@
                     </label>
                 <br>
                     <br>
+                    <div class="form-group">
+                        <div class="form-floating">
+                            <select class="form-select" id="action[14]" name="action[14]" aria-label="Floating label select example">
 
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+
+                            </select>
+                            <label for="floatingSelect"><?php echo $txtlogin14 ?></label>
+                        </div>
+
+                    </div>
 
                 <button class="btn btn-secondary" name="add_task" id="add_task" value="login">ACTIVATE</button>
 

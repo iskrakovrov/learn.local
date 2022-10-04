@@ -44,10 +44,10 @@ foreach ($query as $a) {
         $tocken = "YES";
     }
     $t = $a['id'];
-    //$sql = "SELECT count(task) FROM task WHERE account = $t";
-    $tk = 0;// selectAll($sql);
-   //$tk = $tk[0];
-  // $tk = $tk['count(task)'];
+    $sql = "SELECT count(task) FROM task WHERE account = $t";
+    $tk = selectAll($sql);
+  $tk = $tk[0];
+   $tk = $tk['count(task)'];
     $id_gr = $a['group_acc'];
 
 
