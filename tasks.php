@@ -9,7 +9,7 @@ require_once($lang);
 
 $ids = $_SESSION['ids'];
 $add_task = $_POST['add_task'];
-if ($add_task === "login") {
+if ($add_task == "login") {
     $setup = $_POST['action'];
 
     $st[] = array(
@@ -48,7 +48,7 @@ if ($add_task === "login") {
     }
 }
 
-if ($add_task === "coockie") {
+if ($add_task == "coockie") {
     $st[] = array(
         'cat' => $_REQUEST['cat'],
         'num_s' => $_REQUEST['num_s'],
@@ -69,10 +69,10 @@ if ($add_task === "coockie") {
 
 
 }
-if ($add_task === "filter") {
+if ($add_task == "add_mail") {
     $st[] = array(
-        'cat' => $_REQUEST['cat'],
-        'num_s' => $_REQUEST['num_s'],
+        'am' => $_REQUEST['am'],
+
 
     );
     $data = array(

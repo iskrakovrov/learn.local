@@ -102,7 +102,7 @@
                     <label class="form-check-label" for="action[9]">
                         <?php echo $txtlogin9 ?>
                     </label>
-                    <input class="form-control" name="action[9]" type="number" id="action[9]">
+                    <input class="form-control" name="action[9]" type="number" id="action[9] required">
 
                 <br>
 
@@ -153,12 +153,12 @@
                             </select>
 
                     <br>
-                    <!-- Время до запуска -->
+                    <!-- Время после работы -->
 
                     <label class="form-check-label" for="action[15]">
                         <?php echo $txtlogin15 ?>
                     </label>
-                    <input class="form-control" name="action[15]" type="number" id="action[15]">
+                    <input class="form-control" name="action[15]" type="number" id="action[15] required">
 
                     <br>
 
