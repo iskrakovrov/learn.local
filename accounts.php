@@ -4,7 +4,10 @@ require_once('inc/db.php');
 require_once('function/function.php');
 $lang = $_SESSION['lang'] . '.php';
 require_once($lang);
-
+$sql = "SELECT * FROM group_acc";
+$gg = selectall($sql);
+$sql = "SELECT * FROM servers";
+$ss = selectAll($sql);
 
 ?>
 <!doctype html>
@@ -62,8 +65,6 @@ require_once 'inc/header.php'
                     <a class="btn btn-secondary" href="groups.php" role="button">Account groups</a>
 
                     <a class="btn btn-success" href="add_acc2.php" role="button">Add accounts</a>
-
-
                 </div>
             </div>
         </div>
@@ -90,6 +91,17 @@ require_once 'inc/header.php'
 
 
                     <option value="" disabled="disabled">----------</option>
+                    <?php foreach ($gg as $g){ ?>
+                    <option value="go_group.php?gr=<?php echo $g['id'] ?>"><?php echo $txtaccounts40 .$g['name_group'] ?></option>
+
+                    <?php } ?>
+
+                    <option value="" disabled="disabled">----------</option>
+                    <?php foreach ($ss as $s){ ?>
+                        <option value="go_server.php?se=<?php echo $s['id'] ?>"><?php echo $txtaccounts41 .$s['name_server'] ?></option>
+
+                    <?php } ?>
+                    <option value="" disabled="disabled">----------</option>
 
                     <option value="del">Удалить</option>
                 </select>
@@ -113,7 +125,7 @@ require_once 'inc/header.php'
 
 
                         <button class="btn btn-danger" onClick="return confirm( '<?php echo $txtaccounts5 ?>' )"
-                                name="del_accs" id="dell_accs">DELETE ACCOUNTS
+                                name="add_task" id="add_task" value="del_acc.php">DELETE ACCOUNTS
                         </button>
                     </div>
                 </div>

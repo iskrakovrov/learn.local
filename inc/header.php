@@ -133,9 +133,19 @@ $cp = $cpr['COUNT(*)'];
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#">Hand Mode</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="trash.php">Trash</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link active active dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            Trash
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="add_list.php">View trash</a></li>
+
+                            <li><a class="dropdown-item" href="edit_list_bl.php">Delete Trash</a></li>
+
+                        </ul>
                     </li>
+
                     <li class="nav-item">
                         <a class="nav-link active" href="logout.php">Exit</a>
                     </li>
