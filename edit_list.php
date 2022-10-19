@@ -7,8 +7,8 @@ require_once($lang);
 
 
 if (!empty($_REQUEST['key'])) {
-
-    $array = explode("\r\n", $_REQUEST['key']);
+   $key =  addslashes($_REQUEST['key']);
+    $array = explode("\r\n", $key);
 
     for ($i = 0, $iMax = count($array); $i <= $iMax; $i++)
     {
@@ -49,7 +49,7 @@ if (!empty($_REQUEST['key'])) {
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     <link href="css/style.css" rel="stylesheet">
-    <title>FB Combo Servers</title>
+    <title>FB Combo Edit list</title>
 </head>
 <body>
 <?php
@@ -61,7 +61,7 @@ $ser = selectAll($sql);
 ?>
 <main class="container-fluid ">
     <div class="row text-center">
-        <h2>Edit </h2>
+        <h2>Edit lists </h2>
     </div>
     <div class="row justify-content-center">
         <div class="col-6 text-center">
@@ -85,6 +85,8 @@ $ser = selectAll($sql);
                 <br>
                 <button type="submit" class="btn btn-primary">Submit</button>
                 <br>
+                <br>
+                <button type="submit" class="btn btn-primary">Delete values</button>
             </form>
         </div>
     </div>

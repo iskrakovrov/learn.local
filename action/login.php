@@ -62,7 +62,7 @@
                     <label class="form-check-label" for="action[4]">
                         <?php echo $txtlogin5 ?>
                     </label>
-                    <input class="form-control" name="action[4]" type="number" id="action[4]">
+                    <input class="form-control" name="action[4]" type="number" id="action[4]" value ="150">
 
                 <br>
                 <!-- Макс принятий -->
@@ -70,7 +70,7 @@
                     <label class="form-check-label" for="action[5]">
                         <?php echo $txtlogin11 ?>
                     </label>
-                    <input class="form-control" name="action[5]" type="number" id="action[5]">
+                    <input class="form-control" name="action[5]" type="number" id="action[5]" value="200">
 
                 <br>
                 <!-- Макс лайков -->

@@ -56,7 +56,7 @@ require_once($lang);
         <div class="row">
             <div class="col text-center">
                 <form>
-                    <a class="btn btn-secondary" href="add_server.php" role="button">Add server</a>
+                    <a class="btn btn-secondary" href="add_list.php" role="button">Add list</a>
                     <a class="btn btn-danger" href="del_server.php" role="button">Delete servers</a>
             </div>
         </div>
