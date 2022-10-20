@@ -48,6 +48,35 @@ if ($add_task == "login") {
     }
 }
 
+if ($add_task == "new_accounts") {
+    $st[] = array(
+        'listid' => $_REQUEST['listid'],
+        'geo' => $_REQUEST['geo'],
+        'num_i' => $_REQUEST['num_i'],
+        'pause' => $_REQUEST['pause'],
+        'confirm' => $_REQUEST['confirm'],
+        'num_с' => $_REQUEST['num_с'],
+        'f24' => $_REQUEST['f24'],
+
+
+    );
+    $data = array(
+
+        "data" => $st,
+    );
+    $json_data = json_encode($data);
+
+    foreach ($ids as $a) {
+        $add_task = $_POST['add_task'];
+        $time = Time();
+        $r = add_task($add_task, $json_data, $time, $a);
+
+    }
+
+
+}
+
+
 if ($add_task == "coockie") {
     $st[] = array(
         'cat' => $_REQUEST['cat'],
