@@ -75,7 +75,7 @@ $geol = selectAll($sql);
 
 
                     <label for="num_co"><?php echo $txtnewacc6 ?></label>
-                    <input type="number" name="num_с" id="num_с" class="form-control" value="5"
+                    <input type="number" name="num_co" id="num_co" class="form-control" value="5"
                            required>
 
 
