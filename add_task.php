@@ -61,32 +61,36 @@ $_SESSION['ids'] = $ids;
                 </div>
                 <div class="row justify-content-md-center">
                     <div class="col-sm-4">
+
+                    <!--  Фарм кук -->
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="coockie.php" id="coo">
                             <label class="form-check-label" for="coo">
                                 <?php echo $txttask2?>
                             </label>
                         </div>
+                        <!--  Фарм интересов -->
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="farm.php" id="farm">
                             <label class="form-check-label" for="farm">
                                 <?php echo $txttask3?>
                             </label>
                         </div>
-
+                        <!--  Добавить почту -->
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="add_mail.php" id="add_mail">
                             <label class="form-check-label" for="add_mail">
                                 <?php echo $txttask30 ?>
                             </label>
                         </div>
-
+                        <!--  Прокачка новорегов -->
                         <div class="form-check">
-                            <input class="form-check-input" name="task[]" type="checkbox" value="invite1" id="task3">
+                            <input class="form-check-input" name="task[]" type="checkbox" value="new_accounts.php" id="new_accounts">
                             <label class="form-check-label" for="defaultCheck1">
                                 <?php echo $txttask4?>
                             </label>
                         </div>
+                        <!--  Инвайт 3 Приглашение предложенных -->
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="invite_suggestions.php"
                                    id="invite_suggestions">
@@ -94,12 +98,14 @@ $_SESSION['ids'] = $ids;
                                 <?php echo $txttask5?>
                             </label>
                         </div>
+                        <!--  Инвайт из групп -->
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="invite1" id="task3">
                             <label class="form-check-label" for="defaultCheck1">
                                 <?php echo $txttask6?>
                             </label>
                         </div>
+                        <!--  Фарм кук -->
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="invite1" id="task3">
                             <label class="form-check-label" for="defaultCheck1">

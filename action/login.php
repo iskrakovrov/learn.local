@@ -78,7 +78,7 @@
                     <label class="form-check-label" for="action[6]">
                         <?php echo $txtlogin6 ?>
                     </label>
-                    <input class="form-control" name="action[6]" type="number" id="action[6]">
+                    <input class="form-control" name="action[6]" type="number" id="action[6]" value="50">
 
                 <br>
                 <!-- Макс комментариев -->
@@ -86,7 +86,7 @@
                     <label class="form-check-label" for="action[7]">
                         <?php echo $txtlogin7 ?>
                     </label>
-                    <input class="form-control" name="action[7]" type="number" id="action[7]">
+                    <input class="form-control" name="action[7]" type="number" id="action[7]" value="50">
 
                 <br>
                 <!-- Макс лички -->
@@ -94,7 +94,7 @@
                     <label class="form-check-label" for="action[8]">
                         <?php echo $txtlogin8 ?>
                     </label>
-                    <input class="form-control" name="action[8]" type="number" id="action[8]">
+                    <input class="form-control" name="action[8]" type="number" id="action[8]" value="20">
 
                 <br>
                 <!-- Время до запуска -->
@@ -102,7 +102,7 @@
                     <label class="form-check-label" for="action[9]">
                         <?php echo $txtlogin9 ?>
                     </label>
-                    <input class="form-control" name="action[9]" type="number" id="action[9] required">
+                    <input class="form-control" name="action[9]" type="number" id="action[9]" value="600" required>
 
                 <br>
 
@@ -158,7 +158,7 @@
                     <label class="form-check-label" for="action[15]">
                         <?php echo $txtlogin15 ?>
                     </label>
-                    <input class="form-control" name="action[15]" type="number" id="action[15] required">
+                    <input class="form-control" name="action[15]" type="number" id="action[15]" value="10" required>
 
                     <br>
 

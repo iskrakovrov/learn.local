@@ -46,9 +46,9 @@ $geol = selectAll($sql);
                     <select name="geo" id="geo" class="form-control">
                         <?php
                         $i = 0;
-                        foreach ($qeol as $b) {
+                        foreach ($geol as $a) {
                             $i++; ?>
-                            <option value="<?php echo $b['id'] ?>"><?php echo $b['name']; ?></option>
+                            <option value="<?php echo $a['id'] ?>"><?php echo $a['name']; ?></option>
                         <?php } ?>
                     </select>
                     <br>
@@ -74,7 +74,7 @@ $geol = selectAll($sql);
                     <br>
 
 
-                    <label for="num_с"><?php echo $txtnewacc6 ?></label>
+                    <label for="num_co"><?php echo $txtnewacc6 ?></label>
                     <input type="number" name="num_с" id="num_с" class="form-control" value="5"
                            required>
 

@@ -55,7 +55,7 @@ if ($add_task == "new_accounts") {
         'num_i' => $_REQUEST['num_i'],
         'pause' => $_REQUEST['pause'],
         'confirm' => $_REQUEST['confirm'],
-        'num_с' => $_REQUEST['num_с'],
+        'num_co' => $_REQUEST['num_co'],
         'f24' => $_REQUEST['f24'],
 
 
@@ -64,7 +64,7 @@ if ($add_task == "new_accounts") {
 
         "data" => $st,
     );
-    $json_data = json_encode($data);
+    $json_data = json_encode($data, JSON_THROW_ON_ERROR);
 
     foreach ($ids as $a) {
         $add_task = $_POST['add_task'];
