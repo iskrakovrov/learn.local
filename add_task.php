@@ -105,6 +105,13 @@ $_SESSION['ids'] = $ids;
                                 <?php echo $txttask6?>
                             </label>
                         </div>
+                        <!-- удалить инвайты -->
+                        <div class="form-check">
+                            <input class="form-check-input" name="task[]" type="checkbox" value="erase_invite.php" id="erase_invite">
+                            <label class="form-check-label" for="erase_invite">
+                                <?php echo $txttask31 ?>
+                            </label>
+                        </div>
                         <!--  Фарм кук -->
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="invite1" id="task3">
