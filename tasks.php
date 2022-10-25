@@ -75,7 +75,32 @@ if ($add_task == "new_accounts") {
 
 
 }
+if ($add_task == "global_invite") {
+    $st[] = array(
+        'ti1' => $_REQUEST['ti1'],
+        'ti2' => $_REQUEST['ti2'],
+        'ti3' => $_REQUEST['ti3'],
+        'ti4' => $_REQUEST['ti4'],
+        'ti5' => $_REQUEST['ti5'],
+        'ti6' => $_REQUEST['ti6'],
 
+
+    );
+    $data = array(
+
+        "data" => $st,
+    );
+    $json_data = json_encode($data, JSON_THROW_ON_ERROR);
+
+    foreach ($ids as $a) {
+        $add_task = $_POST['add_task'];
+        $time = Time();
+        $r = add_task($add_task, $json_data, $time, $a);
+
+    }
+
+
+}
 
 if ($add_task == "coockie") {
     $st[] = array(
@@ -169,13 +194,20 @@ if ($add_task === 'erase_invite') {
 
     }
 }
-if ($add_task === 'invite_suggestions') {
+if ($add_task == 'invite_suggestions') {
     $setup = $_POST['action'];
     $st[] = array(
 
-        'imax' => $setup[0],
-        'ionerun' => $setup[1],
-        'ipause' => $setup[2],
+        'geo' => $_REQUEST['geo'],
+        'num_i' => $_REQUEST['num_i'],
+        'pause' => $_REQUEST['pause'],
+        'filter' => $_REQUEST['filter'],
+        'wln' => $_REQUEST['wln'],
+        'bln' => $_REQUEST['bln'],
+        'gbl' => $_REQUEST['gbl'],
+        'confirm' => $_REQUEST['confirm'],
+        'num_co' => $_REQUEST['num_co'],
+        'f24' => $_REQUEST['f24'],
 
 
     );
@@ -184,7 +216,7 @@ if ($add_task === 'invite_suggestions') {
         "data" => $st,
     );
 
-    $json_data = json_encode($data);
+    $json_data = json_encode($data, JSON_THROW_ON_ERROR);
     $time = Time();
 
     foreach ($ids as $a) {
@@ -235,8 +267,7 @@ if (!empty($w)) {
     $url = 'action' . '/' . $w;
     array_shift($task);
     include_once($url);
-}
-else{
+} else {
     header("Location: accounts.php");
     exit;
 }

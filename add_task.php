@@ -52,12 +52,20 @@ $_SESSION['ids'] = $ids;
             <form method="post" action="tasks.php">
 
                 <div class="form-check">
-                    <div style="align-content: center">&#9989; Login</div>
+                    <div style="align-content: left">&#9989; Login</div>
                     <!--<input class="form-check-input" name="task[]"   value="login.php" id="login" checked="checked" ">
                        <label class="form-check-label" for="defaultCheck1"  >
                            Login
                        </label> -->
                     <input type="hidden" name="task[]" value="login.php">
+                </div>
+                <div class="form-check">
+                    <div style="align-content: left">&#9989; <?php echo $txtglobali ?> </div>
+                    <!--<input class="form-check-input" name="task[]"   value="login.php" id="login" checked="checked" ">
+                       <label class="form-check-label" for="defaultCheck1"  >
+                           Login
+                       </label> -->
+                    <input type="hidden" name="task[]" value="global_invite.php">
                 </div>
                 <div class="row justify-content-md-center">
                     <div class="col-sm-4">

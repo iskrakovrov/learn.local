@@ -25,7 +25,8 @@ $qw = selectAll($sql);
 
                 <div class="form-group">
                     <div class="form-floating">
-                        <select class="form-select" id="filter" name="filter" aria-label="Floating label select example">
+                        <select class="form-select" id="filter" name="filter"
+                                aria-label="Floating label select example">
 
                             <option value="all">All</option>
                             <option value="cyr">Cyr</option>
@@ -71,7 +72,8 @@ $qw = selectAll($sql);
                 <br>
                 <div class="form-group">
                     <div class="form-floating">
-                        <select class="form-select" id="confirm" name="confirm" aria-label="Floating label select example">
+                        <select class="form-select" id="confirm" name="confirm"
+                                aria-label="Floating label select example">
 
                             <option value="1">Confirm</option>
                             <option value="2">Cancel</option>
