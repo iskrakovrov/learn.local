@@ -94,16 +94,31 @@ $_SESSION['ids'] = $ids;
                         <!--  Прокачка новорегов -->
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="new_accounts.php" id="new_accounts">
-                            <label class="form-check-label" for="defaultCheck1">
+                            <label class="form-check-label" for="new_accounts">
                                 <?php echo $txttask4?>
+                            </label>
+                        </div>
+                        <!--  Прокачка новорегов no global -->
+                        <div class="form-check">
+                            <input class="form-check-input" name="task[]" type="checkbox" value="ngnew_accounts.php" id="ngnew_accounts">
+                            <label class="form-check-label" for="ngnew_accounts">
+                                <?php echo $txttask4?> No global
                             </label>
                         </div>
                         <!--  Инвайт 3 Приглашение предложенных -->
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="invite_suggestions.php"
                                    id="invite_suggestions">
-                            <label class="form-check-label" for="defaultCheck2">
+                            <label class="form-check-label" for="invite_suggestions">
                                 <?php echo $txttask5?>
+                            </label>
+                        </div>
+                        <!--  Инвайт 3 Приглашение предложенных -->
+                        <div class="form-check">
+                            <input class="form-check-input" name="task[]" type="checkbox" value="nginvite_suggestions.php"
+                                   id="nginvite_suggestions">
+                            <label class="form-check-label" for="nginvite_suggestions">
+                                <?php echo $txttask5?> No global
                             </label>
                         </div>
                         <!--  Инвайт из групп -->

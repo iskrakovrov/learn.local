@@ -47,7 +47,10 @@ foreach ($query as $a) {
     $sql = "SELECT count(task) FROM task WHERE account = $t";
     $tk = selectAll($sql);
   $tk = $tk[0];
-   $tk = $tk['count(task)'];
+   $tk = $tk['count(task)']-1;
+   if($tk<0){
+       $tk=0;
+   }
     $id_gr = $a['group_acc'];
 
 

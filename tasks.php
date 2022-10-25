@@ -77,12 +77,13 @@ if ($add_task == "new_accounts") {
 }
 if ($add_task == "global_invite") {
     $st[] = array(
+        'ti0' => $_REQUEST['ti0'],
         'ti1' => $_REQUEST['ti1'],
         'ti2' => $_REQUEST['ti2'],
         'ti3' => $_REQUEST['ti3'],
         'ti4' => $_REQUEST['ti4'],
         'ti5' => $_REQUEST['ti5'],
-        'ti6' => $_REQUEST['ti6'],
+
 
 
     );
