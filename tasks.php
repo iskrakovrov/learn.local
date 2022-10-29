@@ -85,7 +85,6 @@ if ($add_task == "global_invite") {
         'ti5' => $_REQUEST['ti5'],
 
 
-
     );
     $data = array(
 
@@ -217,7 +216,7 @@ if ($add_task == 'invite_suggestions') {
         "data" => $st,
     );
 
-   $json_data = json_encode($data);
+    $json_data = json_encode($data);
 
 
     foreach ($ids as $a) {
@@ -232,7 +231,8 @@ if ($add_task == 'invite_suggestions') {
 if ($add_task == 'invite_from_group') {
     $setup = $_POST['action'];
     $st[] = array(
-
+        'gr' => $_REQUEST['gr'],
+        'mode' => $_REQUEST['mode'],
         'geo' => $_REQUEST['geo'],
         'num_i' => $_REQUEST['num_i'],
         'pause' => $_REQUEST['pause'],
@@ -263,19 +263,19 @@ if ($add_task == 'invite_from_group') {
     }
 }
 
- //   foreach ($ids as $a) {
- //       $add_task = $_POST['add_task'];
- //       $sql = "SELECT id FROM task WHERE task = '$add_task' AND account = $a";
- //       $query = select($sql);
- //       if (empty($query)) {
+//   foreach ($ids as $a) {
+//       $add_task = $_POST['add_task'];
+//       $sql = "SELECT id FROM task WHERE task = '$add_task' AND account = $a";
+//       $query = select($sql);
+//       if (empty($query)) {
 //           $sql = "INSERT INTO task (id, account, task, setup, created) VALUES (NULL, $a, '$add_task', '$json_data', $time)";
- //           $query = insert($sql);
- //       } else {
+//           $query = insert($sql);
+//       } else {
 //            $sql = "UPDATE task SET setup = '$json_data', created = $time";
- //           $query = update($sql);
+//           $query = update($sql);
 
- //       }
- //   }
+//       }
+//   }
 
 //
 $ids = $_SESSION['ids'];

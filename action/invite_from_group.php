@@ -32,10 +32,10 @@ $gr1 = selectAll($sql);
                 <form method="post" onSubmit="return Complete();">
                     <br>
                     <!-- Список групп -->
-                    <label for="geo" class="control-label"><?php echo $txtinv31 ?></label>
+                    <label for="geo" class="control-label"><?php echo $txtglobali20 ?></label>
 
                     <select name="gr" id="gr" class="form-control">
-<option value="in"><?php echo $txtglobali18  ?></option>
+                        <option value="in"><?php echo $txtglobali18 ?></option>
                         <?php
                         $i = 0;
                         foreach ($gr1 as $r) {
@@ -62,7 +62,7 @@ $gr1 = selectAll($sql);
                            pattern="([0-9]{1,3})-([0-9]{1,3})" required>
 
                     <br>
-<!-- Вид инвайтов-->
+                    <!-- Вид инвайтов-->
                     <label for="mode" class="control-label"><?php echo $txtinv31 ?></label>
 
                     <select name="mode" id="mode" class="form-control">
