@@ -146,7 +146,7 @@ if ($add_task == "add_mail") {
 
 }
 
-if ($add_task === 'farm') {
+if ($add_task == 'farm') {
     $st[] = array(
         'cat' => $_REQUEST['cat'],
         'like_page' => $_REQUEST['like_page'],
@@ -217,24 +217,67 @@ if ($add_task == 'invite_suggestions') {
         "data" => $st,
     );
 
-    $json_data = json_encode($data, JSON_THROW_ON_ERROR);
-    $time = Time();
+   $json_data = json_encode($data);
+
 
     foreach ($ids as $a) {
         $add_task = $_POST['add_task'];
-        $sql = "SELECT id FROM task WHERE task = '$add_task' AND account = $a";
-        $query = select($sql);
-        if (empty($query)) {
-            $sql = "INSERT INTO task (id, account, task, setup, created) VALUES (NULL, $a, '$add_task', '$json_data', $time)";
-            $query = insert($sql);
-        } else {
-            $sql = "UPDATE task SET setup = '$json_data', created = $time";
-            $query = update($sql);
+        $time = Time();
+        $r = add_task($add_task, $json_data, $time, $a);
 
-        }
+
     }
-
 }
+
+if ($add_task == 'invite_from_group') {
+    $setup = $_POST['action'];
+    $st[] = array(
+
+        'geo' => $_REQUEST['geo'],
+        'num_i' => $_REQUEST['num_i'],
+        'pause' => $_REQUEST['pause'],
+        'filter' => $_REQUEST['filter'],
+        'wln' => $_REQUEST['wln'],
+        'bln' => $_REQUEST['bln'],
+        'gbl' => $_REQUEST['gbl'],
+        'confirm' => $_REQUEST['confirm'],
+        'num_co' => $_REQUEST['num_co'],
+        'f24' => $_REQUEST['f24'],
+
+
+    );
+    $data = array(
+
+        "data" => $st,
+    );
+
+    $json_data = json_encode($data);
+
+
+    foreach ($ids as $a) {
+        $add_task = $_POST['add_task'];
+        $time = Time();
+        $r = add_task($add_task, $json_data, $time, $a);
+
+
+    }
+}
+
+ //   foreach ($ids as $a) {
+ //       $add_task = $_POST['add_task'];
+ //       $sql = "SELECT id FROM task WHERE task = '$add_task' AND account = $a";
+ //       $query = select($sql);
+ //       if (empty($query)) {
+//           $sql = "INSERT INTO task (id, account, task, setup, created) VALUES (NULL, $a, '$add_task', '$json_data', $time)";
+ //           $query = insert($sql);
+ //       } else {
+//            $sql = "UPDATE task SET setup = '$json_data', created = $time";
+ //           $query = update($sql);
+
+ //       }
+ //   }
+
+//
 $ids = $_SESSION['ids'];
 $task = $_REQUEST['task'];
 if (empty($task)) {
