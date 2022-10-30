@@ -63,7 +63,7 @@ $gr1 = selectAll($sql);
 
                     <br>
                     <!-- Вид инвайтов-->
-                    <label for="mode" class="control-label"><?php echo $txtinv31 ?></label>
+                    <label for="mode" class="control-label"><?php echo $txtglobali21 ?></label>
 
                     <select name="mode" id="mode" class="form-control">
                         <option value="all">ALL</option>

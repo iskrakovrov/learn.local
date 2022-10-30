@@ -25,7 +25,7 @@ require_once($lang);
 <body>
 <?php
 include_once 'inc/header.php';
-require_once 'action/global_invite.php'?>
+require_once 'action/invite_from_group.php'?>
 
 
 
