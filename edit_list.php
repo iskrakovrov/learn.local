@@ -55,7 +55,12 @@ if (!empty($_REQUEST['key'])) {
 <?php
 include_once 'inc/header.php';
 $cat = $_REQUEST['id'];
-$sql = "SELECT * FROM value_lists WHERE list = $cat";
+$sql = "SELECT COUNT(*) FROM value_lists WHERE list = $cat";
+$count = select($sql);
+$cc = $count['COUNT(*)'];
+
+
+$sql = "SELECT * FROM value_lists WHERE list = $cat LIMIT 1000";
 $ser = selectAll($sql);
 
 ?>
@@ -68,7 +73,7 @@ $ser = selectAll($sql);
 
 
             <div class="alert alert-info" role="alert">
-                <strong>Каждая запись с новой строки</strong><br>
+                <?php echo $txtedlist ?>
 
                 <br>
             </div>
@@ -96,7 +101,7 @@ $ser = selectAll($sql);
         <div class="row justify-content-center">
             <div class="col-6 text-center">
 
-
+                <label for="example"><strong><?php echo $cc ?> <?php echo $txtedlist2  ?> </strong> </label>
                 <table id="example" class="cell-border" style="width:100%">
                     <thead>
                     <tr>
@@ -151,6 +156,8 @@ $ser = selectAll($sql);
 
     <br>
     <br>
+
+
 </main>
 
 
@@ -174,7 +181,7 @@ $ser = selectAll($sql);
 
     dr_table = $('#example').DataTable({
 
-        "lengthMenu": [[100, 300, 500, -1], [30, 100, 200, "All"]],
+        "lengthMenu": [[30, 100, 200, -1], [30, 100, 200, "All"]],
         stateSave: true,
 
 

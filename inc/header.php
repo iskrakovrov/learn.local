@@ -113,7 +113,7 @@ $cp = $cpr['COUNT(*)'];
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="filters.php">Filters</a>
+                        <a class="nav-link active" aria-current="template" href="template.php">Templates Task</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="posts" href="edit_list_posts.php">Posts</a>
