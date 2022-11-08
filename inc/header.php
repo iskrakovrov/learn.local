@@ -38,7 +38,7 @@ $cp = $cpr['COUNT(*)'];
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="#">Old realise</a></li>
+                            <li><a class="dropdown-item" href="error.php">Errors</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
