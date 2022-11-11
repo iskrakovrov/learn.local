@@ -5,7 +5,12 @@ require_once('function/function.php');
 $lang = $_SESSION['lang'] . '.php';
 require_once($lang);
 
-
+$time = Time();
+$time2 = $time - 170000;
+$sql = "DELETE FROM err WHERE created < $time2";
+$q = delete($sql);
+$sql = "SELECT * FROM err LIMIT 1000";
+$q = selectall($sql);
 ?>
 <!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
@@ -24,98 +29,117 @@ require_once($lang);
     <link href="css/style.css" rel="stylesheet">
     <title>FB Combo</title>
 </head>
+
 <body>
 <?php
 include_once 'inc/header.php';
-
-$sql = "SELECT * FROM proxy";
-$ser = selectAll($sql);
 
 
 ?>
 <main class="container-fluid ">
     <div class="row text-center">
-        <h2>Proxy</h2>
+        <h2>Farm cookies</h2>
     </div>
-    <form method="post" action="del_pr.php">
-        <div class="row">
+    <div class="col align-center">
 
-            <div class="col text-center">
+        <div class="row justify-content-center">
+            <div class="col-6 text-center">
 
 
-                <a class="btn btn-secondary" href="add_multi_proxy.php" role="button">Add proxy</a>
+                <div class="alert alert-info" role="alert">
+                    <?php echo $txterr ?>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                <a class="btn btn-success" href="all_no_work_proxy.php" role="button">Multy FREE proxy</a>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
 
-                <button type="submit" class="btn btn-danger" title="Delete proxy"
-                        onClick="return confirm( 'WARNING!!! DELETE PROXY? ' )">Delete Proxy <i
-                        class="bi bi-x-circle-fill"></i></button>
+
+
+
+            <div class="col-sm-8 text-center">
+<br>
+                <a class="btn btn-secondary" href="#" role="button"><?php echo $txterr1 ?></a>
+                <a class="btn btn-secondary" href="#" role="button"><?php echo $txterr2 ?></a>
+                <br>
+                <table id="example" class="cell-border" style="width:100%">
+                    <thead>
+                    <tr>
+                        <th class="check" style="text-align: center;">
+                            <input type="checkbox" id="all" value=""/>
+                        </th>
+                        <th>Id Error</th>
+                        <th>Type error</th>
+                        <th>Count</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                    $i = 0;
+                    foreach ($q as $a) {
+                        $i++; ?>
+                        <tr>
+                            <td style="text-align: center;"><input type="checkbox" name="a[]"
+                                                                   value="<?php echo $a['id'] ?>">
+                            </td>
+                            <td><?php echo $a['value'] ?></td>
+                            <?php if ($a['type'] > 0) {
+                              $q1 = 'login Ok';
+                            }
+                            else{
+                                $q1 = 'login No Ok';
+                            }?>
+                            <td><?php echo $q1 ?></td>
+                            <?php
+                            $value = $a['value'];
+                            $sql = "SELECT COUNT(*) FROM err WHERE value = '$value'";
+                            $cou = select($sql);
+                            $count = $cou['COUNT(*)']; ?>
+                            <td><?php echo $count ?></td>
+
+                            <td>
+                                <div class="col">
+
+                                    <a href="del_err.php?id=<?php echo $a['id'] ?>" class="btn btn-danger"
+                                       title="Delete" onClick="return confirm( 'WARNING!!! DELETE PROXY? ' )">Delete                                        <i class="bi bi-x-circle-fill"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                    <?php } ?>
+
+
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <th></th>
+                        <th>Id Error</th>
+                        <th>Type error</th>
+                        <th>Count</th>
+                        <th>Action</th>
+                    </tr>
+                    </tfoot>
+                </table>
 
 
             </div>
         </div>
-
-        <div class="container-fluid">
-
-
-            <table id="example" class="cell-border" style="width:100%">
-                <thead>
-                <tr>
-                    <th class="check" style="text-align: center;">
-                        <input type="checkbox" id="all" value=""/>
-                    </th>
-                    <th>Protocol</th>
-                    <th>Proxy</th>
-                    <th>Link</th>
-                    <th>Status</th>
-                    <th>Comment</th>
-                    <th>Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php
-                $i = 0;
-                foreach ($ser as $a) {
-                    $i++; ?>
-                    <tr>
-                        <td style="text-align: center;"><input type="checkbox" name="a[]"
-                                                               value="<?php echo $a['id'] ?>">
-                        </td>
-                        <td><?php echo $a['protocol'] ?></td>
-                        <td><?php echo $a['proxy'] ?></td>
-                        <td><?php echo $a['link_proxy'] ?></td>
-                        <td><?php echo $a['status'] ?></td>
-                        <td><?php echo $a['comment'] ?></td>
-                        <td>
-                            <div class="col">
-                                <button type="button" class="btn btn-success">Good proxy</button>
-                                <a href="del_proxy.php?id=<?php echo $a['id'] ?>" class="btn btn-danger"
-                                   title="Delete proxy" onClick="return confirm( 'WARNING!!! DELETE PROXY? ' )">Delete
-                                    Proxy
-                                    <i class="bi bi-x-circle-fill"></i></a>
-                            </div>
-                        </td>
-                    </tr>
-                <?php } ?>
-
-
-                </tbody>
-                <tfoot>
-                <tr>
-                    <th></th>
-                    <th>Protocol</th>
-                    <th>Proxy</th>
-                    <th>Link</th>
-                    <th>Status</th>
-                    <th>Comment</th>
-                    <th>Action</th>
-                </tr>
-                </tfoot>
-            </table>
-        </div>
+    </div>
 
 
 </main>
+
+
+
+
+
+
+
+
+
+
 
 
 <!-- Option 1: Bootstrap Bundle with Popper -->
