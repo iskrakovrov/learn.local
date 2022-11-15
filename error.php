@@ -38,7 +38,7 @@ include_once 'inc/header.php';
 ?>
 <main class="container-fluid ">
     <div class="row text-center">
-        <h2>Farm cookies</h2>
+        <h2><?php echo $txterr ?> </h2>
     </div>
     <div class="col align-center">
 
@@ -63,6 +63,7 @@ include_once 'inc/header.php';
 <br>
                 <a class="btn btn-secondary" href="#" role="button"><?php echo $txterr1 ?></a>
                 <a class="btn btn-secondary" href="#" role="button"><?php echo $txterr2 ?></a>
+                <a class="btn btn-secondary" href="#" role="button"><?php echo $txterr3 ?></a>
                 <br>
                 <table id="example" class="cell-border" style="width:100%">
                     <thead>

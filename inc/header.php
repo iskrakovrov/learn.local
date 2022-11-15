@@ -6,9 +6,11 @@ $sql = "SELECT COUNT(*) FROM accounts";
 $acc = select($sql);
 $sql = "SELECT COUNT(*) FROM proxy";
 $cpr = select($sql);
-
+$sql = "SELECT COUNT(*) FROM err";
+$err = select($sql);
 $a = $acc['COUNT(*)'];
 $cp = $cpr['COUNT(*)'];
+$er = $err['COUNT(*)'];
 
 ?>
 
@@ -38,7 +40,7 @@ $cp = $cpr['COUNT(*)'];
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="error.php">Errors</a></li>
+                            <li><a class="dropdown-item" href="error.php">Errors <span class="badge badge-danger"><?php echo $er?></span></a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>

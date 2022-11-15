@@ -18,7 +18,7 @@ foreach ($ids as $a) {
                 $p1 = 0;
             }
 
-            $sql = "UPDATE proxy SET use_proxy = $p1 WHERE id = $p";
+            $sql = "UPDATE proxy SET use_proxy = '$p1' WHERE id = $p";
             $qu = update($sql);
 
         }

@@ -1,7 +1,7 @@
 <?php
 require_once('inc/db.php');
 require_once('function/function.php');
-$sql = "SELECT * FROM proxy WHERE status = 'ok' ORDER BY `use_proxy`, `work`  LIMIT 1";
+$sql = "SELECT * FROM proxy WHERE status = 'ok' ORDER BY `work` , `use_proxy`  LIMIT 1";
 //$sql = "SELECT * FROM proxy, accounts WHERE proxy.status = 'ok' ORDER BY 'proxy.use_proxy' ASC, 'proxy.work' ASC";
 $query = select($sql);
 $id = $query['id'];

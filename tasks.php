@@ -173,6 +173,28 @@ if ($add_task == 'farm') {
 
     }
 }
+if ($add_task == 'filling_accounts') {
+    $st[] = array(
+        'currc' => $_REQUEST['currc'],
+        'edu' => $_REQUEST['edu'],
+        'work' => $_REQUEST['work'],
+
+    );
+    $data = array(
+
+        "data" => $st,
+    );
+    $json_data = json_encode($data);
+
+
+    foreach ($ids as $a) {
+        $add_task = $_POST['add_task'];
+        $time = Time();
+        $r = add_task($add_task, $json_data, $time, $a);
+
+
+    }
+}
 
 if ($add_task === 'erase_invite') {
     $st[] = array(
