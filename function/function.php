@@ -324,4 +324,12 @@ function parse_name($key)
     }
     return [$sql];
 }
-
+function create($create)
+{
+    global $pdo;
+    $sql = $create;
+    $query = $pdo->prepare($sql);
+    $query->execute();
+    dbCheckError($query);
+    return $query->fetchAll();
+}

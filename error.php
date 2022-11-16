@@ -27,7 +27,7 @@ $q = selectall($sql);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link href="css/style.css" rel="stylesheet">
-    <title>FB Combo</title>
+    <title>FB Combo error</title>
 </head>
 
 <body>
@@ -63,7 +63,7 @@ include_once 'inc/header.php';
 <br>
                 <a class="btn btn-secondary" href="#" role="button"><?php echo $txterr1 ?></a>
                 <a class="btn btn-secondary" href="#" role="button"><?php echo $txterr2 ?></a>
-                <a class="btn btn-secondary" href="#" role="button"><?php echo $txterr3 ?></a>
+                <a class="btn btn-danger" href="del_error.php" role="button"><?php echo $txterr3 ?></a>
                 <br>
                 <table id="example" class="cell-border" style="width:100%">
                     <thead>
@@ -105,7 +105,7 @@ include_once 'inc/header.php';
                                 <div class="col">
 
                                     <a href="del_err.php?id=<?php echo $a['id'] ?>" class="btn btn-danger"
-                                       title="Delete" onClick="return confirm( 'WARNING!!! DELETE PROXY? ' )">Delete                                        <i class="bi bi-x-circle-fill"></i></a>
+                                       title="Delete">Delete <i class="bi bi-x-circle-fill"></i></a>
                                 </div>
                             </td>
                         </tr>

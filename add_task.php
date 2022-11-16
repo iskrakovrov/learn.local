@@ -123,7 +123,7 @@ $_SESSION['ids'] = $ids;
                         </div>
                         <!--  Инвайт из групп -->
                         <div class="form-check">
-                            <input class="form-check-input" name="task[]" type="checkbox" value="invite_from_group.php" id="invite_from_group" disabled>
+                            <input class="form-check-input" name="task[]" type="checkbox" value="invite_from_group.php" id="invite_from_group">
                             <label class="form-check-label" for="invite_from_group">
                                 <?php echo $txttask6?>
                             </label>

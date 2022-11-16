@@ -48,15 +48,7 @@ include_once 'inc/header.php'
 
 
             <div class="alert alert-info" role="alert">
-                Формат в котором должны быть записаны аккаунты<br/><strong>login;password</strong><br>
-                Если не создана группа <br>
-                <a class="btn btn-secondary" href="gr.php" role="button" data-placement="right"
-                   title="Если не указали группу">Add account group</a>
-                <br>
-                Если не создан сервер
-                <br>
-                <a class="btn btn-secondary" href="servers.php" role="button" data-toggle="tooltip" data-placement="right"
-                   title="Если не указали сервер">Add Server</a>
+               <?php  echo ?>
                 <br>
             </div>
         </div>
@@ -65,11 +57,11 @@ include_once 'inc/header.php'
         <div class="col-6 text-center">
             <form method="post">
                 <div class="form-group">
-                    <label for="name_server">Введите имя сервера. В настройках Zenno укажите такой же. Максимум 5 символов.</label>
+                    <label for="name_server"><?php $txtaddgr3 ?></label>
                     <input type="text" class="form-control"  name = "name_server"  id="name_server"  maxlength = 5  placeholder="Enter name server">
                 </div>
                 <div class="form-group">
-                    <label for="com_server">Комментарий Максимум 50 символов.</label>
+                    <label for="com_server"><?php echo $txtaddgr1 ?></label>
                     <input type="text" class="form-control"  name = "com_server"  id="com_server"  maxlength = 50  placeholder="Enter name server">
                 </div>
                 <br>
