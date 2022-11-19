@@ -1,7 +1,9 @@
 <?php
-include_once ('inc/init.php');
+include_once('inc/init.php');
 require_once('inc/db.php');
 require_once('function/function.php');
+$lang = $_SESSION['lang'] . '.php';
+require_once($lang);
 ?>
 <!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
@@ -25,7 +27,7 @@ require_once('function/function.php');
 <?php
 include_once 'inc/header.php';
 $sql = "SELECT * FROM servers";
-$ser=selectAll($sql);
+$ser = selectAll($sql);
 
 ?>
 <main class="container-fluid ">
@@ -37,31 +39,21 @@ $ser=selectAll($sql);
 
 
             <div class="alert alert-info" role="alert">
-                Формат в котором должны быть записаны аккаунты<br/><strong>login;password</strong><br>
-                Если не создана группа <br>
-                <a class="btn btn-secondary" href="gr.php" role="button" data-placement="right"
-                   title="Если не указали группу">Add account group</a>
-                <br>
-                Если не создан сервер
-                <br>
-                <a class="btn btn-secondary" href="servers.php" role="button" data-toggle="tooltip" data-placement="right"
-                   title="Если не указали сервер">Add Server</a>
-                <br>
+                <?php echo $txtserver ?>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col text-center">
             <form action="del_servers.php" method="post">
-            <a class="btn btn-secondary" href="add_server.php" role="button">Add server</a>
-                <input class="btn btn-danger" type="submit" value="submit">
+                <a class="btn btn-secondary" href="add_server.php" role="button">Add server</a>
+                
 
-            <a class="btn btn-danger"  href="del_server.php" role="button">Delete servers</a>
+                <a class="btn btn-danger" href="del_server.php" role="button">Delete servers</a>
         </div>
     </div>
 
     <div class="container-fluid">
-
 
 
         <table id="example" class="cell-border" style="width:100%">
@@ -81,7 +73,8 @@ $ser=selectAll($sql);
             foreach ($ser as $a) {
                 $i++; ?>
                 <tr>
-                    <td style="text-align: center;"><input type="checkbox" name="a[]" value="<?php echo $a['id_server'] ?>">
+                    <td style="text-align: center;"><input type="checkbox" name="a[]"
+                                                           value="<?php echo $a['id_server'] ?>">
                     </td>
                     <td><?php echo $a['name_server'] ?></td>
                     <td><?php echo $a['comment'] ?></td>
@@ -90,7 +83,10 @@ $ser=selectAll($sql);
                         <div class="col">
                             <button type="button" class="btn btn-success">Edit server</button>
 
-                            <a href="del_server.php?id=<?php echo $a['id_server'] ?>" class="btn btn-danger" title="Delete Server" onClick="return confirm( 'WARNING!!! DELETE SERVER? Аккаунты привязанные к данному серверу будут свободными, пока вы не привяжете их к новому серверу' )">Delete Server <i class="bi bi-x-circle-fill"></i></a>
+                            <a href="del_server.php?id=<?php echo $a['id_server'] ?>" class="btn btn-danger"
+                               title="Delete Server"
+                               onClick="return confirm( 'WARNING!!! DELETE SERVER? <?php echo $txtserver1 ?>' )">Delete
+                                Server <i class="bi bi-x-circle-fill"></i></a>
                         </div>
                     </td>
                 </tr>

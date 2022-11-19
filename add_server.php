@@ -2,6 +2,8 @@
 include_once ('inc/init.php');
 require_once('inc/db.php');
 require_once('function/function.php');
+$lang = $_SESSION['lang'] . '.php';
+require_once($lang);
 if (!empty($_REQUEST['name_server'])){
     $nserv = $_REQUEST['name_server'];
     $com = $_REQUEST['com_server'];
@@ -48,7 +50,7 @@ include_once 'inc/header.php'
 
 
             <div class="alert alert-info" role="alert">
-               <?php  echo ?>
+               <?php  echo 'Add server' ?>
                 <br>
             </div>
         </div>

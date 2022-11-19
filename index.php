@@ -39,7 +39,7 @@ require_once 'inc/header.php'
 
 
                 <div class="alert alert-info" role="alert">
-                    )))))
+				<?php echo $txtindex1 ?>
                 </div>
             </div>
         </div>
@@ -50,28 +50,16 @@ require_once 'inc/header.php'
             <div class="col-sm-8 text-center">
 
                 <br>
-                <div class="card text-center">
-                    <div class="card-header">
-                        Featured
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Special title treatment</h5>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                    <div class="card-footer text-muted">
-                        2 days ago
-                    </div>
-                </div>
+
                 Текущая версия панели
                 <br>
-                Актуальная версия панели СКАЧАТЬ
+                <a href="#">Актуальная версия панели СКАЧАТЬ</a>
                 <br>
-                КАК ОБНОВИТЬ
+                <a href="#">Как обновить</a>
                 <br>
-                Инструкции
+                <a href="https://soft.fbcombo.com/putevoditel/">Инструкции</a>
                 <br>
-                Техподдержка
+                <a href="https://soft.fbcombo.com/putevoditel/">https://t.me/iskrakovrov</a>
                 <br>
                 <br>
                 <br>
@@ -81,7 +69,7 @@ require_once 'inc/header.php'
                 <br>
                 Если вы работаете с одной прокси со ссылкой или с одним модемом со сменой IP при старте аккаунта - работайте в 1 поток, чтоб смена IP не мешала работе аккаунтов.
                 <br>
-                php.ini  max_execution_time = 600
+
 
 
             </div>
