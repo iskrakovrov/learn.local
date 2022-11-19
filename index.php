@@ -59,8 +59,8 @@ require_once 'inc/header.php'
                 <br>
                 <a href="https://soft.fbcombo.com/putevoditel/">Инструкции</a>
                 <br>
-                <a href="https://soft.fbcombo.com/putevoditel/">https://t.me/iskrakovrov</a>
-                <br>
+
+                <a href="https://t.me/iskrakovrov">Техподдержка в Telegram</a>
                 <br>
                 <br>
                 СОВЕТЫ
@@ -69,7 +69,13 @@ require_once 'inc/header.php'
                 <br>
                 Если вы работаете с одной прокси со ссылкой или с одним модемом со сменой IP при старте аккаунта - работайте в 1 поток, чтоб смена IP не мешала работе аккаунтов.
                 <br>
-
+<br>
+                <div class="alert alert-success" role="alert">
+                    <strong><p> После тестирования и запуска всех режимов, что в планах.</p></strong>
+                    <p> Запуск общей базы для инвайта по гео с 750 млн пользователями FB со всего мира. Чтоб вы могли делать выгрузки для себя</p>
+                    <p> Разработка новых сервисных режимов для переброски и копирования ваших списков</p>
+                    <p> Ну и как всегда, жду ваших идей</p>
+                </div>
 
 
             </div>

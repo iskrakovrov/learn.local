@@ -50,7 +50,7 @@ include_once 'inc/header.php'
 
 
             <div class="alert alert-info" role="alert">
-               <?php  echo 'Add server' ?>
+               <?php  echo $txtserver2 ?>
                 <br>
             </div>
         </div>
@@ -59,7 +59,7 @@ include_once 'inc/header.php'
         <div class="col-6 text-center">
             <form method="post">
                 <div class="form-group">
-                    <label for="name_server"><?php $txtaddgr3 ?></label>
+                    <label for="name_server"><?php echo $txtserver3 ?></label>
                     <input type="text" class="form-control"  name = "name_server"  id="name_server"  maxlength = 5  placeholder="Enter name server">
                 </div>
                 <div class="form-group">
