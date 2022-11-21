@@ -123,7 +123,7 @@ function processForm($array)
 
     // обрабатываешь данные формы и возвращаешь сообщение о результате
 
-    if ($a === 1) {
+    if ($a == 1) {
 
         // Если регистрация прошла успешно
         return '<p class="alert alert-success">СЕРВЕР НЕ ДОБАВЛЕН</p>';
@@ -150,7 +150,11 @@ function parse_proxy($pr, $comm)
 {
     $link = explode("|", $pr);
     $prx = $link[0];
+
+
     $arr_pr = parse_url($prx);
+
+
     $mode = $arr_pr['scheme'];
     $host = $arr_pr['host'];
     $port = $arr_pr['port'];

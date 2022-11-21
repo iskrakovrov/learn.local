@@ -3,6 +3,8 @@
 include_once ('inc/init.php');
 require_once('inc/db.php');
 require_once('function/function.php');
+$lang = $_SESSION['lang'] . '.php';
+require_once($lang);
 ?>
 <!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
@@ -19,7 +21,7 @@ require_once('function/function.php');
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link href="css/style.css" rel="stylesheet">
-    <title>FB Combo Servers</title>
+    <title>FB Combo Accounts group</title>
 </head>
 <body>
 <?php
@@ -50,6 +52,7 @@ $gr=selectAll($sql);
                 </th>
                 <th>Name group</th>
                 <th>Comments</th>
+                <th>Count</th>
                 <th>Action</th>
             </tr>
             </thead>
@@ -59,15 +62,24 @@ $gr=selectAll($sql);
             foreach ($gr as $a) {
             $i++; ?>
             <tr>
-                <td style="text-align: center;"><input type="checkbox" name="a[]" value="<?php echo $a['id_gr'] ?>">
+                <td style="text-align: center;"><input type="checkbox" name="a[]" value="<?php echo $a['id'] ?>">
                 </td>
                 <td><?php echo $a['name_group'] ?></td>
                 <td><?php echo $a['comment'] ?></td>
+                <?php
+                $idg = $a['id'];
+                $sql = "SELECT COUNT(id) FROM accounts WHERE group_acc = $idg";
+                $qc = select($sql)
 
+                ?>
+                <td><?php echo $qc['COUNT(id)'] ?></td>
                 <td>
                     <div class="col">
-                        <button type="button" class="btn btn-success">Good proxy</button>
-                        <button type="button" class="btn btn-danger">Delete server</button>
+
+                        <a href="dell_gr.php?id=<?php echo $a['id'] ?>" class="btn btn-danger"
+                           title="Delete group"
+                           onClick="return confirm( 'WARNING!!! DELETE Group? <?php $txtdelgroup ?>' )">Delete
+                            group <i class="bi bi-x-circle-fill"></i></a>
                     </div>
                 </td>
             </tr>
@@ -80,7 +92,7 @@ $gr=selectAll($sql);
                 <th></th>
                 <th>Name group</th>
                 <th>Comment</th>
-
+                <th>Count</th>
                 <th>Action</th>
             </tr>
             </tfoot>

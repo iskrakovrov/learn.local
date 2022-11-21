@@ -43,9 +43,7 @@ $er = $err['COUNT(*)'];
                             <li><a class="dropdown-item" href="error.php">Errors <span class="badge badge-danger"><?php echo $er?></span></a></li>
                             <li>
                                 <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Смена пароля</a></li>
-                            <li>
+
                                 <hr class="dropdown-divider">
                             </li>
                             <li><a class="dropdown-item" href="#">Database repair</a></li>
@@ -150,6 +148,9 @@ $er = $err['COUNT(*)'];
 
                     <li class="nav-item">
                         <a class="nav-link active" href="logout.php">Exit</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#"><strong>UPDATE</strong></a>
                     </li>
 
 

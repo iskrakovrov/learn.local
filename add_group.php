@@ -12,7 +12,7 @@ if (!empty($_REQUEST['name_server'])){
     if (empty($ch)){
         $sql = "INSERT INTO group_acc (name_group, comment) VALUES ('$nserv', '$com')";
         $ch= insert($sql);
-        header("Location: servers.php");
+        header("Location: groups.php");
     }
 
 }
@@ -60,11 +60,11 @@ include_once 'inc/header.php'
             <form method="post">
                 <div class="form-group">
                     <label for="name_server"><?php echo $txtaddgr ?></label>
-                    <input type="text" class="form-control"  name = "name_server"  id="name_server"  maxlength = 5  placeholder="Enter name server">
+                    <input type="text" class="form-control"  name = "name_server"  id="name_server"  maxlength = 5  placeholder="Enter name group">
                 </div>
                 <div class="form-group">
                     <label for="com_server"><?php echo $txtaddgr1 ?></label>
-                    <input type="text" class="form-control"  name = "com_server"  id="com_server"  maxlength = 50  placeholder="Enter name server">
+                    <input type="text" class="form-control"  name = "com_server"  id="com_server"  maxlength = 50  placeholder="">
                 </div>
                 <br>
                 <div class="form-group">

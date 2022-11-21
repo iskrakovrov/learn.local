@@ -5,7 +5,7 @@ require_once('function/function.php');
 $lang = $_SESSION['lang'] . '.php';
 require_once($lang);
 require_once('inc/version.php');
-
+$homepage = file_get_contents('https://soft.fbcombo.com/ver.php');
 
 ?>
 <!doctype html>
@@ -53,7 +53,7 @@ require_once 'inc/header.php'
 
                 Текущая версия панели
                 <br>
-                <a href="#">Актуальная версия панели СКАЧАТЬ</a>
+                <a href="https://soft.fbcombo.com/update.zip">Актуальная версия панели <?php echo $homepage?> СКАЧАТЬ</a>
                 <br>
                 <a href="#">Как обновить</a>
                 <br>

@@ -83,7 +83,7 @@ $ser = selectAll($sql);
                         <div class="col">
                             <button type="button" class="btn btn-success">Edit server</button>
 
-                            <a href="del_server.php?id=<?php echo $a['id_server'] ?>" class="btn btn-danger"
+                            <a href="del_server.php?id=<?php echo $a['id'] ?>" class="btn btn-danger"
                                title="Delete Server"
                                onClick="return confirm( 'WARNING!!! DELETE SERVER? <?php echo $txtserver1 ?>' )">Delete
                                 Server <i class="bi bi-x-circle-fill"></i></a>
