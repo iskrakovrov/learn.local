@@ -335,5 +335,5 @@ function create($create)
     $query = $pdo->prepare($sql);
     $query->execute();
     dbCheckError($query);
-    return $query->fetchAll();
+    return[];
 }

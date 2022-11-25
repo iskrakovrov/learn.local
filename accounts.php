@@ -4,6 +4,7 @@ require_once('inc/db.php');
 require_once('function/function.php');
 $lang = $_SESSION['lang'] . '.php';
 require_once($lang);
+
 $sql = "SELECT * FROM group_acc";
 $gg = selectall($sql);
 $sql = "SELECT * FROM servers";

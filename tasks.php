@@ -216,6 +216,33 @@ if ($add_task === 'erase_invite') {
 
     }
 }
+
+if ($add_task == 'parse_group') {
+    $setup = $_POST['action'];
+    $st[] = array(
+
+        'key' => $_REQUEST['cat'],
+        'group' => $_REQUEST['cat1'],
+
+
+
+    );
+    $data = array(
+
+        "data" => $st,
+    );
+
+    $json_data = json_encode($data);
+
+
+    foreach ($ids as $a) {
+        $add_task = $_POST['add_task'];
+        $time = Time();
+        $r = add_task($add_task, $json_data, $time, $a);
+
+
+    }
+}
 if ($add_task == 'invite_suggestions') {
     $setup = $_POST['action'];
     $st[] = array(

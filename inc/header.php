@@ -150,7 +150,7 @@ $er = $err['COUNT(*)'];
                         <a class="nav-link active" href="logout.php">Exit</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="#"><strong>UPDATE</strong></a>
+                        <a class="nav-link active" href="new.php"><strong>UPDATE</strong></a>
                     </li>
 
 

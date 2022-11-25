@@ -7,11 +7,10 @@ require_once($lang);
 
 
 if (!empty($_REQUEST['key'])) {
-   $key =  addslashes($_REQUEST['key']);
+    $key = addslashes($_REQUEST['key']);
     $array = explode("\r\n", $key);
 
-    for ($i = 0, $iMax = count($array); $i <= $iMax; $i++)
-    {
+    for ($i = 0, $iMax = count($array); $i <= $iMax; $i++) {
         $c = (trim($array[$p]) . "<br/>");
     }
     $c = preg_replace('/<br[^>]*>/', '', $c);
@@ -58,7 +57,9 @@ $cat = $_REQUEST['id'];
 $sql = "SELECT COUNT(*) FROM value_lists WHERE list = $cat";
 $count = select($sql);
 $cc = $count['COUNT(*)'];
-
+$sql = "SELECT * FROM lists WHERE id = $cat";
+$nn = select($sql);
+$n = $nn['name'];
 
 $sql = "SELECT * FROM value_lists WHERE list = $cat LIMIT 1000";
 $ser = selectAll($sql);
@@ -66,7 +67,7 @@ $ser = selectAll($sql);
 ?>
 <main class="container-fluid ">
     <div class="row text-center">
-        <h2>Edit lists </h2>
+        <h2>Edit list <?php echo $n ?> </h2>
     </div>
     <div class="row justify-content-center">
         <div class="col-6 text-center">
@@ -84,8 +85,8 @@ $ser = selectAll($sql);
     <div class="row justify-content-center">
         <div class="col-6 text-center">
             <form method="post">
-    <textarea class="form-control rounded-0" id="key" name="key" rows="10"
-              placeholder="Введите нужные записи"></textarea>
+    <textarea class="form-control rounded-0" id="key" name="key" rows="10">
+    </textarea>
                 <br>
                 <br>
                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -101,7 +102,7 @@ $ser = selectAll($sql);
         <div class="row justify-content-center">
             <div class="col-6 text-center">
 
-                <label for="example"><strong><?php echo $cc ?> <?php echo $txtedlist2  ?> </strong> </label>
+                <label for="example"><strong><?php echo $cc ?><?php echo $txtedlist2 ?> </strong> </label>
                 <table id="example" class="cell-border" style="width:100%">
                     <thead>
                     <tr>
