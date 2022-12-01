@@ -1,6 +1,6 @@
 <main class="container-fluid ">
     <div class="row text-center">
-        <h2>Farm cookies</h2>
+        <h2>LOGIN</h2>
     </div>
     <div class="col align-center">
 

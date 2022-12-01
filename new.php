@@ -7,7 +7,8 @@ $filename = 'mig.php';
 if (file_exists($filename)) {
     require_once ($filename);
   //  unlink($filename);
-    header("Location: " . $_SERVER['HTTP_REFERER']);
-    exit;
+    header('Location: index.php');
+    exit();
 }
-header("Location: " . $_SERVER['HTTP_REFERER']);
+header('Location: index.php');
+exit();

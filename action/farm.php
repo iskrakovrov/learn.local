@@ -49,7 +49,7 @@ $qw = selectAll($sql);
                     <br>
 
                     <label for="num_lp"><?php echo $txtfarmi4 ?></label>
-                    <input type="text" name="num_lp" id="num_lp" class="form-control" placeholder="2-3" pattern="([0-9]{1,3})-([0-9]{1,3})" >
+                    <input type="text" name="num_lp" id="num_lp" class="form-control" value = "2-3" pattern="([0-9]{1,3})-([0-9]{1,3})" >
 
                     <br>
 
@@ -62,7 +62,7 @@ $qw = selectAll($sql);
                     <br>
 
                     <label for="num_gr"><?php echo $txtfarmi6 ?></label>
-                    <input type="text" name="num_gr" id="num_gr" class="form-control" placeholder="2-3" pattern="([0-9]{1,3})-([0-9]{1,3})" >
+                    <input type="text" name="num_gr" id="num_gr" class="form-control" value = "2-3" pattern="([0-9]{1,3})-([0-9]{1,3})" >
 
                     <br>
 
@@ -75,7 +75,7 @@ $qw = selectAll($sql);
                     <br>
                     <br>
                     <label for="num_l"><?php echo $txtfarmi8 ?></label>
-                    <input type="text" name="num_l" id="num_l" class="form-control" placeholder="4-5" pattern="([0-9]{1,3})-([0-9]{1,3})" >
+                    <input type="text" name="num_l" id="num_l" class="form-control" value = "4-5" pattern="([0-9]{1,3})-([0-9]{1,3})" >
 
                     <br>
 
@@ -89,12 +89,12 @@ $qw = selectAll($sql);
                     <br>
                     <label for="p_like_adv"><?php echo $txtfarmi10 ?></label>
                     <input type="number" name="p_like_adv" id="p_like_adv" class="form-control"
-                           placeholder="30" required>
+                           value = "30" required>
 
                     <br>
                     <label for="f24"><?php echo $txtfarmi11 ?></label>
                     <input type="number" name="f24" id="f24" class="form-control"
-                           placeholder="3">
+                           value = "5">
 
                     <br>
 
