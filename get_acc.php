@@ -13,9 +13,10 @@ if (empty($data)) {
     $json_data = 'no accounts';
 }
 else {
+
 $id = $data['id'];
-$time = Time();
-$sql = "UPDATE accounts SET accounts.useacc = 1, accounts.last_start = $time WHERE accounts.id = $id";
+
+$sql = "UPDATE accounts SET accounts.useacc = 1 WHERE accounts.id = $id";
 $query = update($sql);
 }
 echo $json_data;
