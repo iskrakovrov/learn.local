@@ -199,3 +199,4 @@ $txtdelgroup = 'Аккаунты оказавшиеся вне группы по
 $txttask40 = 'Парсинг групп по ключевым словам';
 $txtparcegr1 = 'Задайте список ключевых слов для парсинга групп Facebook';
 $txtparcegr2 = 'Укажите в какой список парсить группы';
+$txtexp = 'Экспорт в формате login;password;mail;password mail;phone;2fa;token;JSON coockie;дата рождения';

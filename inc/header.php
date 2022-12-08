@@ -127,9 +127,7 @@ $er = $err['COUNT(*)'];
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#">Statistic</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Export</a>
-                    </li>
+                    
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#">Hand Mode</a>
                     </li>

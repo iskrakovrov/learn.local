@@ -123,7 +123,9 @@ require_once 'inc/header.php'
                             Proxy for all accounts</a>
                         <button class="btn btn-success" name="add_task" id="add_task" value="add_task.php">ADD TASK
                         </button>
-
+                        <button class="btn btn-info"
+                                name="add_task" id="add_task" value="export_acc.php">EXPORT
+                        </button>
 
                         <button class="btn btn-danger" onClick="return confirm( '<?php echo $txtaccounts5 ?>' )"
                                 name="add_task" id="add_task" value="del_acc.php">DELETE ACCOUNTS
