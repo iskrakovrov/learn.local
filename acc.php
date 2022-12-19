@@ -5,7 +5,7 @@ require_once('inc/db.php');
 require_once('function/function.php');
 
 $start = microtime(true);
-$sql = "SELECT id, login_fb, pass_fb, name, gender, avatar, created, group_acc, server, id_proxy, status, works, useacc, friends, last_start, tocken, mail, phone, adv FROM accounts";
+$sql = 'SELECT id, login_fb, pass_fb, name, gender, avatar, created, group_acc, server, id_proxy, status, works, useacc, friends, last_start, tocken, mail, phone, adv FROM accounts';
 $query = selectAll($sql);
 $sql = "SELECT * FROM group_acc";
 $gr1 = selectAll($sql);

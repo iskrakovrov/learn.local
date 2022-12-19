@@ -65,7 +65,7 @@ $ser = selectAll($sql);
                     <th>Protocol</th>
                     <th>Proxy</th>
                     <th>Link</th>
-                    <th>Status</th>
+                    <th>USE</th>
                     <th>Comment</th>
                     <th>Action</th>
                 </tr>
@@ -82,7 +82,8 @@ $ser = selectAll($sql);
                         <td><?php echo $a['protocol'] ?></td>
                         <td><?php echo $a['proxy'] ?></td>
                         <td><?php echo $a['link_proxy'] ?></td>
-                        <td><?php echo $a['status'] ?></td>
+
+                        <td><?php echo $a['use_proxy'] ?></td>
                         <td><?php echo $a['comment'] ?></td>
                         <td>
                             <div class="col">
@@ -104,7 +105,7 @@ $ser = selectAll($sql);
                     <th>Protocol</th>
                     <th>Proxy</th>
                     <th>Link</th>
-                    <th>Status</th>
+                    <th>USE</th>
                     <th>Comment</th>
                     <th>Action</th>
                 </tr>
