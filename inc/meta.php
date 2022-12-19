@@ -7,8 +7,8 @@
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800&display=swap">
-<link href="css/bootstrap.css" rel="stylesheet" >
-<link href="css/dt.css" rel="stylesheet">
+<link href="/css/bootstrap.css" rel="stylesheet" >
+<link href="/css/dt.css" rel="stylesheet">
 
 
 <link href="css/style.css" rel="stylesheet">
