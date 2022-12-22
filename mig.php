@@ -29,3 +29,11 @@ if(empty($qw)) {
     $sql = "ALTER TABLE `groups_fb` CHANGE `id_fb` `id_fb` INT(25) NULL";
     $qw = create($sql);
 }
+$sql = "SHOW TABLES LIKE 'login_change'";
+$qw = create($sql);
+if(empty($qw)) {
+
+
+    $sql = "CREATE TABLE `login_change` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `old_l` VARCHAR(255) NOT NULL , `new_l` VARCHAR(255) NOT NULL , `created` INT(25) NOT NULL , `id_acc` INT(11) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB";
+    $qw = create($sql);
+}
