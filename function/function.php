@@ -337,3 +337,17 @@ function create($create)
     dbCheckError($query);
     return $query->fetchAll();
 }
+function parse_post($key, $folder)
+{
+
+    if (empty($key)) {
+        $sql = null;
+    } else {
+        $cat = $_REQUEST['id'];
+        $folder = $_REQUEST['folder'];
+
+            $sql = "INSERT INTO posts (id,cat,txt,img) VALUES (NULL, $cat, '$key' , '$folder' )";
+
+    }
+    return [$sql];
+}

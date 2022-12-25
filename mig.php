@@ -37,3 +37,11 @@ if(empty($qw)) {
     $sql = "CREATE TABLE `login_change` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `old_l` VARCHAR(255) NOT NULL , `new_l` VARCHAR(255) NOT NULL , `created` INT(25) NOT NULL , `id_acc` INT(11) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB";
     $qw = create($sql);
 }
+$sql = $sql = "SHOW COLUMNS FROM posts WHERE FIELD = 'tipe'";
+$qw = create($sql);
+if(empty($qw)) {
+    $sql = "ALTER TABLE `posts` ADD `tipe` INT(5) NOT NULL AFTER `img`";
+    $qw = create($sql);
+
+}
+

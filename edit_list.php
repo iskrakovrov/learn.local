@@ -4,7 +4,13 @@ require_once('inc/db.php');
 require_once('function/function.php');
 $lang = $_SESSION['lang'] . '.php';
 require_once($lang);
-
+$cat = $_REQUEST['id'];
+$sql = "SELECT cat FROM lists WHERE id='$cat'";
+$qw = select($sql);
+if ($qw['cat'] == 5) {
+    header('Location: edit_list_posts.php?id='. $cat);
+    exit();
+}
 
 if (!empty($_REQUEST['key'])) {
     $key = addslashes($_REQUEST['key']);
@@ -53,7 +59,7 @@ if (!empty($_REQUEST['key'])) {
 <body>
 <?php
 include_once 'inc/header.php';
-$cat = $_REQUEST['id'];
+//$cat = $_REQUEST['id'];
 $sql = "SELECT COUNT(*) FROM value_lists WHERE list = $cat";
 $count = select($sql);
 $cc = $count['COUNT(*)'];

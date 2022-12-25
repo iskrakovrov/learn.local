@@ -151,4 +151,4 @@ require_once($lang);
     </script>
     </body>
     </html>
-<?php
+
