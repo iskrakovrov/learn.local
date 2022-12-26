@@ -22,6 +22,9 @@ require_once($lang);
 
 require_once 'inc/header.php';
 $id = $_REQUEST['id'];
+$sql ="SELECT login_fb FROM accounts WHERE id = $id";
+$login = select($sql);
+$login = $login['login_fb'];
 $sql = "SELECT COUNT(id) FROM stat_invite WHERE id_acc = $id ";
 $dall = select($sql);
 $sql = "SELECT COUNT(id) FROM stat_invite WHERE id_acc = $id AND  created >= unix_timestamp(now()-interval 30 day)";
@@ -63,7 +66,7 @@ $l1 = $l1['COUNT(id)'];
 
 
                 <div class="alert alert-info" role="alert">
-                    <?php echo $txtindex1 ?>
+                    <strong>Account <?php echo $login ?></strong>
                 </div>
             </div>
         </div>
