@@ -339,14 +339,17 @@ function create($create)
 }
 function parse_post($key, $folder)
 {
-
+    $folder = $_REQUEST['folder'];
+if (empty($folder)){
+    $folder = 'NULL';
+}
     if (empty($key)) {
         $sql = null;
     } else {
         $cat = $_REQUEST['id'];
-        $folder = $_REQUEST['folder'];
 
-            $sql = "INSERT INTO posts (id,cat,txt,img) VALUES (NULL, $cat, '$key' , '$folder' )";
+
+            $sql = "INSERT INTO posts (id,cat,txt,img,tipe) VALUES (NULL, $cat, '$key' , '$folder', 1 )";
 
     }
     return [$sql];

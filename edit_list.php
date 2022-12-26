@@ -91,8 +91,7 @@ $ser = selectAll($sql);
     <div class="row justify-content-center">
         <div class="col-6 text-center">
             <form method="post">
-    <textarea class="form-control rounded-0" id="key" name="key" rows="10">
-    </textarea>
+    <textarea class="form-control rounded-0" id="key" name="key" rows="10"></textarea>
                 <br>
                 <br>
                 <button type="submit" class="btn btn-primary">Submit</button>

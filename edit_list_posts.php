@@ -56,14 +56,14 @@ if (!empty($_REQUEST['key'])) {
 <?php
 include_once 'inc/header.php';
 //$cat = $_REQUEST['id'];
-$sql = "SELECT COUNT(*) FROM value_lists WHERE list = $cat";
+$sql = "SELECT COUNT(*) FROM posts WHERE cat = $cat";
 $count = select($sql);
 $cc = $count['COUNT(*)'];
 $sql = "SELECT * FROM lists WHERE id = $cat";
 $nn = select($sql);
 $n = $nn['name'];
 
-$sql = "SELECT * FROM value_lists WHERE list = $cat LIMIT 1000";
+$sql = "SELECT * FROM posts WHERE cat = $cat LIMIT 1000";
 $ser = selectAll($sql);
 
 ?>
@@ -90,17 +90,16 @@ $ser = selectAll($sql);
     <div class="row justify-content-center">
         <div class="col-6 text-center">
             <form method="post">
-    <textarea class="form-control rounded-0" id="key" name="key" rows="10">
-    </textarea>
+                <label for="key">Texts</label>
+                <textarea class="form-control" id="key" name="key" rows="10"></textarea>
                 <br>
                 <label for="folder"><?php echo $txtpost4 ?></label>
-                <textarea class="form-control rounded-0" id="folder" name="folder">
-    </textarea>
+                <textarea class="form-control" id="folder" name="folder"></textarea>
                 <br>
                 <button type="submit" class="btn btn-primary">Submit</button>
                 <br>
                 <br>
-                <button type="submit" class="btn btn-primary">Delete values</button>
+                <button type="submit" class="btn btn-primary">Delete posts</button>
             </form>
         </div>
     </div>
@@ -108,7 +107,7 @@ $ser = selectAll($sql);
 
     <div class="container-fluid">
         <div class="row justify-content-center">
-            <div class="col-6 text-center">
+            <div class="col text-center">
 
                 <label for="example"><strong><?php echo $cc ?><?php echo $txtedlist2 ?> </strong> </label>
                 <table id="example" class="cell-border" style="width:100%">
@@ -117,8 +116,8 @@ $ser = selectAll($sql);
                         <th class="check" style="text-align: center;">
                             <input type="checkbox" id="all" value=""/>
                         </th>
-                        <th>Value</th>
-
+                        <th>Text</th>
+                        <th>Img</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -131,17 +130,37 @@ $ser = selectAll($sql);
                             <td style="text-align: center;"><input type="checkbox" name="a[]"
                                                                    value="<?php echo $a['id'] ?>">
                             </td>
-                            <td><?php echo $a['value'] ?></td>
+                            <td><?php echo $a['txt'] ?></td>
+                            <?php
+                            if ($a['tipe'] == '1') {
+                                if ($a['img'] == 'NULL'){
+                                    $img = "images/none.png";
+                                } else {
+                                    $img = "images/folder.png";
+                                }
 
+                            }else {
+                                if ($a['img'] == 'NULL'){
+                                    $img = "images/none.png";
+                                } else {
+                                    $img = $a['img'];
+                                }
+                                //                   $img = 'uploads/' . $a['img'];
+                            }
+
+
+                            ?>
+
+                            <td><img src="<?php echo $img ?>"  width="150" height="150"></td>
 
                             <td>
                                 <div class="col">
 
 
-                                    <a href="del_val.php?id=<?php echo $a['id'] ?>" class="btn btn-danger"
+                                    <a href="del_post.php?id=<?php echo $a['id'] ?>" class="btn btn-danger"
                                        title="Delete value"
-                                       onClick="return confirm( 'WARNING!!! DELETE VALUE?' )">Delete
-                                        Value <i class="bi bi-x-circle-fill"></i></a>
+                                       onClick="return confirm( 'WARNING!!! DELETE POST?' )">Delete
+                                        POST <i class="bi bi-x-circle-fill"></i></a>
                                 </div>
                             </td>
                         </tr>
@@ -152,8 +171,8 @@ $ser = selectAll($sql);
                     <tfoot>
                     <tr>
                         <th></th>
-                        <th>Value</th>
-
+                        <th>Text</th>
+                        <th>Img</th>
                         <th>Action</th>
                     </tr>
                     </tfoot>

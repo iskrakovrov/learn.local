@@ -111,8 +111,7 @@ $gr = selectAll($sql);
                     <br>
 
                     <strong><label><?php echo $txtacc?></label></strong>
-                    <textarea class="form-control rounded-0" id="accs" name="accs" rows="10"
-                              placeholder="<?php echo $txtnewline ?>"></textarea>
+                    <textarea class="form-control rounded-0" id="accs" name="accs" rows="10" placeholder="<?php echo $txtnewline ?>"></textarea>
                     <br>
 
                     <strong><label><?php echo $txtnoreq?></label></strong>

@@ -45,3 +45,8 @@ if(empty($qw)) {
 
 }
 
+    $sql = "ALTER TABLE `posts` CHANGE `img` `img` VARCHAR(255) NULL DEFAULT NULL";
+    $qw = create($sql);
+
+
+
