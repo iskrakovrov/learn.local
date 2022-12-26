@@ -78,17 +78,17 @@ $qw1 = selectAll($sql);
 
                     <label for="one_s"><?php echo $txtass2 ?></label>
                     <input type="text" name="one_s" id="one_s" class="form-control"
-                           placeholder="10-20" pattern="([0-9]{1,3})-([0-9]{1,3})" required>
+                           value="10-20" pattern="([0-9]{1,3})-([0-9]{1,3})" required>
                     <br>
                     <label for="pause"><?php echo $txtpause ?></label>
                     <input type="text" name="pause" id="pause" class="form-control"
-                           placeholder="3-4" pattern="([0-9]{1,3})-([0-9]{1,3})" required>
+                           value="3-4" pattern="([0-9]{1,3})-([0-9]{1,3})" required>
                     <br>
 
 
                     <label for="f24"><?php echo $txtfarmi11 ?></label>
                     <input type="number" name="f24" id="f24" class="form-control"
-                           placeholder="3" required>
+                           value="3" required>
 
 
                     <br>

@@ -375,6 +375,64 @@ if ($add_task == 'post_to_group') {
 
     }
 }
+if ($add_task == 'like') {
+    $setup = $_POST['action'];
+    $st[] = array(
+
+
+
+        'cat' => $_REQUEST['cat'],
+        'num_l' => $_REQUEST['num_l'],
+        'pause' => $_REQUEST['pause'],
+        'f24' => $_REQUEST['f24'],
+
+
+
+    );
+    $data = array(
+
+        "data" => $st,
+    );
+
+    $json_data = json_encode($data);
+
+
+    foreach ($ids as $a) {
+        $add_task = $_POST['add_task'];
+        $time = Time();
+        $r = add_task($add_task, $json_data, $time, $a);
+
+
+    }
+}
+if ($add_task == 'happy') {
+    $setup = $_POST['action'];
+    $st[] = array(
+
+
+
+        'cat' => $_REQUEST['cat'],
+        'f24' => $_REQUEST['f24'],
+
+
+
+    );
+    $data = array(
+
+        "data" => $st,
+    );
+
+    $json_data = json_encode($data);
+
+
+    foreach ($ids as $a) {
+        $add_task = $_POST['add_task'];
+        $time = Time();
+        $r = add_task($add_task, $json_data, $time, $a);
+
+
+    }
+}
 
 //   foreach ($ids as $a) {
 //       $add_task = $_POST['add_task'];

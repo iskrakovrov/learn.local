@@ -100,6 +100,7 @@ include_once 'inc/header.php'
                             <option value="8">Site lists</option>
                             <option value="10">Lists Groups</option>
                             <option value="9">Additional lists</option>
+                            <option value="11">URL lists</option>
                         </select>
                     </div>
                     <br>
@@ -131,7 +132,8 @@ include_once 'inc/header.php'
                             <option value="7">Keywords lists</option>
                             <option value="8">Site lists</option>
                             <option value="10">Lists Groups</option>
-                            <option value="9">Другие lists</option>
+                            <option value="9">Additional lists</option>
+                            <option value="11">URL lists</option>
                         </select>
                     </div>
                     <br>
