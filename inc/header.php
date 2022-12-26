@@ -116,10 +116,10 @@ $er = $err['COUNT(*)'];
                         <a class="nav-link active" aria-current="template" href="template.php">Templates Task</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="posts" href="edit_list_posts.php">Posts</a>
+                        <a class="nav-link active" aria-current="posts" href="e_list.php?cat=5">Posts</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="comm" href="edit_list_comm.php">Comments</a>
+                        <a class="nav-link active" aria-current="comm" href="e_list.php?cat=6">Comments</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#">Messenger</a>

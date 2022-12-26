@@ -37,16 +37,20 @@ if(empty($qw)) {
     $sql = "CREATE TABLE `login_change` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `old_l` VARCHAR(255) NOT NULL , `new_l` VARCHAR(255) NOT NULL , `created` INT(25) NOT NULL , `id_acc` INT(11) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB";
     $qw = create($sql);
 }
-$sql = $sql = "SHOW COLUMNS FROM posts WHERE FIELD = 'tipe'";
+$sql = "SHOW COLUMNS FROM posts WHERE FIELD = 'tipe'";
 $qw = create($sql);
-if(empty($qw)) {
+if (empty($qw)) {
     $sql = "ALTER TABLE `posts` ADD `tipe` INT(5) NOT NULL AFTER `img`";
     $qw = create($sql);
 
 }
 
-    $sql = "ALTER TABLE `posts` CHANGE `img` `img` VARCHAR(255) NULL DEFAULT NULL";
-    $qw = create($sql);
+$sql = "ALTER TABLE `posts` CHANGE `img` `img` VARCHAR(255) NULL DEFAULT NULL";
+$qw = create($sql);
 
-
-
+$sql = "SELECT id FROM cat_lists WHERE `cat` = 11";
+$qw = select($sql);
+if (!$qw) {
+    $sql = "INSERT INTO `cat_lists` (`id`, `cat`, `name`) VALUES (11, '11', 'URL List')";
+    $qw = insert($sql);
+}
