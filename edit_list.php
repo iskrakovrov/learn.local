@@ -98,6 +98,13 @@ $ser = selectAll($sql);
                 <br>
                 <br>
                 <button type="submit" class="btn btn-primary">Delete values</button>
+                <br>
+                <br>
+                <a class="btn btn-info" href="export_list.php?id=<?php echo $cat ?>" role="button">
+
+                    EXPORT LIST</a>
+
+
             </form>
         </div>
     </div>

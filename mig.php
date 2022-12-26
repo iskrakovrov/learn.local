@@ -54,3 +54,12 @@ if (!$qw) {
     $sql = "INSERT INTO `cat_lists` (`id`, `cat`, `name`) VALUES (11, '11', 'URL List')";
     $qw = insert($sql);
 }
+
+$sql = "SHOW TABLES LIKE 'posting'";
+$qw = create($sql);
+if(empty($qw)) {
+
+
+    $sql = "CREATE TABLE `posting` (`id` INT NOT NULL AUTO_INCREMENT , `id_acc` INT NOT NULL , `id_post` INT NOT NULL , `target` INT NULL , `created` INT NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;";
+    $qw = create($sql);
+}

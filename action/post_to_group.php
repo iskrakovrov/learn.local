@@ -16,7 +16,7 @@ $qw1 = selectAll($sql);
 
 
                 <div class="alert alert-info" role="alert">
-                    <?php echo $txtpost8  ?>
+                    <?php echo $txtpgroup  ?>
                 </div>
             </div>
         </div>
@@ -28,24 +28,24 @@ $qw1 = selectAll($sql);
                 <form method="post" onSubmit="return Complete();">
 
 
-                    <label for="cat" class="control-label"><?php echo $txtpost9 ?></label>
-
-                    <select name="cat" id="cat" class="form-control">
+                    <label for="type" class="control-label"><?php echo $txtpgroup1 ?></label>
+                    <select name="type" id="type" class="form-control">
+                        <option value="1">Groups where the account is a member</option>
                         <?php
                         $i = 0;
-                        foreach ($qw as $a) {
+                        foreach ($qw1 as $a) {
                             $i++; ?>
                             <option value="<?php echo $a['id'] ?>"><?php echo $a['name']; ?></option>
                         <?php } ?>
                     </select>
-
                     <br>
-                    <label for="cat" class="control-label"><?php echo $txtpost9 ?></label>
 
-                    <select name="cat" id="cat" class="form-control">
+                    <label for="post" class="control-label"><?php echo $txtpgroup3  ?></label>
+
+                    <select name="post" id="post" class="form-control">
                         <?php
                         $i = 0;
-                        foreach ($qw1 as $b) {
+                        foreach ($qw as $b) {
                             $i++; ?>
                             <option value="<?php echo $b['id'] ?>"><?php echo $b['name']; ?></option>
                         <?php } ?>
@@ -53,31 +53,29 @@ $qw1 = selectAll($sql);
 
                     <br>
 
-                    <label for="day" class="control-label"><?php echo $txtpost11 ?></label>
-                    <select name="day" id="day" class="form-control">
-                        <option value="1">Once</option>
-                        <option value="2">Every day</option>
+
+                    <label for="mod1" class="control-label"><?php echo $txtpgroup4 ?></label>
+                    <select name="mod1" id="mod1" class="form-control">
+                        <option value="1">NO</option>
+                        <option value="2">YES</option>
                     </select>
                     <br>
 
-                    <label for="multi1" class="control-label"><?php echo $txtpost12 ?></label>
-                    <select name="multi1" id="multi1" class="form-control">
-                        <option value="1">YES</option>
-                        <option value="2">NO</option>
+                    <label for="mod2" class="control-label"><?php echo $txtpgroup2 ?></label>
+                    <select name="mod2" id="mod2" class="form-control">
+                        <option value="1">NO</option>
+                        <option value="2">YES</option>
                     </select>
                     <br>
 
-                    <label for="multi2" class="control-label"><?php echo $txtpost13 ?></label>
-                    <select name="multi2" id="multi2" class="form-control">
-                        <option value="1">YES</option>
-                        <option value="2">NO</option>
-                    </select>
+                    <label for="npost"><?php echo $txtpgroup5 ?></label>
+                    <input type="text" name="npost" id="npost" class="form-control" value="5" required>
                     <br>
 
 
 
                     <label for="f24"><?php echo $txtpost10 ?></label>
-                    <input type="text" name="f24" id="f24" class="form-control" value="1" required>
+                    <input type="text" name="f24" id="f24" class="form-control" value="3" required>
 
 
                     <br>

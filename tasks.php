@@ -312,6 +312,70 @@ if ($add_task == 'invite_from_group') {
     }
 }
 
+if ($add_task == 'post_to_profile') {
+    $setup = $_POST['action'];
+    $st[] = array(
+
+
+
+        'cat' => $_REQUEST['cat'],
+        'day' => $_REQUEST['day'],
+        'multi1' => $_REQUEST['multi1'],
+        'multi1' => $_REQUEST['multi2'],
+        'f24' => $_REQUEST['f24'],
+
+
+
+    );
+    $data = array(
+
+        "data" => $st,
+    );
+
+    $json_data = json_encode($data);
+
+
+    foreach ($ids as $a) {
+        $add_task = $_POST['add_task'];
+        $time = Time();
+        $r = add_task($add_task, $json_data, $time, $a);
+
+
+    }
+}
+if ($add_task == 'post_to_group') {
+    $setup = $_POST['action'];
+    $st[] = array(
+
+
+
+        'type' => $_REQUEST['type'],
+        'post' => $_REQUEST['post'],
+        'mod1' => $_REQUEST['mod1'],
+        'mod2' => $_REQUEST['mod2'],
+        'npost' => $_REQUEST['npost'],
+        'f24' => $_REQUEST['f24'],
+
+
+
+    );
+    $data = array(
+
+        "data" => $st,
+    );
+
+    $json_data = json_encode($data);
+
+
+    foreach ($ids as $a) {
+        $add_task = $_POST['add_task'];
+        $time = Time();
+        $r = add_task($add_task, $json_data, $time, $a);
+
+
+    }
+}
+
 //   foreach ($ids as $a) {
 //       $add_task = $_POST['add_task'];
 //       $sql = "SELECT id FROM task WHERE task = '$add_task' AND account = $a";
