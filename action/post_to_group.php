@@ -7,7 +7,7 @@ $qw1 = selectAll($sql);
 
 <main class="container-fluid ">
     <div class="row text-center">
-        <h2>Posting to profile</h2>
+        <h2>Posting to groups</h2>
     </div>
     <div class="col align-center">
 

@@ -87,7 +87,7 @@ $ser = selectAll($sql);
                         <td><?php echo $a['comment'] ?></td>
                         <td>
                             <div class="col">
-                                <button type="button" class="btn btn-success">Good proxy</button>
+                                <a href="f_proxy.php?id=<?php echo $a['id'] ?>" class="btn btn-success">FREE Proxy</a>
                                 <a href="del_proxy.php?id=<?php echo $a['id'] ?>" class="btn btn-danger"
                                    title="Delete proxy" onClick="return confirm( 'WARNING!!! DELETE PROXY? ' )">Delete
                                     Proxy
