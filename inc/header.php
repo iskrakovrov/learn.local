@@ -116,9 +116,7 @@ $er = $err['COUNT(*)'];
                             <li><a class="dropdown-item" href="#">Lists service</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="template" href="template.php">Templates Task</a>
-                    </li>
+
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="posts" href="e_list.php?cat=5">Posts</a>
                     </li>

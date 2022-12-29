@@ -167,8 +167,8 @@ $_SESSION['ids'] = $ids;
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" name="task[]" type="checkbox" value="" id="task6" disabled>
-                            <label class="form-check-label" for="defaultCheck2">
+                            <input class="form-check-input" name="task[]" type="checkbox" value="post_to_profile.php" id="post_to_profile">
+                            <label class="form-check-label" for="post_to_profile">
                                 <?php echo $txttask11?>
                             </label>
                         </div>

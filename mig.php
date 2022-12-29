@@ -63,3 +63,11 @@ if(empty($qw)) {
     $sql = "CREATE TABLE `posting` (`id` INT NOT NULL AUTO_INCREMENT , `id_acc` INT NOT NULL , `id_post` INT NOT NULL , `target` INT NULL , `created` INT NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;";
     $qw = create($sql);
 }
+$sql = "SHOW TABLES LIKE 'stat_post'";
+$qw = create($sql);
+if(empty($qw)) {
+
+
+    $sql = "CREATE TABLE `stat_post` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `id_acc` INT(11) NOT NULL , `id_post` INT(11) NOT NULL , `target` VARCHAR(255) NULL , `created` INT(25) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;";
+    $qw = create($sql);
+}
