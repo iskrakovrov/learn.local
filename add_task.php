@@ -173,19 +173,19 @@ $_SESSION['ids'] = $ids;
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" name="task[]" type="checkbox" value="" id="task6" disabled>
+                            <input class="form-check-input" name="task[]" type="checkbox" value="" id="task6" >
                             <label class="form-check-label" for="defaultCheck2">
                                 <?php echo $txttask12?>
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" name="task[]" type="checkbox" value="" id="task6" disabled>
+                            <input class="form-check-input" name="task[]" type="checkbox" value="" id="task6" >
                             <label class="form-check-label" for="defaultCheck2">
                                 <?php echo $txttask13?>
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" name="task[]" type="checkbox" value="" id="task6" disabled>
+                            <input class="form-check-input" name="task[]" type="checkbox" value="" id="task6" >
                             <label class="form-check-label" for="defaultCheck2">
                                 <?php echo $txttask14?>
                             </label>
@@ -257,7 +257,7 @@ $_SESSION['ids'] = $ids;
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" name="task[]" type="checkbox" value="" id="task6" disabled>
+                            <input class="form-check-input" name="task[]" type="checkbox" value="" id="task6" >
                             <label class="form-check-label" for="defaultCheck2">
                                 <?php echo $txttask26?>
                             </label>
