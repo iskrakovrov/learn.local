@@ -82,6 +82,12 @@ $ser = selectAll($sql);
                 <br>
                 <a href="edit_list_post_one.php?id=<?php echo $cat ?>"
                    class="btn btn-primary"><?php echo $txtpost1 ?></a>
+                <br>
+
+                <?php echo $txtpost14 ?>
+                <br>
+                <a href="edit_list_post_one.php?id=<?php echo $cat ?>"
+                   class="btn btn-primary"><?php echo $txtpost1 ?></a>
             </div>
         </div>
     </div>

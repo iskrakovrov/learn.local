@@ -321,7 +321,7 @@ if ($add_task == 'post_to_profile') {
         'cat' => $_REQUEST['cat'],
         'day' => $_REQUEST['day'],
         'multi1' => $_REQUEST['multi1'],
-        'multi1' => $_REQUEST['multi2'],
+        'multi2' => $_REQUEST['multi2'],
         'f24' => $_REQUEST['f24'],
 
 
