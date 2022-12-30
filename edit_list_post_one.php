@@ -146,6 +146,13 @@ $ser = selectAll($sql);
                 <br>
                 <a href="edit_list_posts.php?id=<?php echo $cat ?>"
                    class="btn btn-primary"><?php echo $txtpost2 ?></a>
+                <br>
+
+                <?php echo $txtpost14 ?>
+                <br>
+                <a href="free_list_post.php?id=<?php echo $cat ?>"
+                   class="btn btn-primary"><?php echo $txtpost15 ?></a>
+                <br>
             </div>
         </div>
     </div>
