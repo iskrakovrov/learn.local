@@ -30,6 +30,7 @@ if ($add_task == "login") {
         'ava' => $setup[13],
         'sf' => $setup[14],
         'end' => $setup[15],
+        'hand' =>  $setup[16],
 
 
     );

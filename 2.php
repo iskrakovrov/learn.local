@@ -232,3 +232,5 @@ $txtlike2 = 'How many posts to like per one launch';
 $txtlike3 = 'Pause from-to';
 $txthappy = 'Customize birthday wishes for your friends. Use comment lists (Comments List)';
 $txthappy1 = 'Congratulations list';
+$txtoptions3 = 'If the proxy is not working, change to another one?';
+$txtlogin40 = 'Hand mode';

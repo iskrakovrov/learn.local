@@ -7,8 +7,8 @@ require_once($lang);
 
 if (!empty($_REQUEST)){
     $proxy = $_REQUEST['proxy'];
-
-    $sql = "UPDATE options SET proxy = $proxy ";
+    $change_proxy = $_REQUEST['change_proxy'];
+    $sql = "UPDATE options SET proxy = $proxy, change_proxy = $change_proxy ";
     $query = update($sql);
     header("Location: ".$_SERVER['HTTP_REFERER']);
     exit;
@@ -20,6 +20,7 @@ $sql = "SELECT * FROM options";
 
 $options = select($sql);
 $pr = $options['proxy'];
+$c_pr = $options['change_proxy'];
 ?>
 <!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
@@ -69,10 +70,18 @@ include_once 'inc/header.php'
                     <input type="number" name="proxy" id="proxy" class="form-control" value="<?php echo $pr ?>"  required>
 
                     <br>
+                    <label for="change_proxy"><?php echo $txtoptions3 ?></label>
+                    <br>
+                    <select id="change_proxy" name="change_proxy">
+                        <option value="0"<?php if ($c_pr == 0) echo ' selected';?>>YES</option>
+                        <option value="1"<?php if ($c_pr == 1) echo ' selected';?>>NO</option>
 
 
-                    <label for="num_s"><?php echo $txtoptions2 ?></label>
-                    <input type="text" name="num_s" id="num_s" class="form-control" placeholder="10-20"  required>
+
+                    </select>
+                    <br>
+ <!--                   <label for="num_s"><?php echo $txtoptions2 ?></label>
+                    <input type="text" name="num_s" id="num_s" class="form-control" placeholder="10-20"  required> -->
 
 
                     <br>

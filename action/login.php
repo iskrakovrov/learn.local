@@ -21,6 +21,19 @@
             <div class="col-sm-2 text-center">
                 <form method="post" onSubmit="return Complete();">
 
+                    <!-- Ручной режим -->
+
+                    <br>
+                    <!-- Удалять телефон -->
+
+                    <input class="form-check-input" name="action[16]" type="checkbox" value="hand"
+                           id="action[16]">
+                    <label class="form-check-label" for="action[16]">
+                        <?php echo $txtlogin40 ?>
+                    </label>
+
+                    <br>
+
             <!-- Сбор информации одноразово -->
 
                     <input class="form-check-input" name="action[0]" type="checkbox" value="sbor"
