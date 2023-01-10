@@ -127,7 +127,7 @@ $er = $err['COUNT(*)'];
                         <a class="nav-link active" aria-current="page" href="#">Messenger</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Statistic</a>
+                        <a class="nav-link active" aria-current="page" href="all_stat.php">Statistic</a>
                     </li>
                     
 

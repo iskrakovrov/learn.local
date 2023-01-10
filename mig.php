@@ -84,3 +84,11 @@ if(empty($qw)) {
 $sql = "INSERT INTO `status` (`id`, `status`) VALUES ('18', 'bad proxy')";
 $qw = insert($sql);
 }
+$sql = "SHOW TABLES LIKE 'likes'";
+$qw = create($sql);
+if(empty($qw)) {
+
+
+    $sql = "CREATE TABLE `likes` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `create` INT(25) NOT NULL , `id_acc` INT(11) NOT NULL , `cat` INT(11) NOT NULL , `id_v` INT(11) NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;";
+    $qw = create($sql);
+}

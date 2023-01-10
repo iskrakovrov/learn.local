@@ -5,53 +5,27 @@ require_once('function/function.php');
 $id = $_REQUEST['id'];
 $sql = "SELECT * FROM accounts WHERE id = '$id'";
 $qu = select($sql);
+if ($qu['avatar']==1){
+    $sql = "SELECT ava FROM ava WHERE id_acc = '$id'";
+    $qw = select($sql);
+    $ava = $qw['ava'];
+}
 if (!empty($_POST)) {
     $login = $_POST['login'];
     $pass = $_POST['pass'];
     $group = $_POST['group'];
     $server = $_POST['server'];
-    $id_phone = $qu['$id_phone'];
+$mail = $_POST['mail'];
     $ph = $_POST['phone'];
+    $pass_mail = $_POST['pass_mail'];
+    $comm = $_POST['comm'];
+    $status = $_POST['status'];
+    $sql = "UPDATE accounts SET login_fb ='$login', pass_fb='$pass', group_acc='$group', server = '$server', phone = '$phone', mail_pass = '$pass_mail', status = '$status', comment = '$comm' WHERE id = '$id'";
+    $qwer = insert($sql);
 
 
-    if (isset($ph) && $ph !== '' && $ph !== 'null') {
-
-
-        $sql = "SELECT phone_id FROM phones WHERE phone = $ph";
-        $q1 = select($sql);
-        if (empty($q1)) {
-            $sql = "INSERT INTO phones (phone) VALUES ('$ph')";
-            $q1 = insert($sql);
-            $sql = "SELECT phone_id FROM phones WHERE phone = $ph";
-            $q1 = insert($sql);
-        }
-        else
-        {
-            $pid = $q1['phone_id'];
-           $sql = "UPDATE phones SET phone = $ph WHERE phone_id = $pid ";
-           $q1 = update($sql);
-            $sql = "UPDATE accounts SET id_phone = $pid WHERE id_acc = $id";
-            $q1 = update($sql);
-        }
-
-    }
-    else {
-
-        $sql = "UPDATE accounts SET id_phone = NULL WHERE id_acc = $id";
-        $q1 = update($sql);
-    }
-
-
-
-
-
-
-
-
-
-
- //  header('Location: /edit_account.php?=' . $id);
-  //  exit();
+  header('Location: /edit_account.php?id=' . $id);
+exit();
 }
 
 
@@ -88,15 +62,7 @@ include_once 'inc/header.php';
 
 
             <div class="alert alert-info" role="alert">
-                Формат в котором должны быть записаны аккаунты<br/><strong>login;password</strong><br>
-                Если не создана группа <br>
-                <a class="btn btn-secondary" href="#" role="button" data-placement="right"
-                   title="Если не указали группу">Add account group</a>
-                <br>
-                Если не создан сервер
-                <br>
-                <a class="btn btn-secondary" href="#" role="button" data-toggle="tooltip" data-placement="right"
-                   title="Если не указали сервер">Add Server</a>
+
                 <br>
             </div>
 
@@ -107,7 +73,7 @@ include_once 'inc/header.php';
                     <div class="col-sm">
 
 
-                        <img src="<?echo $_POST["avatar"]?>" class="img-fluid img-thumbnail" style="width: 200px ">
+                        <img src="data:image/png;base64, <?php echo $ava ?>" class="img-fluid img-thumbnail" style="width: 200px ">
 
 
                     </div>
@@ -144,18 +110,9 @@ include_once 'inc/header.php';
                         </div>
                         <div class="col-sm">
                             <label for="phone">Phone</label>
-                            <?php
-                            $idm = $qu['id_phone'];
-                            if (!empty($idm)) {
-                                $sql = "SELECT * FROM phones WHERE phone_id = $idm";
-                                $query = select($sql);
-                                $phone = $query['phone'];
-                            } else {
-                                $phone = 'null';
-                            }
-                            ?>
+
                             <input type="text" class="form-control" placeholder="Phone" id="phone" name="phone"
-                                   value="<?php echo $phone ?>">
+                                   value="<?php echo $qu['phone'] ?>">
                         </div>
                     </div>
                 </div>
@@ -164,28 +121,15 @@ include_once 'inc/header.php';
                     <div class="row">
                         <div class="col-sm">
                             <label for="mail">Mail</label>
-                            <?php
-                            $idm = $qu['id_mail'];
-                            $sql = "SELECT * FROM mail WHERE id_mail = $idm";
-                            $query = select($sql);
-                            $mail = $query['mail'];
-                            $passmail = $query['pass_mail'];
-                            if (!empty($query)) {
-                                $mail = $query['mail'];
-                                $passmail = $query['pass_mail'];
-                            } else {
-                                $mail = 'null';
-                                $passmail = 'null';
-                            }
-                            ?>
+
                             <input type="text" class="form-control" placeholder="Mail" id="mail" name="mail"
-                                   value="<?php echo $mail ?>">
+                                   value="<?php echo $qu['mail'] ?>">
                         </div>
                         <div class="col-sm">
                             <label for="pass_mail">Password Mail</label>
                             <input type="text" class="form-control" placeholder="Password mail" id="pass_mail"
                                    name="pass_mail"
-                                   value="<?php echo $passmail ?>">
+                                   value="<?php echo $qu['pass_mail'] ?>">
                         </div>
                         <div class="col-sm">
                             <label for="name">Name</label>
@@ -251,19 +195,17 @@ include_once 'inc/header.php';
                             <select class="form-select" aria-label="Default select example" name="status">
                                 <?php
                                 $st = $qu['status'];
-                                $sql = "SELECT * FROM status WHERE id_status = $st";
+                                $sql = "SELECT * FROM status WHERE id = $st";
                                 $q2 = select($sql);
 
-                                ?>
-                                <option selected
-                                        value="<?php echo $q2['id_status'] ?>"><?php echo $q2['status'] ?></option>
-                                <?php
-                                $i = 0;
-                                foreach ($q1 as $a) {
-                                    $i++; ?>
+
+                                foreach ($q1 as $b) {
+                                     ?>
 
 
-                                    <option value="<?php echo $a['id_status'] ?>"><?php echo $a['status'] ?></option>
+                                    <option value="<?php echo $b['id'] ?>" <?php if ($b['id'] == $q2['id']) {
+                                        echo ' selected';
+                                    } ?>><?php echo $b['status'] ?></option>
 
                                     <?php
                                 }
@@ -282,22 +224,21 @@ include_once 'inc/header.php';
                             $sql = "SELECT * FROM group_acc";
                             $q2 = selectAll($sql);
                             $id_gr = $qu['group_acc'];
-                            $sql1 = "SELECT * FROM group_acc WHERE id_gr = $id_gr";
-                            $query1 = select($sql1);
-                            $gr = $query1['name_group'];
-                            $id_gr = $query1['id_gr'];
+
+
                             ?>
 
 
                             <select class="form-select" aria-label="Default select example" name="group">
-                                <option selected value="<?php echo $id_gr ?>"><?php echo $gr ?></option>
+
                                 <?php
-                                $i = 0;
-                                foreach ($q2 as $a) {
-                                    $i++; ?>
+
+                                foreach ($q2 as $c) {
+                                    $idg1 = $c['id'];
+                                    ?>
 
 
-                                    <option value="<?php echo $a['id_gr'] ?>"><?php echo $a['name_group'] ?></option>
+                                    <option value="<?php echo $idg1 ?>"<?php if ($idg1 == $id_gr) echo ' selected'; ?>><?php echo $c['name_group'] ?></option>
                                     <?php
                                 }
                                 ?>
@@ -311,22 +252,18 @@ include_once 'inc/header.php';
                             $sql = "SELECT * FROM servers";
                             $q2 = selectAll($sql);
                             $id_ser = $qu['server'];
-                            $sql1 = "SELECT * FROM servers WHERE id_server = $id_ser";
-                            $query1 = select($sql1);
-                            $ser = $query1['name_server'];
-                            $id_ser = $query1['id_server'];
+
                             ?>
 
 
                             <select class="form-select" aria-label="Default select example" name="server">
 
-                                <option selected value="<?php echo $id_ser ?>"><?php echo $ser ?></option>
 
                                 <?php
-                                $i = 0;
-                                foreach ($q2 as $a) {
-                                    $i++; ?>
-                                    <option value="<?php echo $a['id_server'] ?>"><?php echo $a['name_server'] ?></option>
+
+                                foreach ($q2 as $d) {
+                                    $idss = $d['id']; ?>
+                                    <option value="<?php echo $idss ?>"<?php if ($idss == $id_ser) echo ' selected'; ?>><?php echo $d['name_server'] ?></option>
                                     <?php
                                 }
                                 ?>
@@ -363,7 +300,7 @@ include_once 'inc/header.php';
                     <div class="row">
                         <label for="comment">Comment</label>
                         <input type="text" class="form-control" placeholder="Comment" id="comment" name="comm"
-                               value="<?php echo $qu['comm'] ?>">
+                               value="<?php echo $qu['comment'] ?>">
                     </div>
 
                 </div>

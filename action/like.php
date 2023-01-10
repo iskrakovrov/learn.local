@@ -26,7 +26,6 @@ $qw = selectAll($sql);
             <div class="col-sm-2 text-center">
                 <form method="post" onSubmit="return Complete();">
 
-
                     <label for="cat" class="control-label"><?php echo $txtlike1 ?></label>
 
                     <select name="cat" id="cat" class="form-control">
@@ -46,8 +45,9 @@ $qw = selectAll($sql);
 
 
                     <br>
-                    <label for="pause"><?php echo $txtcook3 ?></label>
-                    <input type="text" name="pause" id="pause" class="form-control" value="5-10" pattern="([0-9]{1,3})-([0-9]{1,3})" required>
+                    <label for="pause"><?php echo $txtnewacc5 ?></label>
+                    <input type="text" name="pause" id="pause" class="form-control" value="5-10"
+                           pattern="([0-9]{1,3})-([0-9]{1,3})" required>
                     <br>
                     <label for="f24"><?php echo $txtfarmi11 ?></label>
                     <input type="number" name="f24" id="f24" class="form-control"
@@ -59,7 +59,6 @@ $qw = selectAll($sql);
 
                     <button class="btn btn-secondary" name="add_task" id="add_task" value="like">ACTIVATE
                     </button>
-
 
 
                 </form>
