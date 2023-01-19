@@ -27,7 +27,12 @@ $qw1 = selectAll($sql);
             <div class="col-sm-2 text-center">
                 <form method="post" onSubmit="return Complete();">
 
-
+                    <label for="day" class="control-label"><?php echo $txtpgroup7 ?></label>
+                    <select name="mod1" id="mod1" class="form-control">
+                        <option value="1">YES</option>
+                        <option value="2">NO</option>
+                    </select>
+                    <br>
                     <label for="type" class="control-label"><?php echo $txtpgroup1 ?></label>
                     <select name="type" id="type" class="form-control">
                         <option value="1">Groups where the account is a member</option>

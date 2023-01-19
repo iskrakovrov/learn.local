@@ -199,6 +199,7 @@ if ($add_task == 'filling_accounts') {
 
 if ($add_task == 'post_to_group') {
     $st[] = array(
+        'day' => $_REQUEST['day'],
         'type' => $_REQUEST['type'],
         'post' => $_REQUEST['post'],
         'mod1' => $_REQUEST['mod1'],
