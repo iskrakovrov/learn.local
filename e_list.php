@@ -44,7 +44,7 @@ require_once($lang);
 
 
                 <div class="alert alert-info" role="alert">
-                    <strong><?php echo $txtelist1 ?>></strong><br>
+                    <strong><?php echo $txtelist1 ?></strong><br>
 
                     <br>
                 </div>
@@ -57,7 +57,7 @@ require_once($lang);
             <div class="col text-center">
                 <form>
                     <a class="btn btn-secondary" href="add_list.php" role="button">Add list</a>
-                    <a class="btn btn-danger" href="del_server.php" role="button">Delete servers</a>
+
             </div>
         </div>
         <div class="container-fluid">

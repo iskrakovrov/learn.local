@@ -71,6 +71,12 @@ $qw1 = selectAll($sql);
                     <label for="npost"><?php echo $txtpgroup5 ?></label>
                     <input type="text" name="npost" id="npost" class="form-control" value="5" required>
                     <br>
+                    <label for="mod3" class="control-label"><?php echo $txtpgroup6 ?></label>
+                    <select name="mod3" id="mod3" class="form-control">
+                        <option value="1">NO</option>
+                        <option value="2">YES</option>
+                    </select>
+                    <br>
 
 
 

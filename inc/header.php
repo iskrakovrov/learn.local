@@ -85,7 +85,7 @@ $er = $err['COUNT(*)'];
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="edit_list_comm.php">Comments lists</a></li>
+                            <li><a class="dropdown-item" href="e_list.php?cat=6">Comments lists</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
