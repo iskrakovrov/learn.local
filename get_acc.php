@@ -1,8 +1,8 @@
 <?php
 require_once('inc/db.php');
 require_once('function/function.php');
-//$name = 'ONE';
-$name = $_GET['server'];
+$name = 'ONE';
+//$name = $_GET['server'];
 $sql = "SELECT * FROM servers WHERE name_server = '$name'";
 $query = select($sql);
 $server = $query['id'];

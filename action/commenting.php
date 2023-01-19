@@ -6,7 +6,7 @@ $qw = selectAll($sql);
 
 <main class="container-fluid ">
     <div class="row text-center">
-        <h2>Farm cookies</h2>
+        <h2>Сommenting</h2>
     </div>
     <div class="col align-center">
 
@@ -15,7 +15,7 @@ $qw = selectAll($sql);
 
 
                 <div class="alert alert-info" role="alert">
-                    <?php echo $txtcook ?>
+                    <?php echo $txtcomm1 ?>
                 </div>
             </div>
         </div>

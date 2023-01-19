@@ -234,3 +234,22 @@ $txthappy = 'Customize birthday wishes for your friends. Use comment lists (Comm
 $txthappy1 = 'Congratulations list';
 $txtoptions3 = 'If the proxy is not working, change to another one?';
 $txtlogin40 = 'Hand mode';
+$txtmenu = 'What to do with marked';
+$txtindex = 'Current panel version';
+$txtindex1 = 'Actual panel version';
+$txtindex2 = 'After installing the update, do not forget to click UPDATE on the top menu to update the database structure';
+$txtindex3 = '<a href="https://soft.fbcombo.com/putevoditel/">Instructions</a>';
+$txtindex4 = '<br>
+                TIPS
+                <br>
+                If you work without a proxy, pay attention to the number of threads so that more than 2-3 accounts do not work at the same time.
+                <br>
+                If you work with one proxy that change IP address by link or with one modem with IP change at account start - work in one thread so IP change does not interfere with the work of accounts.
+                <br>';
+$txtindex5 = '<strong><p> After testing and launching all modes, there are some plans.</p></strong>
+                    <p> Launch of a common base for geo invites with 750 million FB users from all over the world. So that you can unloading for yourself.</p>
+                    <p> Development of new service modes for transferring and copying your lists</p>
+                    <p> Well, as always, I wait for your ideas.</p>';
+$txtindex6 = '<a href="#">How to update</a>';
+$txtindex7 = 'Technical support in Telegram';
+$txtelist1 = 'Selecting a list to edit';

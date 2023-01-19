@@ -227,9 +227,11 @@ $_SESSION['ids'] = $ids;
                                 <?php echo $txttask20?>
                             </label>
                         </div>
+
+                        <!-- прием в друзья -->
                         <div class="form-check">
-                            <input class="form-check-input" name="task[]" type="checkbox" value="" id="task6" disabled>
-                            <label class="form-check-label" for="defaultCheck2">
+                            <input class="form-check-input" name="task[]" type="checkbox" value="accept_friend.php" id="accept_friend">
+                            <label class="form-check-label" for="accept_friend">
                                 <?php echo $txttask21?>
                             </label>
                         </div>

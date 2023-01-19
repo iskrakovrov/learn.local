@@ -44,7 +44,7 @@ require_once($lang);
 
 
                 <div class="alert alert-info" role="alert">
-                    <strong>Выбор списка для редактирования</strong><br>
+                    <strong><?php echo $txtelist1 ?>></strong><br>
 
                     <br>
                 </div>

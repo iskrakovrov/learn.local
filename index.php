@@ -53,8 +53,9 @@ require_once 'inc/header.php'
 
                 Текущая версия панели
                 <br>
-                <a href="https://soft.fbcombo.com/update.zip">Актуальная версия панели <?php echo $homepage?> СКАЧАТЬ</a>
+                <a href="https://soft.fbcombo.com/update.zip">Актуальная версия панели <?php echo $homepage?> <span>DOWNLOAD</span></a>
                 <br>
+                <span>После установки обновления не забудьте нажать UPDATE в верхнем меню для обновления структуры базы данных</span>
                 <a href="#">Как обновить</a>
                 <br>
                 <a href="https://soft.fbcombo.com/putevoditel/">Инструкции</a>

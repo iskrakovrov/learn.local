@@ -67,6 +67,8 @@ foreach ($query as $a) {
     foreach ($ser1 as $z) {
         if ($z['id'] == $id_s) {
             $ser = $z['name_server'];
+        }else {
+            $ser = 'Not server';
         }
     }
 
