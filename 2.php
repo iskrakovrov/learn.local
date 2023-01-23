@@ -35,7 +35,16 @@ $txtlogin12 = 'Perform changeip.bat file. to change the IP modem ';
 $txtcook = 'Farm cookie options';
 $txtcook2 = 'Number of sites';
 $txtcook3 = 'List of sites';
-$txtaddpr1 = 'Adding a proxy. Format. ';
+$txtaddpr1 = 'Adding a proxy. Format 
+<p>http://username:password@hostname:9090</p>
+
+<p>socks5://username:password@hostname:9090</p>
+
+<p>http://username:password@hostname:9090|link</p>
+
+<p>socks5://username:password@hostname:9090|link</p>
+<br> 
+<a href="https://soft.fbcombo.com/en/accounts-and-proxies-in-fbcombo-account-groups-servers-for-work/" target="_blank"><strong>Read more</strong></a>';
 $txttask1 = 'Choose and customize actions.';
 $txttask2 = 'Farm cookie(visit sites)';
 $txttask3 = 'Farm interests(get interests from Facebook)';
@@ -113,9 +122,9 @@ $txtaccounts4 = 'ATTENTION!!! Proxy settings will change for all accounts';
 $txtaccounts5 = 'ATTENTION!!! Delete accounts???';
 $txtaccounts6 = 'Proxy ON - proxy connected. NO - proxy isn`t connected. FREE - launch without proxy.';
 
-$txtaccounts7 = "USE. WORK - account in work. If in the work process there was a freeze and the status didnt change - set the status to FREE in the menu";
+$txtaccounts7 = 'USE. WORK - account in work. If in the work process there was a freeze and the status didnt change - set the status to FREE in the menu';
 
-$txtaccounts8 = 'Use proxy. Перепривязать прокси';
+$txtaccounts8 = 'Use proxy. Refresh proxy';
 
 $txtlogin13 = 'If there is no avatar, install it from the folder?';
 $txterinv = "Deleting invitations";
@@ -236,7 +245,7 @@ $txtoptions3 = 'If the proxy is not working, change to another one?';
 $txtlogin40 = 'Hand mode';
 $txtmenu = 'What to do with marked';
 $txtindex = 'Current panel version';
-$txtindex1 = 'Actual panel version';
+$txtindex11 = 'Actual panel version';
 $txtindex2 = 'After installing the update, do not forget to click UPDATE on the top menu to update the database structure';
 $txtindex3 = '<a href="https://soft.fbcombo.com/putevoditel/">Instructions</a>';
 $txtindex4 = '<br>
@@ -253,3 +262,13 @@ $txtindex5 = '<strong><p> After testing and launching all modes, there are some 
 $txtindex6 = '<a href="#">How to update</a>';
 $txtindex7 = 'Technical support in Telegram';
 $txtelist1 = 'Selecting a list to edit';
+$txtcomm1 = 'Select a list to comment <strong>Url lists</strong>. You can set post addresses and use the list of posts after publishing to groups or profiles. Set a pause between commenting. Indicate that you need to like the post you are commenting on. Specify the number of comments that one account can leave under one post. Specify the number of posts that can be commented on by one account per launch. Specify a list of comments. ';
+$txtcomm2 = 'List of comment URLs';
+$txtcomm3 = 'List of comment texts';
+$txtcomm4 = 'How many comments can one account leave under one post';
+$txtcomm5 = 'How many comments can one account leave in one launch';
+$txtcomm6 = 'Pause from and to. For example: 2-5';
+$txtcomm7 = 'Liking the post we are commenting on';
+$txtpgroup6 = 'Remove a group from the list if it has post moderation';
+$txtpgroup7 = 'Publish posts only within 24 hours.';
+

@@ -1,8 +1,9 @@
 <?php
-$sql = "SELECT * FROM lists WHERE cat = 5";
+$sql = 'SELECT * FROM lists WHERE cat = 5';
 $qw = selectAll($sql);
-$sql = "SELECT * FROM lists WHERE cat = 10";
+$sql = 'SELECT * FROM lists WHERE cat = 10';
 $qw1 = selectAll($sql);
+
 ?>
 
 <main class="container-fluid ">

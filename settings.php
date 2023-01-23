@@ -94,9 +94,9 @@ include_once 'inc/header.php'
                 <div class="form-floating">
 
                 <select class="form-select" id="lng" name="lng">
+                    <option value="1"<?php if ($lang == 1) echo ' selected';?>>Russian</option>
+                    <option value="2"<?php if ($lang == 2) echo ' selected';?>>English</option>
 
-                    <option value = 1>Russian</option>
-                    <option value = 2>English</option>
                 </select>
                 </div>
                 <br>

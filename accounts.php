@@ -78,7 +78,7 @@ require_once 'inc/header.php'
 
 
                 <select name="add_task" id="add_task" class="custom-select">
-                    <option value="" selected>[Что делать с отмеченными]</option>
+                    <option value="" selected>[<?php echo $txtmenu ?>]</option>
                     <option value="add_task.php"><?php echo $txtaccounts ?></option>
                     <option value="acc_free.php"><?php echo $txtaccounts1 ?></option>
 

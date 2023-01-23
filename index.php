@@ -39,7 +39,7 @@ require_once 'inc/header.php'
 
 
                 <div class="alert alert-info" role="alert">
-				<?php echo $txtindex1 ?>
+				<?php echo $txtindex1?>
                 </div>
             </div>
         </div>
@@ -51,31 +51,24 @@ require_once 'inc/header.php'
 
                 <br>
 
-                Текущая версия панели
+
+                <a href="https://soft.fbcombo.com/update.zip"><?php echo $txtindex11?> <strong><?php echo $homepage?></strong> <span>DOWNLOAD</span></a>
                 <br>
-                <a href="https://soft.fbcombo.com/update.zip">Актуальная версия панели <?php echo $homepage?> <span>DOWNLOAD</span></a>
+                <?php echo $txtindex2 ?>
                 <br>
-                <span>После установки обновления не забудьте нажать UPDATE в верхнем меню для обновления структуры базы данных</span>
-                <a href="#">Как обновить</a>
+                <?php echo $txtindex6 ?>
                 <br>
-                <a href="https://soft.fbcombo.com/putevoditel/">Инструкции</a>
+                <?php echo $txtindex3 ?>
                 <br>
 
-                <a href="https://t.me/iskrakovrov">Техподдержка в Telegram</a>
+                <a href="https://t.me/iskrakovrov"><?php echo $txtindex7 ?></a>
                 <br>
                 <br>
-                СОВЕТЫ
-                <br>
-                Если вы работаете без прокси - обратите внимание на количество потоков, чтоб одновременно не работало более 2-3 аккаунтов
-                <br>
-                Если вы работаете с одной прокси со ссылкой или с одним модемом со сменой IP при старте аккаунта - работайте в 1 поток, чтоб смена IP не мешала работе аккаунтов.
+                <?php echo $txtindex4 ?>
                 <br>
 <br>
                 <div class="alert alert-success" role="alert">
-                    <strong><p> После тестирования и запуска всех режимов, что в планах.</p></strong>
-                    <p> Запуск общей базы для инвайта по гео с 750 млн пользователями FB со всего мира. Чтоб вы могли делать выгрузки для себя</p>
-                    <p> Разработка новых сервисных режимов для переброски и копирования ваших списков</p>
-                    <p> Ну и как всегда, жду ваших идей</p>
+                    <?php echo $txtindex5 ?>
                 </div>
 
 

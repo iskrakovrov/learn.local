@@ -372,38 +372,7 @@ if ($add_task == 'post_to_profile') {
 
     }
 }
-if ($add_task == 'post_to_group') {
-    $setup = $_POST['action'];
-    $st[] = array(
 
-
-
-        'type' => $_REQUEST['type'],
-        'post' => $_REQUEST['post'],
-        'mod1' => $_REQUEST['mod1'],
-        'mod2' => $_REQUEST['mod2'],
-        'npost' => $_REQUEST['npost'],
-        'f24' => $_REQUEST['f24'],
-
-
-
-    );
-    $data = array(
-
-        "data" => $st,
-    );
-
-    $json_data = json_encode($data);
-
-
-    foreach ($ids as $a) {
-        $add_task = $_POST['add_task'];
-        $time = Time();
-        $r = add_task($add_task, $json_data, $time, $a);
-
-
-    }
-}
 if ($add_task == 'like') {
     $setup = $_POST['action'];
     $st[] = array(
