@@ -3,6 +3,8 @@ $sql = 'SELECT * FROM lists WHERE cat = 5';
 $qw = selectAll($sql);
 $sql = 'SELECT * FROM lists WHERE cat = 10';
 $qw1 = selectAll($sql);
+$sql = 'SELECT * FROM lists WHERE cat = 11';
+$qw2 = selectAll($sql);
 
 ?>
 
@@ -29,7 +31,7 @@ $qw1 = selectAll($sql);
                 <form method="post" onSubmit="return Complete();">
 
                     <label for="day" class="control-label"><?php echo $txtpgroup7 ?></label>
-                    <select name="mod1" id="mod1" class="form-control">
+                    <select name="day" id="day" class="form-control">
                         <option value="1">YES</option>
                         <option value="2">NO</option>
                     </select>
@@ -83,7 +85,24 @@ $qw1 = selectAll($sql);
                         <option value="2">YES</option>
                     </select>
                     <br>
+                    <label for="mod4" class="control-label"><?php echo $txtpgroup8 ?></label>
+                    <select name="mod4" id="mod4" class="form-control">
+                        <option value="1">NO</option>
+                        <option value="2">YES</option>
+                    </select>
+                    <br>
+                    <label for="post" class="control-label"><?php echo $txtpgroup9  ?></label>
 
+                    <select name="spost" id="spost" class="form-control">
+                        <?php
+                        $i = 0;
+                        foreach ($qw2 as $c) {
+                            $i++; ?>
+                            <option value="<?php echo $c['id'] ?>"><?php echo $c['name']; ?></option>
+                        <?php } ?>
+                    </select>
+
+                    <br>
 
 
                     <label for="f24"><?php echo $txtpost10 ?></label>

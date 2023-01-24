@@ -206,6 +206,8 @@ if ($add_task == 'post_to_group') {
         'mod2' => $_REQUEST['mod2'],
         'npost' => $_REQUEST['npost'],
         'mod3' => $_REQUEST['mod3'],
+        'mod4' => $_REQUEST['mod4'],
+        'spost' => $_REQUEST['spost'],
         'f24' => $_REQUEST['f24'],
 
     );
