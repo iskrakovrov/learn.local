@@ -38,7 +38,7 @@ $qw2 = selectAll($sql);
                     <br>
                     <label for="type" class="control-label"><?php echo $txtpgroup1 ?></label>
                     <select name="type" id="type" class="form-control">
-                        <option value="1">Groups where the account is a member</option>
+                    <!--    <option value="1">Groups where the account is a member</option> -->
                         <?php
                         $i = 0;
                         foreach ($qw1 as $a) {

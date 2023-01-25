@@ -271,4 +271,5 @@ $txtcomm6 = 'Pause from and to. For example: 2-5';
 $txtcomm7 = 'Liking the post we are commenting on';
 $txtpgroup6 = 'Remove a group from the list if it has post moderation';
 $txtpgroup7 = 'Publish posts only within 24 hours.';
-
+$txtpgroup8 = 'If the account is not in a group, then join it?';
+$txtpgroup9 = 'List for collecting post URLs for further work';
