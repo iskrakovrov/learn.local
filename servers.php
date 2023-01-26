@@ -47,7 +47,7 @@ $ser = selectAll($sql);
         <div class="col text-center">
             <form action="del_servers.php" method="post">
                 <a class="btn btn-secondary" href="add_server.php" role="button">Add server</a>
-                
+
 
                 <a class="btn btn-danger" href="del_server.php" role="button">Delete servers</a>
         </div>

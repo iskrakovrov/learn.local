@@ -5,9 +5,11 @@ require_once('function/function.php');
 
 $id = $_SESSION['ids'];
 $yy = $_GET['se'];
-foreach ($id as $a) {
-    $sql = "UPDATE accounts SET server = $yy WHERE id = $a ";
-    $q = update($sql);
+if (!empty($yy)) {
+    foreach ($id as $a) {
+        $sql = "UPDATE accounts SET server = $yy WHERE id = $a ";
+        $q = update($sql);
+    }
 }
 header("Location: accounts.php");
 exit;
