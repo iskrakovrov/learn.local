@@ -89,7 +89,7 @@ foreach ($query as $a) {
     $action .= $a['id'];
     $action .= '" class="btn btn-success" title="Edit" ><i class="bi bi-pencil-square"></i></a><a href="stat_account.php?id=';
     $action .= $a['id'];
-    $action .= '" class="btn btn-success" title="Statistics"><i class="bi bi-star"></i></a><a href="del_account.php?id=';
+    $action .= '" class="btn btn-success" title="Statistics"><i class="bi bi-star"></i></a><a href="del_acc.php?id=';
     $action .= $a['id'];
     $action .= '" class="btn btn-danger" title="Delete Account" onClick="return confirm( ';
     $action .= "'WARNING!!! DELETE ACCOUNT?' )";

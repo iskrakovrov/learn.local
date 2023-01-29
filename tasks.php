@@ -433,6 +433,72 @@ if ($add_task == 'happy') {
 
     }
 }
+if ($add_task == 'commenting') {
+    $setup = $_POST['action'];
+    $st[] = array(
+
+
+
+        'url' => $_REQUEST['url'],
+        'coml' => $_REQUEST['coml'],
+        'num_cp' => $_REQUEST['num_cp'],
+        'num_cd' => $_REQUEST['num_cd'],
+        'pause' => $_REQUEST['pause'],
+        'like' => $_REQUEST['like'],
+        'f24' => $_REQUEST['f24'],
+
+
+
+    );
+    $data = array(
+
+        "data" => $st,
+    );
+
+    $json_data = json_encode($data);
+
+
+    foreach ($ids as $a) {
+        $add_task = $_POST['add_task'];
+        $time = Time();
+        $r = add_task($add_task, $json_data, $time, $a);
+
+
+    }
+}
+if ($add_task == 'comm_public') {
+    $setup = $_POST['action'];
+    $st[] = array(
+
+
+
+        'url' => $_REQUEST['url'],
+        'coml' => $_REQUEST['coml'],
+        'num_cp' => $_REQUEST['num_cp'],
+        'num_cd' => $_REQUEST['num_cd'],
+        'pause' => $_REQUEST['pause'],
+        'like' => $_REQUEST['like'],
+        'f24' => $_REQUEST['f24'],
+
+
+
+    );
+    $data = array(
+
+        "data" => $st,
+    );
+
+    $json_data = json_encode($data);
+
+
+    foreach ($ids as $a) {
+        $add_task = $_POST['add_task'];
+        $time = Time();
+        $r = add_task($add_task, $json_data, $time, $a);
+
+
+    }
+}
 
 //   foreach ($ids as $a) {
 //       $add_task = $_POST['add_task'];

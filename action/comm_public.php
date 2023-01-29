@@ -84,7 +84,7 @@ $qw1 = selectAll($sql);
                     <br>
                     <br>
 
-                    <button class="btn btn-secondary" name="add_task" id="add_task" value="commenting">ACTIVATE
+                    <button class="btn btn-secondary" name="add_task" id="add_task" value="comm_public">ACTIVATE
                     </button>
 
 

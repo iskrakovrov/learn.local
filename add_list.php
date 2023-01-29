@@ -19,26 +19,19 @@ if (!empty($_REQUEST['name'])) {
 }
 if (!empty($_REQUEST['catedit'])) {
     $catedit = $_REQUEST['catedit'];
-    if ($catedit === 3) {
-        $url = 'edit_list_name.php';
-        header("Location: $url");
-        exit();
-    }
+
     if ($catedit === 5) {
         $url = 'edit_list_posts.php';
         header("Location: $url");
         exit();
     }
+    //коммментарии
     if ($catedit === 6) {
-        $url = 'edit_list_comm.php';
+        $url = 'edit_list_posts.php';
         header("Location: $url");
         exit();
     }
-    if ($catedit === 1) {
-        $url = 'edit_list_bl.php';
-        header("Location: $url");
-        exit();
-    }
+
 
     $url = 'e_list.php?cat=' . $catedit;
     header("Location: $url");
