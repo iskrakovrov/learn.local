@@ -7,19 +7,19 @@ require_once('function/function.php');
 $start = microtime(true);
 $sql = 'SELECT id, login_fb, pass_fb, name, gender, avatar, created, group_acc, server, id_proxy, status, works, useacc, friends, last_start, tocken, mail, phone, adv FROM accounts';
 $query = selectAll($sql);
-$sql = "SELECT * FROM group_acc";
+$sql = 'SELECT * FROM group_acc';
 $gr1 = selectAll($sql);
-$sql = "SELECT * FROM servers";
+$sql = 'SELECT * FROM servers';
 $ser1 = selectAll($sql);
-$sql = "SELECT * FROM status";
+$sql = 'SELECT * FROM status';
 $st1 = selectAll($sql);
 
 
 foreach ($query as $a) {
     if (!empty ($a['avatar'])) {
-        $ava = "OK";
+        $ava = 'OK';
     } else {
-        $ava = "NO";
+        $ava = 'NO';
     }
     if (is_null($a['id_proxy'])) {
         $pr = "NO";
@@ -37,11 +37,12 @@ foreach ($query as $a) {
         $use = "WORK"; //ooo
     }
     $find = "EAAB";
-    $pos1 = stripos($a['tocken'], $find);
-    if ($pos1 == false) {
-        $tocken = "NO";
+    $tock = $a['tocken'];
+    $pos1 = stripos($tock, $find);
+    if ($pos1 !== false) {
+        $tocken = 'YES';
     } else {
-        $tocken = "YES";
+        $tocken = 'NO';
     }
     $t = $a['id'];
     $sql = "SELECT count(task) FROM task WHERE account = $t";

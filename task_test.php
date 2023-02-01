@@ -25,7 +25,7 @@ require_once($lang);
 <body>
 <?php
 include_once 'inc/header.php';
-require_once 'action/commenting.php'?>
+require_once 'action/post_to_group.php'?>
 
 
 
