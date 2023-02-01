@@ -142,7 +142,7 @@ function delete($del)
     $query = $pdo->prepare($sql);
     $query->execute();
     dbCheckError($query);
-
+    return 'ok';
 
 }
 
