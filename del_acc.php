@@ -3,7 +3,7 @@ include_once('inc/init.php');
 require_once('inc/db.php');
 require_once('function/function.php');
 
-$id = $_SESSION['ids'];
+$id = $_SESSION['id'];
 
 foreach ($id as $a) {
     $sql = "SELECT * FROM accounts WHERE id = $a";
