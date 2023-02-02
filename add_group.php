@@ -12,7 +12,7 @@ if (!empty($_REQUEST['name_server'])){
     if (empty($ch)){
         $sql = "INSERT INTO group_acc (name_group, comment) VALUES ('$nserv', '$com')";
         $ch= insert($sql);
-        header("Location: groups.php");
+        header('Location: groups.php');
     }
 
 }

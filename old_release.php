@@ -10,7 +10,7 @@ if (!empty($_REQUEST['name_server'])){
     if (empty($ch)){
         $sql = "INSERT INTO servers (name_server, comment) VALUES ('$nserv', '$com')";
         $ch= insert($sql);
-        header("Location: servers.php");
+        header('Location: servers.php');
     }
 
 }

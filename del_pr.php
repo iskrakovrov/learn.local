@@ -13,4 +13,4 @@ foreach ($array as $a) {
 
 }
 
-header("Location: ".$_SERVER['HTTP_REFERER']);
+header('Location: ' .$_SERVER['HTTP_REFERER']);

@@ -10,4 +10,4 @@ foreach ($ids as $id) {
     $query = delete($sql);
 
 }
-header("Location: /accounts.php");
+header('Location: /accounts.php');

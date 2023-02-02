@@ -17,7 +17,7 @@ if (!empty($_REQUEST['key'])) {
     $array = explode("\r\n", $key);
 
     for ($i = 0, $iMax = count($array); $i <= $iMax; $i++) {
-        $c = (trim($array[$p]) . "<br/>");
+        $c = (trim($array[$p]) . '<br/>');
     }
     $c = preg_replace('/<br[^>]*>/', '', $c);
     $i = 0;
@@ -34,7 +34,7 @@ if (!empty($_REQUEST['key'])) {
 
     }
 
-    header("Refresh: 0");
+    header('Refresh: 0');
 }
 
 ?>

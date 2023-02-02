@@ -88,7 +88,7 @@ if (($text == 'NULL') && ($img == 'NULL')) {
 else {
     $sql = "INSERT INTO posts (id, cat, txt, img, tipe) VALUES (NULL, $cat, '$text', '$img', 2)";
     $qw = insert($sql);
-    header("Refresh:0");
+    header('Refresh:0');
 }
 }
 ?>

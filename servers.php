@@ -26,7 +26,7 @@ require_once($lang);
 <body>
 <?php
 include_once 'inc/header.php';
-$sql = "SELECT * FROM servers";
+$sql = 'SELECT * FROM servers';
 $ser = selectAll($sql);
 
 ?>

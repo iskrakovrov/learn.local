@@ -9,5 +9,5 @@ foreach ($ids as $a){
     $qu = update($sql);
 }
 
-header("Location: accounts.php");
+header('Location: accounts.php');
 exit;

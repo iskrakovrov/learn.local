@@ -7,4 +7,4 @@ require_once('function/function.php');
 $id = $_GET['id'];
 $sql = "DELETE FROM value_lists WHERE id = $id";
 $query = delete($sql);
-header("Location: " . $_SERVER['HTTP_REFERER']);
+header('Location: ' . $_SERVER['HTTP_REFERER']);

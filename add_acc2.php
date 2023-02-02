@@ -56,9 +56,9 @@ if (!empty($nr) && !empty($serv) && !empty($group) && isset($_POST['accs'])) {
 <body>
 <?php
 include_once 'inc/header.php';
-$sql = "SELECT * FROM servers";
+$sql = 'SELECT * FROM servers';
 $ser = selectAll($sql);
-$sql = "SELECT * FROM group_acc";
+$sql = 'SELECT * FROM group_acc';
 $gr = selectAll($sql);
 ?>
 <main class="container-fluid ">

@@ -10,13 +10,13 @@ if (!empty($_REQUEST)){
     $change_proxy = $_REQUEST['change_proxy'];
     $sql = "UPDATE options SET proxy = $proxy, change_proxy = $change_proxy ";
     $query = update($sql);
-    header("Location: ".$_SERVER['HTTP_REFERER']);
+    header('Location: ' .$_SERVER['HTTP_REFERER']);
     exit;
 }
 
 
 
-$sql = "SELECT * FROM options";
+$sql = 'SELECT * FROM options';
 
 $options = select($sql);
 $pr = $options['proxy'];

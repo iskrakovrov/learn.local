@@ -25,4 +25,4 @@ $id = $_GET['id'];
     }
     $sql = "DELETE FROM accounts WHERE id =$id";
     $qu1 = delete($sql);
-header("Location: " . $_SERVER['HTTP_REFERER']);
+header('Location: ' . $_SERVER['HTTP_REFERER']);

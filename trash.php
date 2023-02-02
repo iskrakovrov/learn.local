@@ -23,7 +23,7 @@ require_once('function/function.php');
     <title>FB Combo | Trash</title>
 </head>
 <?php
-$sql = "SELECT * FROM trash";
+$sql = 'SELECT * FROM trash';
 $query = selectAll($sql);
 
 ?>

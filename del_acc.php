@@ -28,4 +28,4 @@ foreach ($id as $a) {
 }
 
 $querty = delete($sql);
-header("Location: " . $_SERVER['HTTP_REFERER']);
+header('Location: ' . $_SERVER['HTTP_REFERER']);

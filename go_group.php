@@ -9,5 +9,5 @@ foreach ($id as $a) {
 $sql = "UPDATE accounts SET group_acc = $yy WHERE id = $a ";
 $q = update($sql);
 }
-header("Location: accounts.php");
+header('Location: accounts.php');
 exit;

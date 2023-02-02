@@ -6,5 +6,5 @@ require_once('function/function.php');
 $id = $_REQUEST['id'];
 $sql = "DELETE FROM err WHERE id = $id";
 $q = delete($sql);
-header("Location: " . $_SERVER['HTTP_REFERER']);
+header('Location: ' . $_SERVER['HTTP_REFERER']);
 exit;

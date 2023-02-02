@@ -11,6 +11,6 @@ if (!empty($yy)) {
         $q = update($sql);
     }
 }
-header("Location: accounts.php");
+header('Location: accounts.php');
 exit;
 

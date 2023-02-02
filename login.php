@@ -1,27 +1,27 @@
 <?php
-include_once "inc/init.php";
+include_once 'inc/init.php';
 require_once('inc/db.php');
 require_once('function/function.php');
 $error = "";
 
 
 if (!empty($_REQUEST["submit"])) {
-    $login = isset($_POST["login"]) ? trim($_POST["login"]) : "";
-    $pswd = isset($_POST["pswd"]) ? trim($_POST["pswd"]) : "";
+    $login = isset($_POST["login"]) ? trim($_POST["login"]) : '';
+    $pswd = isset($_POST["pswd"]) ? trim($_POST["pswd"]) : '';
     $sql = "SELECT * FROM users WHERE login = '$login' AND pass = '$pswd'";
     $x = select($sql);
     if (empty($x)) {
         $error = "Неправильный логин или пароль";
 
     }
-    if ($error === "") {
-        $sql = "SELECT lang FROM users";
+    if ($error === '') {
+        $sql = 'SELECT lang FROM users';
         $lang = select($sql);
         $_SESSION["admin"] = 1;
         $lang = $lang['lang'];
         $_SESSION["lang"] = $lang;
 
-        header("Location: accounts.php");
+        header('Location: accounts.php');
     }
 }
 

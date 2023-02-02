@@ -7,5 +7,5 @@ foreach ($ids as $id) {
     $sql = "UPDATE accounts SET useacc = 0 WHERE id = $id";
     $query = update($sql);
 }
-header("Location: /accounts.php");
+header('Location: /accounts.php');
 

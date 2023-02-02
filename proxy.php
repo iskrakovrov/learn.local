@@ -26,7 +26,7 @@ require_once($lang);
 <?php
 include_once 'inc/header.php';
 
-$sql = "SELECT * FROM proxy";
+$sql = 'SELECT * FROM proxy';
 $ser = selectAll($sql);
 
 

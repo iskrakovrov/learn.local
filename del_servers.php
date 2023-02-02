@@ -5,4 +5,4 @@ require_once('function/function.php');
 
 $id=$_GET['id'];
 
-header("Location: ".$_SERVER['HTTP_REFERER']);
+header('Location: ' .$_SERVER['HTTP_REFERER']);

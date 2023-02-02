@@ -9,4 +9,4 @@ $sql = "DELETE FROM value_lists WHERE list = $id";
 $query = delete($sql);
 $sql = "DELETE FROM lists WHERE id = $id";
 $query = delete($sql);
-header("Location: " . $_SERVER['HTTP_REFERER']);
+header('Location: ' . $_SERVER['HTTP_REFERER']);

@@ -24,7 +24,7 @@ require_once('function/function.php');
 <body>
 <?php
 include_once 'inc/header.php';
-$sql = "SELECT * FROM group_acc";
+$sql = 'SELECT * FROM group_acc';
 $gr=selectAll($sql);
 
 ?>

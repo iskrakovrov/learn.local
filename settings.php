@@ -5,10 +5,10 @@ require_once('function/function.php');
 
 $l = $_SESSION['lang'];
 if ($l === 0){
-    $sql = "SELECT lang FROM users";
+    $sql = 'SELECT lang FROM users';
     $res = select($sql);
     $lang = $res['lang'];
-    $_SESSION["lang"] = $lang;
+    $_SESSION['lang'] = $lang;
 }
 $lang = $_SESSION['lang'] . '.php';
 require_once($lang);
@@ -30,14 +30,14 @@ if ($_POST['lng'] !== 'Select' && (!empty($_POST['lng'])))
     $lng = $_POST['lng'];
     $sql = "UPDATE users set lang = '$lng' where id = 1";
     $qw = update($sql);
-    $sql = "SELECT lang FROM users";
+    $sql = 'SELECT lang FROM users';
     $lang = select($sql);
-    $_SESSION["admin"] = 1;
+    $_SESSION['admin'] = 1;
     $lang = $lang['lang'];
-    $_SESSION["lang"] = $lang;
-    header("Refresh: 0");
+    $_SESSION['lang'] = $lang;
+    header('Refresh: 0');
 }
-$sql = "SELECT * FROM users limit 1";
+$sql = 'SELECT * FROM users limit 1';
 $user = select($sql);
 ?>
 <!doctype html>

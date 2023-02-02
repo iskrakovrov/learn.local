@@ -7,7 +7,7 @@ $lang = $_SESSION['lang'] . '.php';
 require_once($lang);
 
 $id = $_SESSION['ids'];
-$today = date("Y-m-d-H-i-s");
+$today = date('Y-m-d-H-i-s');
 $fname = 'accounts-' . $today . '.txt';
 
 $fp = fopen('tmp/' . $fname, 'w');

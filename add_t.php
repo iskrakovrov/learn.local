@@ -13,7 +13,7 @@ if (!empty($_REQUEST['add_task'])){
     return true;
 }
 if (empty($_REQUEST['add_task'])){
-    header("Location: accounts.php");
+    header('Location: accounts.php');
 }
 
 
