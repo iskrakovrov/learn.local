@@ -3,8 +3,9 @@ include_once('inc/init.php');
 require_once('inc/db.php');
 require_once('function/function.php');
 
-$id = $_SESSION['id'];
-
+$id = $_SESSION['ids'];
+session_start();
+$_SESSION['ids'] = $ids;
 foreach ($id as $a) {
     $sql = "SELECT * FROM accounts WHERE id = $a";
     $qu = select($sql);

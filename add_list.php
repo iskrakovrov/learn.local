@@ -25,12 +25,8 @@ if (!empty($_REQUEST['catedit'])) {
         header("Location: $url");
         exit();
     }
-    //коммментарии
-    if ($catedit === 6) {
-        $url = 'edit_list_posts.php';
-        header("Location: $url");
-        exit();
-    }
+    //коммментарии = posts
+
 
 
     $url = 'e_list.php?cat=' . $catedit;
@@ -87,8 +83,8 @@ include_once 'inc/header.php'
                             <option value="2">Geo lists</option>
                             <option value="3">Name lists</option>
                             <option value="4">ID lists</option>
-                            <option value="5">Post lists</option>
-                            <option value="6">Comments lists</option>
+                            <option value="5">Post & comments lists</option>
+
                             <option value="7">Keywords lists</option>
                             <option value="8">Site lists</option>
                             <option value="10">Lists Groups</option>

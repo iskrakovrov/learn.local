@@ -104,7 +104,7 @@ require_once 'inc/header.php'
                     <?php } ?>
                     <option value="" disabled="disabled">----------</option>
 
-                    <option value="del">Удалить</option>
+                    <option value="del_acc.php">Удалить</option>
                 </select>
 
 
