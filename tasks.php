@@ -227,7 +227,7 @@ if ($add_task == 'post_to_group') {
     }
 }
 
-if ($add_task === 'erase_invite') {
+if ($add_task == 'erase_invite') {
     $st[] = array(
         'num_e' => $_REQUEST['num_e'],
 
@@ -500,6 +500,37 @@ if ($add_task == 'comm_public') {
     }
 }
 
+if ($add_task == 'accept_friend') {
+    $setup = $_POST['action'];
+    $st[] = array(
+
+        'cat' => $_REQUEST['cat'],
+        'filter' => $_REQUEST['filter'],
+        'black' => $_REQUEST['black'],
+        'white' => $_REQUEST['white'],
+        'one_s' => $_REQUEST['one_s'],
+        'pause' => $_REQUEST['pause'],
+        'f24' => $_REQUEST['f24'],
+
+
+
+    );
+    $data = array(
+
+        "data" => $st,
+    );
+
+    $json_data = json_encode($data);
+
+
+    foreach ($ids as $a) {
+        $add_task = $_POST['add_task'];
+        $time = Time();
+        $r = add_task($add_task, $json_data, $time, $a);
+
+
+    }
+}
 //   foreach ($ids as $a) {
 //       $add_task = $_POST['add_task'];
 //       $sql = "SELECT id FROM task WHERE task = '$add_task' AND account = $a";

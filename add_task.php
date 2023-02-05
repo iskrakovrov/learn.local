@@ -231,7 +231,7 @@ $_SESSION['ids'] = $ids;
 
                         <!-- прием в друзья -->
                         <div class="form-check">
-                            <input class="form-check-input" name="task[]" type="checkbox" value="accept_friend.php" id="accept_friend">
+                            <input class="form-check-input" name="task[]" type="checkbox" value="accept_friends.php" id="accept_friends">
                             <label class="form-check-label" for="accept_friend">
                                 <?php echo $txttask21?>
                             </label>

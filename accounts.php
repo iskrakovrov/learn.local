@@ -66,7 +66,12 @@ require_once 'inc/header.php'
                     <a class="btn btn-secondary" href="groups.php" role="button">Account groups</a>
 
                     <a class="btn btn-success" href="add_acc2.php" role="button">Add accounts</a>
-                </div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                    <a class="btn btn-outline-primary" href="all_free_acc.php" role="button" onClick="return confirm( 'SET FREE STATUS for ALL ACCOUNT???' )">All accounts have free status</a>
+                    <a class="btn btn-outline-primary" href="all_clear_task.php" role="button" onClick="return confirm( 'CLEAR ALL TASKs for ALL ACCOUNT???' )">Clear tasks for all accounts</a>
+
+                    </div>
             </div>
         </div>
         <br>
@@ -110,7 +115,7 @@ require_once 'inc/header.php'
 
 
                 <div class="input-group-append">
-                    <button class="btn btn-secondary" name="submit1" value="1" type="submit">&raquo;</button>
+                    <button class="btn btn-primary" name="submit1" value="1" type="submit">&raquo;</button>
                 </div>
                 <br>
 
