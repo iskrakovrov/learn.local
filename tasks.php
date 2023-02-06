@@ -500,7 +500,7 @@ if ($add_task == 'comm_public') {
     }
 }
 
-if ($add_task == 'accept_friend') {
+if ($add_task == 'accept_friends') {
     $setup = $_POST['action'];
     $st[] = array(
 
