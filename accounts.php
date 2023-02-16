@@ -21,6 +21,18 @@ $ss = selectAll($sql);
 
 
     <title>FB Combo</title>
+    <style>div.dataTables_length {
+
+            padding-left: 2em;
+
+        }
+
+        div.dataTables_length,
+        div.dataTables_filter {
+
+            padding-top: 0.55em;
+
+        }</style>
 
 </head>
 
@@ -68,10 +80,13 @@ require_once 'inc/header.php'
                     <a class="btn btn-success" href="add_acc2.php" role="button">Add accounts</a>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                    <a class="btn btn-outline-primary" href="all_free_acc.php" role="button" onClick="return confirm( 'SET FREE STATUS for ALL ACCOUNT???' )">All accounts have free status</a>
-                    <a class="btn btn-outline-primary" href="all_clear_task.php" role="button" onClick="return confirm( 'CLEAR ALL TASKs for ALL ACCOUNT???' )">Clear tasks for all accounts</a>
+                    <a class="btn btn-outline-primary" href="all_free_acc.php" role="button"
+                       onClick="return confirm( 'SET FREE STATUS for ALL ACCOUNT???' )">All accounts have free
+                        status</a>
+                    <a class="btn btn-outline-primary" href="all_clear_task.php" role="button"
+                       onClick="return confirm( 'CLEAR ALL TASKs for ALL ACCOUNT???' )">Clear tasks for all accounts</a>
 
-                    </div>
+                </div>
             </div>
         </div>
         <br>
@@ -97,21 +112,20 @@ require_once 'inc/header.php'
 
 
                     <option value="" disabled="disabled">----------</option>
-                    <?php foreach ($gg as $g){ ?>
-                    <option value="go_group.php?gr=<?php echo $g['id'] ?>"><?php echo $txtaccounts40 .$g['name_group'] ?></option>
+                    <?php foreach ($gg as $g) { ?>
+                        <option value="go_group.php?gr=<?php echo $g['id'] ?>"><?php echo $txtaccounts40 . $g['name_group'] ?></option>
 
                     <?php } ?>
 
                     <option value="" disabled="disabled">----------</option>
-                    <?php foreach ($ss as $s){ ?>
-                        <option value="go_server.php?se=<?php echo $s['id'] ?>"><?php echo $txtaccounts41 .$s['name_server'] ?></option>
+                    <?php foreach ($ss as $s) { ?>
+                        <option value="go_server.php?se=<?php echo $s['id'] ?>"><?php echo $txtaccounts41 . $s['name_server'] ?></option>
 
                     <?php } ?>
                     <option value="" disabled="disabled">----------</option>
 
                     <option value="del_acc.php">Удалить</option>
                 </select>
-
 
 
                 <div class="input-group-append">
@@ -251,7 +265,6 @@ require_once 'inc/header.php'
         bProcessing: false,
 
 
-
         searching: true,
 
         serverSide: false,
@@ -260,6 +273,7 @@ require_once 'inc/header.php'
         iLeftWidth: 120,
         sLeftWidth: 'relative',
         "lengthMenu": [[30, 100, 250, 500, 1000, -1], [30, 100, 250, 500, 1000, "All"]],
+        dom: '<"top"lpif<"clear">>rt<"bottom"lpif<"clear">>',
 
 
         "ajax": "acc.php",

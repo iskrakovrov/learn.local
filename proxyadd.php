@@ -4,7 +4,7 @@ require_once('function/function.php');
 $proxy = $_GET['proxy'];
 $mode = $_GET['mode'];
 $acc = $_GET['acc'];
-if ($mode=='add') {
+if ($mode==='add') {
 
     $sql = "SELECT * FROM proxy WHERE id = $proxy";
 

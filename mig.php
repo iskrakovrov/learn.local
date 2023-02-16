@@ -99,7 +99,9 @@ if(empty($qw)) {
 
     $sql = "CREATE TABLE `stat_comm` ( `id` INT NOT NULL AUTO_INCREMENT , `id_acc` INT NOT NULL , `id_post` INT NOT NULL , `target` INT NOT NULL , `created` INT NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;";
     $qw = create($sql);
-}$sql = "SHOW TABLES LIKE 'stat_sugg'";
+}
+
+$sql = "SHOW TABLES LIKE 'stat_sugg'";
 $qw = create($sql);
 if(empty($qw)) {
 
@@ -108,5 +110,12 @@ if(empty($qw)) {
     $qw = create($sql);
 }
 
+$sql = "SHOW TABLES LIKE 'workzp'";
+$qw = create($sql);
+if(empty($qw)) {
 
+
+    $sql = "CREATE TABLE `workzp` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `instance` INT(11) NOT NULL , `id_acc` INT(11) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;";
+    $qw = create($sql);
+}
 

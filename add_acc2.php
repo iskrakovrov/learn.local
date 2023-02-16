@@ -63,28 +63,28 @@ $gr = selectAll($sql);
 ?>
 <main class="container-fluid ">
     <div class="row text-center">
-        <h2><?php echo $txtaddacc?></h2>
+        <h2><?php echo $txtaddacc ?></h2>
     </div>
     <div class="row justify-content-center">
         <div class="col-6 text-center">
 
 
             <div class="alert alert-info" role="alert">
-                <?php echo  $txtaddacc1?>
+                <?php echo $txtaddacc1 ?>
                 <a class="btn btn-secondary" href="gr.php" role="button" data-placement="right"
-                   title="<?php echo  $txtaddacc1?>">Add account group</a>
+                   title="<?php echo $txtaddacc1 ?>">Add account group</a>
                 <br>
-                <?php echo  $txtaddacc2?>
+                <?php echo $txtaddacc2 ?>
                 <br>
                 <a class="btn btn-secondary" href="servers.php" role="button" data-toggle="tooltip"
                    data-placement="right"
-                   title="<?php echo  $txtaddacc2?>">Add Server</a>
+                   title="<?php echo $txtaddacc2 ?>">Add Server</a>
                 <br>
             </div>
             <form method="post">
                 <div class="form-group">
                     <br>
-                    <strong><label><?php echo  $txtaddacc3?></label></strong>
+                    <strong><label><?php echo $txtaddacc3 ?></label></strong>
                     <select class="form-select" name="server">
                         <option disabled selected value>Open this select menu</option>
                         <?php
@@ -96,7 +96,7 @@ $gr = selectAll($sql);
                         ?>
                     </select>
 
-                    <strong><label><?php echo  $txtaddacc4?></label></strong>
+                    <strong><label><?php echo $txtaddacc4 ?></label></strong>
                     <select class="form-select" name="group">
                         <option disabled selected value>Open this select menu</option>
                         <?php
@@ -110,12 +110,14 @@ $gr = selectAll($sql);
                     </select>
                     <br>
 
-                    <strong><label><?php echo $txtacc?></label></strong>
-                    <textarea class="form-control rounded-0" id="accs" name="accs" rows="10" placeholder="<?php echo $txtnewline ?>"></textarea>
+                    <strong><label><?php echo $txtacc ?></label></strong>
+                    <textarea class="form-control rounded-0" id="accs" name="accs" rows="10"
+                              placeholder="<?php echo $txtnewline ?>"></textarea>
                     <br>
 
-                    <strong><label><?php echo $txtnoreq?></label></strong>
-                    <input type="text" class="form-control" id="comms1" name="comms1" placeholder="<?php echo $txtcomm ?>">
+                    <strong><label><?php echo $txtnoreq ?></label></strong>
+                    <input type="text" class="form-control" id="comms1" name="comms1"
+                           placeholder="<?php echo $txtcomm ?>">
 
 
                     <br>
