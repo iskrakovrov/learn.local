@@ -118,4 +118,11 @@ if(empty($qw)) {
     $sql = "CREATE TABLE `workzp` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `instance` INT(11) NOT NULL , `id_acc` INT(11) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;";
     $qw = create($sql);
 }
+$sql = "SELECT * FROM status WHERE id = 19";
+$qw = select($sql);
+if(empty($qw)) {
+    $sql = "INSERT INTO `status` (`id`, `status`) VALUES ('19', 'NEW')";
+    $qw = insert($sql);
+}
+
 

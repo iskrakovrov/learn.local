@@ -97,7 +97,8 @@ $ser = selectAll($sql);
                 <button type="submit" class="btn btn-primary">Submit</button>
                 <br>
                 <br>
-                <button type="submit" class="btn btn-primary">Delete values</button>
+
+                <a class="btn btn-primary" href="del_all_val.php?id=<?php echo $cat ?>" role="button">DELETE ALL VALUES</a>
                 <br>
                 <br>
                 <a class="btn btn-info" href="export_list.php?id=<?php echo $cat ?>" role="button">

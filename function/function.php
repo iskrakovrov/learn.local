@@ -267,7 +267,7 @@ function parse_acc2($acc, $comm, $serv, $group, $cock)
 
     $time = Time();
 
-    $sql = "INSERT INTO accounts (id, login_fb, pass_fb, id_fb, name, bd, mb, yb, gender, avatar, created, comment, group_acc, server, id_proxy, status, works, useacc, friends, last_start, id_mail, id_phone, coockie, tocken, 2fa, ua, mail, mail_pass, imap_mail, phone, adv) VALUES (NULL,'$login', '$pass', NULL, NULL, NULL, NULL, NULL, NULL, NULL, $time, '$comm', $group, $serv,NULL, 1, 0, 0, NULL, NULL, NULL, NULL, '$cock', NULL, '$fa', NULL, '$mail', '$passmail', '$imappass', '$phone', 0)";
+    $sql = "INSERT INTO accounts (id, login_fb, pass_fb, id_fb, name, bd, mb, yb, gender, avatar, created, comment, group_acc, server, id_proxy, status, works, useacc, friends, last_start, id_mail, id_phone, coockie, tocken, 2fa, ua, mail, mail_pass, imap_mail, phone, adv) VALUES (NULL,'$login', '$pass', NULL, NULL, NULL, NULL, NULL, NULL, NULL, $time, '$comm', $group, $serv,NULL, 19, 0, 0, NULL, NULL, NULL, NULL, '$cock', NULL, '$fa', NULL, '$mail', '$passmail', '$imappass', '$phone', 0)";
 
     return [$sql];
 

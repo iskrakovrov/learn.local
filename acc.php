@@ -114,7 +114,7 @@ foreach ($query as $a) {
         "group" => $gr,
         "status" => $st,
         "task" => $tk,
-        "use" => $use,
+        'use' => $use,
         "create" => $data,
         "friends" => $a["friends"],
         "tocken" => $tocken,

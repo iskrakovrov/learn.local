@@ -9,7 +9,8 @@ $time = Time();
 $time2 = $time - 170000;
 $sql = "DELETE FROM err WHERE created < $time2";
 $q = delete($sql);
-$sql = 'SELECT DISTINCT * FROM err LIMIT 1000';
+$sql = 'SELECT DISTINCT value FROM err;';
+//$sql = 'SELECT DISTINCT * FROM err LIMIT 1000';
 $q = selectall($sql);
 ?>
 <!doctype html>
