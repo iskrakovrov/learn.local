@@ -235,6 +235,9 @@ function parse_acc2($acc, $comm, $serv, $group, $cock)
     $fa = $accs[5];
     $phone = $accs [6];
     $cock = $accs [7];
+    $bd = $accs [8];
+    $mb = $accs [9];
+    $yb = $accs [10];
     $sql = "SELECT * FROM accounts WHERE login_fb = '$login'";
     $querty = select($sql);
     if (!empty($querty)) {
@@ -264,10 +267,19 @@ function parse_acc2($acc, $comm, $serv, $group, $cock)
     if (empty($fa)) {
         $fa = "NULL";
     }
+    if (empty($bd)) {
+        $bd = "NULL";
+    }
+    if (empty($mb)) {
+        $mb = "NULL";
+    }
+    if (empty($yb)) {
+        $yb = "NULL";
+    }
 
     $time = Time();
 
-    $sql = "INSERT INTO accounts (id, login_fb, pass_fb, id_fb, name, bd, mb, yb, gender, avatar, created, comment, group_acc, server, id_proxy, status, works, useacc, friends, last_start, id_mail, id_phone, coockie, tocken, 2fa, ua, mail, mail_pass, imap_mail, phone, adv) VALUES (NULL,'$login', '$pass', NULL, NULL, NULL, NULL, NULL, NULL, NULL, $time, '$comm', $group, $serv,NULL, 19, 0, 0, NULL, NULL, NULL, NULL, '$cock', NULL, '$fa', NULL, '$mail', '$passmail', '$imappass', '$phone', 0)";
+    $sql = "INSERT INTO accounts (id, login_fb, pass_fb, id_fb, name, bd, mb, yb, gender, avatar, created, comment, group_acc, server, id_proxy, status, works, useacc, friends, last_start, id_mail, id_phone, coockie, tocken, 2fa, ua, mail, mail_pass, imap_mail, phone, adv) VALUES (NULL,'$login', '$pass', NULL, NULL, '$bd', '$mb', '$yb', NULL, NULL, $time, '$comm', $group, $serv,NULL, 19, 0, 0, NULL, NULL, NULL, NULL, '$cock', NULL, '$fa', NULL, '$mail', '$passmail', '$imappass', '$phone', 0)";
 
     return [$sql];
 

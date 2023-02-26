@@ -235,11 +235,6 @@ require_once 'inc/header.php'
 <script src="js/jquery.js"></script>
 <script src="js/dtjquery.js"></script>
 <script src="js/dataTables.bootstrap.js"></script>
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
 <script type="text/javascript" charset="utf-8" src="js/ColumnFilterWidgets.js"></script>
 
 
@@ -272,7 +267,7 @@ require_once 'inc/header.php'
         scrollX: false,
         iLeftWidth: 120,
         sLeftWidth: 'relative',
-        "lengthMenu": [[30, 100, 250, 500, 1000, -1], [30, 100, 250, 500, 1000, "All"]],
+        "lengthMenu": [[30, 100, 250, 500, 1000], [30, 100, 250, 500, 1000]],
         dom: '<"top"lpif<"clear">>rt<"bottom"lpif<"clear">>',
 
 

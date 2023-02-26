@@ -12,7 +12,7 @@ $fname = 'accounts-' . $today . '.txt';
 
 $fp = fopen('tmp/' . $fname, 'w');
 foreach ($id as $b) {
-    $sql = "SELECT login_fb,pass_fb,mail,mail_pass,phone,2fa,tocken,coockie,bd,mb,yb FROM accounts WHERE id = $b";
+    $sql = "SELECT login_fb,pass_fb,mail,mail_pass,imap_mail,2fa,phone,coockie,bd,mb,yb,tocken FROM accounts WHERE id = $b";
     $query = selectAll($sql);
 
 

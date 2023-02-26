@@ -88,12 +88,18 @@ include_once 'inc/header.php';
                                                                    value="<?php echo $a['id'] ?>">
                             </td>
                             <td><?php echo $a['value'] ?></td>
-                            <?php if ($a['type'] > 0) {
+                            <?php if ($a['type']>0) {
                               $q1 = 'login Ok';
                             }
-                            else{
+                            else {
                                 $q1 = 'login No Ok';
-                            }?>
+                            }
+                            if ($a['type']==3) {
+                                $q1 = 'Time Out';
+                            }
+
+                            ?>
+
                             <td><?php echo $q1 ?></td>
                             <?php
                             $value = $a['value'];

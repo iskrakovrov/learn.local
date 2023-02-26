@@ -13,7 +13,17 @@ $cp = $cpr['COUNT(*)'];
 $er = $err['COUNT(*)'];
 
 ?>
-
+<style>
+    #navbarSupportedContent > ul > li > a > span {
+        background-color: #0d6efd;
+    }
+    #navbarSupportedContent > ul > li:nth-child(1) > ul > li:nth-child(6) > a > span {
+        background-color: #0d6efd;
+    }
+    #navbarSupportedContent > ul > li:nth-child(10) > a > strong {
+        color: #27ff00;
+    }
+</style>
 <div class="outer">
     <header class="container-fluid bg-secondary" >
 
@@ -73,7 +83,7 @@ $er = $err['COUNT(*)'];
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="edit_list_name.php">Name Lists</a></li>
+                            <li><a class="dropdown-item" href="e_list.php?cat=3">Name Lists</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>

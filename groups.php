@@ -124,7 +124,7 @@ $gr=selectAll($sql);
 
     dr_table = $('#example').DataTable({
 
-        "lengthMenu": [[10, 30, 100, -1], [10, 30, 100, "All"]],
+        "lengthMenu": [[30, 100, -1], [30, 100, "All"]],
         stateSave: true,
 
 
