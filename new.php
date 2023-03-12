@@ -6,9 +6,12 @@ $filename = 'mig.php';
 
 if (file_exists($filename)) {
     require_once ($filename);
-  //  unlink($filename);
-    header('Location: index.php');
+    session_start();
+    $_SESSION['alert'] = 1;
+    header('Location: accounts.php');
     exit();
 }
-header('Location: index.php');
+session_start();
+$_SESSION['alert'] = 1;
+header('Location: accounts.php');
 exit();

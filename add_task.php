@@ -285,6 +285,12 @@ $_SESSION['ids'] = $ids;
                                 <?php echo $txttask40?>
                             </label>
                         </div>
+                        <div class="form-check">
+                            <input class="form-check-input" name="task[]" type="checkbox" value="parse_active.php" id="parse_active" >
+                            <label class="form-check-label" for="parse_active">
+                                Parse active users
+                            </label>
+                        </div>
 
                     </div>
                 </div>

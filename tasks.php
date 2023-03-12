@@ -531,6 +531,34 @@ if ($add_task == 'accept_friends') {
 
     }
 }
+
+if ($add_task == 'parse_active') {
+    $setup = $_POST['action'];
+    $st[] = array(
+
+        'urls' => $_REQUEST['cat'],
+        'save_l' => $_REQUEST['cat1'],
+
+
+
+    );
+    $data = array(
+
+        'data' => $st,
+    );
+
+    $json_data = json_encode($data);
+
+
+    foreach ($ids as $a) {
+        $add_task = $_POST['add_task'];
+        $time = Time();
+        $r = add_task($add_task, $json_data, $time, $a);
+
+
+    }
+}
+
 //   foreach ($ids as $a) {
 //       $add_task = $_POST['add_task'];
 //       $sql = "SELECT id FROM task WHERE task = '$add_task' AND account = $a";

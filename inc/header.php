@@ -38,11 +38,10 @@ $er = $err['COUNT(*)'];
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item dropdown">
-                        <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                           data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link active dropdown-toggle" href="#" id="settings" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Settings
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <ul class="dropdown-menu" aria-labelledby="settings">
                             <li><a class="dropdown-item" href="servers.php">Servers</a></li>
                             <li><a class="dropdown-item" href="groups.php">Accounts group</a></li>
                             <li><a class="dropdown-item" href="options.php">Options</a></li>
@@ -65,7 +64,7 @@ $er = $err['COUNT(*)'];
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="proxy.php">Proxy <span class="badge badge-primary"><?php echo $cp ?></span></a>
                     </li>
-                    <li class="nav-item dropdown">
+                  <li class="nav-item dropdown">
                         <a class="nav-link active active dropdown-toggle" href="#" id="navbarDropdown" role="button"
                            data-bs-toggle="dropdown" aria-expanded="false">
                             Lists
@@ -133,6 +132,9 @@ $er = $err['COUNT(*)'];
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="all_stat.php">Statistic</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="parse_lists.php">Parse Lists</a>
                     </li>
                     
 

@@ -6,7 +6,22 @@ $lang = $_SESSION['lang'] . '.php';
 require_once($lang);
 $cat = $_REQUEST['id'];
 
+if ($_REQUEST['dp']=='one'){
+    $a = $_REQUEST['a'];
+    foreach ($a as $ids){
+        $sql = "DELETE FROM posts WHERE id = $ids";
+        $del = delete($sql);
+    }
+    header("Refresh: 0");
+}
+if ($_REQUEST['dp']=='all'){
 
+
+        $sql = "DELETE FROM posts WHERE cat = {$cat}";
+        $del = delete($sql);
+
+    header("Refresh: 0");
+}
 if (!empty($_REQUEST['key'])) {
     $key = addslashes($_REQUEST['key']);
     $folder = addslashes($_REQUEST['folder']);
@@ -19,7 +34,7 @@ if (!empty($_REQUEST['key'])) {
     $i = 0;
     foreach ($array as $key) {
         $i++;
-        $res = parse_post($key,$folder);
+        $res = parse_post($key, $folder);
         $sql = $res[0];
 
         if (!empty($sql)) {
@@ -105,88 +120,102 @@ $ser = selectAll($sql);
                 <br>
                 <button type="submit" class="btn btn-primary">Submit</button>
                 <br>
-                <br>
-                <button type="submit" class="btn btn-primary">Delete posts</button>
+
             </form>
         </div>
     </div>
     <br>
+    <form method="post">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
 
-    <div class="container-fluid">
-        <div class="row justify-content-center">
-            <div class="col text-center">
+                <div class="text-center">
+                    <label for="example"><strong><?php echo $cc ?><?php echo $txtedlist2 ?> </strong> </label>
+                    <br>
+                    <br>
 
-                <label for="example"><strong><?php echo $cc ?><?php echo $txtedlist2 ?> </strong> </label>
-                <table id="example" class="cell-border" style="width:100%">
-                    <thead>
-                    <tr>
-                        <th class="check" style="text-align: center;">
-                            <input type="checkbox" id="all" value=""/>
-                        </th>
-                        <th>Text</th>
-                        <th>Img</th>
-                        <th>Action</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <?php
-                    $i = 0;
-                    foreach ($ser as $a) {
-                        $i++; ?>
+
+                    <div class="col text-center">
+                        <div  class="btn-group" data-toggle="buttons">
+                            <button type="submit" class="btn btn-secondary" style="margin-right: 10px;"
+                                    onClick="return confirm( 'WARNING!!! DELETE POSTS?' )" id="dp" name = "dp" value="one">Delete posts
+                            </button>
+                            <button type="submit" class="btn btn-danger"
+                                    onClick="return confirm( 'WARNING!!! DELETE ALL POSTS?' )" id="dp" name="dp" value="all">Delete all posts
+                            </button>
+
+                        </div>
+                    </div>
+                    <table id="example" class="cell-border" style="width:100%">
+                        <thead>
                         <tr>
-                            <td style="text-align: center;"><input type="checkbox" name="a[]"
-                                                                   value="<?php echo $a['id'] ?>">
-                            </td>
-                            <td><?php echo $a['txt'] ?></td>
-                            <?php
-                            if ($a['tipe'] == '1') {
-                                if ($a['img'] == 'NULL'){
-                                    $img = "images/none.png";
-                                } else {
-                                    $img = "images/folder.png";
-                                }
-
-                            }else {
-                                if ($a['img'] == 'NULL'){
-                                    $img = "images/none.png";
-                                } else {
-                                    $img = $a['img'];
-                                }
-                                //                   $img = 'uploads/' . $a['img'];
-                            }
-
-
-                            ?>
-
-                            <td><img src="<?php echo $img ?>"  width="150" height="150"></td>
-
-                            <td>
-                                <div class="col">
-
-
-                                    <a href="del_post.php?id=<?php echo $a['id'] ?>" class="btn btn-danger"
-                                       title="Delete value"
-                                       onClick="return confirm( 'WARNING!!! DELETE POST?' )">Delete
-                                        POST <i class="bi bi-x-circle-fill"></i></a>
-                                </div>
-                            </td>
+                            <th class="check" style="text-align: center;">
+                                <input type="checkbox" id="all" value=""/>
+                            </th>
+                            <th>Text</th>
+                            <th>Img</th>
+                            <th>Action</th>
                         </tr>
-                    <?php } ?>
+                        </thead>
+                        <tbody>
+                        <?php
+                        $i = 0;
+                        foreach ($ser as $a) {
+                            $i++; ?>
+                            <tr>
+                                <td style="text-align: center;"><input type="checkbox" name="a[]"
+                                                                       value="<?php echo $a['id'] ?>">
+                                </td>
+                                <td><?php echo $a['txt'] ?></td>
+                                <?php
+                                if ($a['tipe'] == '1') {
+                                    if ($a['img'] == 'NULL') {
+                                        $img = 'images/none.png';
+                                    } else {
+                                        $img = 'images/folder.png';
+                                    }
+
+                                } else {
+                                    if ($a['img'] == 'NULL') {
+                                        $img = 'images/none.png';
+                                    } else {
+                                        $img = $a['img'];
+                                    }
+                                    //                   $img = 'uploads/' . $a['img'];
+                                }
 
 
-                    </tbody>
-                    <tfoot>
-                    <tr>
-                        <th></th>
-                        <th>Text</th>
-                        <th>Img</th>
-                        <th>Action</th>
-                    </tr>
-                    </tfoot>
-                </table>
+                                ?>
+
+                                <td><img src="<?php echo $img ?>" width="150" height="150"></td>
+
+                                <td>
+                                    <div class="col">
+
+
+                                        <a href="del_post.php?id=<?php echo $a['id'] ?>" class="btn btn-danger"
+                                           title="Delete value"
+                                           onClick="return confirm( 'WARNING!!! DELETE POST?' )">Delete
+                                            POST <i class="bi bi-x-circle-fill"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                        <?php } ?>
+
+
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <th></th>
+                            <th>Text</th>
+                            <th>Img</th>
+                            <th>Action</th>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
             </div>
-        </div>
-        </form>
+    </form>
     </div>
 
     <br>

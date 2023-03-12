@@ -7,10 +7,10 @@ require_once($lang);
 if (!empty($_REQUEST['name_server'])){
     $nserv = $_REQUEST['name_server'];
     $com = $_REQUEST['com_server'];
-    $sql = "SELECT * FROM group_acc WHERE name_group = '$nserv'";
+    $sql = "SELECT * FROM group_acc WHERE name_group = '{$nserv}'";
     $ch = selectAll($sql);
     if (empty($ch)){
-        $sql = "INSERT INTO group_acc (name_group, comment) VALUES ('$nserv', '$com')";
+        $sql = "INSERT INTO group_acc (name_group, comment) VALUES ('{$nserv}', '{$com}')";
         $ch= insert($sql);
         header('Location: groups.php');
     }

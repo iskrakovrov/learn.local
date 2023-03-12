@@ -21,22 +21,21 @@ foreach ($query as $a) {
     } else {
         $ava = 'NO';
     }
-    if (is_null($a['id_proxy'])) {
-        $pr = "NO";
+    if ($a['id_proxy'] === null) {
+        $pr = 'NO';
     } else {
-        if($a['id_proxy'] == 0){
+        if ($a['id_proxy'] == 0) {
             $pr = 'FREE';
-        }
-        else {
-            $pr = "OK";
+        } else {
+            $pr = 'OK';
         }
     }
     if ($a['useacc'] == '0') {
-        $use = "FREE";
+        $use = 'FREE';
     } else {
-        $use = "WORK"; //ooo
+        $use = 'WORK'; //ooo
     }
-    $find = "EAAB";
+    $find = 'EAAB';
     $tock = $a['tocken'];
     $pos1 = stripos($tock, $find);
     if ($pos1 !== false) {
@@ -47,11 +46,11 @@ foreach ($query as $a) {
     $t = $a['id'];
     $sql = "SELECT count(task) FROM task WHERE account = $t";
     $tk = selectAll($sql);
-  $tk = $tk[0];
-   $tk = $tk['count(task)']-1;
-   if($tk<0){
-       $tk=0;
-   }
+    $tk = $tk[0];
+    $tk = $tk['count(task)'] - 1;
+    if ($tk < 0) {
+        $tk = 0;
+    }
     $id_gr = $a['group_acc'];
 
 
@@ -62,13 +61,13 @@ foreach ($query as $a) {
     }
 
 
-    $data = date('d  M Y', $a["created"]);
+    $data = date('d  M Y', $a['created']);
     $id_s = $a['server'];
 
     foreach ($ser1 as $z) {
         if ($z['id'] == $id_s) {
             $ser = $z['name_server'];
-        }else {
+        } else {
             $ser = 'Not server';
         }
     }
@@ -81,6 +80,28 @@ foreach ($query as $a) {
             $st = $z['status'];
         }
     }
+    $id1 = $a['id'];
+    $sql = "SELECT friends FROM friends WHERE id_acc = {$id1}  ORDER BY created DESC LIMIT 1, 1 ";
+
+    $qw7 = select($sql);
+
+
+    if ($qw7 === false) {
+        $friends = '<div style="color: #000000FF"><strong>';
+        $friends .= $a['friends'];
+        $friends .= '</strong></div>';
+    } else {
+        $colorFriends = $a['friends'] - $qw7['friends'];
+        if ($colorFriends<0) {
+            $friends = '<div style="color: #b70202"><strong>';
+        }
+        else{
+            $friends = '<div style="color: #02b711"><strong>';
+        }
+        $friends .= $a['friends'];
+        $friends .= '</strong></div>';
+    }
+
 
     $id = '<div style="text-align: center;"><input type="checkbox" name="a[]" value="';
     $id .= $a['id'];
@@ -95,38 +116,39 @@ foreach ($query as $a) {
     $action .= '" class="btn btn-danger" title="Delete Account" onClick="return confirm( ';
     $action .= "'WARNING!!! DELETE ACCOUNT?' )";
     $action .= '"><i class="bi bi-x-circle-fill"></i></a></div>';
-    $ls = date('d  M Y G:i', $a["last_start"]);
+    $ls = date('d  M Y G:i', $a['last_start']);
     if ($a['adv'] == 1) {
-        $adv = "YES";
+        $adv = 'YES';
     } else {
-        $adv = "NO";
+        $adv = 'NO';
     }
+
     $mysql_data[] = array(
 
-        "ids" => $id,
-        "login" => $a["login_fb"],
-        "mail" => $a["mail"],
-        "phone" => $a["phone"],
-        "gender" => $a["gender"],
-        "avatar" => $ava,
-        "proxy" => $pr,
-        "server" => $ser,
-        "group" => $gr,
-        "status" => $st,
-        "task" => $tk,
+        'ids' => $id,
+        'login' => $a['login_fb'],
+        'mail' => $a['mail'],
+        'phone' => $a['phone'],
+        'gender' => $a['gender'],
+        'avatar' => $ava,
+        'proxy' => $pr,
+        'server' => $ser,
+        'group' => $gr,
+        'status' => $st,
+        'task' => $tk,
         'use' => $use,
-        "create" => $data,
-        "friends" => $a["friends"],
-        "tocken" => $tocken,
-        "adv" => $adv,
-        "last_start" => $ls,
-        "action" => $action,
+        'create' => $data,
+        'friends' => $friends,
+        'tocken' => $tocken,
+        'adv' => $adv,
+        'last_start' => $ls,
+        'action' => $action,
 
     );
 }
 $data = array(
 
-    "data" => $mysql_data,
+    'data' => $mysql_data,
 );
 
 // Convert PHP array to JSON array

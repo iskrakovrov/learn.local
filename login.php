@@ -2,7 +2,8 @@
 include_once 'inc/init.php';
 require_once('inc/db.php');
 require_once('function/function.php');
-$error = "";
+require_once ('inc/alerts.php');
+$error = '';
 
 
 if (!empty($_REQUEST["submit"])) {
@@ -11,7 +12,10 @@ if (!empty($_REQUEST["submit"])) {
     $sql = "SELECT * FROM users WHERE login = '$login' AND pass = '$pswd'";
     $x = select($sql);
     if (empty($x)) {
-        $error = "Неправильный логин или пароль";
+        session_start();
+        $_SESSION['alert'] = 3;
+        header('Location: login.php');
+        exit();
 
     }
     if ($error === '') {
@@ -112,5 +116,8 @@ if (!empty($_REQUEST["submit"])) {
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
 -->
+<script>
+    $('#alert').delay(5000).fadeOut('slow');
+</script>
 </body>
 </html>

@@ -14,7 +14,7 @@ if (!empty($nr) && !empty($serv) && !empty($group) && isset($_POST['accs'])) {
     $array = explode("\r\n", $_POST['accs']);
 
     for ($i = 0, $iMax = count($array); $i <= $iMax; $i++) {
-        $c = (trim($array[$p]) . "<br/>");
+        $c = (trim($array[$p]) . '<br/>');
     }
     $c = preg_replace('/<br[^>]*>/', '', $c);
     $i = 0;
@@ -30,7 +30,10 @@ if (!empty($nr) && !empty($serv) && !empty($group) && isset($_POST['accs'])) {
 
 
     }
-
+    session_start();
+    $_SESSION['alert'] = 2;
+    header('Location: accounts.php');
+    exit();
 
 }
 

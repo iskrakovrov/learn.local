@@ -26,8 +26,6 @@ require_once 'inc/header.php'
 
 
 
-
-
 <main class="container-fluid ">
     <div class="row text-center">
         <h2>FB COMBO v<?php echo $vers ?></h2>

@@ -72,6 +72,7 @@ require_once($lang);
                                 <input type="checkbox" id="all" value=""/>
                             </th>
                             <th>Name</th>
+                            <th>Count</th>
 
                             <th>Action</th>
                         </tr>
@@ -86,6 +87,13 @@ require_once($lang);
                                                                        value="<?php echo $a['id'] ?>">
                                 </td>
                                 <td><?php echo $a['name'] ?></td>
+                                <td><?php
+                                $cat1 = $a['id'];
+                                    $sql = "SELECT COUNT(*) FROM value_lists WHERE list = $cat1";
+                                    $ww = select($sql);
+
+
+                                    echo $ww['COUNT(*)'] ?></td>
 
 
                                 <td>
@@ -107,8 +115,8 @@ require_once($lang);
                         <tfoot>
                         <tr>
                             <th></th>
-                            <th>Value</th>
-
+                            <th>Name</th>
+                            <th>Count</th>
                             <th>Action</th>
                         </tr>
                         </tfoot>
