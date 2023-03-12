@@ -60,7 +60,7 @@ include_once 'inc/header.php'
             <form method="post">
                 <div class="form-group">
                     <label for="name_server"><?php echo $txtaddgr ?></label>
-                    <input type="text" class="form-control"  name = "name_server"  id="name_server"  maxlength = 5  placeholder="Enter name group">
+                    <input type="text" class="form-control"  name = "name_server"  id="name_server"  maxlength = 10  placeholder="Enter name group">
                 </div>
                 <div class="form-group">
                     <label for="com_server"><?php echo $txtaddgr1 ?></label>

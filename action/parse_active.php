@@ -1,7 +1,7 @@
 <?php
-$sql = "SELECT * FROM lists WHERE cat = 11 OR cat = 9";
+$sql = "SELECT * FROM lists WHERE cat = 11";
 $qw = selectAll($sql);
-$sql = "SELECT * FROM lists WHERE cat = 4 OR cat = 9";
+$sql = "SELECT * FROM lists WHERE cat = 4";
 $qw1 = selectAll($sql);
 
 ?>
@@ -34,7 +34,7 @@ $qw1 = selectAll($sql);
                     <select name="cat" id="cat" class="form-control">
                         <?php
                         $i = 0;
-                        foreach ($qw1 as $a) {
+                        foreach ($qw as $a) {
                             $i++; ?>
                             <option value="<?php echo $a['id'] ?>"><?php echo $a['name']; ?></option>
                         <?php } ?>
@@ -45,7 +45,7 @@ $qw1 = selectAll($sql);
                     <select name="cat1" id="cat1" class="form-control">
                         <?php
                         $i = 0;
-                        foreach ($qw as $b) {
+                        foreach ($qw1 as $b) {
                             $i++; ?>
                             <option value="<?php echo $b['id'] ?>"><?php echo $b['name']; ?></option>
                         <?php } ?>
