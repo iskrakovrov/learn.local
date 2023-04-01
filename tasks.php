@@ -9,7 +9,7 @@ require_once($lang);
 
 $ids = $_SESSION['ids'];
 $add_task = $_POST['add_task'];
-if ($add_task == "login") {
+if ($add_task == 'login') {
     $setup = $_POST['action'];
 
     $st[] = array(
@@ -179,6 +179,8 @@ if ($add_task == 'filling_accounts') {
         'currc' => $_REQUEST['currc'],
         'edu' => $_REQUEST['edu'],
         'work' => $_REQUEST['work'],
+        'fname' => $_REQUEST['fname'],
+        'lname' => $_REQUEST['lname'],
 
     );
     $data = array(

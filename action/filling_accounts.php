@@ -5,7 +5,10 @@ $sql = "SELECT * FROM lists WHERE  cat = 9 LIMIT 500";
 $edu = selectAll($sql);
 $sql = "SELECT * FROM lists WHERE  cat = 9 LIMIT 500";
 $work = selectAll($sql);
-
+$sql = "SELECT * FROM lists WHERE  cat = 3 LIMIT 500";
+$fname = selectAll($sql);
+$sql = "SELECT * FROM lists WHERE  cat = 3 LIMIT 500";
+$lname = selectAll($sql);
 ?>
 <main class="container-fluid ">
     <div class="row text-center">
@@ -65,6 +68,28 @@ $work = selectAll($sql);
                         foreach ($work as $c) {
                             $i++; ?>
                             <option value="<?php echo $c['id'] ?>"><?php echo $c['name']; ?></option>
+                        <?php } ?>
+                    </select>
+                    <label for="fname" class="control-label">First name</label>
+                    <!-- Имя -->
+                    <select name="fname" id="fname" class="form-control">
+                        <option value="no"><?php echo $txtfill5 ?></option>
+                        <?php
+                        $i = 0;
+                        foreach ($fname as $e) {
+                            $i++; ?>
+                            <option value="<?php echo $e['id'] ?>"><?php echo $e['name']; ?></option>
+                        <?php } ?>
+                    </select>
+                    <label for="lname" class="control-label">Last name</label>
+                    <!-- Фамилия -->
+                    <select name="lname" id="work" class="form-control">
+                        <option value="no"><?php echo $txtfill5 ?></option>
+                        <?php
+                        $i = 0;
+                        foreach ($lname as $d) {
+                            $i++; ?>
+                            <option value="<?php echo $d['id'] ?>"><?php echo $d['name']; ?></option>
                         <?php } ?>
                     </select>
 
