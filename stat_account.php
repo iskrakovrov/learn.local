@@ -23,8 +23,7 @@ require_once($lang);
 require_once 'inc/header.php';
 $id = $_REQUEST['id'];
 
-$sql = 'SELECT * FROM friends WHERE id = $id  ORDER BY created DESC LIMIT 20';
-$statFriends = selectAll($sql);
+
 
 
 $sql ="SELECT login_fb FROM accounts WHERE id = $id";

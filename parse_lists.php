@@ -72,8 +72,10 @@ $lists = selectAll($sql);
                     <td><?php echo $a['name'] ?></td>
                     <td>
                         <?php
+                        $ida = $a['id'];
                         $idc = $a['cat'];
-                        $sql = "SELECT * FROM stat_parse WHERE cat = $idc";
+
+                        $sql = "SELECT * FROM stat_parse WHERE cat = $ida";
                         $tt = select($sql);
                         if (empty($tt)) {
 
@@ -81,9 +83,9 @@ $lists = selectAll($sql);
 
 
                         } else {
-                            $sql = "SELECT COUNT(*) FROM value_lists WHERE list = $idc";
+                            $sql = "SELECT COUNT(*) FROM value_lists WHERE list = $ida";
                             $t1 = select($sql);
-                            $sql = "SELECT COUNT(*) FROM stat_parse WHERE cat = $idc";
+                            $sql = "SELECT COUNT(*) FROM stat_parse WHERE cat = $ida";
                             $t2 = select($sql);
                             $t1 = $t1['COUNT(*)'];
                             $t2 = $t2['COUNT(*)'];
