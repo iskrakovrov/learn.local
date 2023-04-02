@@ -200,7 +200,7 @@ $_SESSION['ids'] = $ids;
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="filling_accounts.php" id="filling_accounts">
-                            <label class="form-check-label" for="defaultCheck2">
+                            <label class="form-check-label" for="filling_accounts">
                                 <?php echo $txttask16?>
                             </label>
                         </div>
