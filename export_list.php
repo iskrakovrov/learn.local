@@ -12,8 +12,9 @@ $fname = 'list-' . $today . '.txt';
 
 $fp = fopen('tmp/' . $fname, 'w');
 
-    $sql = "SELECT value FROM value_lists WHERE list = $id";
-    $query = selectAll($sql);
+$sql = "SELECT value FROM value_lists WHERE list = ?";
+$args = [$id];
+$query = selectAll($sql, $args);
 
 
     // Открываем поток для записи

@@ -8,8 +8,9 @@ $array = $_POST['a'];
 foreach ($array as $a) {
     $i++;
     $id = $a;
-    $sql = "DELETE FROM proxy WHERE id='$id'";
-    $querty = delete($sql);
+    $sql = "DELETE FROM proxy WHERE id=?";
+    $args = [$id];
+    $querty = delete($sql, $args);
 
 }
 

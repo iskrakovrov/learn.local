@@ -5,15 +5,16 @@ require_once('function/function.php');
 $lang = $_SESSION['lang'] . '.php';
 require_once($lang);
 
-
 if (!empty($_REQUEST['name'])) {
     $name = $_REQUEST['name'];
     $cat = $_REQUEST['cat'];
-    $sql = "SELECT * FROM lists WHERE cat = $cat AND name = '$name'";
-    $query = select($sql);
+    $sql = "SELECT * FROM lists WHERE cat = ? AND name = ?";
+    $args = [$cat, $name];
+    $query = select($sql, $args);
     if (empty($query)) {
-        $sql = "INSERT INTO lists (cat, name) VALUES ($cat, '$name')";
-        $query = select($sql);
+        $sql = "INSERT INTO lists (cat, name) VALUES (?, ?)";
+        $args = [$cat, $name];
+        $query = select($sql, $args);
         header('Location: add_list.php');
     }
 }
@@ -26,8 +27,6 @@ if (!empty($_REQUEST['catedit'])) {
         exit();
     }
     //коммментарии = posts
-
-
 
     $url = 'e_list.php?cat=' . $catedit;
     header("Location: $url");

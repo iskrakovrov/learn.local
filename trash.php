@@ -137,14 +137,16 @@ include_once 'inc/header.php'
                         <td><?php echo $a['login_fb'] ?></td>
                         <td><?php
                             $id_acc = $a['id_acc'];
-                            $sql1 = "SELECT * FROM mail WHERE id_acc = $id_acc";
-                            $query1 = select($sql1);
+                            $sql1 = "SELECT * FROM mail WHERE id_acc = ?";
+                            $args1 = [$id_acc];
+                            $query1 = select($sql1, $args1);
                             $mail = $query1['mail'];
                             echo $mail ?></td>
                         <td><?php
                             $id_acc = $a['id_acc'];
-                            $sql1 = "SELECT * FROM phones WHERE id_acc = $id_acc";
-                            $query1 = select($sql1);
+                            $sql1 = "SELECT * FROM phones WHERE id_acc = ?";
+                            $args1 = [$id_acc];
+                            $query1 = select($sql1, $args1);
                             $mail = $query1['phone'];
                             echo $mail ?></td>
 
@@ -153,8 +155,9 @@ include_once 'inc/header.php'
                         <td><?php
                             $id_acc = $a['id_acc'];
                             $proxy = $a['proxy'];
-                            $sql1 = "SELECT id_proxy FROM accounts WHERE id_acc = $id_acc";
-                            $query1 = select($sql1);
+                            $sql1 = "SELECT id_proxy FROM accounts WHERE id_acc = ?";
+                            $args1 = [$id_acc];
+                            $query1 = select($sql1, $args1);
                             if (empty($query1['proxy'])) {
                                 $pr = "OFF";
                             } else {
@@ -163,14 +166,16 @@ include_once 'inc/header.php'
                             echo $pr ?></td>
                         <td><?php
                             $id_serv = $a['server'];
-                            $sql1 = "SELECT * FROM servers WHERE id_server = $id_serv";
-                            $query1 = select($sql1);
+                            $sql1 = "SELECT * FROM servers WHERE id_server = ?";
+                            $args1 = [$id_serv];
+                            $query1 = select($sql1, $args1);
                             $serv = $query1['name_server'];
                             echo $serv ?></td>
                         <td><?php
                             $id_gr = $a['group_acc'];
-                            $sql1 = "SELECT * FROM group_acc WHERE id_gr = $id_gr";
-                            $query1 = select($sql1);
+                            $sql1 = "SELECT * FROM group_acc WHERE id_gr = ?";
+                            $args1 = [$id_gr];
+                            $query1 = select($sql1, $args1);
                             $gr = $query1['name_group'];
                             echo $gr ?></td>
                         <td><?php
@@ -178,8 +183,9 @@ include_once 'inc/header.php'
                             if (empty($id_st)) {
                                 $id_st = 0;
                             }
-                            $sql1 = "SELECT * FROM status WHERE id_status = $id_st";
-                            $query1 = select($sql1);
+                            $sql1 = "SELECT * FROM status WHERE id_status = ?";
+                            $args1 = [$id_st];
+                            $query1 = select($sql1, $args1);
                             $stat = $query1['status'];
                             echo $stat ?></td>
                         <td>17</td>

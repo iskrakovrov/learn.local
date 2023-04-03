@@ -5,8 +5,6 @@ require_once('function/function.php');
 $lang = $_SESSION['lang'] . '.php';
 require_once($lang);
 
-
-
 ?>
 <!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
@@ -23,33 +21,42 @@ require_once($lang);
 require_once 'inc/header.php';
 $id = $_REQUEST['id'];
 
-$sql = "SELECT * FROM friends WHERE id_acc = $id  ORDER BY created DESC LIMIT 20";
-$statFriends = selectAll($sql);
+$sql = "SELECT * FROM friends WHERE id_acc = ? ORDER BY created DESC LIMIT 20";
+$args = [$id];
+$statFriends = selectAll($sql, $args);
 
-
-$sql ="SELECT login_fb FROM accounts WHERE id = $id";
-$login = select($sql);
+$sql = "SELECT login_fb FROM accounts WHERE id = ?";
+$args = [$id];
+$login = select($sql, $args);
 $login = $login['login_fb'];
-$sql = "SELECT COUNT(id) FROM stat_invite WHERE id_acc = $id ";
-$dall = select($sql);
-$sql = "SELECT COUNT(id) FROM stat_invite WHERE id_acc = $id AND  created >= unix_timestamp(now()-interval 30 day)";
-$d30 = select($sql);
-$sql = "SELECT COUNT(id) FROM stat_invite WHERE id_acc = $id AND  created >= unix_timestamp(now()-interval 7 day)";
-$d7 = select($sql);
-$sql = "SELECT COUNT(id) FROM stat_invite WHERE id_acc = $id AND  created >= unix_timestamp(now()-interval 1 day)";
-$d1 = select($sql);
+$sql = "SELECT COUNT(id) FROM stat_invite WHERE id_acc = ?";
+$args = [$id];
+$dall = select($sql, $args);
+$sql = "SELECT COUNT(id) FROM stat_invite WHERE id_acc = ? AND  created >= unix_timestamp(now()-interval 30 day)";
+$args = [$id];
+$d30 = select($sql, $args);
+$sql = "SELECT COUNT(id) FROM stat_invite WHERE id_acc = ? AND  created >= unix_timestamp(now()-interval 7 day)";
+$args = [$id];
+$d7 = select($sql, $args);
+$sql = "SELECT COUNT(id) FROM stat_invite WHERE id_acc = ? AND  created >= unix_timestamp(now()-interval 1 day)";
+$args = [$id];
+$d1 = select($sql, $args);
 $dall = $dall['COUNT(id)'];
 $d30 = $d30['COUNT(id)'];
 $d7 = $d7['COUNT(id)'];
 $d1 = $d1['COUNT(id)'];
-$sql = "SELECT COUNT(id) FROM stat_like WHERE id_acc = $id ";
-$lall = select($sql);
-$sql = "SELECT COUNT(id) FROM stat_like WHERE id_acc = $id AND  created >= unix_timestamp(now()-interval 30 day)";
-$l30 = select($sql);
-$sql = "SELECT COUNT(id) FROM stat_like WHERE id_acc = $id AND  created >= unix_timestamp(now()-interval 7 day)";
-$l7 = select($sql);
-$sql = "SELECT COUNT(id) FROM stat_like WHERE id_acc = $id AND  created >= unix_timestamp(now()-interval 1 day)";
-$l1 = select($sql);
+$sql = "SELECT COUNT(id) FROM stat_like WHERE id_acc = ?";
+$args = [$id];
+$lall = select($sql, $args);
+$sql = "SELECT COUNT(id) FROM stat_like WHERE id_acc = ? AND  created >= unix_timestamp(now()-interval 30 day)";
+$args = [$id];
+$l30 = select($sql, $args);
+$sql = "SELECT COUNT(id) FROM stat_like WHERE id_acc = ? AND  created >= unix_timestamp(now()-interval 7 day)";
+$args = [$id];
+$l7 = select($sql, $args);
+$sql = "SELECT COUNT(id) FROM stat_like WHERE id_acc = ? AND  created >= unix_timestamp(now()-interval 1 day)";
+$args = [$id];
+$l1 = select($sql, $args);
 $lall = $lall['COUNT(id)'];
 $l30 = $l30['COUNT(id)'];
 $l7 = $l7['COUNT(id)'];

@@ -75,18 +75,21 @@ $lists = selectAll($sql);
                         $ida = $a['id'];
                         $idc = $a['cat'];
 
-                        $sql = "SELECT * FROM stat_parse WHERE cat = $ida";
-                        $tt = select($sql);
+                        $sql = "SELECT * FROM stat_parse WHERE cat = ?";
+                        $args = [$ida];
+                        $tt = select($sql, $args);
                         if (empty($tt)) {
 
                             $msg = '<button type="button" class="btn btn-secondary" disabled>List is free</button>';
 
 
                         } else {
-                            $sql = "SELECT COUNT(*) FROM value_lists WHERE list = $ida";
-                            $t1 = select($sql);
-                            $sql = "SELECT COUNT(*) FROM stat_parse WHERE cat = $ida";
-                            $t2 = select($sql);
+                            $sql = "SELECT COUNT(*) FROM value_lists WHERE list = ?";
+                            $args = [$ida];
+                            $t1 = select($sql, $args);
+                            $sql = "SELECT COUNT(*) FROM stat_parse WHERE cat = ?";
+                            $args = [$ida];
+                            $t2 = select($sql, $args);
                             $t1 = $t1['COUNT(*)'];
                             $t2 = $t2['COUNT(*)'];
                             $msg = '<a href="reset_list.php?id=';

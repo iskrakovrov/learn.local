@@ -5,11 +5,13 @@ require_once('function/function.php');
 if (!empty($_REQUEST['name_server'])){
     $nserv = $_REQUEST['name_server'];
     $com = $_REQUEST['com_server'];
-    $sql = "SELECT * FROM servers WHERE name_server = '$nserv'";
-    $ch = selectAll($sql);
+    $sql = "SELECT * FROM servers WHERE name_server = ?";
+    $args = [$nserv];
+    $ch = selectAll($sql, $args);
     if (empty($ch)){
-        $sql = "INSERT INTO servers (name_server, comment) VALUES ('$nserv', '$com')";
-        $ch= insert($sql);
+        $sql = "INSERT INTO servers (name_server, comment) VALUES (?, ?)";
+        $args = [$nserv, $com];
+        $ch= insert($sql, $args);
         header('Location: servers.php');
     }
 

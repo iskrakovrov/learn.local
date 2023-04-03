@@ -5,6 +5,7 @@ require_once('inc/db.php');
 require_once('function/function.php');
 
 $id = $_GET['id'];
-$sql = "DELETE FROM posts WHERE id = $id";
-$query = delete($sql);
+$sql = "DELETE FROM posts WHERE id = ?";
+$args = [$id];
+$query = delete($sql, $args);
 header('Location: ' . $_SERVER['HTTP_REFERER']);

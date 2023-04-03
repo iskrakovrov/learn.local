@@ -86,8 +86,9 @@ if (($text == 'NULL') && ($img == 'NULL')) {
     header("Refresh:0");
 }
 else {
-    $sql = "INSERT INTO posts (id, cat, txt, img, tipe) VALUES (NULL, $cat, '$text', '$img', 2)";
-    $qw = insert($sql);
+    $sql = "INSERT INTO posts (id, cat, txt, img, tipe) VALUES (NULL, ?, ?, ?, 2)";
+    $args = [$cat, $text, $img];
+    $qw = insert($sql, $args);
     header('Refresh:0');
 }
 }
@@ -121,15 +122,19 @@ else {
 <?php
 include_once 'inc/header.php';
 //$cat = $_REQUEST['id'];
-$sql = "SELECT COUNT(*) FROM posts WHERE cat = $cat";
-$count = select($sql);
+$sql = "SELECT COUNT(*) FROM posts WHERE cat = ?";
+$args = [$cat];
+$count = select($sql, $args);
 $cc = $count['COUNT(*)'];
-$sql = "SELECT * FROM lists WHERE id = $cat";
-$nn = select($sql);
+
+$sql = "SELECT * FROM lists WHERE id = ?";
+$args = [$cat];
+$nn = select($sql, $args);
 $n = $nn['name'];
 
-$sql = "SELECT * FROM posts WHERE cat = $cat LIMIT 1000";
-$ser = selectAll($sql);
+$sql = "SELECT * FROM posts WHERE cat = ? LIMIT 1000";
+$args = [$cat];
+$ser = selectAll($sql, $args);
 
 ?>
 <main class="container-fluid ">

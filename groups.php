@@ -68,8 +68,9 @@ $gr=selectAll($sql);
                 <td><?php echo $a['comment'] ?></td>
                 <?php
                 $idg = $a['id'];
-                $sql = "SELECT COUNT(id) FROM accounts WHERE group_acc = $idg";
-                $qc = select($sql)
+                $sql = "SELECT COUNT(id) FROM accounts WHERE group_acc = ?";
+                $args = [$idg];
+                $qc = select($sql, $args);
 
                 ?>
                 <td><?php echo $qc['COUNT(id)'] ?></td>

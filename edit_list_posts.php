@@ -6,19 +6,19 @@ $lang = $_SESSION['lang'] . '.php';
 require_once($lang);
 $cat = $_REQUEST['id'];
 
-if ($_REQUEST['dp']=='one'){
+if ($_REQUEST['dp'] == 'one') {
     $a = $_REQUEST['a'];
-    foreach ($a as $ids){
-        $sql = "DELETE FROM posts WHERE id = $ids";
-        $del = delete($sql);
+    foreach ($a as $ids) {
+        $sql = "DELETE FROM posts WHERE id = ?";
+        $args = [$ids];
+        $del = delete($sql, $args);
     }
     header("Refresh: 0");
 }
-if ($_REQUEST['dp']=='all'){
-
-
-        $sql = "DELETE FROM posts WHERE cat = {$cat}";
-        $del = delete($sql);
+if ($_REQUEST['dp'] == 'all') {
+    $sql = "DELETE FROM posts WHERE cat = ?";
+    $args = [$cat];
+    $del = delete($sql, $args);
 
     header("Refresh: 0");
 }
@@ -71,15 +71,19 @@ if (!empty($_REQUEST['key'])) {
 <?php
 include_once 'inc/header.php';
 //$cat = $_REQUEST['id'];
-$sql = "SELECT COUNT(*) FROM posts WHERE cat = $cat";
-$count = select($sql);
+$sql = "SELECT COUNT(*) FROM posts WHERE cat = ?";
+$args = [$cat];
+$count = select($sql, $args);
 $cc = $count['COUNT(*)'];
-$sql = "SELECT * FROM lists WHERE id = $cat";
-$nn = select($sql);
+
+$sql = "SELECT * FROM lists WHERE id = ?";
+$args = [$cat];
+$nn = select($sql, $args);
 $n = $nn['name'];
 
-$sql = "SELECT * FROM posts WHERE cat = $cat LIMIT 1000";
-$ser = selectAll($sql);
+$sql = "SELECT * FROM posts WHERE cat = ? LIMIT 1000";
+$args = [$cat];
+$ser = selectAll($sql, $args);
 
 ?>
 <main class="container-fluid ">

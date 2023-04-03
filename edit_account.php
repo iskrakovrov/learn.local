@@ -3,29 +3,34 @@ include_once('inc/init.php');
 require_once('inc/db.php');
 require_once('function/function.php');
 $id = $_REQUEST['id'];
-$sql = "SELECT * FROM accounts WHERE id = '$id'";
-$qu = select($sql);
-if ($qu['avatar']==1){
-    $sql = "SELECT ava FROM ava WHERE id_acc = '$id'";
-    $qw = select($sql);
+$sql = "SELECT * FROM accounts WHERE id = ?";
+$args = [$id];
+$qu = select($sql, $args);
+
+if ($qu['avatar'] == 1) {
+    $sql = "SELECT ava FROM ava WHERE id_acc = ?";
+    $args = [$id];
+    $qw = select($sql, $args);
     $ava = $qw['ava'];
 }
+
 if (!empty($_POST)) {
     $login = $_POST['login'];
     $pass = $_POST['pass'];
     $group = $_POST['group'];
     $server = $_POST['server'];
-$mail = $_POST['mail'];
+    $mail = $_POST['mail'];
     $ph = $_POST['phone'];
     $pass_mail = $_POST['pass_mail'];
     $comm = $_POST['comm'];
     $status = $_POST['status'];
-    $sql = "UPDATE accounts SET login_fb ='$login', pass_fb='$pass', group_acc='$group', server = '$server', phone = '$phone', mail_pass = '$pass_mail', status = '$status', comment = '$comm' WHERE id = '$id'";
-    $qwer = insert($sql);
 
+    $sql = "UPDATE accounts SET login_fb = ?, pass_fb = ?, group_acc = ?, server = ?, phone = ?, mail_pass = ?, status = ?, comment = ? WHERE id = ?";
+    $args = [$login, $pass, $group, $server, $ph, $pass_mail, $status, $comm, $id];
+    $qwer = update($sql, $args);
 
-  header('Location: /edit_account.php?id=' . $id);
-exit();
+    header('Location: /edit_account.php?id=' . $id);
+    exit();
 }
 
 
@@ -195,8 +200,9 @@ include_once 'inc/header.php';
                             <select class="form-select" aria-label="Default select example" name="status">
                                 <?php
                                 $st = $qu['status'];
-                                $sql = "SELECT * FROM status WHERE id = $st";
-                                $q2 = select($sql);
+                                $sql = "SELECT * FROM status WHERE id = ?";
+                                $args = [$st];
+                                $q2 = select($sql, $args);
 
 
                                 foreach ($q1 as $b) {

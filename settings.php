@@ -16,20 +16,23 @@ require_once($lang);
 if (!empty($_POST['login']))
 {
     $login = $_POST['login'];
-    $sql = "UPDATE users set login = '$login' where id = 1";
-    $qw=update($sql);
+    $sql = "UPDATE users SET login = ? WHERE id = 1";
+    $args = [$login];
+    $qw=update($sql, $args);
 }
 if (!empty($_POST['pass']))
 {
     $pass = $_POST['pass'];
-    $sql = "UPDATE users set pass = '$pass' where id = 1";
-    $qw = update($sql);
+    $sql = "UPDATE users SET pass = ? WHERE id = 1";
+    $args = [$pass];
+    $qw = update($sql, $args);
 }
 if ($_POST['lng'] !== 'Select' && (!empty($_POST['lng'])))
 {
     $lng = $_POST['lng'];
-    $sql = "UPDATE users set lang = '$lng' where id = 1";
-    $qw = update($sql);
+    $sql = "UPDATE users SET lang = ? WHERE id = 1";
+    $args = [$lng];
+    $qw = update($sql, $args);
     $sql = 'SELECT lang FROM users';
     $lang = select($sql);
     $_SESSION['admin'] = 1;

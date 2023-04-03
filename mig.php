@@ -13,13 +13,15 @@ if (is_null($ver)) {
         exit();
     }
 
-    $sql = "UPDATE options SET ver = '$vers'";
-    $qw = update($sql);
+    $sql = "UPDATE options SET ver = ?";
+    $args = [$vers];
+    $qw = update($sql, $args);
     header('Location: new.php');
     exit();
 }
-$sql = "UPDATE options SET ver = '$vers'";
-$qw = update($sql);
+$sql = "UPDATE options SET ver = ?";
+$args = [$vers];
+$qw = update($sql, $args);
 
 $sql = "SHOW COLUMNS FROM groups_fb WHERE FIELD = 'url'";
 $qw = create($sql);

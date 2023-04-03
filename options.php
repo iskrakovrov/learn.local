@@ -8,8 +8,9 @@ require_once($lang);
 if (!empty($_REQUEST)){
     $proxy = $_REQUEST['proxy'];
     $change_proxy = $_REQUEST['change_proxy'];
-    $sql = "UPDATE options SET proxy = $proxy, change_proxy = $change_proxy ";
-    $query = update($sql);
+    $sql = "UPDATE options SET proxy = ?, change_proxy = ?";
+    $args = [$proxy, $change_proxy];
+    $query = update($sql, $args);
     header('Location: ' .$_SERVER['HTTP_REFERER']);
     exit;
 }

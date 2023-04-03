@@ -8,8 +8,9 @@ $sql = "SELECT * FROM proxy WHERE status = 'ok' ORDER BY `work` , `use_proxy`  L
 $query = select($sql);
 $id = $query['id'];
 $time = Time();
-$sql = "UPDATE proxy SET work = $time WHERE id = $id";
-$query1 = update($sql);
+$sql = "UPDATE proxy SET work = ? WHERE id = ?";
+$args = [$time, $id];
+$query1 = update($sql, $args);
 
 $sql ='UNLOCK TABLES';
 $data = create($sql);

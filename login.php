@@ -9,8 +9,9 @@ $error = '';
 if (!empty($_REQUEST["submit"])) {
     $login = isset($_POST["login"]) ? trim($_POST["login"]) : '';
     $pswd = isset($_POST["pswd"]) ? trim($_POST["pswd"]) : '';
-    $sql = "SELECT * FROM users WHERE login = '$login' AND pass = '$pswd'";
-    $x = select($sql);
+    $sql = "SELECT * FROM users WHERE login = ? AND pass = ?";
+    $args = [$login, $pswd];
+    $x = select($sql, $args);
     if (empty($x)) {
         session_start();
         $_SESSION['alert'] = 3;

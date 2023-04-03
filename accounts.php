@@ -6,7 +6,7 @@ $lang = $_SESSION['lang'] . '.php';
 require_once($lang);
 
 $sql = "SELECT * FROM group_acc";
-$gg = selectall($sql);
+$gg = selectAll($sql);
 $sql = "SELECT * FROM servers";
 $ss = selectAll($sql);
 

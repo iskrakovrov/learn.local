@@ -1,20 +1,21 @@
 <?php
-include_once ('inc/init.php');
+include_once('inc/init.php');
 require_once('inc/db.php');
 require_once('function/function.php');
 $lang = $_SESSION['lang'] . '.php';
 require_once($lang);
-if (!empty($_REQUEST['name_server'])){
+if (!empty($_REQUEST['name_server'])) {
     $nserv = $_REQUEST['name_server'];
     $com = $_REQUEST['com_server'];
-    $sql = "SELECT * FROM group_acc WHERE name_group = '{$nserv}'";
-    $ch = selectAll($sql);
-    if (empty($ch)){
-        $sql = "INSERT INTO group_acc (name_group, comment) VALUES ('{$nserv}', '{$com}')";
-        $ch= insert($sql);
+    $sql = "SELECT * FROM group_acc WHERE name_group = ?";
+    $args = [$nserv];
+    $ch = selectAll($sql, $args);
+    if (empty($ch)) {
+        $sql = "INSERT INTO group_acc (name_group, comment) VALUES (?, ?)";
+        $args = [$nserv, $com];
+        $ch = insert($sql, $args);
         header('Location: groups.php');
     }
-
 }
 ?>
 

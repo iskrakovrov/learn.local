@@ -12,9 +12,9 @@ $fname = 'accounts-' . $today . '.txt';
 
 $fp = fopen('tmp/' . $fname, 'w');
 foreach ($id as $b) {
-    $sql = "SELECT login_fb,pass_fb,mail,mail_pass,imap_mail,2fa,phone,coockie,bd,mb,yb,tocken FROM accounts WHERE id = $b";
-    $query = selectAll($sql);
-
+    $sql = "SELECT login_fb, pass_fb, mail, mail_pass, imap_mail, 2fa, phone, coockie, bd, mb, yb, tocken FROM accounts WHERE id = ?";
+    $args = [$b];
+    $query = selectAll($sql, $args);
 
     // Открываем поток для записи
     foreach ($query as $a) {

@@ -23,45 +23,45 @@ function dbCheckError($query)
 }
 
 // Запрос Select к бд
-function select($sel)
+function select($sel, $args = [])
 {
     global $pdo;
     $sql = $sel;
     $query = $pdo->prepare($sql);
-    $query->execute();
+    $query->execute($args);
     dbCheckError($query);
     return $query->fetch();
 }
 
-function selectAll($sel)
+function selectAll($sel, $args = [])
 {
     global $pdo;
     $sql = $sel;
     $query = $pdo->prepare($sql);
-    $query->execute();
+    $query->execute($args);
     dbCheckError($query);
     return $query->fetchAll();
 }
 
-function insert($ins)
+function insert($ins, $args = [])
 {
 
     global $pdo;
     $sql = $ins;
     $query = $pdo->prepare($sql);
-    $query->execute();
+    $query->execute($args);
     dbCheckError($query);
 
 
 }
 
-function update($upd)
+function update($upd, $args = [])
 {
 
     global $pdo;
     $sql = $upd;
     $query = $pdo->prepare($sql);
-    $query->execute();
+    $query->execute($args);
     dbCheckError($query);
 
 
@@ -134,13 +134,13 @@ function processForm($array)
 
 }
 
-function delete($del)
+function delete($del, $args = [])
 {
 
     global $pdo;
     $sql = $del;
     $query = $pdo->prepare($sql);
-    $query->execute();
+    $query->execute($args);
     dbCheckError($query);
     return 'ok';
 
@@ -238,8 +238,9 @@ function parse_acc2($acc, $comm, $serv, $group, $cock)
     $bd = $accs [8];
     $mb = $accs [9];
     $yb = $accs [10];
-    $sql = "SELECT * FROM accounts WHERE login_fb = '$login'";
-    $querty = select($sql);
+    $sql = "SELECT * FROM accounts WHERE login_fb = ?";
+    $args = [$login];
+    $querty = select($sql, $args);
     if (!empty($querty)) {
         $sql = null;
         return;
@@ -292,15 +293,18 @@ function add_task($add_task, $json_data, $time, $account)
     $a = $account;
 
 
-    $sql = "SELECT id FROM task WHERE task = '$add_task' AND account = $a";
-    $query = select($sql);
+    $sql = "SELECT id FROM task WHERE task = ? AND account = ?";
+    $args = [$add_task, $a];
+    $query = select($sql, $args);
     $id_tr = $query['id'];
     if (empty($query)) {
-        $sql = "INSERT INTO task (id, account, task, setup, created) VALUES (NULL, $a, '$add_task', '$json_data', $time)";
-        $query = insert($sql);
+        $sql = "INSERT INTO task (id, account, task, setup, created) VALUES (NULL, ?, ?, ?, ?)";
+        $args = [$a, $add_task, $json_data, $time];
+        $query = insert($sql, $args);
     } else {
-        $sql = "UPDATE task SET setup = '$json_data', created = $time WHERE id = $id_tr";
-        $query = update($sql);
+        $sql = "UPDATE task SET setup = ?, created = ? WHERE id = ?";
+        $args = [$json_data, $time, $id_tr];
+        $query = update($sql, $args);
 
     }
 }
@@ -330,8 +334,9 @@ function parse_name($key)
         $sql = null;
     } else {
         $cat = $_REQUEST['cat'];
-        $sql = "SELECT * FROM name_lists WHERE id_list = $cat AND value = '$key'";
-        $query = select($sql);
+        $sql = "SELECT * FROM name_lists WHERE id_list = ? AND value = ?";
+        $args = [$cat, $key];
+        $query = select($sql, $args);
         if (empty($query)) {
             $sql = "INSERT INTO name_lists (id,value,id_list) VALUES (NULL, '$key', $cat )";
         } else {

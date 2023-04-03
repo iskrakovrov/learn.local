@@ -55,8 +55,9 @@ if (!empty($_REQUEST['key'])) {
 <?php
 include_once 'inc/header.php';
 $cat = $_REQUEST['cat'];
-$sql = "SELECT * FROM name_lists WHERE id_list = $cat";
-$ser = selectAll($sql);
+$sql = "SELECT * FROM name_lists WHERE id_list = ?";
+$args = [$cat];
+$ser = selectAll($sql, $args);
 
 ?>
 <main class="container-fluid ">

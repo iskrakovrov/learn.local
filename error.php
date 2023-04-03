@@ -7,11 +7,13 @@ require_once($lang);
 
 $time = Time();
 $time2 = $time - 170000;
-$sql = "DELETE FROM err WHERE created < $time2";
-$q = delete($sql);
+$sql = "DELETE FROM err WHERE created < ?";
+$args = [$time2];
+$q = delete($sql, $args);
+
 $sql = 'SELECT DISTINCT value FROM err;';
 //$sql = 'SELECT DISTINCT * FROM err LIMIT 1000';
-$q = selectall($sql);
+$q = selectAll($sql);
 ?>
 <!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">

@@ -21,31 +21,31 @@ require_once($lang);
 <?php
 
 require_once 'inc/header.php';
-$sql = 'SELECT COUNT(id) FROM stat_invite';
+$sql = 'SELECT COUNT(id) AS count FROM stat_invite';
 $dall = $d30 = select($sql);
 
-$sql = 'SELECT COUNT(id) FROM stat_invite WHERE  created >= unix_timestamp(now()-interval 30 day)';
+$sql = 'SELECT COUNT(id) AS count FROM stat_invite WHERE  created >= unix_timestamp(now()-interval 30 day)';
 $d30 = select($sql);
-$sql = 'SELECT COUNT(id) FROM stat_invite WHERE created >= unix_timestamp(now()-interval 7 day)';
+$sql = 'SELECT COUNT(id) AS count FROM stat_invite WHERE created >= unix_timestamp(now()-interval 7 day)';
 $d7 = select($sql);
-$sql = 'SELECT COUNT(id) FROM stat_invite WHERE created >= unix_timestamp(now()-interval 1 day)';
+$sql = 'SELECT COUNT(id) AS count FROM stat_invite WHERE created >= unix_timestamp(now()-interval 1 day)';
 $d1 = select($sql);
-$dall = $dall['COUNT(id)'];
-$d30 = $d30['COUNT(id)'];
-$d7 = $d7['COUNT(id)'];
-$d1 = $d1['COUNT(id)'];
-$sql = 'SELECT COUNT(id) FROM stat_like ';
+$dall = $dall['count'];
+$d30 = $d30['count'];
+$d7 = $d7['count'];
+$d1 = $d1['count'];
+$sql = 'SELECT COUNT(id) AS count FROM stat_like';
 $lall = select($sql);
-$sql = 'SELECT COUNT(id) FROM stat_like WHERE  created >= unix_timestamp(now()-interval 30 day)';
+$sql = 'SELECT COUNT(id) AS count FROM stat_like WHERE created >= unix_timestamp(now()-interval 30 day)';
 $l30 = select($sql);
-$sql = 'SELECT COUNT(id) FROM stat_like WHERE   created >= unix_timestamp(now()-interval 7 day)';
+$sql = 'SELECT COUNT(id) AS count FROM stat_like WHERE created >= unix_timestamp(now()-interval 7 day)';
 $l7 = select($sql);
-$sql = 'SELECT COUNT(id) FROM stat_like WHERE   created >= unix_timestamp(now()-interval 1 day)';
+$sql = 'SELECT COUNT(id) AS count FROM stat_like WHERE created >= unix_timestamp(now()-interval 1 day)';
 $l1 = select($sql);
-$lall = $lall['COUNT(id)'];
-$l30 = $l30['COUNT(id)'];
-$l7 = $l7['COUNT(id)'];
-$l1 = $l1['COUNT(id)'];
+$lall = $lall['count'];
+$l30 = $l30['count'];
+$l7 = $l7['count'];
+$l1 = $l1['count'];
 ?>
 
 

@@ -8,9 +8,9 @@ $id=$_GET['id'];
 
 
 
-$sql = "UPDATE proxy SET use_proxy = 0 WHERE id = $id";
-
-$qu = update($sql);
+$sql = "UPDATE proxy SET use_proxy = 0 WHERE id = ?";
+$args = [$id];
+$qu = update($sql, $args);
 $sql = "UPDATE accounts SET id_proxy = NULL WHERE id_proxy = $id";
 header('Location: ' .$_SERVER['HTTP_REFERER']);
 exit;

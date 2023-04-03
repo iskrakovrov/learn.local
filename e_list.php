@@ -31,8 +31,10 @@ require_once($lang);
     <?php
     include_once 'inc/header.php';
     $cat = $_REQUEST['cat'];
-    $sql = "SELECT * FROM lists WHERE cat = $cat";
-    $ser = selectAll($sql);
+
+    $sql = "SELECT * FROM lists WHERE cat = ?";
+    $args = [$cat];
+    $ser = selectAll($sql, $args);
 
     ?>
     <main class="container-fluid ">
@@ -89,8 +91,9 @@ require_once($lang);
                                 <td><?php echo $a['name'] ?></td>
                                 <td><?php
                                 $cat1 = $a['id'];
-                                    $sql = "SELECT COUNT(*) FROM value_lists WHERE list = $cat1";
-                                    $ww = select($sql);
+                                    $sql = "SELECT COUNT(*) FROM value_lists WHERE list = ?";
+                                    $args = [$cat1];
+                                    $ww = select($sql, $args);
 
 
                                     echo $ww['COUNT(*)'] ?></td>
