@@ -21,12 +21,12 @@ if (!empty($_POST)) {
     $server = $_POST['server'];
     $mail = $_POST['mail'];
     $ph = $_POST['phone'];
-    $pass_mail = $_POST['pass_mail'];
+    $mail_pass = $_POST['mail_pass'];
     $comm = $_POST['comm'];
     $status = $_POST['status'];
 
     $sql = "UPDATE accounts SET login_fb = ?, pass_fb = ?, group_acc = ?, server = ?, phone = ?, mail_pass = ?, status = ?, comment = ? WHERE id = ?";
-    $args = [$login, $pass, $group, $server, $ph, $pass_mail, $status, $comm, $id];
+    $args = [$login, $pass, $group, $server, $ph, $mail_pass, $status, $comm, $id];
     $qwer = update($sql, $args);
 
     header('Location: /edit_account.php?id=' . $id);
@@ -127,14 +127,14 @@ include_once 'inc/header.php';
                         <div class="col-sm">
                             <label for="mail">Mail</label>
 
-                            <input type="text" class="form-control" placeholder="Mail" id="mail" name="mail"
+                            <input type="text" class="form-control"  id="mail" name="mail"
                                    value="<?php echo $qu['mail'] ?>">
                         </div>
                         <div class="col-sm">
-                            <label for="pass_mail">Password Mail</label>
-                            <input type="text" class="form-control" placeholder="Password mail" id="pass_mail"
-                                   name="pass_mail"
-                                   value="<?php echo $qu['pass_mail'] ?>">
+                            <label for="mail_pass">Password Mail</label>
+                            <input type="text" class="form-control"  id="mail_pass"
+                                   name="mail_pass"
+                                   value="<?php echo $qu['mail_pass'] ?>">
                         </div>
                         <div class="col-sm">
                             <label for="name">Name</label>
