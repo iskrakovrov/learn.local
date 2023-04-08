@@ -196,6 +196,7 @@ require_once 'inc/alerts.php';
                     <th>Adv</th>
                     <th>Last Start</th>
                     <th>Action</th>
+                    <th>!</th>
                 </tr>
                 </thead>
 
@@ -219,6 +220,7 @@ require_once 'inc/alerts.php';
                     <th>Adv</th>
                     <th>Last Start</th>
                     <th>Action</th>
+                    <th>!</th>
                 </tr>
                 </tfoot>
 
@@ -294,7 +296,8 @@ require_once 'inc/alerts.php';
             {mData: 'tocken'},
             {mData: 'adv'},
             {mData: 'last_start'},
-            {mData: 'action'}],
+            {mData: 'action'},
+            {mData: 'spst'}],
         "aoColumnDefs": [
             {"bSortable": false, "aTargets": [-1]}
         ],

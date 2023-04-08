@@ -71,7 +71,11 @@ foreach ($query as $a) {
             $ser = 'Not server';
         }
     }
-
+    if ($a['works'] == '0') {
+        $spst = '';
+    } else {
+        $spst = 'incorrect pass';
+    }
 
     $st = $a['status'];
 
@@ -92,10 +96,9 @@ foreach ($query as $a) {
         $friends .= '</strong></div>';
     } else {
         $colorFriends = $a['friends'] - $qw7['friends'];
-        if ($colorFriends<0) {
+        if ($colorFriends < 0) {
             $friends = '<div style="color: #b70202"><strong>';
-        }
-        else{
+        } else {
             $friends = '<div style="color: #02b711"><strong>';
         }
         $friends .= $a['friends'];
@@ -143,6 +146,7 @@ foreach ($query as $a) {
         'adv' => $adv,
         'last_start' => $ls,
         'action' => $action,
+        'spst' => $spst,
 
     );
 }

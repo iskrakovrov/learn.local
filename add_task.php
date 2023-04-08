@@ -222,13 +222,13 @@ $_SESSION['ids'] = $ids;
                                 <?php echo $txttask19?>
                             </label>
                         </div>
-                        <div class="form-check">
+                        <!--           <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="" id="task6" disabled>
                             <label class="form-check-label" for="defaultCheck2">
                                 <?php echo $txttask20?>
                             </label>
                         </div>
-
+->
                         <!-- прием в друзья -->
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="accept_friends.php" id="accept_friends">
@@ -273,7 +273,7 @@ $_SESSION['ids'] = $ids;
                             </label>
                         </div>
                         
-                        <div class="form-check">
+                       <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="" id="task6" disabled>
                             <label class="form-check-label" for="defaultCheck2">
                                 <?php echo $txttask28?>
