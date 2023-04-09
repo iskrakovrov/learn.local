@@ -170,9 +170,9 @@ include_once 'inc/header.php';
                                    value="<?php echo $qu['gender'] ?>" disabled>
                         </div>
                         <div class="col-sm">
-                            <label for="name">Name</label>
-                            <input type="text" class="form-control" placeholder="Name" id="name"
-                                   value="<?php echo $qu['name'] ?>" disabled>
+                            <label for="name">FB id</label>
+                            <input type="text" class="form-control" placeholder="ID FB" id="id_fb"
+                                   value="<?php echo $qu['id_fb'] ?>" disabled>
                         </div>
                     </div>
                 </div>

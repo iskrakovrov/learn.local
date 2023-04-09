@@ -5,7 +5,7 @@ require_once('inc/db.php');
 require_once('function/function.php');
 
 $start = microtime(true);
-$sql = 'SELECT id, login_fb, pass_fb, name, gender, avatar, created, group_acc, server, id_proxy, status, works, useacc, friends, last_start, tocken, mail, phone, adv FROM accounts';
+$sql = 'SELECT id, login_fb, pass_fb, id_fb, name, gender, avatar, created, group_acc, server, id_proxy, status, works, useacc, friends, last_start, tocken, mail, phone, adv FROM accounts';
 $query = selectAll($sql);
 $sql = 'SELECT * FROM group_acc';
 $gr1 = selectAll($sql);
@@ -125,11 +125,23 @@ foreach ($query as $a) {
     } else {
         $adv = 'NO';
     }
+   $idf = $a['id_fb'];
+
+    if (!empty($idf)) {
+        $lfb = '<a href="https://facebook.com/';
+        $lfb .= $idf;
+        $lfb .= ' "target="_blank">';
+        $lfb .= $a['login_fb'];
+        $lfb .= '</a>';
+    }
+    else {
+        $lfb = $a['login_fb'];
+    }
 
     $mysql_data[] = array(
 
         'ids' => $id,
-        'login' => $a['login_fb'],
+        'login' => $lfb,
         'mail' => $a['mail'],
         'phone' => $a['phone'],
         'gender' => $a['gender'],

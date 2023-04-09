@@ -148,6 +148,13 @@ if (empty($qw)) {
     $sql = "ALTER TABLE `stat_parse` ADD `cat` INT(11) NOT NULL AFTER `id_url`;";
     $qw = create($sql);
 }
+$sql = "SHOW COLUMNS FROM change_login WHERE FIELD = 'id_fb'";
+$qw = create($sql);
+if (empty($qw)) {
+    $sql = "ALTER TABLE `change_login` ADD `id_fb` BIGINT NULL AFTER `created`";
+    $qw = create($sql);
+    $sql = "ALTER TABLE `change_password` ADD `id_fb` BIGINT NULL AFTER `created`";
+    $qw = create($sql);
 
-
+}
 
