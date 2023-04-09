@@ -2,16 +2,21 @@
 include_once('inc/init.php');
 require_once('inc/db.php');
 require_once('function/function.php');
-$sql = "SELECT COUNT(*) FROM accounts";
+$sql = 'SELECT COUNT(*) FROM accounts';
 $acc = select($sql);
-$sql = "SELECT COUNT(*) FROM proxy";
+$sql = 'SELECT COUNT(*) FROM proxy';
 $cpr = select($sql);
-$sql = "SELECT COUNT(*) FROM err";
+$sql = 'SELECT COUNT(*) FROM err';
 $err = select($sql);
 $a = $acc['COUNT(*)'];
 $cp = $cpr['COUNT(*)'];
 $er = $err['COUNT(*)'];
-
+$sql = 'SELECT COUNT(*) FROM accounts where useacc = 1';
+$wrk = select($sql);
+$wo = $wrk['COUNT(*)'];
+$sql = 'SELECT COUNT(DISTINCT `account`) FROM task';
+$t = select($sql);
+$tas = $t['COUNT(DISTINCT `account`)'];
 ?>
 <style>
     #navbarSupportedContent > ul > li > a > span {
@@ -22,6 +27,14 @@ $er = $err['COUNT(*)'];
     }
     #navbarSupportedContent > ul > li:nth-child(11) > a > strong {
         color: #27ff00;
+    }
+    #navbarSupportedContent > ul.nav.justify-content-end > li:nth-child(1) > a
+    {
+        color: aliceblue;
+    }
+    #navbarSupportedContent > ul.nav.justify-content-end > li:nth-child(2) > a
+    {
+        color: aliceblue;
     }
 </style>
 <div class="outer">
@@ -160,7 +173,14 @@ $er = $err['COUNT(*)'];
 
 
                 </ul>
-
+                <ul class="nav justify-content-end">
+                    <li class="nav-item">
+                        <a class="nav-item" aria-current="page" >Accounts Work <span class="badge badge-primary"><?php echo $wo ?></span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-item" aria-current="page" >Accounts with task <span class="badge badge-primary"><?php echo $tas ?></span></a>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>

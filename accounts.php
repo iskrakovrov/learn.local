@@ -177,7 +177,7 @@ require_once 'inc/alerts.php';
                 <tr>
                     <th class="check" style="text-align: center;">
                         <label for="all"></label>
-                        <input type="checkbox" id="all" value=""/>
+                        <input type="checkbox"  id="all" value=""/>
                     </th>
                     <th>Login</th>
                     <th>Mail</th>
@@ -247,6 +247,10 @@ require_once 'inc/alerts.php';
 
 
 
+
+
+
+
 <script>
     $('#alert').delay(5000).fadeOut('slow');
 
@@ -254,6 +258,8 @@ require_once 'inc/alerts.php';
         $('#dr_table tbody :checkbox').prop('checked', $(this).is(':checked'));
         e.stopImmediatePropagation();
     });
+
+
 
 
     let dr_table;
@@ -275,6 +281,7 @@ require_once 'inc/alerts.php';
         dom: '<"top"lpif<"clear">>rt<"bottom"lpif<"clear">>',
 
 
+
         "ajax": "acc.php",
         "deferRender": true,
         "columns": [
@@ -291,26 +298,63 @@ require_once 'inc/alerts.php';
             {mData: 'status'},
             {mData: 'task'},
             {mData: 'use'},
-            {mData: 'create'},
+            {mData: 'create',
+
+                render: function ( data, type, row ) {
+                    // If display or filter data is requested, format the date
+                    if ( type === 'display' || type === 'filter' ) {
+                        var d = new Date( data * 1000 );
+
+                        return d.getDate() +'.'+ (d.getMonth()+1) +'.'+ d.getFullYear() + ' - '+ d.getHours() + ':'+ d.getMinutes()  ;
+                    }
+
+                    // Otherwise the data type requested (`type`) is type detection or
+                    // sorting data, for which we want to use the integer, so just return
+                    // that, unaltered
+                    return data;
+                }
+                },
             {mData: 'friends'},
             {mData: 'tocken'},
             {mData: 'adv'},
-            {mData: 'last_start'},
+            {mData: 'last_start' ,
+                render: function ( data, type, row ) {
+                    // If display or filter data is requested, format the date
+                    if ( type === 'display' || type === 'filter' ) {
+                        var d = new Date( data * 1000 );
+
+                        return d.getDate() +'.'+ (d.getMonth()+1) +'.'+ d.getFullYear() + ' - '+ d.getHours() + ':'+ d.getMinutes()  ;
+                    }
+
+                    // Otherwise the data type requested (`type`) is type detection or
+                    // sorting data, for which we want to use the integer, so just return
+                    // that, unaltered
+                    return data;
+                }
+                },
             {mData: 'action'},
             {mData: 'spst'}],
+
+
+
         "aoColumnDefs": [
             {"bSortable": false, "aTargets": [-1]}
         ],
+
 
         "sLengthMenu": "Records per page: _MENU_",
         "sInfo": "Total of _TOTAL_ records (showing _START_ to _END_)",
         "sInfoFiltered": "(filtered from _MAX_ total records)",
 
 
+
         'columnDefs': [{
             'targets': [0, 4, 5, 6, 7, 8, 9, 11, 14, 15], // column index (start from 0)
             'orderable': false, // set orderable false for selected columns
         }],
+
+
+
 
 
         initComplete: function () {

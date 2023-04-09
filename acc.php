@@ -60,8 +60,8 @@ foreach ($query as $a) {
         }
     }
 
-
-    $data = date('d  M Y', $a['created']);
+$data = $a['created'];
+ //   $data = date('d  M Y', $a['created']);
     $id_s = $a['server'];
 
     foreach ($ser1 as $z) {
@@ -119,7 +119,8 @@ foreach ($query as $a) {
     $action .= '" class="btn btn-danger" title="Delete Account" onClick="return confirm( ';
     $action .= "'WARNING!!! DELETE ACCOUNT?' )";
     $action .= '"><i class="bi bi-x-circle-fill"></i></a></div>';
-    $ls = date('d  M Y G:i', $a['last_start']);
+    //$ls = date('d  M Y G:i', $a['last_start']);
+$ls = $a['last_start'];
     if ($a['adv'] == 1) {
         $adv = 'YES';
     } else {
@@ -137,6 +138,7 @@ foreach ($query as $a) {
     else {
         $lfb = $a['login_fb'];
     }
+
 
     $mysql_data[] = array(
 
@@ -156,7 +158,7 @@ foreach ($query as $a) {
         'friends' => $friends,
         'tocken' => $tocken,
         'adv' => $adv,
-        'last_start' => $ls,
+     'last_start' => $ls,
         'action' => $action,
         'spst' => $spst,
 
