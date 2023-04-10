@@ -12,5 +12,9 @@
 
 <link href="/css/style.css" rel="stylesheet">
 <link href="/css/jquery.dataTables.yadcf.css" rel="stylesheet">
+<script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-base.min.js"></script>
+<script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-exports.min.js"></script>
+<script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-ui.min.js"></script>
+<link rel="stylesheet" href="https://cdn.anychart.com/releases/8.11.0/css/anychart-ui.min.css" />
 
 

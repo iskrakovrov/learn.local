@@ -155,6 +155,14 @@ if (empty($qw)) {
     $qw = create($sql);
     $sql = "ALTER TABLE `change_password` ADD `id_fb` BIGINT NULL AFTER `created`";
     $qw = create($sql);
+  }
+$sql = "SHOW COLUMNS FROM change_mail WHERE FIELD = 'id_fb'";
+$qw = create($sql);
+if (empty($qw)) {
+    $sql = "ALTER TABLE `change_mail` ADD `id_fb` BIGINT NOT NULL AFTER `new_mail_pass`";
+    $qw = create($sql);
 
 }
+
+
 
