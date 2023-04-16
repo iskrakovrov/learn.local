@@ -11,20 +11,26 @@ $qw = selectAll($sql);
 session_start();
 $_SESSION['ids'] = $ids;
 if(!empty($_POST['use_t'])){
+foreach ($ids as $i) {
+    $sql = 'DELETE FROM task WHERE account =?';
+    $args = [$i];
+    $qw = delete($sql, $args);
+    $sql = 'DELETE FROM temp_task WHERE account =?';
+    $args = [$i];
+    $qw = delete($sql, $args);
+}
+}
+
     $template = $_POST['use_t'];
     $sql = 'SELECT * FROM template WHERE id_template = ?';
     $args = [$template];
     $atemp = select($sql, $args);
     foreach ($atemp as $d){
         foreach ($ids as $i){
-            $sql = 'DELETE FROM task WHERE account =?';
-            $args = [$i];
-            $qw = delete($sql, $args);
-            $sql = 'DELETE FROM temp_task WHERE account =?';
-            $args = [$i];
-            $qw = delete($sql, $args);
+            foreach ($ids as $i){
+
             $task = $atemp['task'];
-            $setup = $atem['setup'];
+            $setup = $atemp['setup'];
             $time = Time();
             $sql = 'INSERT INTO task (task, account, setup, created) VALUES (?,?,?,?)';
             $args = [$task, $i, $setup, $time];
