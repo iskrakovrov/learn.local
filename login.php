@@ -26,7 +26,7 @@ if (!empty($_REQUEST["submit"])) {
         $lang = $lang['lang'];
         $_SESSION["lang"] = $lang;
 
-        header('Location: accounts.php');
+        header('Location: index.php');
     }
 }
 

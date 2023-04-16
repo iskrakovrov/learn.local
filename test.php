@@ -1,50 +1,29 @@
 <?php
-include_once('inc/init.php');
-require_once('inc/db.php');
-require_once('function/function.php');
-$id = $_GET['id'];
-$sql = 'SELECT id_acc, created , friends FROM friends WHERE id_acc = ? AND created >= unix_timestamp(current_date - interval 200 day) GROUP BY id_acc, date(from_unixtime(created)) ';
-$args = [$id];
-$qwery = selectAll($sql, $args);
 
-foreach ($qwery as $a) {
-    $da = $a['created'];
-    $fr = $a['friends'];
-    $mysql_data[] = array(
+$ch = curl_init();
 
-        $da,
+curl_setopt($ch, CURLOPT_URL, "https://api.openai.com/v1/completions");
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+curl_setopt($ch, CURLOPT_POSTFIELDS, '{
+  "model": "text-davinci-003", 
+  "prompt": "Я хочу, чтобы вы выступили в роли продавца в соцсети. Попробуйте продать мне программу FBcombo, но сделайте так, чтобы то, что вы пытаетесь продать, выглядело более ценным, чем оно есть на самом деле, и убедите меня купить это. Представлять себя не надо. А теперь я представлю, что ты мне написал в месенджер, и спрошу, зачем ты написал. Привет, слушаю вас?",
+  "max_tokens": 1500,
+  "temperature": 1,
+  "top_p": 0.8,
+  "frequency_penalty": 0,
+  "presence_penalty": 0
+}');
+curl_setopt($ch, CURLOPT_POST, 1);
 
+$headers = array();
+$headers[] = "Content-Type: application/json";
+$headers[] = "Authorization: Bearer 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";
+curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
-    );
+$result = curl_exec($ch);
+if (curl_errno($ch)) {
+    echo 'Error:' . curl_error($ch);
 }
+curl_close ($ch);
 
-$d1 = array(
-
-    'regtime' => $mysql_data,
-);
-
-
-foreach ($qwery as $a) {
-    $da = $a['created'];
-    $fr = $a['friends'];
-    $mysql_data1[] = array(
-
-        $fr,
-
-
-    );
-}
-
-$d2 = array(
-
-    'delay' => $mysql_data1,
-);
-
-$result = array_merge($d1, $d2);
-$json_data = json_encode($result, JSON_UNESCAPED_UNICODE);
-// Convert PHP array to JSON array
-//$json_data1 = json_encode($d1, JSON_UNESCAPED_UNICODE);
-//$json_data2 = json_encode($d2, JSON_UNESCAPED_UNICODE);
-//print $json_data1;
-print $json_data;
-//print_r ($data);
+echo $result;
