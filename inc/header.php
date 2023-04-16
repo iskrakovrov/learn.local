@@ -28,7 +28,7 @@ $templ = $templ['COUNT(*)'];
     #navbarSupportedContent > ul > li:nth-child(1) > ul > li:nth-child(6) > a > span {
         background-color: #0d6efd;
     }
-    #navbarSupportedContent > ul > li:nth-child(11) > a > strong {
+    #navbarSupportedContent > ul > li:nth-child(12) > a > strong {
         color: #27ff00;
     }
     #navbarSupportedContent > ul.nav.justify-content-end > li:nth-child(1) > a

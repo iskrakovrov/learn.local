@@ -10,33 +10,35 @@ $sql = 'SELECT * FROM templates';
 $qw = selectAll($sql);
 session_start();
 $_SESSION['ids'] = $ids;
-if(!empty($_POST['use_t'])){
-foreach ($ids as $i) {
-    $sql = 'DELETE FROM task WHERE account =?';
-    $args = [$i];
-    $qw = delete($sql, $args);
-    $sql = 'DELETE FROM temp_task WHERE account =?';
-    $args = [$i];
-    $qw = delete($sql, $args);
-}
-}
+if (!empty($_POST['use_t'])) {
+    foreach ($ids as $i) {
+        $sql = 'DELETE FROM task WHERE account =?';
+        $args = [$i];
+        $qw = delete($sql, $args);
+        $sql = 'DELETE FROM temp_task WHERE account =?';
+        $args = [$i];
+        $qw = delete($sql, $args);
+    }
+
 
     $template = $_POST['use_t'];
     $sql = 'SELECT * FROM template WHERE id_template = ?';
     $args = [$template];
-    $atemp = select($sql, $args);
-    foreach ($atemp as $d){
-        foreach ($ids as $i){
-            foreach ($ids as $i){
+    $atemp = selectAll($sql, $args);
+    foreach ($atemp as $d) {
+        foreach ($ids as $i) {
 
-            $task = $atemp['task'];
-            $setup = $atemp['setup'];
+
+            $task = $d['task'];
+            $setup = $d['setup'];
             $time = Time();
             $sql = 'INSERT INTO task (task, account, setup, created) VALUES (?,?,?,?)';
             $args = [$task, $i, $setup, $time];
             $qw = insert($sql, $args);
 
         }
+
+
     }
     session_start();
     $_SESSION['alert'] = 4;
@@ -79,54 +81,54 @@ include_once 'inc/header.php';
             </div>
 
 
-
-
             <form method="post">
 
 
-            <br>
+                <br>
 
-            <table id="example" class="cell-border" style="width:100%">
-                <thead>
-                <tr>
-
-                    <th>Name template</th>
-
-                    <th>Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php
-                $i = 0;
-                foreach ($qw as $b) {
-                    $i++; ?>
+                <table id="example" class="cell-border" style="width:100%">
+                    <thead>
                     <tr>
 
-                        <td><?php $nam = $b['name'];
-                            echo $nam ?></td>
+                        <th>Name template</th>
 
-
-                        <td>
-                            <div class="col">
-
-
-                                <button type="submit" class="btn btn-success" id="use_t" name ="use_t" value="<?php echo $b['id'] ?>">Success</button>
-                            </div>
-                        </td>
+                        <th>Action</th>
                     </tr>
-                <?php } ?>
+                    </thead>
+                    <tbody>
+                    <?php
+
+                    foreach ($qw as $b) {
+                        $i++; ?>
+                        <tr>
+
+                            <td><?php $nam = $b['name'];
+                                echo $nam ?></td>
 
 
-                </tbody>
-                <tfoot>
-                <tr>
+                            <td>
+                                <div class="col">
 
-                    <th>Name template</th>
 
-                    <th>Action</th>
-                </tr>
-                </tfoot>
-            </table>
+                                    <button type="submit" class="btn btn-success" id="use_t" name="use_t"
+                                            value="<?php echo $b['id'] ?>">Success
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    <?php } ?>
+
+
+                    </tbody>
+                    <tfoot>
+                    <tr>
+
+                        <th>Name template</th>
+
+                        <th>Action</th>
+                    </tr>
+                    </tfoot>
+                </table>
 
 </main>
 

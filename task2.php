@@ -48,7 +48,7 @@ $_SESSION['ids'] = $ids;
             </div>
 
             <form method="post" action="task.php">
-                <label for="cat" class="control-label">Что делаем</label>
+                <label for="addTask" class="control-label">Что делаем</label>
 
 
                 <select name="addTask" id="addTask" class="form-control">
