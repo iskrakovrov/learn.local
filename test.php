@@ -17,7 +17,7 @@ curl_setopt($ch, CURLOPT_POST, 1);
 
 $headers = array();
 $headers[] = "Content-Type: application/json";
-$headers[] = "Authorization: Bearer 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";
+$headers[] = "Authorization: Bearer *";
 curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
 $result = curl_exec($ch);
