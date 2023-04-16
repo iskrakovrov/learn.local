@@ -371,3 +371,13 @@ if (empty($folder)){
     }
     return [$sql];
 }
+function add_template($add_task, $json_data, $time, $numberTemplate)
+{
+    $a = $numberTemplate;
+    $sql = 'INSERT INTO template (id, id_template, task, setup) VALUES (NULL, ?, ?, ?)';
+    $args = [$a, $add_task, $json_data];
+    $query = insert($sql, $args);
+
+
+}
+

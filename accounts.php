@@ -140,8 +140,9 @@ require_once 'inc/alerts.php';
                         <a class="btn btn-secondary" href="all_proxy.php" role="button"
                            onClick="return confirm( '<?php echo $txtaccounts4 ?>' )">
                             Proxy for all accounts</a>
-                        <button class="btn btn-success" name="add_task" id="add_task" value="add_task.php">ADD TASK
+                        <button class="btn btn-success" name="add_task" id="add_task" value="task2.php">ADD TASK
                         </button>
+
                         <button class="btn btn-info"
                                 name="add_task" id="add_task" value="export_acc.php">EXPORT
                         </button>

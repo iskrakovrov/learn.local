@@ -164,5 +164,20 @@ if (empty($qw)) {
 
 }
 
+$sql = "SHOW TABLES LIKE 'templates'";
+$qw = create($sql);
 
+if (empty($qw)) {
 
+    $sql = "CREATE TABLE `templates` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `name` VARCHAR(100) NOT NULL , PRIMARY KEY (`id`), UNIQUE (`name`)) ENGINE = InnoDB;";
+    $qw = create($sql);
+}
+
+$sql = "SHOW TABLES LIKE 'template'";
+$qw = create($sql);
+
+if (empty($qw)) {
+
+    $sql = "CREATE TABLE `template` ( `id` INT NOT NULL AUTO_INCREMENT , `id_template` INT NOT NULL , `task` VARCHAR(25) NOT NULL , `setup` VARCHAR(255) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;";
+    $qw = create($sql);
+}

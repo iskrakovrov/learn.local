@@ -8,6 +8,7 @@ require_once($lang);
 
 
 $ids = $_SESSION['ids'];
+$numberTemplate = $_SESSION['numberTemplate'];
 $add_task = $_POST['add_task'];
 if ($add_task == 'login') {
     $setup = $_POST['action'];
@@ -44,9 +45,15 @@ if ($add_task == 'login') {
     foreach ($ids as $a) {
         $add_task = $_POST['add_task'];
         $time = Time();
+    }
+        if ($a!='t'){
+
+
         $r = add_task($add_task, $json_data, $time, $a);
 
-    }
+    }else{
+            $r = add_template($add_task, $json_data, $time, $numberTemplate);
+        }
 }
 
 if ($add_task == "new_accounts") {
@@ -65,16 +72,21 @@ if ($add_task == "new_accounts") {
 
         "data" => $st,
     );
+
     $json_data = json_encode($data, JSON_THROW_ON_ERROR);
 
     foreach ($ids as $a) {
         $add_task = $_POST['add_task'];
         $time = Time();
+    }
+    if ($a!='t'){
+
+
         $r = add_task($add_task, $json_data, $time, $a);
 
+    }else{
+        $r = add_template($add_task, $json_data, $time, $numberTemplate);
     }
-
-
 }
 if ($add_task == "global_invite") {
     $st[] = array(
@@ -91,16 +103,21 @@ if ($add_task == "global_invite") {
 
         "data" => $st,
     );
+
     $json_data = json_encode($data, JSON_THROW_ON_ERROR);
 
     foreach ($ids as $a) {
         $add_task = $_POST['add_task'];
         $time = Time();
+    }
+    if ($a!='t'){
+
+
         $r = add_task($add_task, $json_data, $time, $a);
 
+    }else{
+        $r = add_template($add_task, $json_data, $time, $numberTemplate);
     }
-
-
 }
 
 if ($add_task == "coockie") {
@@ -113,16 +130,21 @@ if ($add_task == "coockie") {
 
         "data" => $st,
     );
-    $json_data = json_encode($data);
+
+    $json_data = json_encode($data, JSON_THROW_ON_ERROR);
 
     foreach ($ids as $a) {
         $add_task = $_POST['add_task'];
         $time = Time();
+    }
+    if ($a!='t'){
+
+
         $r = add_task($add_task, $json_data, $time, $a);
 
+    }else{
+        $r = add_template($add_task, $json_data, $time, $numberTemplate);
     }
-
-
 }
 if ($add_task == "add_mail") {
     $st[] = array(
@@ -134,16 +156,21 @@ if ($add_task == "add_mail") {
 
         "data" => $st,
     );
-    $json_data = json_encode($data);
+
+    $json_data = json_encode($data, JSON_THROW_ON_ERROR);
 
     foreach ($ids as $a) {
         $add_task = $_POST['add_task'];
         $time = Time();
+    }
+    if ($a!='t'){
+
+
         $r = add_task($add_task, $json_data, $time, $a);
 
+    }else{
+        $r = add_template($add_task, $json_data, $time, $numberTemplate);
     }
-
-
 }
 
 if ($add_task == 'farm') {
@@ -163,15 +190,20 @@ if ($add_task == 'farm') {
 
         "data" => $st,
     );
-    $json_data = json_encode($data);
 
+    $json_data = json_encode($data, JSON_THROW_ON_ERROR);
 
     foreach ($ids as $a) {
         $add_task = $_POST['add_task'];
         $time = Time();
+    }
+    if ($a!='t'){
+
+
         $r = add_task($add_task, $json_data, $time, $a);
 
-
+    }else{
+        $r = add_template($add_task, $json_data, $time, $numberTemplate);
     }
 }
 if ($add_task == 'filling_accounts') {
@@ -187,15 +219,20 @@ if ($add_task == 'filling_accounts') {
 
         "data" => $st,
     );
-    $json_data = json_encode($data);
 
+    $json_data = json_encode($data, JSON_THROW_ON_ERROR);
 
     foreach ($ids as $a) {
         $add_task = $_POST['add_task'];
         $time = Time();
+    }
+    if ($a!='t'){
+
+
         $r = add_task($add_task, $json_data, $time, $a);
 
-
+    }else{
+        $r = add_template($add_task, $json_data, $time, $numberTemplate);
     }
 }
 
@@ -217,15 +254,20 @@ if ($add_task == 'post_to_group') {
 
         "data" => $st,
     );
-    $json_data = json_encode($data);
 
+    $json_data = json_encode($data, JSON_THROW_ON_ERROR);
 
     foreach ($ids as $a) {
         $add_task = $_POST['add_task'];
         $time = Time();
+    }
+    if ($a!='t'){
+
+
         $r = add_task($add_task, $json_data, $time, $a);
 
-
+    }else{
+        $r = add_template($add_task, $json_data, $time, $numberTemplate);
     }
 }
 
@@ -238,15 +280,20 @@ if ($add_task == 'erase_invite') {
 
         "data" => $st,
     );
-    $json_data = json_encode($data);
 
+    $json_data = json_encode($data, JSON_THROW_ON_ERROR);
 
     foreach ($ids as $a) {
         $add_task = $_POST['add_task'];
         $time = Time();
+    }
+    if ($a!='t'){
+
+
         $r = add_task($add_task, $json_data, $time, $a);
 
-
+    }else{
+        $r = add_template($add_task, $json_data, $time, $numberTemplate);
     }
 }
 
@@ -265,15 +312,19 @@ if ($add_task == 'parse_group') {
         "data" => $st,
     );
 
-    $json_data = json_encode($data);
-
+    $json_data = json_encode($data, JSON_THROW_ON_ERROR);
 
     foreach ($ids as $a) {
         $add_task = $_POST['add_task'];
         $time = Time();
+    }
+    if ($a!='t'){
+
+
         $r = add_task($add_task, $json_data, $time, $a);
 
-
+    }else{
+        $r = add_template($add_task, $json_data, $time, $numberTemplate);
     }
 }
 if ($add_task == 'invite_suggestions') {
@@ -298,15 +349,19 @@ if ($add_task == 'invite_suggestions') {
         "data" => $st,
     );
 
-    $json_data = json_encode($data);
-
+    $json_data = json_encode($data, JSON_THROW_ON_ERROR);
 
     foreach ($ids as $a) {
         $add_task = $_POST['add_task'];
         $time = Time();
+    }
+    if ($a!='t'){
+
+
         $r = add_task($add_task, $json_data, $time, $a);
 
-
+    }else{
+        $r = add_template($add_task, $json_data, $time, $numberTemplate);
     }
 }
 
@@ -333,15 +388,19 @@ if ($add_task == 'invite_from_group') {
         "data" => $st,
     );
 
-    $json_data = json_encode($data);
-
+    $json_data = json_encode($data, JSON_THROW_ON_ERROR);
 
     foreach ($ids as $a) {
         $add_task = $_POST['add_task'];
         $time = Time();
+    }
+    if ($a!='t'){
+
+
         $r = add_task($add_task, $json_data, $time, $a);
 
-
+    }else{
+        $r = add_template($add_task, $json_data, $time, $numberTemplate);
     }
 }
 
@@ -365,15 +424,19 @@ if ($add_task == 'post_to_profile') {
         "data" => $st,
     );
 
-    $json_data = json_encode($data);
-
+    $json_data = json_encode($data, JSON_THROW_ON_ERROR);
 
     foreach ($ids as $a) {
         $add_task = $_POST['add_task'];
         $time = Time();
+    }
+    if ($a!='t'){
+
+
         $r = add_task($add_task, $json_data, $time, $a);
 
-
+    }else{
+        $r = add_template($add_task, $json_data, $time, $numberTemplate);
     }
 }
 
@@ -396,15 +459,19 @@ if ($add_task == 'like') {
         "data" => $st,
     );
 
-    $json_data = json_encode($data);
-
+    $json_data = json_encode($data, JSON_THROW_ON_ERROR);
 
     foreach ($ids as $a) {
         $add_task = $_POST['add_task'];
         $time = Time();
+    }
+    if ($a!='t'){
+
+
         $r = add_task($add_task, $json_data, $time, $a);
 
-
+    }else{
+        $r = add_template($add_task, $json_data, $time, $numberTemplate);
     }
 }
 if ($add_task == 'happy') {
@@ -424,15 +491,19 @@ if ($add_task == 'happy') {
         "data" => $st,
     );
 
-    $json_data = json_encode($data);
-
+    $json_data = json_encode($data, JSON_THROW_ON_ERROR);
 
     foreach ($ids as $a) {
         $add_task = $_POST['add_task'];
         $time = Time();
+    }
+    if ($a!='t'){
+
+
         $r = add_task($add_task, $json_data, $time, $a);
 
-
+    }else{
+        $r = add_template($add_task, $json_data, $time, $numberTemplate);
     }
 }
 if ($add_task == 'commenting') {
@@ -457,15 +528,19 @@ if ($add_task == 'commenting') {
         "data" => $st,
     );
 
-    $json_data = json_encode($data);
-
+    $json_data = json_encode($data, JSON_THROW_ON_ERROR);
 
     foreach ($ids as $a) {
         $add_task = $_POST['add_task'];
         $time = Time();
+    }
+    if ($a!='t'){
+
+
         $r = add_task($add_task, $json_data, $time, $a);
 
-
+    }else{
+        $r = add_template($add_task, $json_data, $time, $numberTemplate);
     }
 }
 if ($add_task == 'comm_public') {
@@ -490,15 +565,19 @@ if ($add_task == 'comm_public') {
         "data" => $st,
     );
 
-    $json_data = json_encode($data);
-
+    $json_data = json_encode($data, JSON_THROW_ON_ERROR);
 
     foreach ($ids as $a) {
         $add_task = $_POST['add_task'];
         $time = Time();
+    }
+    if ($a!='t'){
+
+
         $r = add_task($add_task, $json_data, $time, $a);
 
-
+    }else{
+        $r = add_template($add_task, $json_data, $time, $numberTemplate);
     }
 }
 
@@ -522,15 +601,19 @@ if ($add_task == 'accept_friends') {
         "data" => $st,
     );
 
-    $json_data = json_encode($data);
-
+    $json_data = json_encode($data, JSON_THROW_ON_ERROR);
 
     foreach ($ids as $a) {
         $add_task = $_POST['add_task'];
         $time = Time();
+    }
+    if ($a!='t'){
+
+
         $r = add_task($add_task, $json_data, $time, $a);
 
-
+    }else{
+        $r = add_template($add_task, $json_data, $time, $numberTemplate);
     }
 }
 
@@ -546,18 +629,22 @@ if ($add_task == 'parse_active') {
     );
     $data = array(
 
-        'data' => $st,
+        "data" => $st,
     );
 
-    $json_data = json_encode($data);
-
+    $json_data = json_encode($data, JSON_THROW_ON_ERROR);
 
     foreach ($ids as $a) {
         $add_task = $_POST['add_task'];
         $time = Time();
+    }
+    if ($a!='t'){
+
+
         $r = add_task($add_task, $json_data, $time, $a);
 
-
+    }else{
+        $r = add_template($add_task, $json_data, $time, $numberTemplate);
     }
 }
 

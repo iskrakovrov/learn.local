@@ -17,6 +17,9 @@ $wo = $wrk['COUNT(*)'];
 $sql = 'SELECT COUNT(DISTINCT `account`) FROM task';
 $t = select($sql);
 $tas = $t['COUNT(DISTINCT `account`)'];
+$sql = 'SELECT COUNT(*) FROM templates';
+$templ = select($sql);
+$templ = $templ['COUNT(*)'];
 ?>
 <style>
     #navbarSupportedContent > ul > li > a > span {
@@ -135,7 +138,9 @@ $tas = $t['COUNT(DISTINCT `account`)'];
                             <li><a class="dropdown-item" href="#">Lists service</a></li>
                         </ul>
                     </li>
-
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="add_template.php">Task Templates <span class="badge badge-primary"><?php echo $templ ?></span></a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="posts" href="e_list.php?cat=5">Posts</a>
                     </li>

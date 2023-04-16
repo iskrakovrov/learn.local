@@ -31,9 +31,11 @@ require_once($lang);
 <?php
 include_once 'inc/header.php';
 $ids = $_SESSION['ids'];
+$numberTemplate = $_SESSION['numberTemplate'];
 $i = 0;
 session_start();
 $_SESSION['ids'] = $ids;
+$_SESSION['numberTemplate'] = $numberTemplate;
 
 
 ?>
