@@ -1,6 +1,8 @@
 <?php
 $sql = "SELECT * FROM lists WHERE cat = 7 OR cat = 9";
 $qw = selectAll($sql);
+$sql = "SELECT * FROM lists WHERE cat = 10";
+$qw1 = selectAll($sql);
 ?>
 
 <main class="container-fluid ">
@@ -64,6 +66,30 @@ $qw = selectAll($sql);
                     <label for="num_gr"><?php echo $txtfarmi6 ?></label>
                     <input type="text" name="num_gr" id="num_gr" class="form-control" value = "2-3" pattern="([0-9]{1,3})-([0-9]{1,3})" >
 
+                    <br>
+
+                    <input class="form-check-input" name="like_gr1" type="checkbox" value="like_gr1"
+                           id="like_gr1">
+                    <label class="form-check-label" for="like_gr1">
+                        Подписываться по списку групп и страниц
+                    </label>
+                    <br>
+                    <br>
+                    <label for="num_gr1">Количество подписок за раз</label>
+                    <input type="text" name="num_gr1" id="num_gr1" class="form-control" value = "2-3" pattern="([0-9]{1,3})-([0-9]{1,3})" >
+
+                    <br>
+                    <label for="cat1" class="control-label">Список групп и страниц (URL Groups)</label>
+
+                    <select name="cat1" id="cat1" class="form-control">
+                        <?php
+                        $i = 0;
+                        foreach ($qw1 as $b) {
+                            $i++; ?>
+                            <option value="<?php echo $b['id'] ?>"><?php echo $b['name']; ?></option>
+                        <?php } ?>
+                    </select>
+                    <br>
                     <br>
 
 

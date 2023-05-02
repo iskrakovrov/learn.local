@@ -273,3 +273,7 @@ $txtpgroup6 = 'Remove a group from the list if it has post moderation';
 $txtpgroup7 = 'Publish posts only within 24 hours.';
 $txtpgroup8 = 'If the account is not in a group, then join it?';
 $txtpgroup9 = 'List for collecting post URLs for further work';
+$txttasks1 = 'What to do?';
+$txttasks2 = 'Add tasks';
+$txttasks3 = 'Add template';
+$txttasks4 = 'Use template';

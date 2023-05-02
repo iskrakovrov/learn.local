@@ -48,14 +48,14 @@ $_SESSION['ids'] = $ids;
             </div>
 
             <form method="post" action="task.php">
-                <label for="addTask" class="control-label">Что делаем</label>
+                <label for="addTask" class="control-label"><?php echo $txttasks1?></label>
 
 
                 <select name="addTask" id="addTask" class="form-control">
 
-                    <option value="add_task.php">Создать задание</option>
-                    <option value="add_template.php">Создать шаблон</option>
-                    <option value="use_template.php">Использовать шаблон</option>
+                    <option value="add_task.php"><?php echo $txttasks2?></option>
+                    <option value="add_template.php"><?php echo $txttasks3?></option>
+                    <option value="use_template.php"><?php echo $txttasks4?></option>
 
 
                 </select>

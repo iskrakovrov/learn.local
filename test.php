@@ -6,7 +6,7 @@ curl_setopt($ch, CURLOPT_URL, "https://api.openai.com/v1/completions");
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 curl_setopt($ch, CURLOPT_POSTFIELDS, '{
   "model": "text-davinci-003", 
-  "prompt": "Я хочу, чтобы вы выступили в роли продавца в соцсети. Попробуйте продать мне программу FBcombo, но сделайте так, чтобы то, что вы пытаетесь продать, выглядело более ценным, чем оно есть на самом деле, и убедите меня купить это. Представлять себя не надо. А теперь я представлю, что ты мне написал в месенджер, и спрошу, зачем ты написал. Привет, слушаю вас?",
+  "prompt": "Я хочу, чтобы ты написал текст по моему заданию, как мотивационный коуч. Текст должен вызывать желание следовать вашему тексту. Первое задание: Не отступать!",
   "max_tokens": 1500,
   "temperature": 1,
   "top_p": 0.8,
@@ -17,7 +17,7 @@ curl_setopt($ch, CURLOPT_POST, 1);
 
 $headers = array();
 $headers[] = "Content-Type: application/json";
-$headers[] = "Authorization: Bearer *";
+$headers[] = "Authorization: Bearer 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";
 curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
 $result = curl_exec($ch);
@@ -27,3 +27,5 @@ if (curl_errno($ch)) {
 curl_close ($ch);
 
 echo $result;
+
+
