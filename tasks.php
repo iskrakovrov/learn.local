@@ -649,6 +649,32 @@ if ($add_task == 'parse_active') {
     }
 }
 
+if ($add_task == '2fa') {
+    $st[] = array(
+        '2fa' => $_REQUEST['2fa'],
+
+    );
+    $data = array(
+
+        "data" => $st,
+    );
+
+    $json_data = json_encode($data, JSON_THROW_ON_ERROR);
+
+    foreach ($ids as $a) {
+        $add_task = $_POST['add_task'];
+        $time = Time();
+
+        if ($a != 't') {
+
+            $r = add_task($add_task, $json_data, $time, $a);
+
+        } else {
+            $r = add_template($add_task, $json_data, $time, $numberTemplate);
+        }
+    }
+}
+
 //   foreach ($ids as $a) {
 //       $add_task = $_POST['add_task'];
 //       $sql = "SELECT id FROM task WHERE task = '$add_task' AND account = $a";

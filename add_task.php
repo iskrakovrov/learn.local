@@ -86,6 +86,13 @@ $_SESSION['numberTemplate'] = $numberTemplate;
                                 <?php echo $txttask3?>
                             </label>
                         </div>
+                        <!--  Фарм интересов -->
+                        <div class="form-check">
+                            <input class="form-check-input" name="task[]" type="checkbox" value="2fa.php" id="2fa">
+                            <label class="form-check-label" for="2fa">
+                                <?php echo $txttasks5 ?>
+                            </label>
+                        </div>
                         <!--  Добавить почту -->
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="add_mail.php" id="add_mail">

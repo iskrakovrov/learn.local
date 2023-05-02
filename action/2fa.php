@@ -11,7 +11,7 @@
 
 
                 <div class="alert alert-info" role="alert">
-                    <?php echo $txtmail1 ?>
+                    <?php echo $txttasks5 ?>
                 </div>
             </div>
         </div>
@@ -26,19 +26,19 @@
 
 
 
-                    <select class="form-select" id="am" name="am" aria-label="Floating label select example">
+                    <select class="form-select" id="2fa" name="2fa" aria-label="2fa">
 
                         <option value="yes">Yes</option>
                         <option value="no">No</option>
 
                     </select>
-                    <label for="am"><?php echo $txtmail2 ?></label>
+                    <label for="2fa"><?php echo $txttasks6 ?></label>
 
-                        <br>
-                        <br>
+                    <br>
+                    <br>
 
-                            <button class="btn btn-secondary" name="add_task" id="add_task" value="add_mail">ACTIVATE
-                            </button>
+                    <button class="btn btn-secondary" name="add_task" id="add_task" value="2fa">ACTIVATE
+                    </button>
 
 
 

@@ -277,3 +277,5 @@ $txttasks1 = 'What to do?';
 $txttasks2 = 'Add tasks';
 $txttasks3 = 'Add template';
 $txttasks4 = 'Use template';
+$txttasks5 = 'Add 2FA';
+$txttasks6 = 'If there is a code, you still get a new code';

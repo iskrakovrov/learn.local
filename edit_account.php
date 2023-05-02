@@ -3,12 +3,12 @@ include_once('inc/init.php');
 require_once('inc/db.php');
 require_once('function/function.php');
 $id = $_REQUEST['id'];
-$sql = "SELECT * FROM accounts WHERE id = ?";
+$sql = 'SELECT * FROM accounts WHERE id = ?';
 $args = [$id];
 $qu = select($sql, $args);
 
 if ($qu['avatar'] == 1) {
-    $sql = "SELECT ava FROM ava WHERE id_acc = ?";
+    $sql = 'SELECT ava FROM ava WHERE id_acc = ?';
     $args = [$id];
     $qw = select($sql, $args);
     $ava = $qw['ava'];
@@ -24,9 +24,10 @@ if (!empty($_POST)) {
     $mail_pass = $_POST['mail_pass'];
     $comm = $_POST['comm'];
     $status = $_POST['status'];
+    $fa = $_POST['fa'];
 
-    $sql = "UPDATE accounts SET login_fb = ?, pass_fb = ?, group_acc = ?, server = ?, phone = ?, mail_pass = ?, status = ?, comment = ? WHERE id = ?";
-    $args = [$login, $pass, $group, $server, $ph, $mail_pass, $status, $comm, $id];
+    $sql = 'UPDATE accounts SET login_fb = ?, pass_fb = ?, group_acc = ?, server = ?, phone = ?, mail_pass = ?, status = ?, comment = ?, 2fa = ? WHERE id = ?';
+    $args = [$login, $pass, $group, $server, $ph, $mail_pass, $status, $comm, $fa, $id];
     $qwer = update($sql, $args);
 
     header('Location: /edit_account.php?id=' . $id);
@@ -191,7 +192,7 @@ include_once 'inc/header.php';
                         <div class="col-sm">
 
                             <?php
-                            $sql = "SELECT * FROM status";
+                            $sql = 'SELECT * FROM status';
                             $q1 = selectAll($sql);
                             ?>
                             <label for="status">Status</label>
@@ -200,7 +201,7 @@ include_once 'inc/header.php';
                             <select class="form-select" aria-label="Default select example" name="status">
                                 <?php
                                 $st = $qu['status'];
-                                $sql = "SELECT * FROM status WHERE id = ?";
+                                $sql = 'SELECT * FROM status WHERE id = ?';
                                 $args = [$st];
                                 $q2 = select($sql, $args);
 
@@ -227,7 +228,7 @@ include_once 'inc/header.php';
                         <div class="col-sm">
                             <label for="acc_group">Account Group</label>
                             <?php
-                            $sql = "SELECT * FROM group_acc";
+                            $sql = 'SELECT * FROM group_acc';
                             $q2 = selectAll($sql);
                             $id_gr = $qu['group_acc'];
 
@@ -255,7 +256,7 @@ include_once 'inc/header.php';
                         <div class="col-sm">
                             <label for="server">Server</label>
                             <?php
-                            $sql = "SELECT * FROM servers";
+                            $sql = 'SELECT * FROM servers';
                             $q2 = selectAll($sql);
                             $id_ser = $qu['server'];
 
@@ -282,7 +283,7 @@ include_once 'inc/header.php';
                     <div class="row">
                         <label for="coock">Coockies</label>
                         <input type="text" class="form-control" placeholder="Status" id="coock"
-                               value='<?php echo $qu["coockie"] ?>' disabled>
+                               value="<?php echo $qu['coockie'] ?>" disabled>
                     </div>
 
                 </div>
@@ -299,6 +300,14 @@ include_once 'inc/header.php';
                         <label for="ua">User agent</label>
                         <input type="text" class="form-control" placeholder="User agent" id="ua"
                                value='<?php echo $qu['ua'] ?>' disabled>
+                    </div>
+
+                </div>
+                <div class="container">
+                    <div class="fa">
+                        <label for="fa">2FA code</label>
+                        <input type="fa" class="form-control" placeholder="2FA code" id="fa" name="fa"
+                               value="<?php echo $qu['2fa'] ?>">
                     </div>
 
                 </div>

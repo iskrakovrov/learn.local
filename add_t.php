@@ -17,7 +17,3 @@ if (empty($_REQUEST['add_task'])){
 }
 
 
-
-
-
-?>
