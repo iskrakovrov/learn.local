@@ -11,9 +11,10 @@ $sql = "DELETE FROM err WHERE created < ?";
 $args = [$time2];
 $q = delete($sql, $args);
 
-$sql = 'SELECT DISTINCT value FROM err;';
+$sql = 'SELECT DISTINCT value FROM err';
 //$sql = 'SELECT DISTINCT * FROM err LIMIT 1000';
 $q = selectAll($sql);
+
 ?>
 <!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
@@ -23,8 +24,9 @@ $q = selectAll($sql);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
-          rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
+        rel="stylesheet">
     <!-- Bootstrap CSS -->
     <link href="css/dt.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -40,6 +42,7 @@ include_once 'inc/header.php';
 
 ?>
 <main class="container-fluid ">
+
     <div class="row text-center">
         <h2><?php echo $txterr ?> </h2>
     </div>
@@ -62,94 +65,80 @@ include_once 'inc/header.php';
 
 
 
-            <div class="col-sm-8 text-center">
-<br>
-                <a class="btn btn-secondary" href="#" role="button"><?php echo $txterr1 ?></a>
-                <a class="btn btn-secondary" href="#" role="button"><?php echo $txterr2 ?></a>
-                <a class="btn btn-danger" href="del_error.php" role="button"><?php echo $txterr3 ?></a>
-                <br>
-                <table id="example" class="cell-border" style="width:100%">
-                    <thead>
-                    <tr>
-                        <th class="check" style="text-align: center;">
-                            <input type="checkbox" id="all" value=""/>
-                        </th>
-                        <th>Id Error</th>
-                        <th>Type error</th>
-                        <th>Count</th>
-                        <th>Action</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <?php
-                    $i = 0;
-                    foreach ($q as $a) {
-                        $i++; ?>
+                <div class="col-sm-8 text-center">
+                    <br>
+
+                    <a class="btn btn-danger" href="del_error.php" role="button"><?php echo $txterr3 ?></a>
+                    <br>
+                    <table id="example" class="cell-border" style="width:100%">
+                        <thead>
                         <tr>
-                            <td style="text-align: center;"><input type="checkbox" name="a[]"
-                                                                   value="<?php echo $a['id'] ?>">
-                            </td>
-                            <td><?php echo $a['value'] ?></td>
-                            <?php if ($a['type']>0) {
-                              $q1 = 'login Ok';
-                            }
-                            else {
-                                $q1 = 'login No Ok';
-                            }
-                            if ($a['type']==3) {
-                                $q1 = 'Time Out';
-                            }
 
-                            ?>
-
-                            <td><?php echo $q1 ?></td>
-                            <?php
-                            $value = $a['value'];
-                            $sql = "SELECT COUNT(*) FROM err WHERE value = '$value'";
-                            $cou = select($sql);
-                            $count = $cou['COUNT(*)']; ?>
-                            <td><?php echo $count ?></td>
-
-                            <td>
-                                <div class="col">
-
-                                    <a href="del_err.php?id=<?php echo $a['id'] ?>" class="btn btn-danger"
-                                       title="Delete">Delete <i class="bi bi-x-circle-fill"></i></a>
-                                </div>
-                            </td>
+                            <th>Id Error</th>
+                            <th>Type error</th>
+                            <th>Count</th>
+                            <th>Action</th>
                         </tr>
-                    <?php } ?>
+                        </thead>
+                        <tbody>
+                        <?php
+                        $i = 0;
+                        foreach ($q as $a) {
+                            $i++; ?>
+                            <tr>
+
+                                <td><?php echo $a['value'] ?></td>
+                                <?php if ($a['type'] > 0) {
+                                    $q1 = 'login Ok';
+                                } else {
+                                    $q1 = 'login No Ok';
+                                }
+                                if ($a['type'] == 3) {
+                                    $q1 = 'Time Out';
+                                }
+
+                                ?>
+
+                                <td><?php echo $q1 ?></td>
+                                <?php
+                                $value = $a['value'];
+                                $sql = "SELECT COUNT(*) FROM err WHERE value = '$value'";
+                                $cou = select($sql);
+                                $count = $cou['COUNT(*)']; ?>
+                                <td><?php echo $count ?></td>
+
+                                <td>
+                                    <div class="col">
+                                        <a href="err_report.php?id=<?php echo $a['value'] ?>" class="btn btn-success"
+                                           title="Add report">Add report <i class="bi bi-x-circle-fill"></i></a>
+                                        <a href="del_err.php?id=<?php echo $a['id'] ?>" class="btn btn-danger"
+                                           title="Delete">Delete <i class="bi bi-x-circle-fill"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                        <?php } ?>
 
 
-                    </tbody>
-                    <tfoot>
-                    <tr>
-                        <th></th>
-                        <th>Id Error</th>
-                        <th>Type error</th>
-                        <th>Count</th>
-                        <th>Action</th>
-                    </tr>
-                    </tfoot>
-                </table>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+
+                            <th>Id Error</th>
+                            <th>Type error</th>
+                            <th>Count</th>
+                            <th>Action</th>
+                        </tr>
+                        </tfoot>
+                    </table>
 
 
-            </div>
+                </div>
+
         </div>
     </div>
 
 
 </main>
-
-
-
-
-
-
-
-
-
-
 
 
 <!-- Option 1: Bootstrap Bundle with Popper -->

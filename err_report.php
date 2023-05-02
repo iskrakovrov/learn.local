@@ -6,29 +6,30 @@ require_once('function/function.php');
 $lang = $_SESSION['lang'] . '.php';
 require_once($lang);
 
-$id = $_SESSION['ids'];
+$err = $_GET['id'];
 $today = date('Y-m-d-H-i-s');
 $fname = 'error-' . $today . '.txt';
-
+$sql = 'SELECT * FROM err WHERE value = ?';
+$args = [$err];
+$qu = selectAll($sql, $args);
 $fp = fopen('tmp/' . $fname, 'w');
-foreach ($id as $b) {
-    $sql = 'SELECT * FROM err WHERE id = ?';
-    $args = [$b];
-    $qu = selectAll($sql, $args);
-    $err = $qu['value'];
-    foreach ($qu as $r) {
-        $sql = "SELECT login_fb, pass_fb, mail, mail_pass, imap_mail, 2fa, phone, coockie, bd, mb, yb, tocken FROM accounts WHERE id = ?";
-        $args = [$r];
-        $query = selectAll($sql, $args);
+
+
+foreach ($qu as $r) {
+    $err = $r['value'];
+    $id = $r['id_acc'];
+    $sql = 'SELECT login_fb, pass_fb, mail, mail_pass, imap_mail, 2fa, phone, coockie, bd, mb, yb, tocken FROM accounts WHERE id = ?';
+    $args = [$id];
+    $query = selectAll($sql, $args);
 
     // Открываем поток для записи
     foreach ($query as $a) {
-        //   echo $a;
-        //       fputcsv($fp, $a, ";");  // Записываем строки в поток
-        fwrite($fp, implode(';', $a) . "\r\n");
-    }
+
+        fwrite($fp, implode(';', $a) . "|" . $err . "\r\n");
+
     }
 }
+
 fclose($fp);
 ?>
 
@@ -36,9 +37,9 @@ fclose($fp);
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <!-- Required meta tags -->
-   <?php
-   require_once 'inc/meta.php';
-   ?>
+    <?php
+    require_once 'inc/meta.php';
+    ?>
     <title>FB Combo ERROR REPORT</title>
 </head>
 <body>
@@ -56,7 +57,7 @@ include_once 'inc/header.php';
 
 
             <div class="alert alert-info" role="alert">
-                <?php echo $txtexp ?>
+
 
                 <br>
             </div>
@@ -70,7 +71,7 @@ include_once 'inc/header.php';
 
                 <br>
                 <br>
-                <a class="btn btn-secondary" href="<?php echo 'tmp/'. $fname ?>" role="button" download>
+                <a class="btn btn-secondary" href="<?php echo 'tmp/' . $fname ?>" role="button" download>
                     DOWNLOAD</a>
                 <br>
 
