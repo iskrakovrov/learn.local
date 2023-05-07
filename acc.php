@@ -5,7 +5,7 @@ require_once('inc/db.php');
 require_once('function/function.php');
 
 $start = microtime(true);
-$sql = 'SELECT id, login_fb, pass_fb, id_fb, name, gender, avatar, created, group_acc, server, id_proxy, status, works, useacc, friends, last_start, tocken, mail, phone, adv FROM accounts';
+$sql = 'SELECT id, login_fb, pass_fb, id_fb, name, gender, avatar, created, group_acc, server, id_proxy, status, works, useacc, friends, last_start, tocken, mail, phone, adv, 2fa FROM accounts';
 $query = selectAll($sql);
 $sql = 'SELECT * FROM group_acc';
 $gr1 = selectAll($sql);
@@ -138,8 +138,12 @@ $ls = $a['last_start'];
     else {
         $lfb = $a['login_fb'];
     }
-
-
+    $fa = $a['2fa'];
+    if ($fa == 'NULL'||$fa == 'None') {
+    $fa = '-';
+    } else{
+        $fa = '+';
+    }
     $mysql_data[] = array(
 
         'ids' => $id,
@@ -161,6 +165,7 @@ $ls = $a['last_start'];
      'last_start' => $ls,
         'action' => $action,
         'spst' => $spst,
+        'fa' => $fa,
 
     );
 }

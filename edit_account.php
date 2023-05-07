@@ -283,7 +283,7 @@ include_once 'inc/header.php';
                     <div class="row">
                         <label for="coock">Coockies</label>
                         <input type="text" class="form-control" placeholder="Status" id="coock"
-                               value="<?php echo $qu['coockie'] ?>" disabled>
+                               value='<?php echo $qu['coockie'] ?>' disabled>
                     </div>
 
                 </div>

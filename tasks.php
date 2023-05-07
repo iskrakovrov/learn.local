@@ -216,6 +216,7 @@ if ($add_task == 'filling_accounts') {
         'work' => $_REQUEST['work'],
         'fname' => $_REQUEST['fname'],
         'lname' => $_REQUEST['lname'],
+        'cover' => $_REQUEST['cover'],
 
     );
     $data = array(

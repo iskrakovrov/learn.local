@@ -1,13 +1,13 @@
 <?php
-$sql = "SELECT * FROM lists WHERE cat = 2 OR cat = 9 LIMIT 500";
+$sql = 'SELECT * FROM lists WHERE cat = 2 OR cat = 9 LIMIT 500';
 $csity = selectAll($sql);
-$sql = "SELECT * FROM lists WHERE  cat = 9 LIMIT 500";
+$sql = 'SELECT * FROM lists WHERE  cat = 9 LIMIT 500';
 $edu = selectAll($sql);
-$sql = "SELECT * FROM lists WHERE  cat = 9 LIMIT 500";
+$sql = 'SELECT * FROM lists WHERE  cat = 9 LIMIT 500';
 $work = selectAll($sql);
-$sql = "SELECT * FROM lists WHERE  cat = 3 LIMIT 500";
+$sql = 'SELECT * FROM lists WHERE  cat = 3 LIMIT 500';
 $fname = selectAll($sql);
-$sql = "SELECT * FROM lists WHERE  cat = 3 LIMIT 500";
+$sql = 'SELECT * FROM lists WHERE  cat = 3 LIMIT 500';
 $lname = selectAll($sql);
 ?>
 <main class="container-fluid ">
@@ -32,7 +32,7 @@ $lname = selectAll($sql);
             <div class="col-sm-2 text-center">
                 <form method="post" onSubmit="return Complete();">
 
-<!-- Город рождения и проживания -->
+                    <!-- Город рождения и проживания -->
                     <label for="currc" class="control-label"><?php echo $txtfill2 ?></label>
 
                     <select name="currc" id="currc" class="form-control">
@@ -93,12 +93,20 @@ $lname = selectAll($sql);
                         <?php } ?>
                     </select>
 
+
                     <br>
+                    <label for="cover">Install cover</label>
+                    <select class="form-select" id="cover" name="cover">
+
+                        <option value="no">No</option>
+                        <option value="yes">Yes</option>
+
+                    </select>
+
                     <br>
 
                     <button class="btn btn-secondary" name="add_task" id="add_task" value="filling_accounts">ACTIVATE
                     </button>
-
 
 
                 </form>

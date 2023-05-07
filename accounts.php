@@ -113,13 +113,15 @@ require_once 'inc/alerts.php';
 
                     <option value="" disabled="disabled">----------</option>
                     <?php foreach ($gg as $g) { ?>
-                        <option value="go_group.php?gr=<?php echo $g['id'] ?>"><?php echo $txtaccounts40 . $g['name_group'] ?></option>
+                        <option
+                            value="go_group.php?gr=<?php echo $g['id'] ?>"><?php echo $txtaccounts40 . $g['name_group'] ?></option>
 
                     <?php } ?>
 
                     <option value="" disabled="disabled">----------</option>
                     <?php foreach ($ss as $s) { ?>
-                        <option value="go_server.php?se=<?php echo $s['id'] ?>"><?php echo $txtaccounts41 . $s['name_server'] ?></option>
+                        <option
+                            value="go_server.php?se=<?php echo $s['id'] ?>"><?php echo $txtaccounts41 . $s['name_server'] ?></option>
 
                     <?php } ?>
                     <option value="" disabled="disabled">----------</option>
@@ -155,7 +157,7 @@ require_once 'inc/alerts.php';
 
 
             </div>
-          <br>
+            <br>
             <table>
                 <tbody>
                 <tr>
@@ -178,7 +180,7 @@ require_once 'inc/alerts.php';
                 <tr>
                     <th class="check" style="text-align: center;">
                         <label for="all"></label>
-                        <input type="checkbox"  id="all" value=""/>
+                        <input type="checkbox" id="all" value=""/>
                     </th>
                     <th>Login</th>
                     <th>Mail</th>
@@ -198,6 +200,7 @@ require_once 'inc/alerts.php';
                     <th>Last Start</th>
                     <th>Action</th>
                     <th>!</th>
+                    <th>2fa</th>
                 </tr>
                 </thead>
 
@@ -222,6 +225,8 @@ require_once 'inc/alerts.php';
                     <th>Last Start</th>
                     <th>Action</th>
                     <th>!</th>
+                    <th>2fa</th>
+
                 </tr>
                 </tfoot>
 
@@ -245,13 +250,6 @@ require_once 'inc/alerts.php';
 <script type="text/javascript" charset="utf-8" src="js/ColumnFilterWidgets.js"></script>
 
 
-
-
-
-
-
-
-
 <script>
     $('#alert').delay(5000).fadeOut('slow');
 
@@ -259,8 +257,6 @@ require_once 'inc/alerts.php';
         $('#dr_table tbody :checkbox').prop('checked', $(this).is(':checked'));
         e.stopImmediatePropagation();
     });
-
-
 
 
     let dr_table;
@@ -282,7 +278,6 @@ require_once 'inc/alerts.php';
         dom: '<"top"lpif<"clear">>rt<"bottom"lpif<"clear">>',
 
 
-
         "ajax": "acc.php",
         "deferRender": true,
         "columns": [
@@ -299,14 +294,15 @@ require_once 'inc/alerts.php';
             {mData: 'status'},
             {mData: 'task'},
             {mData: 'use'},
-            {mData: 'create',
+            {
+                mData: 'create',
 
-                render: function ( data, type, row ) {
+                render: function (data, type, row) {
                     // If display or filter data is requested, format the date
-                    if ( type === 'display' || type === 'filter' ) {
-                        var d = new Date( data * 1000 );
+                    if (type === 'display' || type === 'filter') {
+                        var d = new Date(data * 1000);
 
-                        return d.getDate() +'.'+ (d.getMonth()+1) +'.'+ d.getFullYear() + ' - '+ d.getHours() + ':'+ d.getMinutes()  ;
+                        return d.getDate() + '.' + (d.getMonth() + 1) + '.' + d.getFullYear() + ' - ' + d.getHours() + ':' + d.getMinutes();
                     }
 
                     // Otherwise the data type requested (`type`) is type detection or
@@ -314,17 +310,18 @@ require_once 'inc/alerts.php';
                     // that, unaltered
                     return data;
                 }
-                },
+            },
             {mData: 'friends'},
             {mData: 'tocken'},
             {mData: 'adv'},
-            {mData: 'last_start' ,
-                render: function ( data, type, row ) {
+            {
+                mData: 'last_start',
+                render: function (data, type, row) {
                     // If display or filter data is requested, format the date
-                    if ( type === 'display' || type === 'filter' ) {
-                        var d = new Date( data * 1000 );
+                    if (type === 'display' || type === 'filter') {
+                        var d = new Date(data * 1000);
 
-                        return d.getDate() +'.'+ (d.getMonth()+1) +'.'+ d.getFullYear() + ' - '+ d.getHours() + ':'+ d.getMinutes()  ;
+                        return d.getDate() + '.' + (d.getMonth() + 1) + '.' + d.getFullYear() + ' - ' + d.getHours() + ':' + d.getMinutes();
                     }
 
                     // Otherwise the data type requested (`type`) is type detection or
@@ -332,55 +329,63 @@ require_once 'inc/alerts.php';
                     // that, unaltered
                     return data;
                 }
-                },
+            },
             {mData: 'action'},
-            {mData: 'spst'}],
-
-
-
-        "aoColumnDefs": [
-            {"bSortable": false, "aTargets": [-1]}
+            {mData: 'spst'},
+            {mData: 'fa'}
         ],
 
 
-        "sLengthMenu": "Records per page: _MENU_",
-        "sInfo": "Total of _TOTAL_ records (showing _START_ to _END_)",
-        "sInfoFiltered": "(filtered from _MAX_ total records)",
+        "aoColumnDefs":
+            [
+                {"bSortable": false, "aTargets": [-1]}
+            ],
 
 
-
-        'columnDefs': [{
-            'targets': [0, 4, 5, 6, 7, 8, 9, 11, 14, 15], // column index (start from 0)
-            'orderable': false, // set orderable false for selected columns
-        }],
-
-
-
+        "sLengthMenu":
+            "Records per page: _MENU_",
+        "sInfo":
+            "Total of _TOTAL_ records (showing _START_ to _END_)",
+        "sInfoFiltered":
+            "(filtered from _MAX_ total records)",
 
 
-        initComplete: function () {
-            this.api()
-                .columns([4, 5, 6, 7, 8, 9, 11, 14, 15])
-                .every(function () {
-                    const column = this;
-                    const select = $('<select><option value=""></option></select>')
-                        .appendTo($(column.header()))
-                        .on('change', function () {
-                            const val = $.fn.dataTable.util.escapeRegex($(this).val());
+        'columnDefs':
+            [{
+                'targets': [0, 4, 5, 6, 7, 8, 9, 11, 14, 15], // column index (start from 0)
+                'orderable': false, // set orderable false for selected columns
+            }],
 
-                            column.search(val ? '^' + val + '$' : '', true, false).draw();
-                        });
 
-                    column
-                        .data()
-                        .unique()
-                        .sort()
-                        .each(function (d, j) {
-                            select.append('<option value="' + d + '">' + d + '</option>');
-                        });
-                });
-        },
-    });
+        initComplete
+    :
+
+    function () {
+        this.api()
+            .columns([4, 5, 6, 7, 8, 9, 11, 14, 15])
+            .every(function () {
+                const column = this;
+                const select = $('<select><option value=""></option></select>')
+                    .appendTo($(column.header()))
+                    .on('change', function () {
+                        const val = $.fn.dataTable.util.escapeRegex($(this).val());
+
+                        column.search(val ? '^' + val + '$' : '', true, false).draw();
+                    });
+
+                column
+                    .data()
+                    .unique()
+                    .sort()
+                    .each(function (d, j) {
+                        select.append('<option value="' + d + '">' + d + '</option>');
+                    });
+            });
+    }
+
+    ,
+    })
+    ;
 
 
     $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
