@@ -181,3 +181,30 @@ if (empty($qw)) {
     $sql = "CREATE TABLE `template` ( `id` INT NOT NULL AUTO_INCREMENT , `id_template` INT NOT NULL , `task` VARCHAR(25) NOT NULL , `setup` VARCHAR(255) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;";
     $qw = create($sql);
 }
+
+$sql = "SHOW TABLES LIKE 'oai'";
+$qw = create($sql);
+
+if (empty($qw)) {
+
+    $sql = "CREATE TABLE `oai` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `code` VARCHAR(100) NOT NULL , `status` INT(2) NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB";
+    $qw = create($sql);
+}
+$sql = "SELECT * FROM cat_lists WHERE id = 12";
+$qw = select($sql);
+if (empty($qw)) {
+    $sql = "INSERT INTO `cat_lists` (`id`, `cat`, `name`) VALUES ('12', '12', 'Chat GPT Prompts')";
+    $qw = insert($sql);
+}
+$sql = "SHOW TABLES LIKE 'commentoai'";
+$qw = create($sql);
+
+if (empty($qw)) {
+
+    $sql = "CREATE TABLE `commentoai` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `url_post` VARCHAR(255) NOT NULL , `text_post` TEXT NOT NULL , `comment` TEXT NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;";
+    $qw = create($sql);
+    $sql = "ALTER TABLE `commentoai` ADD `id_acc` INT(11) NOT NULL AFTER `comment`;";
+    $qw = create($sql);
+}
+
+

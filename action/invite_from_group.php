@@ -1,12 +1,14 @@
 <?php
-$sql = "SELECT * FROM lists WHERE cat = 2 OR cat = 9";
+$sql = 'SELECT * FROM lists WHERE cat = 2 OR cat = 9';
 $geo1 = selectAll($sql);
-$sql = "SELECT * FROM lists WHERE cat = 3 OR cat = 9";
+$sql = 'SELECT * FROM lists WHERE cat = 3 OR cat = 9';
 $name1 = selectAll($sql);
-$sql = "SELECT * FROM lists WHERE cat = 1 OR cat = 9";
+$sql = 'SELECT * FROM lists WHERE cat = 1 OR cat = 9';
 $bl1 = selectAll($sql);
-$sql = "SELECT * FROM lists WHERE cat = 10 OR cat = 9";
+$sql = 'SELECT * FROM lists WHERE cat = 10 OR cat = 9';
 $gr1 = selectAll($sql);
+$sql = 'SELECT * FROM lists WHERE cat = 4';
+$me1 = selectAll($sql);
 ?>
 
 <main class="container-fluid ">
@@ -75,7 +77,7 @@ $gr1 = selectAll($sql);
 
                     <br>
                     <!-- ГЕО -->
-                    <label for="geo" class="control-label"><?php echo $txtinv31 ?></label>
+                    <label for="geo" class="control-label"><?php echo $txtinv31 ?> <?php echo $txtinvg1 ?></label>
 
                     <select name="geo" id="geo" class="form-control">
                         <option value="all">ALL</option>
@@ -169,6 +171,18 @@ $gr1 = selectAll($sql);
 
 
                     <br>
+                    <label for="parse">Parse member?</label>
+                    <select class="form-select" id="parse" name="parse">
+
+                        <option value="no">No</option>
+                        <?php
+                        $i = 0;
+                        foreach ($me1 as $s) {
+                            $i++; ?>
+                            <option value="<?php echo $s['id'] ?>"><?php echo $s['name']; ?></option>
+                        <?php } ?>
+
+                    </select>
                     <br>
 
                     <button class="btn btn-secondary" name="add_task" id="add_task" value="invite_from_group">ACTIVATE

@@ -5,7 +5,7 @@ require_once('function/function.php');
 $lang = $_SESSION['lang'] . '.php';
 require_once($lang);
 $cat = $_REQUEST['id'];
-$sql = "SELECT cat FROM lists WHERE id=?";
+$sql = 'SELECT cat FROM lists WHERE id=?';
 $args =[$cat];
 $qw = select($sql, $args);
 if ($qw['cat'] == 5) {
@@ -61,17 +61,17 @@ if (!empty($_REQUEST['key'])) {
 <?php
 include_once 'inc/header.php';
 //$cat = $_REQUEST['id'];
-$sql = "SELECT COUNT(*) FROM value_lists WHERE list = ?";
+$sql = 'SELECT COUNT(*) FROM value_lists WHERE list = ?';
 $args = [$cat];
 $count = select($sql, $args);
 $cc = $count['COUNT(*)'];
 
-$sql = "SELECT * FROM lists WHERE id = ?";
+$sql = 'SELECT * FROM lists WHERE id = ?';
 $args = [$cat];
 $nn = select($sql, $args);
 $n = $nn['name'];
 
-$sql = "SELECT * FROM value_lists WHERE list = ? LIMIT 1000";
+$sql = 'SELECT * FROM value_lists WHERE list = ? LIMIT 1000';
 $args = [$cat];
 $ser = selectAll($sql, $args);
 

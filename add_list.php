@@ -89,6 +89,8 @@ include_once 'inc/header.php'
                             <option value="10">Lists Groups</option>
                             <option value="9">Additional lists</option>
                             <option value="11">URL lists</option>
+                            <option value="12">Chat GPT Promts</option>
+
                         </select>
                     </div>
                     <br>
@@ -122,6 +124,7 @@ include_once 'inc/header.php'
                             <option value="10">Lists Groups</option>
                             <option value="9">Additional lists</option>
                             <option value="11">URL lists</option>
+                            <option value="12">Chat GPT Promts</option>
                         </select>
                     </div>
                     <br>

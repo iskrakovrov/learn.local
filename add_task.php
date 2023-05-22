@@ -100,6 +100,13 @@ $_SESSION['numberTemplate'] = $numberTemplate;
                                 <?php echo $txttask30 ?>
                             </label>
                         </div>
+                        <!--  заполнение акков -->
+                        <div class="form-check">
+                            <input class="form-check-input" name="task[]" type="checkbox" value="filling_accounts.php" id="filling_accounts">
+                            <label class="form-check-label" for="filling_accounts">
+                                <?php echo $txttask16?>
+                            </label>
+                        </div>
                         <!--  Прокачка новорегов -->
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="new_accounts.php" id="new_accounts">
@@ -207,12 +214,7 @@ $_SESSION['numberTemplate'] = $numberTemplate;
                                 <?php echo $txttask15?>
                             </label>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" name="task[]" type="checkbox" value="filling_accounts.php" id="filling_accounts">
-                            <label class="form-check-label" for="filling_accounts">
-                                <?php echo $txttask16?>
-                            </label>
-                        </div>
+
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="" id="task6" disabled>
                             <label class="form-check-label" for="defaultCheck2">
@@ -243,6 +245,12 @@ $_SESSION['numberTemplate'] = $numberTemplate;
                             <input class="form-check-input" name="task[]" type="checkbox" value="accept_friends.php" id="accept_friends">
                             <label class="form-check-label" for="accept_friends">
                                 <?php echo $txttask21?>
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" name="task[]" type="checkbox" value="comoai.php" id="comoai" >
+                            <label class="form-check-label" for="comoai">
+                                <?php echo 'Comments OpenAi'?>
                             </label>
                         </div>
                         <div class="form-check">

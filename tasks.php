@@ -381,6 +381,7 @@ if ($add_task == 'invite_from_group') {
         'gbl' => $_REQUEST['gbl'],
         'confirm' => $_REQUEST['confirm'],
         'num_co' => $_REQUEST['num_co'],
+        'parse' => $_REQUEST['parse'],
         'f24' => $_REQUEST['f24'],
 
 
@@ -546,6 +547,44 @@ if ($add_task == 'commenting') {
     }
 }
 if ($add_task == 'comm_public') {
+    $setup = $_POST['action'];
+    $st[] = array(
+
+
+
+        'url' => $_REQUEST['url'],
+        'coml' => $_REQUEST['coml'],
+        'num_cp' => $_REQUEST['num_cp'],
+        'num_cd' => $_REQUEST['num_cd'],
+        'pause' => $_REQUEST['pause'],
+        'like' => $_REQUEST['like'],
+        'f24' => $_REQUEST['f24'],
+
+
+
+    );
+    $data = array(
+
+        "data" => $st,
+    );
+
+    $json_data = json_encode($data, JSON_THROW_ON_ERROR);
+
+    foreach ($ids as $a) {
+        $add_task = $_POST['add_task'];
+        $time = Time();
+
+        if ($a != 't') {
+
+            $r = add_task($add_task, $json_data, $time, $a);
+
+        } else {
+            $r = add_template($add_task, $json_data, $time, $numberTemplate);
+        }
+    }
+}
+
+if ($add_task == 'comoai') {
     $setup = $_POST['action'];
     $st[] = array(
 

@@ -60,7 +60,7 @@ $templ = $templ['COUNT(*)'];
                         <ul class="dropdown-menu" aria-labelledby="settings">
                             <li><a class="dropdown-item" href="servers.php">Servers</a></li>
                             <li><a class="dropdown-item" href="groups.php">Accounts group</a></li>
-                            <li><a class="dropdown-item" href="#">OpenAi</a></li>
+                            <li><a class="dropdown-item" href="open_ai.php">OpenAi</a></li>
                             <li><a class="dropdown-item" href="options.php">Options</a></li>
                             <li><a class="dropdown-item" href="settings.php">Settings</a></li>
                             <li>
@@ -132,7 +132,7 @@ $templ = $templ['COUNT(*)'];
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="#">Lists IMG</a></li>
+                            <li><a class="dropdown-item" href="e_list.php?cat=12">Chat GPT Prompts</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
