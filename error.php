@@ -11,7 +11,7 @@ $sql = "DELETE FROM err WHERE created < ?";
 $args = [$time2];
 $q = delete($sql, $args);
 
-$sql = 'SELECT DISTINCT value FROM err';
+$sql = 'SELECT DISTINCT value, type FROM err';
 //$sql = 'SELECT DISTINCT * FROM err LIMIT 1000';
 $q = selectAll($sql);
 
@@ -88,14 +88,19 @@ include_once 'inc/header.php';
                             <tr>
 
                                 <td><?php echo $a['value'] ?></td>
-                                <?php if ($a['type'] > 0) {
+                                <?php
+                                $er = $a['type'];
+
+
+                                if ($er == 0) {
                                     $q1 = 'login Ok';
-                                } else {
+                                } elseif ($er == 1) {
                                     $q1 = 'login No Ok';
-                                }
-                                if ($a['type'] == 3) {
+                                } elseif ($er == 3) {
                                     $q1 = 'Time Out';
                                 }
+
+
 
                                 ?>
 

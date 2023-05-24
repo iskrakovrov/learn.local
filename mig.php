@@ -155,7 +155,7 @@ if (empty($qw)) {
     $qw = create($sql);
     $sql = "ALTER TABLE `change_password` ADD `id_fb` BIGINT NULL AFTER `created`";
     $qw = create($sql);
-  }
+}
 $sql = "SHOW COLUMNS FROM change_mail WHERE FIELD = 'id_fb'";
 $qw = create($sql);
 if (empty($qw)) {
@@ -207,4 +207,10 @@ if (empty($qw)) {
     $qw = create($sql);
 }
 
+$sql = "SELECT * FROM status WHERE id = 20";
+$qw = select($sql);
+if (empty($qw)) {
+    $sql = "INSERT INTO `status` (`id`, `status`) VALUES ('20', 'TimeOut')";
+    $qw = insert($sql);
+}
 
