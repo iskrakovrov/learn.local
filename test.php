@@ -1,49 +1,22 @@
-<?php
+<script
+    src="https://code.jquery.com/jquery-3.7.0.js"
+    integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+    crossorigin="anonymous"></script>
+<script>
+    var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "http://soundcloud.com/oembed",
+        "method": "POST",
+        "headers": {},
+        "data": {
+            "format": "json",
+            "url": "http://soundcloud.com/forss/flickermood"
+        }
+    }
 
-require_once('inc/db.php');
-require_once('function/function.php');
-//$text = 'Привет';
-$text = $_GET['text'];
-$sql = 'SELECT code FROM oai WHERE status = ? LIMIT 1';
-$argc = [0];
-$qw1 = select($sql,$argc);
-$apioai = $qw1['code'];
-$sql = 'SELECT value FROM value_lists where list = 60 ORDER BY rand() LIMIT 1';
-$argc = 60;
-$qw = select($sql);
-$ch = curl_init();
-$promt = $qw['value'];
-$promt.= '"';
-$promt.= $text;
-$promt.= '"';
-$data = [
-    'model' => 'text-davinci-003',
-    'prompt'=> $promt,
-    'max_tokens' => 1500,
-    'temperature'=> 1,
-    'top_p'=> 0.8,
-    'frequency_penalty' => 0,
-    'presence_penalty'=> 0
-];
-
-curl_setopt($ch, CURLOPT_URL, "https://api.openai.com/v1/completions");
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
-curl_setopt($ch, CURLOPT_POST, 1);
-
-$headers = array();
-$headers[] = "Content-Type: application/json";
-$h = 'Authorization: Bearer ';
-$h .= $apioai;
-$headers[] = $h;
-curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-
-$result = curl_exec($ch);
-if (curl_errno($ch)) {
-    echo 'Error:' . curl_error($ch);
-}
-curl_close ($ch);
-
-echo $result;
-
+    $.ajax(settings).done(function (response) {
+        console.log(response);
+    });
+</script>
 

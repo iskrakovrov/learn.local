@@ -7,7 +7,7 @@ $id = $_SESSION['ids'];
 $yy = $_GET['se'];
 if (!empty($yy)) {
     foreach ($id as $a) {
-        $sql = "UPDATE accounts SET server = ? WHERE id = ?";
+        $sql = 'UPDATE accounts SET server = ? WHERE id = ?';
         $args = [$yy, $a];
         $q = update($sql, $args);
     }

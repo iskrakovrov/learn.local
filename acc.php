@@ -51,26 +51,50 @@ foreach ($query as $a) {
     if ($tk < 0) {
         $tk = 0;
     }
+
+
     $id_gr = $a['group_acc'];
+    $gr2 = array_filter($gr1, fn (array $data2): bool => $data2['id'] == $id_gr);
+    if (!empty($gr2)) {
 
 
-    foreach ($gr1 as $z) {
-        if ($z['id'] == $id_gr) {
+        foreach ($gr2 as $z){
             $gr = $z['name_group'];
         }
+    }else{
+        $gr = 'No Group';
     }
+
+
+
+//    $id_gr = $a['group_acc'];
+
+
+//    foreach ($gr1 as $z) {
+//        if ($z['id'] == $id_gr) {
+//            $gr = $z['name_group'];
+ //       }
+ //   }
 
 $data = $a['created'];
  //   $data = date('d  M Y', $a['created']);
-    $id_s = $a['server'];
 
-    foreach ($ser1 as $z) {
-        if ($z['id'] == $id_s) {
-            $ser = $z['name_server'];
-        } else {
-            $ser = 'Not server';
-        }
-    }
+
+     $id_s = $a['server'];
+    $ser2 = array_filter($ser1, fn (array $data1): bool => $data1['id'] == $id_s);
+if (!empty($ser2)) {
+
+
+foreach ($ser2 as $y){
+    $ser = $y['name_server'];
+}
+}else{
+    $ser = 'No Server';
+}
+
+
+
+
     if ($a['works'] == '0') {
         $spst = '';
     } else {
