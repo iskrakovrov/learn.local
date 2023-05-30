@@ -381,3 +381,91 @@ function add_template($add_task, $json_data, $time, $numberTemplate)
 
 }
 
+function checkAPIKey($apiKey) {
+    // Создание HTTP-запроса к API-серверу для проверки ключа
+    $url = 'https://api.openai.com/v1/engines/text-davinci-003/completions';
+
+
+
+    $headers = array(
+        'Content-Type: application/json',
+        'Authorization: Bearer ' . $apiKey
+    );
+
+    $data = array(
+        'prompt' => 'Привет, как дела?'
+    );
+
+    $ch = curl_init();
+
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    $response = curl_exec($ch);
+
+    curl_close($ch);
+
+    // Проверка ответа от API-сервера
+    if ($response === false) {
+        return false; // Ошибка при отправке запроса
+    }
+
+    $decodedResponse = json_decode($response, true);
+
+    if (isset($decodedResponse['id']) && isset($decodedResponse['object']) && isset($decodedResponse['model'])) {
+        return true; // Ключ действителен
+    } else {
+        return false; // Ключ недействителен
+    }
+}
+
+
+function checkAPIBalance($apiKey)  {
+
+
+    $dates = getLast100Days();
+    $startDate = $dates[0];
+    $endDate = $dates[1];
+
+// Создание URL с использованием полученных дат
+    $url = 'https://api.openai.com/v1/dashboard/billing/usage?start_date=' . $startDate . '&end_date=' . $endDate;
+
+    $headers = array(
+        'Content-Type: application/json',
+        'Authorization: Bearer ' . $apiKey
+    );
+
+    $ch = curl_init();
+
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    $response = curl_exec($ch);
+
+    curl_close($ch);
+
+    if ($response === false) {
+        return false; // Ошибка при отправке запроса
+    }
+
+    $decodedResponse = json_decode($response, true);
+
+    if (isset($decodedResponse['total_usage'])) {
+        $totalUsage = $decodedResponse['total_usage'];
+        return $totalUsage; // Возвращает общее количество токенов
+    } else {
+        return false; // Не удалось получить информацию о балансе
+    }
+}
+
+function getLast100Days() {
+    $endDate = date('Y-m-d'); // Текущая дата
+
+    $startDate = date('Y-m-d', strtotime('-100 days', strtotime($endDate))); // Вычисление даты, отстоящей от текущей на 100 дней
+
+    return array($startDate, $endDate); // Возвращает массив с начальной и конечной датами
+}

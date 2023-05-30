@@ -100,6 +100,9 @@ require_once($lang);
 
 
                                 <td>
+                                    <a href="uniq.php?id=<?php echo $a['id'] ?>" class="btn btn-secondary"
+                                       title="Uniq"
+                                    >Uniq <i class="bi bi-x-circle-fill"></i></a>
                                     <a href="edit_list.php?id=<?php echo $a['id'] ?>" class="btn btn-success"
                                        title="Edit list"
                                        >Edit list <i class="bi bi bi-pen"></i></a>

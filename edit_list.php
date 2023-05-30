@@ -6,10 +6,10 @@ $lang = $_SESSION['lang'] . '.php';
 require_once($lang);
 $cat = $_REQUEST['id'];
 $sql = 'SELECT cat FROM lists WHERE id=?';
-$args =[$cat];
+$args = [$cat];
 $qw = select($sql, $args);
 if ($qw['cat'] == 5) {
-    header('Location: edit_list_posts.php?id='. $cat);
+    header('Location: edit_list_posts.php?id=' . $cat);
     exit();
 }
 
@@ -47,8 +47,9 @@ if (!empty($_REQUEST['key'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
-          rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
+        rel="stylesheet">
     <!-- Bootstrap CSS -->
     <link href="css/dt.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -96,14 +97,16 @@ $ser = selectAll($sql, $args);
     <div class="row justify-content-center">
         <div class="col-6 text-center">
             <form method="post">
-    <textarea class="form-control rounded-0" id="key" name="key" rows="10"></textarea>
+                <textarea class="form-control rounded-0" id="key" name="key" rows="10"></textarea>
                 <br>
                 <br>
                 <button type="submit" class="btn btn-primary">Submit</button>
                 <br>
+
                 <br>
 
-                <a class="btn btn-primary" href="del_all_val.php?id=<?php echo $cat ?>" role="button">DELETE ALL VALUES</a>
+                <a class="btn btn-primary" href="del_all_val.php?id=<?php echo $cat ?>" role="button">DELETE ALL
+                    VALUES</a>
                 <br>
                 <br>
                 <a class="btn btn-info" href="export_list.php?id=<?php echo $cat ?>" role="button">
@@ -146,8 +149,6 @@ $ser = selectAll($sql, $args);
 
                             <td>
                                 <div class="col">
-
-
                                     <a href="del_val.php?id=<?php echo $a['id'] ?>" class="btn btn-danger"
                                        title="Delete value"
                                        onClick="return confirm( 'WARNING!!! DELETE VALUE?' )">Delete

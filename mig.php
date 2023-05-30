@@ -213,4 +213,25 @@ if (empty($qw)) {
     $sql = "INSERT INTO `status` (`id`, `status`) VALUES ('20', 'TimeOut')";
     $qw = insert($sql);
 }
+$sql = "SHOW COLUMNS FROM commentoai WHERE FIELD = 'posted'";
+$qw = create($sql);
+if (empty($qw)) {
+    $sql = "ALTER TABLE `commentoai` ADD `posted` INT(2) NULL AFTER `id_acc`";
+    $qw = create($sql);
+}
+$sql = "SHOW COLUMNS FROM oai WHERE FIELD = 'usage'";
+$qw = create($sql);
+if (empty($qw)) {
+    $sql = "ALTER TABLE `oai` ADD `usage` VARCHAR(255) NULL AFTER `status`";
+    $qw = create($sql);
+}
+$sql = "SHOW COLUMNS FROM commentoai WHERE FIELD = 'created'";
+$qw = create($sql);
+if (empty($qw)) {
+    $sql = "ALTER TABLE `commentoai` ADD `created` int(25) NULL AFTER `posted`";
+    $qw = create($sql);
+}
+
+
+
 

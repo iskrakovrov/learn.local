@@ -49,6 +49,11 @@ $ser = selectAll($sql);
                 <a class="btn btn-secondary" href="add_oai.php" role="button">Add key</a>
 
         </div>
+        <div class="col text-center">
+            <form action="del_keys.php" method="post">
+                <a class="btn btn-secondary" href="add_oai.php" role="button">Add key</a>
+
+        </div>
     </div>
 
     <div class="container-fluid">
@@ -62,6 +67,7 @@ $ser = selectAll($sql);
                 </th>
                 <th>Chat Open_ai key</th>
                 <th>Status</th>
+                <th>Usage</th>
                 <th>Action</th>
             </tr>
             </thead>
@@ -81,11 +87,14 @@ $ser = selectAll($sql);
                         else{
                             echo 'bad';
                         }?></td>
+                    <td><?php echo $a['usage'] ?></td>
 
                     <td>
                         <div class="col">
 
-
+                            <a href="checkoai.php?id=<?php echo $a['id'] ?>" class="btn btn-success"
+                               title="Check Key"
+                            >Check Key <i class="bi bi-x-circle-fill"></i></a>
                             <a href="del_oai.php?id=<?php echo $a['id'] ?>" class="btn btn-danger"
                                title="Delete Key"
                                >Delete key <i class="bi bi-x-circle-fill"></i></a>
@@ -101,6 +110,7 @@ $ser = selectAll($sql);
                 <th></th>
                 <th>Chat Open_ai key</th>
                 <th>Status</th>
+                <th>Usage</th>
                 <th>Action</th>
             </tr>
             </tfoot>
