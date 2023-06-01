@@ -1,10 +1,17 @@
 <?php
 
+ini_set('error_reporting', E_ALL);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+
+
+
 include_once('inc/init.php');
 require_once('inc/db.php');
 require_once('function/function.php');
 $lang = $_SESSION['lang'] . '.php';
 require_once($lang);
+
 
 $id = $_SESSION['ids'];
 $today = date('Y-m-d-H-i-s');

@@ -1,18 +1,25 @@
 <?php
 
+ini_set('error_reporting', E_ALL);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+
 include_once('inc/init.php');
 require_once('inc/db.php');
 require_once('function/function.php');
 $lang = $_SESSION['lang'] . '.php';
 require_once($lang);
+error_reporting(E_ALL);
+
 
 $id = $_REQUEST['id'];
 $today = date("Y-m-d-H-i-s");
 $fname = 'list-' . $today . '.txt';
 
+
 $fp = fopen('tmp/' . $fname, 'w');
 
-$sql = "SELECT value FROM value_lists WHERE list = ?";
+$sql = 'SELECT value FROM value_lists WHERE list = ?';
 $args = [$id];
 $query = selectAll($sql, $args);
 
@@ -51,7 +58,7 @@ include_once 'inc/header.php';
 ?>
 <main class="container-fluid ">
     <div class="row text-center">
-        <h2>Export accounts</h2>
+        <h2>Export list</h2>
     </div>
     <div class="row justify-content-center">
         <div class="col-6 text-center">

@@ -18,7 +18,7 @@ $qw = selectAll($sql);
 </head>
 <body>
 <?php
-include_once 'inc/header.php';
+
 $ids = array('t');
 $i = 0;
 $nameTemplate = $_POST['nameTemplate'];
@@ -34,7 +34,7 @@ if (!empty($nameTemplate)) {
     $_SESSION['numberTemplate'] = $numberTemplate;
     header('Location: add_task.php');
 }
-
+require_once 'inc/header.php';
 ?>
 <main class="container-fluid ">
     <div class="row text-center">
@@ -52,7 +52,7 @@ if (!empty($nameTemplate)) {
 
 
             <form method="post">
-                <label for="nameTemplate">Имя шаблона</label>
+                <label for="nameTemplate">Name template</label>
                 <input type="text" name="nameTemplate" id="nameTemplate" class="form-control"  required>
                 <br>
 

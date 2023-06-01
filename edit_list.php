@@ -17,18 +17,15 @@ if (!empty($_REQUEST['key'])) {
     $key = addslashes($_REQUEST['key']);
     $array = explode("\r\n", $key);
 
-    for ($i = 0, $iMax = count($array); $i <= $iMax; $i++) {
-        $c = (trim($array[$p]) . '<br/>');
-    }
-    $c = preg_replace('/<br[^>]*>/', '', $c);
-    $i = 0;
     foreach ($array as $key) {
         $i++;
         $res = parse_key($key);
         $sql = $res[0];
 
         if (!empty($sql)) {
-            $ins = insert($sql);
+            $argc = [$key];
+            $ins = insert($sql,$argc);
+
 
         }
 
@@ -114,6 +111,19 @@ $ser = selectAll($sql, $args);
                     EXPORT LIST</a>
 
 
+            </form>
+            <br>
+            Загрузить из файла
+            <form method="POST" action="upload_val.php?id=<?php echo $cat?>" enctype="multipart/form-data">
+                <div>
+                    <span>Upload a File:</span>
+                    <input type="file" name="uploadedFile" />
+                </div>
+
+
+
+                <br>
+                <input type="submit" name="uploadBtn" value="Upload" />
             </form>
         </div>
     </div>

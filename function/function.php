@@ -316,10 +316,13 @@ function parse_key($key)
         $sql = null;
     } else {
         $cat = $_REQUEST['id'];
-        $sql = "SELECT * FROM value_lists WHERE list = $cat AND value = '$key'";
-        $query = select($sql);
+        $sql = "SELECT * FROM value_lists WHERE list = $cat AND value = ?";
+        $args = [$key];
+        $query = select($sql, $args);
         if (empty($query)) {
-            $sql = "INSERT INTO value_lists (id,value,list) VALUES (NULL, '$key', $cat )";
+
+            $sql = "INSERT INTO value_lists (id,value,list) VALUES (NULL, ?, $cat )";
+
         } else {
             $sql = null;
         }
