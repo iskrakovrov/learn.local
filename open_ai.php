@@ -45,15 +45,11 @@ $ser = selectAll($sql);
     </div>
     <div class="row">
         <div class="col text-center">
-            <form action="del_keys.php" method="post">
+            <form action="add_oai.php" method="post">
                 <a class="btn btn-secondary" href="add_oai.php" role="button">Add key</a>
 
         </div>
-        <div class="col text-center">
-            <form action="del_keys.php" method="post">
-                <a class="btn btn-secondary" href="add_oai.php" role="button">Add key</a>
 
-        </div>
     </div>
 
     <div class="container-fluid">

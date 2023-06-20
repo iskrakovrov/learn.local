@@ -11,9 +11,7 @@ foreach ($id as $a) {
     $args = [$a];
     $qu = select($sql, $args);
 
-    $sql = "INSERT IGNORE INTO trash (id, login_fb, pass_fb, id_fb, name, bd, mb, yb, gender, avatar, created, comment, group_acc, server, id_proxy, status, works, useacc, friends, last_start, id_mail, id_phone, coockie, tocken, `2fa`, ua, mail, mail_pass, imap_mail, phone, adv) SELECT * FROM accounts WHERE id = ?";
-    $args = [$a];
-    $qu1 = insert($sql, $args);
+
 
     $sql = "DELETE FROM task WHERE account = ?";
     $args = [$a];

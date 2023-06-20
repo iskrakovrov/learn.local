@@ -21,7 +21,7 @@ require_once($lang);
 require_once 'inc/header.php';
 $id = $_REQUEST['id'];
 
-$sql = "SELECT * FROM friends WHERE id_acc = ? ORDER BY created DESC LIMIT 20";
+$sql = 'SELECT * FROM friends WHERE id_acc = ? ORDER BY created DESC LIMIT 20';
 $args = [$id];
 $statFriends = selectAll($sql, $args);
 

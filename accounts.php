@@ -32,7 +32,15 @@ $ss = selectAll($sql);
 
             padding-top: 0.55em;
 
-        }</style>
+        }
+		</style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css">
+	     <style>
+			.select2-container--default .select2-selection--single .select2-selection__clear {
+            margin-right: -5px;
+			margin-top: -10px;
+        }
+		</style>
 
 </head>
 
@@ -126,7 +134,7 @@ require_once 'inc/alerts.php';
                     <?php } ?>
                     <option value="" disabled="disabled">----------</option>
 
-                    <option value="del_acc.php">Удалить</option>
+                    <option value="del_acc.php">Delete</option>
                 </select>
 
 
@@ -152,6 +160,8 @@ require_once 'inc/alerts.php';
                         <button class="btn btn-danger" onClick="return confirm( '<?php echo $txtaccounts5 ?>' )"
                                 name="add_task" id="add_task" value="del_acc.php">DELETE ACCOUNTS
                         </button>
+						&nbsp; &nbsp; &nbsp; <button id="clearFiltersBtn" class="btn btn-primary">Clear Filters</button>
+
                     </div>
                 </div>
 
@@ -175,57 +185,58 @@ require_once 'inc/alerts.php';
 
             <table id="dr_table" class="table table-responsive table-striped table-bordered table-hover"
                    style="width:100%">
-
                 <thead>
                 <tr>
                     <th class="check" style="text-align: center;">
                         <label for="all"></label>
                         <input type="checkbox" id="all" value=""/>
                     </th>
-                    <th>Login</th>
-                    <th>Mail</th>
-                    <th>Phone</th>
-                    <th>Gender</th>
-                    <th>Avatar</th>
-                    <th>Proxy</th>
-                    <th>Server</th>
-                    <th>Group</th>
-                    <th>Status</th>
-                    <th>Task</th>
-                    <th>Use</th>
-                    <th>Create</th>
-                    <th>Friends</th>
-                    <th>Tocken</th>
-                    <th>Adv</th>
-                    <th>Last Start</th>
-                    <th>Action</th>
-                    <th>!</th>
-                    <th>2fa</th>
+                    <th class="select-filter">Login</th>
+                    <th class="select-filter">Mail</th>
+                    <th class="select-filter">Phone</th>
+                    <th class="select-filter">Gender</th>
+                    <th class="select-filter">Avatar</th>
+                    <th class="select-filter">Proxy</th>
+                    <th class="select-filter">Server</th>
+                    <th class="select-filter">Group</th>
+                    <th class="select-filter">Status</th>
+                    <th class="select-filter">Task</th>
+                    <th class="select-filter">Use</th>
+                    <th class="select-filter">Create</th>
+                    <th class="select-filter">Friends</th>
+                    <th class="select-filter">Tocken</th>
+                    <th class="select-filter">Adv</th>
+                    <th class="select-filter">Last Start</th>
+                    <th class="select-filter">Action</th>
+                    <th class="select-filter">AR</th>
+                    <th class="select-filter">!</th>
+                    <th class="select-filter">2fa</th>
                 </tr>
                 </thead>
 
                 <tfoot>
                 <tr>
-                    <th></th>
-                    <th>Login</th>
-                    <th>Mail</th>
-                    <th>Phone</th>
-                    <th>gender</th>
-                    <th>Avatar</th>
-                    <th>Proxy</th>
-                    <th>Server</th>
-                    <th>Group</th>
-                    <th>Status</th>
-                    <th>Task</th>
-                    <th>Use</th>
-                    <th>Create</th>
-                    <th>Friends</th>
-                    <th>Tocken</th>
-                    <th>Adv</th>
-                    <th>Last Start</th>
-                    <th>Action</th>
-                    <th>!</th>
-                    <th>2fa</th>
+                    <th class="select-filter"></th>
+                    <th class="select-filter">Login</th>
+                    <th class="select-filter">Mail</th>
+                    <th class="select-filter">Phone</th>
+                    <th class="select-filter">gender</th>
+                    <th class="select-filter">Avatar</th>
+                    <th class="select-filter">Proxy</th>
+                    <th class="select-filter">Server</th>
+                    <th class="select-filter">Group</th>
+                    <th class="select-filter">Status</th>
+                    <th class="select-filter">Task</th>
+                    <th class="select-filter">Use</th>
+                    <th class="select-filter">Create</th>
+                    <th class="select-filter">Friends</th>
+                    <th class="select-filter">Tocken</th>
+                    <th class="select-filter">Adv</th>
+                    <th class="select-filter">Last Start</th>
+                    <th class="select-filter">Action</th>
+                    <th class="select-filter">AR</th>
+                    <th class="select-filter">!</th>
+                    <th class="select-filter">2fa</th>
 
                 </tr>
                 </tfoot>
@@ -248,7 +259,7 @@ require_once 'inc/alerts.php';
 
 <script src="js/dataTables.bootstrap.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/ColumnFilterWidgets.js"></script>
-
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 <script>
     $('#alert').delay(5000).fadeOut('slow');
@@ -266,7 +277,7 @@ require_once 'inc/alerts.php';
 
         bProcessing: false,
 
-
+        stateSave: true,
         searching: true,
 
         serverSide: false,
@@ -331,6 +342,7 @@ require_once 'inc/alerts.php';
                 }
             },
             {mData: 'action'},
+            {mData: 'ar'},
             {mData: 'spst'},
             {mData: 'fa'}
         ],
@@ -352,40 +364,84 @@ require_once 'inc/alerts.php';
 
         'columnDefs':
             [{
-                'targets': [0, 4, 5, 6, 7, 8, 9, 11, 14, 15], // column index (start from 0)
+                'targets': [0, 4, 5, 6, 7, 11, 14, 15], // column index (start from 0)
                 'orderable': false, // set orderable false for selected columns
             }],
 
 
-        initComplete
-    :
+		initComplete: function () {
 
-    function () {
-        this.api()
-            .columns([4, 5, 6, 7, 8, 9, 11, 14, 15])
-            .every(function () {
-                const column = this;
-                const select = $('<select><option value=""></option></select>')
-                    .appendTo($(column.header()))
-                    .on('change', function () {
-                        const val = $.fn.dataTable.util.escapeRegex($(this).val());
+			const table = this.api();
+			const filterColumns = [4, 5, 6, 7, 11, 14, 15];
+			const filterColumnsMultiple = [9, 8];
 
-                        column.search(val ? '^' + val + '$' : '', true, false).draw();
-                    });
+			table.columns(filterColumns).every(function () {
+				const column = this;
+				const select = $('<select><option value=""></option></select>')
+					.appendTo($(column.header()))
+					.on('change', function () {
+						const selectedValue = $(this).val();
+						const escapedValue = $.fn.dataTable.util.escapeRegex(selectedValue);
 
-                column
-                    .data()
-                    .unique()
-                    .sort()
-                    .each(function (d, j) {
-                        select.append('<option value="' + d + '">' + d + '</option>');
-                    });
-            });
-    }
+						column.search(escapedValue ? '^' + escapedValue + '$' : '', true, false).draw();
+						 // Save the state of this Select2 widget.
+						localStorage.setItem('select2-' + column.index(), selectedValue);
+					});
 
-    ,
-    })
-    ;
+				column.data()
+					.unique()
+					.sort()
+					.each(function (d) {
+						select.append($('<option></option>').attr('value', d).text(d));
+					});
+				select.select2({
+					placeholder: 'Filter',
+					allowClear: true
+				}); // Initialize Select2 on the select element
+				// Restore the state of this Select2 widget.
+				const savedValue = localStorage.getItem('select2-' + column.index());
+				if (savedValue !== null) {
+					select.val(savedValue).trigger('change');
+				}
+			});
+
+			table.columns(filterColumnsMultiple).every(function () {
+				const column = this;
+				const select = $('<select multiple></select>')
+					.appendTo($(column.header()))
+					.on('change', function () {
+						const selectedValues = $(this).val();
+
+                                        if (!selectedValues || selectedValues.length === 0 || (selectedValues.length === 1 && selectedValues[0] === '')) {
+						column.search('').draw(); // Clear the filter
+                                                localStorage.removeItem('select2-' + column.index()); // Clear the saved state
+						return;
+					}
+
+						column.search(selectedValues ? '^(' + selectedValues.join('|') + ')$' : '', true, false).draw(); // Use regex to search for multiple values
+						// Save the state of this Select2 widget.
+						localStorage.setItem('select2-' + column.index(), selectedValues.join(','));
+					});
+
+				column.data()
+					.unique()
+					.sort()
+					.each(function (d) {
+						select.append($('<option></option>').attr('value', d).text(d));
+					});
+				select.select2({
+					placeholder: 'Filter',
+					allowClear: true
+				}); // Initialize Select2 on the select element
+				// Restore the state of this Select2 widget.
+				const savedValues = localStorage.getItem('select2-' + column.index());
+				if (savedValues !== null) {
+					select.val(savedValues.split(',')).trigger('change');
+				}
+			});
+		},
+
+    });
 
 
     $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
@@ -406,6 +462,19 @@ require_once 'inc/alerts.php';
 
     $(document).ready(function () {
         const table = $('#dr_table').DataTable();
+		
+		// Event listener to the Clear Filters button
+		$('#clearFiltersBtn').on('click', function () {
+			event.preventDefault();
+
+			table.search('').columns().search('').draw(); // Clear the search and column filters
+			table.columns().every(function () {
+				const column = this;
+				const header = $(column.header());
+				header.find('select').val(null).trigger('change'); // Clear any select filters
+				localStorage.removeItem('select2-' + column.index()); // Clear the saved state
+			});
+		});
 
         // Event listener to the two range filtering inputs to redraw on input
         $('#min, #max').keyup(function () {

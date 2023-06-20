@@ -254,6 +254,12 @@ $_SESSION['numberTemplate'] = $numberTemplate;
                             </label>
                         </div>
                         <div class="form-check">
+                            <input class="form-check-input" name="task[]" type="checkbox" value="post_oai.php" id="post_oai" >
+                            <label class="form-check-label" for="post_oai">
+                                <?php echo 'Posting profile OpenAi'?>
+                            </label>
+                        </div>
+                        <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="" id="task6" disabled>
                             <label class="form-check-label" for="defaultCheck2">
                                 <?php echo $txttask22?>

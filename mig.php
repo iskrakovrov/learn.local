@@ -231,7 +231,14 @@ if (empty($qw)) {
     $sql = "ALTER TABLE `commentoai` ADD `created` int(25) NULL AFTER `posted`";
     $qw = create($sql);
 }
-
+$sql = "SHOW COLUMNS FROM accounts WHERE FIELD = 'ar'";
+$qw = create($sql);
+if (empty($qw)) {
+    $sql = "ALTER TABLE `accounts` ADD `bid` INT(25) NULL AFTER `adv`, ADD `ar` INT(11) NULL AFTER `bid`;";
+    $qw = create($sql);
+    $sql = "ALTER TABLE `accounts` CHANGE `bid` `bid` VARCHAR(255) NULL DEFAULT NULL;";
+    $qw = create($sql);
+}
 
 
 

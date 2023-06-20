@@ -657,6 +657,37 @@ if ($add_task == 'accept_friends') {
         }
     }
 }
+if ($add_task == 'post_oai') {
+    $setup = $_POST['action'];
+    $st[] = array(
+
+        'promt' => $_REQUEST['promt'],
+        'img' => $_REQUEST['img'],
+        'f24' => $_REQUEST['f24'],
+
+
+
+    );
+    $data = array(
+
+        "data" => $st,
+    );
+
+    $json_data = json_encode($data, JSON_THROW_ON_ERROR);
+
+    foreach ($ids as $a) {
+        $add_task = $_POST['add_task'];
+        $time = Time();
+
+        if ($a != 't') {
+
+            $r = add_task($add_task, $json_data, $time, $a);
+
+        } else {
+            $r = add_template($add_task, $json_data, $time, $numberTemplate);
+        }
+    }
+}
 
 if ($add_task == 'parse_active') {
     $setup = $_POST['action'];
