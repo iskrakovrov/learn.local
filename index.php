@@ -7,7 +7,7 @@ require_once($lang);
 require_once('inc/version.php');
 $filename = 'mig.php';
 require_once ($filename);
-$homepage = file_get_contents('https://soft.fbcombo.com/ver.php');
+//$homepage = file_get_contents('https://soft.fbcombo.com/ver.php');
 
 ?>
 <!doctype html>

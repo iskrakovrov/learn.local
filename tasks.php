@@ -786,9 +786,7 @@ if (empty($task)) {
 </head>
 <body>
 <?php
-include_once 'inc/header.php';
-
-
+// include_once 'inc/header.php';
 $w = $task[0];
 if (!empty($w)) {
     $url = 'action' . '/' . $w;
@@ -801,6 +799,11 @@ if (!empty($w)) {
 session_start();
 $_SESSION['task'] = $task;
 $_SESSION['ids'] = $ids;
+
+
+
+
+
 
 
 ?>

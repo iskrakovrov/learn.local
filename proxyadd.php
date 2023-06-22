@@ -6,7 +6,7 @@ $mode = $_GET['mode'];
 $acc = $_GET['acc'];
 if ($mode==='add') {
 
-    $sql = "SELECT * FROM proxy WHERE id = ?";
+    $sql = 'SELECT * FROM proxy WHERE id = ?';
 
     $args = [$proxy];
     $query = select($sql, $args);
@@ -15,11 +15,11 @@ if ($mode==='add') {
     $id = $query['id'];
     $time = Time();
 
-    $sql = "UPDATE proxy SET use_proxy = ?, work = ? WHERE id = ?";
+    $sql = 'UPDATE proxy SET use_proxy = ?, work = ? WHERE id = ?';
     $args = [$count, $time, $id];
     $query1 = update($sql, $args);
 
-    $sql = "UPDATE accounts SET id_proxy = ? WHERE id = ?";
+    $sql = 'UPDATE accounts SET id_proxy = ? WHERE id = ?';
     $args = [$proxy, $acc];
     $query1 = update($sql, $args);
     echo 'ok';

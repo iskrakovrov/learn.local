@@ -1,10 +1,12 @@
 <?php
-$sql = "SELECT * FROM lists WHERE cat = 2 OR cat = 9";
+$sql = 'SELECT * FROM lists WHERE cat = 2 OR cat = 9';
 $geo1 = selectAll($sql);
-$sql = "SELECT * FROM lists WHERE cat = 3 OR cat = 9";
+$sql = 'SELECT * FROM lists WHERE cat = 3 OR cat = 9';
 $name1 = selectAll($sql);
-$sql = "SELECT * FROM lists WHERE cat = 1 OR cat = 9";
+$sql = 'SELECT * FROM lists WHERE cat = 1 OR cat = 9';
 $bl1 = selectAll($sql);
+$sql = 'SELECT * FROM lists WHERE cat = 5';
+$qw1 = selectAll($sql);
 ?>
 
 <main class="container-fluid ">
@@ -132,7 +134,19 @@ $bl1 = selectAll($sql);
                     <input type="number" name="num_co" id="num_co" class="form-control" value="5"
                            required>
 
+                    <label for="confirm">Privat Message list</label>
+                    <select class="form-select" id="pm" name="pm">
 
+                        <option value="0">No Message</option>
+                        <?php
+                        $i = 0;
+                        foreach ($qw1 as $z) {
+                            $i++; ?>
+                            <option value="<?php echo $z['id'] ?>"><?php echo $z['name']; ?></option>
+                        <?php } ?>
+
+                    </select>
+                    <br>
                     <br>
                     <!-- раз в день -->
                     <label for="f24"><?php echo $txtfarmi11 ?></label>

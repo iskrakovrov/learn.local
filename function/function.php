@@ -472,3 +472,44 @@ function getLast100Days() {
 
     return array($startDate, $endDate); // Возвращает массив с начальной и конечной датами
 }
+function del_acc($args): bool
+{
+    extracted($args);
+
+    return true;
+}
+
+/**
+ * @param $args
+ * @return void
+ */
+function d_acc($args): void
+{
+    $sql = 'DELETE FROM task WHERE account = ?';
+
+    $qu1 = delete($sql, $args);
+
+    $sql = 'DELETE FROM temp_task WHERE account = ?';
+
+    $qu1 = delete($sql, $args);
+
+    $sql = 'DELETE FROM stat_comm WHERE id_acc = ?';
+
+    $qu1 = delete($sql, $args);
+
+    $sql = 'DELETE FROM stat_invite WHERE id_acc = ?';
+
+    $qu1 = delete($sql, $args);
+
+    $sql = 'DELETE FROM stat_like WHERE id_acc = ?';
+
+    $qu1 = delete($sql, $args);
+
+    $sql = 'DELETE FROM stat_post WHERE id_acc = ?';
+
+    $qu1 = delete($sql, $args);
+
+    $sql = 'DELETE FROM stat_sugg WHERE id_acc = ?';
+
+    $qu1 = delete($sql, $args);
+}
