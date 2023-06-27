@@ -9,6 +9,8 @@ $sql = 'SELECT * FROM lists WHERE  cat = 3 LIMIT 500';
 $fname = selectAll($sql);
 $sql = 'SELECT * FROM lists WHERE  cat = 3 LIMIT 500';
 $lname = selectAll($sql);
+$sql = 'SELECT * FROM lists WHERE  cat = 5 LIMIT 500';
+$apost = selectAll($sql);
 ?>
 <main class="container-fluid ">
     <div class="row text-center">
@@ -82,7 +84,7 @@ $lname = selectAll($sql);
                         <?php } ?>
                     </select>
                     <label for="lname" class="control-label">Last name</label>
-                    <!-- Фамилия -->
+
                     <select name="lname" id="work" class="form-control">
                         <option value="no"><?php echo $txtfill5 ?></option>
                         <?php
@@ -101,6 +103,26 @@ $lname = selectAll($sql);
                         <option value="no">No</option>
                         <option value="yes">Yes</option>
 
+                    </select>
+
+                    <br>
+                    <label for="ava">Install avatar</label>
+                    <select class="form-select" id="ava" name="ava">
+
+                        <option value="no">No</option>
+                        <option value="yes">Yes</option>
+
+                    </select>
+                    <br>
+                    <label for="apost">Text for avatar</label>
+                    <select name="apost" id="apost" class="form-control">
+                        <option value="no"><?php echo 'No text for avatar'?></option>
+                        <?php
+                        $i = 0;
+                        foreach ($apost as $t) {
+                            $i++; ?>
+                            <option value="<?php echo $t['id'] ?>"><?php echo $t['name']; ?></option>
+                        <?php } ?>
                     </select>
 
                     <br>

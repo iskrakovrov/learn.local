@@ -239,6 +239,13 @@ if (empty($qw)) {
     $sql = "ALTER TABLE `accounts` CHANGE `bid` `bid` VARCHAR(255) NULL DEFAULT NULL;";
     $qw = create($sql);
 }
+$sql = "SHOW TABLES LIKE 'note'";
+$qw = create($sql);
 
+if (empty($qw)) {
+
+    $sql = "CREATE TABLE `note` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `created` INT(11) NOT NULL , `text` VARCHAR(60000) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB";
+    $qw = create($sql);
+}
 
 

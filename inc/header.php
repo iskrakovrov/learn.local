@@ -203,10 +203,14 @@ $homepage = file_get_contents('https://soft.fbcombo.com/ver.php');
                         <li class="nav-item">
                             <a class="nav-link active" href="<?php echo $lm ?>"><strong><?php echo $m ?></strong></a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="note.php"><strong>Note</strong></a>
+                        </li>
 
 
                     </ul>
                     <ul class="nav justify-content-end">
+
                         <li class="nav-item">
                             <a class="nav-item" aria-current="page">Accounts Work <span
                                     class="badge badge-primary"><?php echo $wo ?></span></a>
