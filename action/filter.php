@@ -1,5 +1,5 @@
 <?php
-$sql = "SELECT * FROM lists WHERE cat = 8 OR cat = 9";
+$sql = 'SELECT * FROM lists WHERE cat = 8 OR cat = 9';
 $qw = selectAll($sql);
 
 ?>

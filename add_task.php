@@ -114,6 +114,13 @@ $_SESSION['numberTemplate'] = $numberTemplate;
                                 <?php echo $txttask4?>
                             </label>
                         </div>
+                        <!--  Share -->
+                        <div class="form-check">
+                            <input class="form-check-input" name="task[]" type="checkbox" value="share.php" id="share">
+                            <label class="form-check-label" for="share">
+                                Share
+                            </label>
+                        </div>
                         <!--  Прокачка новорегов no global -->
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="ngnew_accounts.php" id="ngnew_accounts" disabled>

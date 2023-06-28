@@ -34,7 +34,7 @@ $me1 = selectAll($sql);
                 <form method="post" onSubmit="return Complete();">
                     <br>
                     <!-- Список групп -->
-                    <label for="geo" class="control-label"><?php echo $txtglobali20 ?></label>
+                    <label for="gr" class="control-label"><?php echo $txtglobali20 ?></label>
 
                     <select name="gr" id="gr" class="form-control">
                         <option value="in"><?php echo $txtglobali18 ?></option>

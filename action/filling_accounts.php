@@ -48,7 +48,7 @@ $apost = selectAll($sql);
                     </select>
 
                     <br>
-                    <label for="cat" class="control-label"><?php echo $txtfill4 ?></label>
+                    <label for="edu" class="control-label"><?php echo $txtfill4 ?></label>
 
                     <!-- Место учебы -->
                     <select name="edu" id="edu" class="form-control">

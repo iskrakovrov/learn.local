@@ -24,7 +24,7 @@
                     <br>
 
 
-                    <label for="num_s"><?php echo $txterinv2 ?></label>
+                    <label for="num_e"><?php echo $txterinv2 ?></label>
                     <input type="number" name="num_e" id="num_e" class="form-control" value="1000" required>
 
 

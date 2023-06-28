@@ -134,7 +134,7 @@ $qw1 = selectAll($sql);
                     <input type="number" name="num_co" id="num_co" class="form-control" value="5"
                            required>
 
-                    <label for="confirm">Privat Message list</label>
+                    <label for="pm">Privat Message list</label>
                     <select class="form-select" id="pm" name="pm">
 
                         <option value="0">No Message</option>

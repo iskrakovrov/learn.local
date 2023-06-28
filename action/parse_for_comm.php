@@ -1,7 +1,7 @@
 <?php
-$sql = "SELECT * FROM lists WHERE cat = 11";
+$sql = 'SELECT * FROM lists WHERE cat = 11';
 $qw = selectAll($sql);
-$sql = "SELECT * FROM lists WHERE cat = 12";
+$sql = 'SELECT * FROM lists WHERE cat = 12';
 $qw1 = selectAll($sql);
 
 ?>

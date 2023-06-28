@@ -1,5 +1,5 @@
 <?php
-$sql = "SELECT * FROM lists WHERE cat = 5";
+$sql = 'SELECT * FROM lists WHERE cat = 5';
 $qw = selectAll($sql);
 
 ?>

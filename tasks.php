@@ -10,8 +10,10 @@ require_once($lang);
 $ids = $_SESSION['ids'];
 $numberTemplate = $_SESSION['numberTemplate'];
 $add_task = $_POST['add_task'];
+$setup = $_POST['action'];
+
 if ($add_task == 'login') {
-    $setup = $_POST['action'];
+
 
     $st[] = array(
 
@@ -35,28 +37,10 @@ if ($add_task == 'login') {
 
 
     );
-    $data = array(
-
-        "data" => $st,
-    );
-
-    $json_data = json_encode($data, JSON_THROW_ON_ERROR);
-
-    foreach ($ids as $a) {
-        $add_task = $_POST['add_task'];
-        $time = Time();
-
-        if ($a != 't') {
-
-            $r = add_task($add_task, $json_data, $time, $a);
-
-        } else {
-            $r = add_template($add_task, $json_data, $time, $numberTemplate);
-        }
-    }
+    gen_task($ids, $st, $add_task, $numberTemplate);
 }
 
-if ($add_task == "new_accounts") {
+if ($add_task == 'new_accounts') {
     $st[] = array(
         'listid' => $_REQUEST['listid'],
         'geo' => $_REQUEST['geo'],
@@ -68,27 +52,9 @@ if ($add_task == "new_accounts") {
 
 
     );
-    $data = array(
-
-        "data" => $st,
-    );
-
-    $json_data = json_encode($data, JSON_THROW_ON_ERROR);
-
-    foreach ($ids as $a) {
-        $add_task = $_POST['add_task'];
-        $time = Time();
-
-        if ($a != 't') {
-
-            $r = add_task($add_task, $json_data, $time, $a);
-
-        } else {
-            $r = add_template($add_task, $json_data, $time, $numberTemplate);
-        }
-    }
+    gen_task($ids, $st, $add_task, $numberTemplate);
 }
-if ($add_task == "global_invite") {
+if ($add_task == 'global_invite') {
     $st[] = array(
         'ti0' => $_REQUEST['ti0'],
         'ti1' => $_REQUEST['ti1'],
@@ -99,78 +65,24 @@ if ($add_task == "global_invite") {
 
 
     );
-    $data = array(
-
-        "data" => $st,
-    );
-
-    $json_data = json_encode($data, JSON_THROW_ON_ERROR);
-
-    foreach ($ids as $a) {
-        $add_task = $_POST['add_task'];
-        $time = Time();
-
-        if ($a != 't') {
-
-            $r = add_task($add_task, $json_data, $time, $a);
-
-        } else {
-            $r = add_template($add_task, $json_data, $time, $numberTemplate);
-        }
-    }
+    gen_task($ids, $st, $add_task, $numberTemplate);
 }
 
-if ($add_task == "coockie") {
+if ($add_task == 'coockie') {
     $st[] = array(
         'cat' => $_REQUEST['cat'],
         'num_s' => $_REQUEST['num_s'],
 
     );
-    $data = array(
-
-        "data" => $st,
-    );
-
-    $json_data = json_encode($data, JSON_THROW_ON_ERROR);
-
-    foreach ($ids as $a) {
-        $add_task = $_POST['add_task'];
-        $time = Time();
-
-        if ($a != 't') {
-
-            $r = add_task($add_task, $json_data, $time, $a);
-
-        } else {
-            $r = add_template($add_task, $json_data, $time, $numberTemplate);
-        }
-    }
+    gen_task($ids, $st, $add_task, $numberTemplate);
 }
-if ($add_task == "add_mail") {
+if ($add_task == 'add_mail') {
     $st[] = array(
         'am' => $_REQUEST['am'],
 
 
     );
-    $data = array(
-
-        "data" => $st,
-    );
-
-    $json_data = json_encode($data, JSON_THROW_ON_ERROR);
-
-    foreach ($ids as $a) {
-        $add_task = $_POST['add_task'];
-        $time = Time();
-
-        if ($a != 't') {
-
-            $r = add_task($add_task, $json_data, $time, $a);
-
-        } else {
-            $r = add_template($add_task, $json_data, $time, $numberTemplate);
-        }
-    }
+    gen_task($ids, $st, $add_task, $numberTemplate);
 }
 
 if ($add_task == 'farm') {
@@ -189,25 +101,7 @@ if ($add_task == 'farm') {
         'p_like_adv' => $_REQUEST['p_like_adv'],
         'f24' => $_REQUEST['f24'],
     );
-    $data = array(
-
-        "data" => $st,
-    );
-
-    $json_data = json_encode($data, JSON_THROW_ON_ERROR);
-
-    foreach ($ids as $a) {
-        $add_task = $_POST['add_task'];
-        $time = Time();
-
-        if ($a != 't') {
-
-            $r = add_task($add_task, $json_data, $time, $a);
-
-        } else {
-            $r = add_template($add_task, $json_data, $time, $numberTemplate);
-        }
-    }
+    gen_task($ids, $st, $add_task, $numberTemplate);
 }
 if ($add_task == 'filling_accounts') {
     $st[] = array(
@@ -221,25 +115,7 @@ if ($add_task == 'filling_accounts') {
         'apost' => $_REQUEST['apost'],
 
     );
-    $data = array(
-
-        "data" => $st,
-    );
-
-    $json_data = json_encode($data, JSON_THROW_ON_ERROR);
-
-    foreach ($ids as $a) {
-        $add_task = $_POST['add_task'];
-        $time = Time();
-
-        if ($a != 't') {
-
-            $r = add_task($add_task, $json_data, $time, $a);
-
-        } else {
-            $r = add_template($add_task, $json_data, $time, $numberTemplate);
-        }
-    }
+    gen_task($ids, $st, $add_task, $numberTemplate);
 }
 if ($add_task == 'post_to_group') {
     $st[] = array(
@@ -255,50 +131,14 @@ if ($add_task == 'post_to_group') {
         'f24' => $_REQUEST['f24'],
 
     );
-    $data = array(
-
-        "data" => $st,
-    );
-
-    $json_data = json_encode($data, JSON_THROW_ON_ERROR);
-
-    foreach ($ids as $a) {
-        $add_task = $_POST['add_task'];
-        $time = Time();
-
-        if ($a != 't') {
-
-            $r = add_task($add_task, $json_data, $time, $a);
-
-        } else {
-            $r = add_template($add_task, $json_data, $time, $numberTemplate);
-        }
-    }
+    gen_task($ids, $st, $add_task, $numberTemplate);
 }
 if ($add_task == 'erase_invite') {
     $st[] = array(
         'num_e' => $_REQUEST['num_e'],
 
     );
-    $data = array(
-
-        "data" => $st,
-    );
-
-    $json_data = json_encode($data, JSON_THROW_ON_ERROR);
-
-    foreach ($ids as $a) {
-        $add_task = $_POST['add_task'];
-        $time = Time();
-
-        if ($a != 't') {
-
-            $r = add_task($add_task, $json_data, $time, $a);
-
-        } else {
-            $r = add_template($add_task, $json_data, $time, $numberTemplate);
-        }
-    }
+    gen_task($ids, $st, $add_task, $numberTemplate);
 }
 
 if ($add_task == 'parse_group') {
@@ -309,27 +149,8 @@ if ($add_task == 'parse_group') {
         'group' => $_REQUEST['cat1'],
 
 
-
     );
-    $data = array(
-
-        "data" => $st,
-    );
-
-    $json_data = json_encode($data, JSON_THROW_ON_ERROR);
-
-    foreach ($ids as $a) {
-        $add_task = $_POST['add_task'];
-        $time = Time();
-
-        if ($a != 't') {
-
-            $r = add_task($add_task, $json_data, $time, $a);
-
-        } else {
-            $r = add_template($add_task, $json_data, $time, $numberTemplate);
-        }
-    }
+    gen_task($ids, $st, $add_task, $numberTemplate);
 }
 if ($add_task == 'invite_suggestions') {
     $setup = $_POST['action'];
@@ -348,25 +169,7 @@ if ($add_task == 'invite_suggestions') {
 
 
     );
-    $data = array(
-
-        "data" => $st,
-    );
-
-    $json_data = json_encode($data, JSON_THROW_ON_ERROR);
-
-    foreach ($ids as $a) {
-        $add_task = $_POST['add_task'];
-        $time = Time();
-
-        if ($a != 't') {
-
-            $r = add_task($add_task, $json_data, $time, $a);
-
-        } else {
-            $r = add_template($add_task, $json_data, $time, $numberTemplate);
-        }
-    }
+    gen_task($ids, $st, $add_task, $numberTemplate);
 }
 
 if ($add_task == 'invite_from_group') {
@@ -388,31 +191,12 @@ if ($add_task == 'invite_from_group') {
 
 
     );
-    $data = array(
-
-        "data" => $st,
-    );
-
-    $json_data = json_encode($data, JSON_THROW_ON_ERROR);
-
-    foreach ($ids as $a) {
-        $add_task = $_POST['add_task'];
-        $time = Time();
-
-        if ($a != 't') {
-
-            $r = add_task($add_task, $json_data, $time, $a);
-
-        } else {
-            $r = add_template($add_task, $json_data, $time, $numberTemplate);
-        }
-    }
+    gen_task($ids, $st, $add_task, $numberTemplate);
 }
 
 if ($add_task == 'post_to_profile') {
     $setup = $_POST['action'];
     $st[] = array(
-
 
 
         'cat' => $_REQUEST['cat'],
@@ -422,33 +206,13 @@ if ($add_task == 'post_to_profile') {
         'f24' => $_REQUEST['f24'],
 
 
-
     );
-    $data = array(
-
-        "data" => $st,
-    );
-
-    $json_data = json_encode($data, JSON_THROW_ON_ERROR);
-
-    foreach ($ids as $a) {
-        $add_task = $_POST['add_task'];
-        $time = Time();
-
-        if ($a != 't') {
-
-            $r = add_task($add_task, $json_data, $time, $a);
-
-        } else {
-            $r = add_template($add_task, $json_data, $time, $numberTemplate);
-        }
-    }
+    gen_task($ids, $st, $add_task, $numberTemplate);
 }
 
 if ($add_task == 'like') {
     $setup = $_POST['action'];
     $st[] = array(
-
 
 
         'cat' => $_REQUEST['cat'],
@@ -457,64 +221,25 @@ if ($add_task == 'like') {
         'f24' => $_REQUEST['f24'],
 
 
-
     );
-    $data = array(
-
-        "data" => $st,
-    );
-
-    $json_data = json_encode($data, JSON_THROW_ON_ERROR);
-
-    foreach ($ids as $a) {
-        $add_task = $_POST['add_task'];
-        $time = Time();
-
-        if ($a != 't') {
-
-            $r = add_task($add_task, $json_data, $time, $a);
-
-        } else {
-            $r = add_template($add_task, $json_data, $time, $numberTemplate);
-        }
-    }
+    gen_task($ids, $st, $add_task, $numberTemplate);
 }
 if ($add_task == 'happy') {
     $setup = $_POST['action'];
     $st[] = array(
 
 
-
         'cat' => $_REQUEST['cat'],
         'f24' => $_REQUEST['f24'],
 
 
-
     );
-    $data = array(
-
-        "data" => $st,
-    );
-
-    $json_data = json_encode($data, JSON_THROW_ON_ERROR);
-
-    foreach ($ids as $a) {
-        $add_task = $_POST['add_task'];
-        $time = Time();
-
-        if ($a != 't') {
-
-            $r = add_task($add_task, $json_data, $time, $a);
-
-        } else {
-            $r = add_template($add_task, $json_data, $time, $numberTemplate);
-        }
-    }
+    gen_task($ids, $st, $add_task, $numberTemplate);
 }
-if ($add_task == 'commenting') {
-    $setup = $_POST['action'];
-    $st[] = array(
 
+if ($add_task == 'commenting') {
+
+    $st[] = array(
 
 
         'url' => $_REQUEST['url'],
@@ -526,32 +251,31 @@ if ($add_task == 'commenting') {
         'f24' => $_REQUEST['f24'],
 
 
+    );
+    gen_task($ids, $st, $add_task, $numberTemplate);
+}
+
+if ($add_task == 'share') {
+    $setup = $_POST['action'];
+    $st[] = array(
+
+        'one' => $_REQUEST['one'],
+        'url' => $_REQUEST['url'],
+        'stxt' => $_REQUEST['stxt'],
+        'num_cp' => $_REQUEST['num_cp'],
+        'num_sd' => $_REQUEST['num_sd'],
+        'prc' => $_REQUEST['prc'],
+        'pause' => $_REQUEST['pause'],
+        'like' => $_REQUEST['like'],
+        'f24' => $_REQUEST['f24'],
+
 
     );
-    $data = array(
-
-        "data" => $st,
-    );
-
-    $json_data = json_encode($data, JSON_THROW_ON_ERROR);
-
-    foreach ($ids as $a) {
-        $add_task = $_POST['add_task'];
-        $time = Time();
-
-        if ($a != 't') {
-
-            $r = add_task($add_task, $json_data, $time, $a);
-
-        } else {
-            $r = add_template($add_task, $json_data, $time, $numberTemplate);
-        }
-    }
+    gen_task($ids, $st, $add_task, $numberTemplate);
 }
 if ($add_task == 'comm_public') {
-    $setup = $_POST['action'];
-    $st[] = array(
 
+    $st[] = array(
 
 
         'url' => $_REQUEST['url'],
@@ -563,27 +287,8 @@ if ($add_task == 'comm_public') {
         'f24' => $_REQUEST['f24'],
 
 
-
     );
-    $data = array(
-
-        "data" => $st,
-    );
-
-    $json_data = json_encode($data, JSON_THROW_ON_ERROR);
-
-    foreach ($ids as $a) {
-        $add_task = $_POST['add_task'];
-        $time = Time();
-
-        if ($a != 't') {
-
-            $r = add_task($add_task, $json_data, $time, $a);
-
-        } else {
-            $r = add_template($add_task, $json_data, $time, $numberTemplate);
-        }
-    }
+    gen_task($ids, $st, $add_task, $numberTemplate);
 }
 
 if ($add_task == 'comoai') {
@@ -591,7 +296,6 @@ if ($add_task == 'comoai') {
     $st[] = array(
 
 
-
         'url' => $_REQUEST['url'],
         'coml' => $_REQUEST['coml'],
         'num_cp' => $_REQUEST['num_cp'],
@@ -601,27 +305,8 @@ if ($add_task == 'comoai') {
         'f24' => $_REQUEST['f24'],
 
 
-
     );
-    $data = array(
-
-        "data" => $st,
-    );
-
-    $json_data = json_encode($data, JSON_THROW_ON_ERROR);
-
-    foreach ($ids as $a) {
-        $add_task = $_POST['add_task'];
-        $time = Time();
-
-        if ($a != 't') {
-
-            $r = add_task($add_task, $json_data, $time, $a);
-
-        } else {
-            $r = add_template($add_task, $json_data, $time, $numberTemplate);
-        }
-    }
+    gen_task($ids, $st, $add_task, $numberTemplate);
 }
 
 if ($add_task == 'accept_friends') {
@@ -637,27 +322,8 @@ if ($add_task == 'accept_friends') {
         'f24' => $_REQUEST['f24'],
 
 
-
     );
-    $data = array(
-
-        "data" => $st,
-    );
-
-    $json_data = json_encode($data, JSON_THROW_ON_ERROR);
-
-    foreach ($ids as $a) {
-        $add_task = $_POST['add_task'];
-        $time = Time();
-
-        if ($a != 't') {
-
-            $r = add_task($add_task, $json_data, $time, $a);
-
-        } else {
-            $r = add_template($add_task, $json_data, $time, $numberTemplate);
-        }
-    }
+    gen_task($ids, $st, $add_task, $numberTemplate);
 }
 if ($add_task == 'post_oai') {
     $setup = $_POST['action'];
@@ -668,27 +334,8 @@ if ($add_task == 'post_oai') {
         'f24' => $_REQUEST['f24'],
 
 
-
     );
-    $data = array(
-
-        "data" => $st,
-    );
-
-    $json_data = json_encode($data, JSON_THROW_ON_ERROR);
-
-    foreach ($ids as $a) {
-        $add_task = $_POST['add_task'];
-        $time = Time();
-
-        if ($a != 't') {
-
-            $r = add_task($add_task, $json_data, $time, $a);
-
-        } else {
-            $r = add_template($add_task, $json_data, $time, $numberTemplate);
-        }
-    }
+    gen_task($ids, $st, $add_task, $numberTemplate);
 }
 
 if ($add_task == 'parse_active') {
@@ -699,27 +346,8 @@ if ($add_task == 'parse_active') {
         'save_l' => $_REQUEST['cat1'],
 
 
-
     );
-    $data = array(
-
-        "data" => $st,
-    );
-
-    $json_data = json_encode($data, JSON_THROW_ON_ERROR);
-
-    foreach ($ids as $a) {
-        $add_task = $_POST['add_task'];
-        $time = Time();
-
-        if ($a != 't') {
-
-            $r = add_task($add_task, $json_data, $time, $a);
-
-        } else {
-            $r = add_template($add_task, $json_data, $time, $numberTemplate);
-        }
-    }
+    gen_task($ids, $st, $add_task, $numberTemplate);
 }
 
 if ($add_task == '2fa') {
@@ -727,42 +355,11 @@ if ($add_task == '2fa') {
         '2fa' => $_REQUEST['2fa'],
 
     );
-    $data = array(
+    gen_task($ids, $st, $add_task, $numberTemplate);
 
-        "data" => $st,
-    );
-
-    $json_data = json_encode($data, JSON_THROW_ON_ERROR);
-
-    foreach ($ids as $a) {
-        $add_task = $_POST['add_task'];
-        $time = Time();
-
-        if ($a != 't') {
-
-            $r = add_task($add_task, $json_data, $time, $a);
-
-        } else {
-            $r = add_template($add_task, $json_data, $time, $numberTemplate);
-        }
-    }
 }
 
-//   foreach ($ids as $a) {
-//       $add_task = $_POST['add_task'];
-//       $sql = "SELECT id FROM task WHERE task = '$add_task' AND account = $a";
-//       $query = select($sql);
-//       if (empty($query)) {
-//           $sql = "INSERT INTO task (id, account, task, setup, created) VALUES (NULL, $a, '$add_task', '$json_data', $time)";
-//           $query = insert($sql);
-//       } else {
-//            $sql = "UPDATE task SET setup = '$json_data', created = $time";
-//           $query = update($sql);
 
-//       }
-//   }
-
-//
 $ids = $_SESSION['ids'];
 $task = $_REQUEST['task'];
 if (empty($task)) {
@@ -777,8 +374,9 @@ if (empty($task)) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
-          rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
+        rel="stylesheet">
     <!-- Bootstrap CSS -->
     <link href="css/dt.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -788,24 +386,19 @@ if (empty($task)) {
 </head>
 <body>
 <?php
-// include_once 'inc/header.php';
+
 $w = $task[0];
 if (!empty($w)) {
     $url = 'action' . '/' . $w;
     array_shift($task);
     include_once($url);
 } else {
-    header("Location: accounts.php");
+    header('Location: accounts.php');
     exit;
 }
 session_start();
 $_SESSION['task'] = $task;
 $_SESSION['ids'] = $ids;
-
-
-
-
-
 
 
 ?>

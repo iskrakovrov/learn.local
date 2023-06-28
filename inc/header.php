@@ -162,7 +162,7 @@ $homepage = file_get_contents('https://soft.fbcombo.com/ver.php');
                                     class="badge badge-primary"><?php echo $templ ?></span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="posts" href="e_list.php?cat=5">Posts</a>
+                            <a class="nav-link active" aria-current="page" href="e_list.php?cat=5">Posts</a>
                         </li>
 
                         <li class="nav-item">
@@ -176,17 +176,8 @@ $homepage = file_get_contents('https://soft.fbcombo.com/ver.php');
                         </li>
 
 
-                        <li class="nav-item dropdown">
-                            <a class="nav-link active active dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                               data-bs-toggle="dropdown" aria-expanded="false">
-                                Trash
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="add_list.php">View trash</a></li>
-
-                                <li><a class="dropdown-item" href="edit_list_bl.php">Delete Trash</a></li>
-
-                            </ul>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="note.php"><strong>Note</strong></a>
                         </li>
 
                         <li class="nav-item">
@@ -203,9 +194,7 @@ $homepage = file_get_contents('https://soft.fbcombo.com/ver.php');
                         <li class="nav-item">
                             <a class="nav-link active" href="<?php echo $lm ?>"><strong><?php echo $m ?></strong></a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="note.php"><strong>Note</strong></a>
-                        </li>
+
 
 
                     </ul>

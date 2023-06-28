@@ -244,7 +244,15 @@ $qw = create($sql);
 
 if (empty($qw)) {
 
-    $sql = "CREATE TABLE `note` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `created` INT(11) NOT NULL , `text` VARCHAR(60000) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB";
+    $sql = "CREATE TABLE `note` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `created` INT(11) NOT NULL , `text` TEXT(16000) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB";
+    $qw = create($sql);
+}
+$sql = "SHOW TABLES LIKE 'stat_share'";
+$qw = create($sql);
+
+if (empty($qw)) {
+
+    $sql = "CREATE TABLE `stat_share` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `create` INT(11) NOT NULL , `url` VARCHAR(255) NOT NULL , `id_fb` BIGINT(20) NOT NULL , `id_acc` INT(11) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;";
     $qw = create($sql);
 }
 

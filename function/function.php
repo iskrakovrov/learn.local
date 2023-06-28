@@ -287,7 +287,6 @@ function parse_acc2($acc, $comm, $serv, $group, $cock)
 }
 
 
-
 function add_task($add_task, $json_data, $time, $account)
 {
     $a = $account;
@@ -348,6 +347,7 @@ function parse_name($key)
     }
     return [$sql];
 }
+
 function create($create)
 {
     global $pdo;
@@ -357,23 +357,25 @@ function create($create)
     dbCheckError($query);
     return $query->fetchAll();
 }
+
 function parse_post($key, $folder)
 {
     $folder = $_REQUEST['folder'];
-if (empty($folder)){
-    $folder = 'NULL';
-}
+    if (empty($folder)) {
+        $folder = 'NULL';
+    }
     if (empty($key)) {
         $sql = null;
     } else {
         $cat = $_REQUEST['id'];
 
 
-            $sql = "INSERT INTO posts (id,cat,txt,img,tipe) VALUES (NULL, $cat, '$key' , '$folder', 1 )";
+        $sql = "INSERT INTO posts (id,cat,txt,img,tipe) VALUES (NULL, $cat, '$key' , '$folder', 1 )";
 
     }
     return [$sql];
 }
+
 function add_template($add_task, $json_data, $time, $numberTemplate)
 {
     $a = $numberTemplate;
@@ -384,10 +386,10 @@ function add_template($add_task, $json_data, $time, $numberTemplate)
 
 }
 
-function checkAPIKey($apiKey) {
+function checkAPIKey($apiKey)
+{
     // Создание HTTP-запроса к API-серверу для проверки ключа
     $url = 'https://api.openai.com/v1/engines/text-davinci-003/completions';
-
 
 
     $headers = array(
@@ -426,7 +428,8 @@ function checkAPIKey($apiKey) {
 }
 
 
-function checkAPIBalance($apiKey)  {
+function checkAPIBalance($apiKey)
+{
 
 
     $dates = getLast100Days();
@@ -465,13 +468,15 @@ function checkAPIBalance($apiKey)  {
     }
 }
 
-function getLast100Days() {
+function getLast100Days()
+{
     $endDate = date('Y-m-d'); // Текущая дата
 
     $startDate = date('Y-m-d', strtotime('-100 days', strtotime($endDate))); // Вычисление даты, отстоящей от текущей на 100 дней
 
     return array($startDate, $endDate); // Возвращает массив с начальной и конечной датами
 }
+
 function del_acc($args): bool
 {
     extracted($args);
@@ -512,4 +517,29 @@ function d_acc($args): void
     $sql = 'DELETE FROM stat_sugg WHERE id_acc = ?';
 
     $qu1 = delete($sql, $args);
+}
+
+function gen_task($ids, $st, $add_task, $numberTemplate)
+{
+    $data = array(
+
+        'data' => $st,
+    );
+
+    try {
+        $json_data = json_encode($data, JSON_THROW_ON_ERROR);
+    } catch (JsonException $e) {
+    }
+
+    foreach ($ids as $a) {
+        $time = Time();
+
+        if ($a != 't') {
+
+            $r = add_task($add_task, $json_data, $time, $a);
+
+        } else {
+            $r = add_template($add_task, $json_data, $time, $numberTemplate);
+        }
+    }
 }

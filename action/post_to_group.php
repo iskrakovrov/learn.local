@@ -91,7 +91,7 @@ $qw2 = selectAll($sql);
                         <option value="2">YES</option>
                     </select>
                     <br>
-                    <label for="post" class="control-label"><?php echo $txtpgroup9  ?></label>
+                    <label for="spost" class="control-label"><?php echo $txtpgroup9  ?></label>
 
                     <select name="spost" id="spost" class="form-control">
                         <?php

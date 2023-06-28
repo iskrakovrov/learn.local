@@ -1,9 +1,9 @@
 <?php
-$sql = "SELECT * FROM lists WHERE cat = 2 OR cat = 9";
+$sql = 'SELECT * FROM lists WHERE cat = 2 OR cat = 9';
 $geo1 = selectAll($sql);
-$sql = "SELECT * FROM lists WHERE cat = 3 OR cat = 9";
+$sql = 'SELECT * FROM lists WHERE cat = 3 OR cat = 9';
 $name1 = selectAll($sql);
-$sql = "SELECT * FROM lists WHERE cat = 1 OR cat = 9";
+$sql = 'SELECT * FROM lists WHERE cat = 1 OR cat = 9';
 $bl1 = selectAll($sql);
 ?>
 
