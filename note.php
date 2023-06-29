@@ -10,9 +10,9 @@ if ($_POST['cls'] == '1'){
 }
 if (!empty ($_REQUEST['txt'])) {
     $txt = $_REQUEST['txt'];
+$t = Time();
 
-
-    $sql = 'INSERT INTO `note` (id,created,text) VALUES (1,Now(),?) ON DUPLICATE KEY UPDATE text = ?';
+    $sql = "INSERT INTO `note` (id,created,text) VALUES (1, $t ,?) ON DUPLICATE KEY UPDATE text = ?";
 
 
     $argc = [$txt, $txt];

@@ -514,6 +514,10 @@ function d_acc($args): void
 
     $qu1 = delete($sql, $args);
 
+    $sql = 'DELETE FROM friends WHERE id_acc = ?';
+
+    $qu1 = delete($sql, $args);
+
     $sql = 'DELETE FROM stat_sugg WHERE id_acc = ?';
 
     $qu1 = delete($sql, $args);

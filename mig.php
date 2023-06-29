@@ -252,7 +252,7 @@ $qw = create($sql);
 
 if (empty($qw)) {
 
-    $sql = "CREATE TABLE `stat_share` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `create` INT(11) NOT NULL , `url` VARCHAR(255) NOT NULL , `id_fb` BIGINT(20) NOT NULL , `id_acc` INT(11) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;";
+    $sql = "CREATE TABLE `stat_share` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `create` INT(20) NOT NULL , `url` VARCHAR(255) NOT NULL , `id_fb` BIGINT(20) NOT NULL , `id_acc` INT(11) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;";
     $qw = create($sql);
 }
 
