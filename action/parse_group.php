@@ -18,6 +18,8 @@ $qw1 = selectAll($sql);
 
                 <div class="alert alert-info" role="alert">
                     <?php echo $txtparcegr1 ?>
+                    <br>
+                    One account processes up to 5 keywords per launch
                 </div>
             </div>
         </div>

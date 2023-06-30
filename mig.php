@@ -264,3 +264,5 @@ if (empty($qw)) {
     $qw = create($sql);
 }
 
+$sql = "SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))";
+$qw = create($sql);

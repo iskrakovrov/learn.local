@@ -188,7 +188,7 @@ echo $fr['all_friends'];
             }
         });
         return response;
-    };
+    }
 
     dat1 = ajaxRequest(function(response){
 
