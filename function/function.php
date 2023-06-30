@@ -547,3 +547,50 @@ function gen_task($ids, $st, $add_task, $numberTemplate)
         }
     }
 }
+
+function check_proxy($pr)
+{
+
+    $ip = $pr['ip'];
+    $port = $pr['port'];
+    $protocol = $pr['protocol'];
+    $login = $pr['login'];
+    $pswd = $pr['pswd'];
+    $proxy .= $ip;
+    $proxy .= ':';
+    $proxy .= $port;
+    $proxyauth .= $login;
+    $proxyauth .= ':';
+    $proxyauth .= $pswd;
+    $url = 'http://ip-api.com/json';
+    $ch = curl_init();
+    if ($protocol == 'socks5') {
+        curl_setopt($ch, CURLOPT_PROXYTYPE, CURLPROXY_SOCKS5);
+    }
+    curl_setopt($ch, CURLOPT_PROXYTYPE, CURLPROXY_SOCKS5);
+    curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36');
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+    curl_setopt($ch, CURLOPT_PROXY, $proxy);
+    curl_setopt($ch, CURLOPT_PROXYUSERPWD, $proxyauth);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_HEADER, 0);
+    $curl_scraped_page = curl_exec($ch);
+    curl_close($ch);
+    $response = json_decode($curl_scraped_page, true);
+
+    if ($response['status'] == 'success') {
+        $st = '';
+        $st .= $response['countryCode'];
+        $st .= ',';
+        $st .= $response['city'];
+
+    } else {
+        $st = 'bad';
+    }
+    $id = $pr['id'];
+    $sql = "UPDATE proxy SET status = '$st' WHERE id = $id ";
+    $stat = update($sql);
+}

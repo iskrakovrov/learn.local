@@ -16,7 +16,8 @@ $sql = 'DELETE FROM stat_like WHERE (id_acc) NOT IN (SELECT id FROM accounts )';
 $qw = delete($sql,$argc);
 $sql = 'DELETE FROM stat_invite WHERE (id_acc) NOT IN (SELECT id FROM accounts )';
 $qw = delete($sql,$argc);
-
+$sql = 'DELETE FROM ava WHERE (id_acc) NOT IN (SELECT id FROM accounts )';
+$qw = delete($sql,$argc);
 
 
 header('Location: accounts.php');

@@ -43,8 +43,8 @@ $ser = selectAll($sql);
 
                 <a class="btn btn-secondary" href="add_multi_proxy.php" role="button">Add proxy</a>
 
-                <a class="btn btn-success" href="all_no_work_proxy.php" role="button">Multy FREE proxy</a>
-
+                <a class="btn btn-secondary" href="all_no_work_proxy.php" role="button">Multy FREE proxy</a>
+                <a class="btn btn-success" href="chk_proxy.php" role="button">Check ALL proxy</a>
                 <button type="submit" class="btn btn-danger" title="Delete proxy"
                         onClick="return confirm( 'WARNING!!! DELETE PROXY? ' )">Delete Proxy <i
                             class="bi bi-x-circle-fill"></i></button>
@@ -66,6 +66,7 @@ $ser = selectAll($sql);
                     <th>Proxy</th>
                     <th>Link</th>
                     <th>USE</th>
+                    <th>Status</th>
                     <th>Comment</th>
                     <th>Action</th>
                 </tr>
@@ -84,10 +85,14 @@ $ser = selectAll($sql);
                         <td><?php echo $a['link_proxy'] ?></td>
 
                         <td><?php echo $a['use_proxy'] ?></td>
+                        <td><?php echo $a['status'] ?></td>
                         <td><?php echo $a['comment'] ?></td>
                         <td>
                             <div class="col">
-                                <a href="f_proxy.php?id=<?php echo $a['id'] ?>" class="btn btn-success">FREE Proxy</a>
+                                <a href="chk_proxy.php?id=<?php echo $a['id'] ?>" class="btn btn-success"
+                                >Check Proxy<i class="bi bi-x-circle-fill"></i></a>
+                                <a href="f_proxy.php?id=<?php echo $a['id'] ?>" class="btn btn-secondary">FREE Proxy</a>
+
                                 <a href="del_proxy.php?id=<?php echo $a['id'] ?>" class="btn btn-danger"
                                    title="Delete proxy" onClick="return confirm( 'WARNING!!! DELETE PROXY? ' )">Delete
                                     Proxy
@@ -106,6 +111,7 @@ $ser = selectAll($sql);
                     <th>Proxy</th>
                     <th>Link</th>
                     <th>USE</th>
+                    <th>Status</th>
                     <th>Comment</th>
                     <th>Action</th>
                 </tr>
