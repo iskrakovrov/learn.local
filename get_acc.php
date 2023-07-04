@@ -14,7 +14,10 @@ $data = create($sql);
 $sql = 'SELECT accounts.* FROM accounts, task WHERE accounts.id = task.account AND accounts.useacc <> 1 AND accounts.server = ? ORDER BY accounts.last_start LIMIT 1';
 $args = [$server];
 $data = select($sql, $args);
-$json_data = json_encode($data, JSON_THROW_ON_ERROR);
+try {
+    $json_data = json_encode($data, JSON_THROW_ON_ERROR);
+} catch (JsonException $e) {
+}
 if (empty($data)) {
     $json_data = 'no accounts';
 }

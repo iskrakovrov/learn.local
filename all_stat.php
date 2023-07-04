@@ -55,9 +55,13 @@ INNER JOIN (
 INNER JOIN accounts a ON f.id_acc = a.id
 WHERE a.status = 1 OR a.status = 15 OR a.status = 20';
 $fr = select($sql);
+$fr = NULL;
 $t =Time();
 $afr = $fr['SUM(f.friends)'];
-$sql = "INSERT INTO all_stat (all_friends, created, type) VALUES ($afr, $t, 1)";
+if (empty($afr)){
+    $afr = 0;
+}
+$sql = "INSERT INTO all_stat (id, all_friends, created, type) VALUES (NULL, $afr, $t, 1)";
 $fr = insert($sql);
 echo $fr['all_friends'];
 ?>

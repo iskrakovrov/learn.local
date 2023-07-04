@@ -566,8 +566,10 @@ function check_proxy($pr)
     $ch = curl_init();
     if ($protocol == 'socks5') {
         curl_setopt($ch, CURLOPT_PROXYTYPE, CURLPROXY_SOCKS5);
+    }else{
+        curl_setopt($ch, CURLOPT_PROXYTYPE, CURLPROXY_HTTP);
     }
-    curl_setopt($ch, CURLOPT_PROXYTYPE, CURLPROXY_SOCKS5);
+
     curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36');
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);

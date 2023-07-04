@@ -264,5 +264,13 @@ if (empty($qw)) {
     $qw = create($sql);
 }
 
-$sql = "SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))";
+$sql = "SET SESSION sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));";
 $qw = create($sql);
+
+$sql = "SHOW COLUMNS FROM accounts WHERE FIELD = 'created_acc'";
+$qw = create($sql);
+if (empty($qw)) {
+    $sql = "ALTER TABLE `accounts` ADD `created_acc` INT(11) NULL AFTER `ar`;";
+    $qw = create($sql);
+}
+
