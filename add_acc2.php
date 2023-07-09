@@ -20,7 +20,7 @@ if (!empty($nr) && !empty($serv) && !empty($group) && isset($_POST['accs'])) {
     $i = 0;
     foreach ($array as $pr) {
         $i++;
-        $res = parse_acc2($pr, $comm, $serv, $group, $cock);
+        $res = parse_acc2($pr, $comm, $serv, $group, $cock,$pg);
         $sql = $res[0];
 
         if (!empty($sql)) {
@@ -63,6 +63,8 @@ $sql = 'SELECT * FROM servers';
 $ser = selectAll($sql);
 $sql = 'SELECT * FROM group_acc';
 $gr = selectAll($sql);
+$sql = 'SELECT * FROM group_proxy';
+$pr_gr = selectall($sql);
 ?>
 <main class="container-fluid ">
     <div class="row text-center">
@@ -116,6 +118,18 @@ $gr = selectAll($sql);
                     <strong><label><?php echo $txtacc ?></label></strong>
                     <textarea class="form-control rounded-0" id="accs" name="accs" rows="10"
                               placeholder="<?php echo $txtnewline ?>"></textarea>
+                    <br>
+                    <label class="form-control" for="pg">Select a proxy group</label>
+                    <select class="form-select" id="pg" name="pg" aria-label="Floating label select example">
+
+                        <option value="0">No group</option>
+                        <?php foreach ($pr_gr as $br) {
+
+
+                            ?>
+                            <option value="<?php echo $br['id'] ?>"><?php echo $br['name_group']?></option>
+                        <?php } ?>
+                    </select>
                     <br>
 
                     <strong><label><?php echo $txtnoreq ?></label></strong>

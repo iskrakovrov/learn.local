@@ -24,7 +24,7 @@ foreach ($query as $a) {
     if ($a['gpoup_proxy']===NULL) {
         $pr = 'NO';
     } else {
-        if ($a['gpoup_proxy'] == 0) {
+        if ($a['gpoup_proxy'] === 0) {
             $pr = 'FREE';
         } else {
             $idp = $a['gpoup_proxy'];
