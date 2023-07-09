@@ -93,7 +93,8 @@ $homepage = file_get_contents('https://soft.fbcombo.com/ver.php');
                             </a>
 
                             <ul class="dropdown-menu" aria-labelledby="proxy">
-                                <li><a class="dropdown-item" href="#">Proxy group</a></li>
+                                <li><a class="dropdown-item" href="proxy_gr.php">Proxy group</a></li>
+                                <li><a class="dropdown-item" href="add_proxy_group.php">Add Proxy group</a></li>
                                 <li><a class="dropdown-item" href="proxy.php">Proxy</a></li>
 
 

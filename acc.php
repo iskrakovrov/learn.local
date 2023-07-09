@@ -5,7 +5,7 @@ require_once('inc/db.php');
 require_once('function/function.php');
 
 $start = microtime(true);
-$sql = 'SELECT id, login_fb, pass_fb, id_fb, name, gender, avatar, created, group_acc, server, id_proxy, status, works, useacc, friends, last_start, tocken, mail, phone, adv, 2fa, ar FROM accounts';
+$sql = 'SELECT id, login_fb, pass_fb, id_fb, name, gender, avatar, created, group_acc, server, id_proxy, status, works, useacc, friends, last_start, tocken, mail, phone, adv, 2fa, ar, created_acc, ig, life, gpoup_proxy  FROM accounts ';
 $query = selectAll($sql);
 $sql = 'SELECT * FROM group_acc';
 $gr1 = selectAll($sql);
@@ -21,13 +21,16 @@ foreach ($query as $a) {
     } else {
         $ava = 'NO';
     }
-    if ($a['id_proxy'] === null) {
+    if ($a['gpoup_proxy']===NULL) {
         $pr = 'NO';
     } else {
-        if ($a['id_proxy'] == 0) {
+        if ($a['gpoup_proxy'] == 0) {
             $pr = 'FREE';
         } else {
-            $pr = 'OK';
+            $idp = $a['gpoup_proxy'];
+            $sql = "SELECT * FROM group_proxy WHERE id=$idp";
+            $nn = select($sql);
+            $pr = $nn['name_group'];
         }
     }
     if ($a['useacc'] == '0') {
@@ -54,17 +57,16 @@ foreach ($query as $a) {
 
 
     $id_gr = $a['group_acc'];
-    $gr2 = array_filter($gr1, fn (array $data2): bool => $data2['id'] == $id_gr);
+    $gr2 = array_filter($gr1, fn(array $data2): bool => $data2['id'] == $id_gr);
     if (!empty($gr2)) {
 
 
-        foreach ($gr2 as $z){
+        foreach ($gr2 as $z) {
             $gr = $z['name_group'];
         }
-    }else{
+    } else {
         $gr = 'No Group';
     }
-
 
 
 //    $id_gr = $a['group_acc'];
@@ -73,26 +75,24 @@ foreach ($query as $a) {
 //    foreach ($gr1 as $z) {
 //        if ($z['id'] == $id_gr) {
 //            $gr = $z['name_group'];
- //       }
- //   }
+    //       }
+    //   }
 
-$data = $a['created'];
- //   $data = date('d  M Y', $a['created']);
-
-
-     $id_s = $a['server'];
-    $ser2 = array_filter($ser1, fn (array $data1): bool => $data1['id'] == $id_s);
-if (!empty($ser2)) {
+    $life = $a['life'];
+    //   $data = date('d  M Y', $a['created']);
 
 
-foreach ($ser2 as $y){
-    $ser = $y['name_server'];
-}
-}else{
-    $ser = 'No Server';
-}
+    $id_s = $a['server'];
+    $ser2 = array_filter($ser1, fn(array $data1): bool => $data1['id'] == $id_s);
+    if (!empty($ser2)) {
 
 
+        foreach ($ser2 as $y) {
+            $ser = $y['name_server'];
+        }
+    } else {
+        $ser = 'No Server';
+    }
 
 
     if ($a['works'] == '0') {
@@ -116,8 +116,6 @@ foreach ($ser2 as $y){
 
     if ($qw7 === false) {
         $friends = '<div style="color: #000000FF"><strong>';
-        $friends .= $a['friends'];
-        $friends .= '</strong></div>';
     } else {
         $colorFriends = $a['friends'] - $qw7['friends'];
         if ($colorFriends < 0) {
@@ -125,9 +123,9 @@ foreach ($ser2 as $y){
         } else {
             $friends = '<div style="color: #02b711"><strong>';
         }
-        $friends .= $a['friends'];
-        $friends .= '</strong></div>';
     }
+    $friends .= $a['friends'];
+    $friends .= '</strong></div>';
 
 
     $id = '<div style="text-align: center;"><input type="checkbox" name="a[]" value="';
@@ -143,14 +141,23 @@ foreach ($ser2 as $y){
     $action .= '" class="btn btn-danger" title="Delete Account" onClick="return confirm( ';
     $action .= "'WARNING!!! DELETE ACCOUNT?' )";
     $action .= '"><i class="bi bi-x-circle-fill"></i></a></div>';
+
+
+    $cr_acc = $data = $a['created_acc'];
+
+    //   $data = date('d  M Y', $a['created']);
+
+
+    $id_s = $a['server'];
+    $ser2 = array_filter($ser1, fn(array $data1): bool => $data1['id'] == $id_s);
     //$ls = date('d  M Y G:i', $a['last_start']);
-$ls = $a['last_start'];
+    $ls = $a['last_start'];
     if ($a['adv'] == 1) {
         $adv = 'YES';
     } else {
         $adv = 'NO';
     }
-   $idf = $a['id_fb'];
+    $idf = $a['id_fb'];
 
     if (!empty($idf)) {
         $lfb = '<a href="https://facebook.com/';
@@ -158,21 +165,29 @@ $ls = $a['last_start'];
         $lfb .= ' "target="_blank">';
         $lfb .= $a['login_fb'];
         $lfb .= '</a>';
-    }
-    else {
+    } else {
         $lfb = $a['login_fb'];
     }
     $fa = $a['2fa'];
-    if ($fa == 'NULL'||$fa == 'None') {
-    $fa = '-';
-    } else{
+    if ($fa == 'NULL' || $fa == 'None') {
+        $fa = '-';
+    } else {
         $fa = '+';
     }
-    $ares = $a['ar'];
-    if ($ares == '1'){
-        $ar = 'OK';
+
+    $ig1 = $a['ig'];
+    if ($ig1 == 1) {
+        $ig = 'bad';
+    } else if (empty($ig1)) {
+        $ig = '';
+    } else {
+        $ig = 'ok';
     }
-    else if ($ares == '2'){
+
+    $ares = $a['ar'];
+    if ($ares == '1') {
+        $ar = 'OK';
+    } else if ($ares == '2') {
         $ar = 'No Ok';
     } else {
         $ar = '?';
@@ -192,15 +207,17 @@ $ls = $a['last_start'];
         'status' => $st,
         'task' => $tk,
         'use' => $use,
-        'create' => $data,
+        'life' => $life,
         'friends' => $friends,
         'tocken' => $tocken,
         'adv' => $adv,
-     'last_start' => $ls,
+        'last_start' => $ls,
         'action' => $action,
         'spst' => $spst,
         'fa' => $fa,
         'ar' => $ar,
+        'created_acc' => $cr_acc,
+        'ig' => $ig,
 
     );
 }

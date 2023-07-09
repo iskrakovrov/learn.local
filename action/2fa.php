@@ -2,7 +2,7 @@
 ?>
 <main class="container-fluid ">
     <div class="row text-center">
-        <h2>Add mail</h2>
+        <h2>ADD 2FA</h2>
     </div>
     <div class="col align-center">
 

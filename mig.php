@@ -274,3 +274,60 @@ if (empty($qw)) {
     $qw = create($sql);
 }
 
+$sql = "SELECT * FROM status WHERE id = 20";
+$qw = select($sql);
+if (empty($qw)) {
+    $sql = "INSERT INTO `status` (`id`, `status`) VALUES ('21', 'ОК CHK MAIL')";
+    $qw = insert($sql);
+}
+
+$sql = "SHOW TABLES LIKE 'instagram'";
+$qw = create($sql);
+
+if (empty($qw)) {
+
+    $sql = "CREATE TABLE `instagram` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `login_i` VARCHAR(255) NOT NULL , `pass_i` VARCHAR(255) NOT NULL , `mail` VARCHAR(255) NULL , `cookies_i` LONGTEXT NULL , `id_acc` INT(11) NULL , `id_fb` BIGINT(255) NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;";
+    $qw = create($sql);
+    $sql = "ALTER TABLE `instagram` ADD `pass_mail` VARCHAR(255)  NULL AFTER `mail`";
+    $qw = create($sql);
+    $sql = "ALTER TABLE `instagram` ADD `created` INT(11) NULL AFTER `id_fb`";
+    $qw = create($sql);
+    $sql = "ALTER TABLE `instagram` ADD `sch` INT(11) NULL AFTER `created`";
+    $qw = create($sql);
+}
+$sql = "SHOW COLUMNS FROM accounts WHERE FIELD = 'life'";
+$qw = create($sql);
+if (empty($qw)) {
+    $sql = "ALTER TABLE `accounts` ADD `life` VARCHAR(255) NULL AFTER `created_acc`;";
+    $qw = create($sql);
+
+}
+$sql = "SHOW COLUMNS FROM accounts WHERE FIELD = 'ig'";
+$qw = create($sql);
+if (empty($qw)) {
+    $sql = "ALTER TABLE `accounts` ADD `ig` INT(11) NULL AFTER `life`;";
+    $qw = create($sql);
+
+}
+
+$sql = "SHOW TABLES LIKE 'group_proxy'";
+$qw = create($sql);
+
+if (empty($qw)) {
+
+    $sql = "CREATE TABLE `group_proxy` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `name_group` VARCHAR(50) NOT NULL , `comment` VARCHAR(255) NULL , PRIMARY KEY (`id`), UNIQUE `n_g` (`name_group`)) ENGINE = InnoDB;";
+    $qw = create($sql);
+    $sql = "ALTER TABLE `proxy` CHANGE `ban` `group_proxy` INT(11) NULL DEFAULT NULL";
+    $qw = create($sql);
+    $sql = "UPDATE `proxy` SET `group_proxy`= NULL;";
+    $qw = create($sql);
+    $sql = "ALTER TABLE `accounts` ADD `gpoup_proxy` INT(11) NULL AFTER `id_proxy`;";
+    $qw = create($sql);
+}
+
+
+
+
+
+
+

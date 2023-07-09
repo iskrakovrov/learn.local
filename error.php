@@ -7,7 +7,7 @@ require_once($lang);
 
 $time = Time();
 $time2 = $time - 170000;
-$sql = "DELETE FROM err WHERE created < ?";
+$sql = 'DELETE FROM err WHERE created < ?';
 $args = [$time2];
 $q = delete($sql, $args);
 

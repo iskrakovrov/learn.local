@@ -321,6 +321,12 @@ $_SESSION['numberTemplate'] = $numberTemplate;
                                 Parse active users
                             </label>
                         </div>
+                        <div class="form-check">
+                            <input class="form-check-input" name="task[]" type="checkbox" value="instagram.php" id="instagram" >
+                            <label class="form-check-label" for="instagram">
+                                Instagram
+                            </label>
+                        </div>
 
                     </div>
                 </div>

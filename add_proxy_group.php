@@ -4,17 +4,17 @@ require_once('inc/db.php');
 require_once('function/function.php');
 $lang = $_SESSION['lang'] . '.php';
 require_once($lang);
-if (!empty($_REQUEST['name_server'])) {
-    $nserv = $_REQUEST['name_server'];
-    $com = $_REQUEST['com_server'];
+if (!empty($_REQUEST['name_group'])) {
+    $ngr = $_REQUEST['name_group'];
+    $com = $_REQUEST['com_pr'];
     $sql = 'SELECT * FROM group_acc WHERE name_group = ?';
-    $args = [$nserv];
+    $args = [$ngr];
     $ch = selectAll($sql, $args);
     if (empty($ch)) {
-        $sql = 'INSERT INTO group_acc (name_group, comment) VALUES (?, ?)';
-        $args = [$nserv, $com];
+        $sql = 'INSERT INTO group_proxy (name_group, comment) VALUES (?, ?)';
+        $args = [$ngr, $com];
         $ch = insert($sql, $args);
-        header('Location: groups.php');
+        header('Location: proxy_gr.php');
     }
 }
 ?>
@@ -44,14 +44,14 @@ include_once 'inc/header.php'
 ?>
 <main class="container-fluid ">
     <div class="row text-center">
-        <h2>Add group account</h2>
+        <h2>Add group proxies</h2>
     </div>
     <div class="row justify-content-center">
         <div class="col-6 text-center">
 
 
             <div class="alert alert-info" role="alert">
-                <?php echo $txtgracc ?>
+                Add group proxies
                 <br>
             </div>
         </div>
@@ -60,17 +60,17 @@ include_once 'inc/header.php'
         <div class="col-6 text-center">
             <form method="post">
                 <div class="form-group">
-                    <label for="name_server"><?php echo $txtaddgr ?></label>
-                    <input type="text" class="form-control"  name = "name_server"  id="name_server"  maxlength = 10  placeholder="Enter name group">
+                    <label for="name_group">Name proxies group</label>
+                    <input type="text" class="form-control"  name = "name_group"  id="name_group"  maxlength = 10  placeholder="Enter name proxies group">
                 </div>
                 <div class="form-group">
-                    <label for="com_server"><?php echo $txtaddgr1 ?></label>
-                    <input type="text" class="form-control"  name = "com_server"  id="com_server"  maxlength = 50  placeholder="">
+                    <label for="com_pr"><?php echo $txtaddgr1 ?></label>
+                    <input type="text" class="form-control"  name = "com_pr"  id="com_pr"  maxlength = 50  placeholder="">
                 </div>
                 <br>
                 <div class="form-group">
 
-                    <button type="submit" class="btn btn-primary">Add group</button>
+                    <button type="submit" class="btn btn-primary">Add proxies group</button>
                 </div>
             </form>
 

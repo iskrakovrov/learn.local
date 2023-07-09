@@ -67,6 +67,16 @@ if ($add_task == 'global_invite') {
     );
     gen_task($ids, $st, $add_task, $numberTemplate);
 }
+if ($add_task == 'instagram') {
+    $st[] = array(
+
+        'cm' => $_REQUEST['cm'],
+        'f24' => $_REQUEST['f24'],
+
+
+    );
+    gen_task($ids, $st, $add_task, $numberTemplate);
+}
 
 if ($add_task == 'coockie') {
     $st[] = array(
@@ -79,6 +89,7 @@ if ($add_task == 'coockie') {
 if ($add_task == 'add_mail') {
     $st[] = array(
         'am' => $_REQUEST['am'],
+        'cm' => $_REQUEST['cm'],
 
 
     );

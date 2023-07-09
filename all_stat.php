@@ -53,9 +53,9 @@ INNER JOIN (
     GROUP BY id_acc
 ) f2 ON f.id_acc = f2.id_acc AND f.created = f2.max_created
 INNER JOIN accounts a ON f.id_acc = a.id
-WHERE a.status = 1 OR a.status = 15 OR a.status = 20';
+WHERE a.status = 1 OR a.status = 15 OR a.status = 20 OR a.status = 21 OR a.status = 18';
 $fr = select($sql);
-$fr = NULL;
+
 $t =Time();
 $afr = $fr['SUM(f.friends)'];
 if (empty($afr)){

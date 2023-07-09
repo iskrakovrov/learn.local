@@ -134,7 +134,7 @@ function processForm($array)
 
 }
 
-function delete($del, $args = [])
+function delete($del, $args = []): string
 {
 
     global $pdo;
@@ -146,8 +146,11 @@ function delete($del, $args = [])
 
 }
 
-function parse_proxy($pr, $comm)
+function parse_proxy($pr, $comm, $pg): ?array
 {
+    if($pg==0){
+        $pg = 'null';
+    }
     $link = explode("|", $pr);
     $prx = $link[0];
 
@@ -162,8 +165,7 @@ function parse_proxy($pr, $comm)
     $pass = $arr_pr['pass'];
     $link = $link[1];
     if (empty ($host)) {
-        $sql = null;
-        return $sql;
+        return null;
     }
     if (empty($mode)) {
         $mode = 'http';
@@ -177,15 +179,15 @@ function parse_proxy($pr, $comm)
     }
     $time = Time();
     $sql1 = "SELECT * FROM proxy WHERE proxy = '$pr'";
-    $sql = "INSERT INTO `proxy` (`id`, `protocol`, `proxy`, `ip`, `port`, `login`, `pswd`, `link_proxy`, `status`, `work`, `created`, `comment`, `use_proxy`, `ban`) VALUES (NULL, '$mode', '$pr', '$host', '$port', '$user', '$pass', '$link', 'ok','0', '$time', '$comm', 0, 0)";
+    $sql = "INSERT INTO `proxy` (`id`, `protocol`, `proxy`, `ip`, `port`, `login`, `pswd`, `link_proxy`, `status`, `work`, `created`, `comment`, `use_proxy`, `group_proxy`) VALUES (NULL, '$mode', '$pr', '$host', '$port', '$user', '$pass', '$link', 'ok','0', '$time', '$comm', 0, $pg)";
     return [$sql, $sql1];
 }
 
-function parse_acc1($acc, $comm, $serv, $group)
+function parse_acc1($acc, $comm, $serv, $group): ?array
 {
 
 
-    $accs = explode(";", $acc);
+    $accs = explode(';', $acc);
     $login = $accs[0];
     $pass = $accs[1];
     if (empty($login)) {
@@ -238,7 +240,7 @@ function parse_acc2($acc, $comm, $serv, $group, $cock)
     $bd = $accs [8];
     $mb = $accs [9];
     $yb = $accs [10];
-    $sql = "SELECT * FROM accounts WHERE login_fb = ?";
+    $sql = 'SELECT * FROM accounts WHERE login_fb = ?';
     $args = [$login];
     $querty = select($sql, $args);
     if (!empty($querty)) {
@@ -292,23 +294,23 @@ function add_task($add_task, $json_data, $time, $account)
     $a = $account;
 
 
-    $sql = "SELECT id FROM task WHERE task = ? AND account = ?";
+    $sql = 'SELECT id FROM task WHERE task = ? AND account = ?';
     $args = [$add_task, $a];
     $query = select($sql, $args);
     $id_tr = $query['id'];
     if (empty($query)) {
-        $sql = "INSERT INTO task (id, account, task, setup, created) VALUES (NULL, ?, ?, ?, ?)";
+        $sql = 'INSERT INTO task (id, account, task, setup, created) VALUES (NULL, ?, ?, ?, ?)';
         $args = [$a, $add_task, $json_data, $time];
         $query = insert($sql, $args);
     } else {
-        $sql = "UPDATE task SET setup = ?, created = ? WHERE id = ?";
+        $sql = 'UPDATE task SET setup = ?, created = ? WHERE id = ?';
         $args = [$json_data, $time, $id_tr];
         $query = update($sql, $args);
 
     }
 }
 
-function parse_key($key)
+function parse_key($key): array
 {
 
     if (empty($key)) {
@@ -329,14 +331,14 @@ function parse_key($key)
     return [$sql];
 }
 
-function parse_name($key)
+function parse_name($key): array
 {
 
     if (empty($key)) {
         $sql = null;
     } else {
         $cat = $_REQUEST['cat'];
-        $sql = "SELECT * FROM name_lists WHERE id_list = ? AND value = ?";
+        $sql = 'SELECT * FROM name_lists WHERE id_list = ? AND value = ?';
         $args = [$cat, $key];
         $query = select($sql, $args);
         if (empty($query)) {
@@ -352,8 +354,13 @@ function create($create)
 {
     global $pdo;
     $sql = $create;
+       try {
     $query = $pdo->prepare($sql);
     $query->execute();
+      } catch(PDOException $e) {
+          echo 'Error: Unable to execute query. SQL: ' . $sql . ' Error message: ' . $e->getMessage();
+       die();
+   }
     dbCheckError($query);
     return $query->fetchAll();
 }
@@ -551,6 +558,7 @@ function gen_task($ids, $st, $add_task, $numberTemplate)
 function check_proxy($pr)
 {
 
+    global $proxy;
     $ip = $pr['ip'];
     $port = $pr['port'];
     $protocol = $pr['protocol'];
@@ -559,6 +567,8 @@ function check_proxy($pr)
     $proxy .= $ip;
     $proxy .= ':';
     $proxy .= $port;
+
+    $proxyauth = '';
     $proxyauth .= $login;
     $proxyauth .= ':';
     $proxyauth .= $pswd;

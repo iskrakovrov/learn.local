@@ -1,31 +1,28 @@
-<!doctype html>
 <?php
 include_once('inc/init.php');
 require_once('inc/db.php');
 require_once('function/function.php');
 $lang = $_SESSION['lang'] . '.php';
 require_once($lang);
-
-
-
-
 $nr = $_REQUEST['proxy1'];
 $comm = $_REQUEST['comms1'];
-
+$pg = $_REQUEST['pg'];
+$sql = 'SELECT * FROM group_proxy';
+$pr_gr = selectall($sql);
 
 if (isset($_POST['proxy1'])) {
     $array = explode("\r\n", $_POST['proxy1']);
 
     for ($i = 0, $iMax = count($array); $i <= $iMax; $i++) {
-        $c = (trim($array[$p]) . "<br/>");
+        $c = (trim($array[$p]) . '<br/>');
     }
     $c = preg_replace('/<br[^>]*>/', '', $c);
     $i = 0;
     foreach ($array as $pr) {
         $i++;
-               $res = parse_proxy($pr, $comm);
-       $sql = $res[1];
-        if(!empty($sql)){
+        $res = parse_proxy($pr, $comm, $pg);
+        $sql = $res[1];
+        if (!empty($sql)) {
             $sel = select($res[1]);
             if (empty($sel)) {
                 $ins = insert($res[0]);
@@ -34,13 +31,12 @@ if (isset($_POST['proxy1'])) {
         }
 
 
-
     }
-
-
+    header('Location: proxy.php');
 }
-
 ?>
+
+
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <!-- Required meta tags -->
@@ -48,12 +44,13 @@ if (isset($_POST['proxy1'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
-          rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
+        rel="stylesheet">
     <!-- Bootstrap CSS -->
     <link href="css/dt.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="css/bootstrap.css" rel="stylesheet">
+
     <link href="css/style.css" rel="stylesheet">
     <title>FB Combo</title>
 </head>
@@ -63,7 +60,7 @@ include_once 'inc/header.php'
 ?>
 <main class="container-fluid ">
     <div class="row text-center">
-        <h2><?php echo $txtaddpr?></h2>
+        <h2><?php echo $txtaddpr ?></h2>
     </div>
     <div class="row justify-content-center">
         <div class="col-6 text-center">
@@ -72,24 +69,37 @@ include_once 'inc/header.php'
             <div class="alert alert-info" role="alert">
                 <?php echo $txtaddpr1 ?>
             </div>
-        <form method="post">
-            <div class="form-group">
+            <form method="post">
+                <div class="form-group">
 
 
                  <textarea class="form-control rounded-0" id="proxy" name="proxy1" rows="10"
                            placeholder="<?php echo $txtnewline ?>"></textarea>
                     <br>
+                    <label class="form-control" for="pg">Select a proxy group</label>
+                    <select class="form-select" id="pg" name="pg" aria-label="Floating label select example">
 
-                    <input type="text" class="form-control" id="comms" name="comms1" placeholder="<?php echo $txtcomm?>">
+                        <option value="0">No group</option>
+                        <?php foreach ($pr_gr as $br) {
 
 
+                            ?>
+                            <option value="<?php echo $br['id'] ?>"><?php echo $br['name_group']?></option>
+                        <?php } ?>
+                    </select>
+                    <br>
+                    <label class="form-control" for="comms">Write a comment if you need</label>
 
-                <br>
+                    <input type="text" class="form-control" id="comms" name="comms1"
+                           placeholder="<?php echo $txtcomm ?>">
 
-                <button type="submit" name="proxy" class="btn btn-primary">Submit</button>
-                <br>
-            </div>
-        </form>
+
+                    <br>
+
+                    <button type="submit" name="proxy" class="btn btn-primary">Submit</button>
+                    <br>
+                </div>
+            </form>
         </div>
 
 

@@ -9,6 +9,8 @@ $sql = "SELECT * FROM group_acc";
 $gg = selectAll($sql);
 $sql = "SELECT * FROM servers";
 $ss = selectAll($sql);
+$sql = "SELECT * FROM group_proxy";
+$pp = selectAll($sql);
 
 ?>
 <!doctype html>
@@ -109,10 +111,15 @@ require_once 'inc/alerts.php';
                     <option value="" selected>[<?php echo $txtmenu ?>]</option>
                     <option value="add_task.php"><?php echo $txtaccounts ?></option>
                     <option value="acc_free.php"><?php echo $txtaccounts1 ?></option>
-
-
                     <option value="clear_task.php"><?php echo $txtlogin16 ?></option>
+                    <option value="" disabled="disabled">----------</option>
+                    <option
+                        value="acc_go_proxy.php?gr=0"><?php echo 'Account without proxy'?></option>
+                    <?php foreach ($pp as $p) { ?>
+                        <option
+                            value="acc_go_proxy.php?gr=<?php echo $p['id'] ?>"><?php echo 'Add account to proxy group ' . $p['name_group'] ?></option>
 
+                    <?php } ?>
 
                     <option value="" disabled="disabled">----------</option>
                     <option value="free_proxy.php"><?php echo $txtaccounts2 ?></option>
@@ -202,15 +209,18 @@ require_once 'inc/alerts.php';
                     <th class="select-filter">Status</th>
                     <th class="select-filter">Task</th>
                     <th class="select-filter">Use</th>
-                    <th class="select-filter">Create</th>
+                    <th class="select-filter">Life</th>
                     <th class="select-filter">Friends</th>
                     <th class="select-filter">Tocken</th>
                     <th class="select-filter">Adv</th>
                     <th class="select-filter">Last Start</th>
-                    <th class="select-filter">Action</th>
+
                     <th class="select-filter">AR</th>
                     <th class="select-filter">!</th>
                     <th class="select-filter">2fa</th>
+                    <th class="select-filter">ig</th>
+                    <th class="select-filter">Created acc</th>
+                    <th class="select-filter">Action</th>
                 </tr>
                 </thead>
 
@@ -228,15 +238,18 @@ require_once 'inc/alerts.php';
                     <th class="select-filter">Status</th>
                     <th class="select-filter">Task</th>
                     <th class="select-filter">Use</th>
-                    <th class="select-filter">Create</th>
+                    <th class="select-filter">Life</th>
                     <th class="select-filter">Friends</th>
                     <th class="select-filter">Tocken</th>
                     <th class="select-filter">Adv</th>
                     <th class="select-filter">Last Start</th>
-                    <th class="select-filter">Action</th>
+
                     <th class="select-filter">AR</th>
                     <th class="select-filter">!</th>
                     <th class="select-filter">2fa</th>
+                    <th class="select-filter">ig</th>
+                    <th class="select-filter">Created acc</th>
+                    <th class="select-filter">Action</th>
 
                 </tr>
                 </tfoot>
@@ -306,22 +319,23 @@ require_once 'inc/alerts.php';
             {mData: 'task'},
             {mData: 'use'},
             {
-                mData: 'create',
+                mData: 'life'
+                //,
 
-                render: function (data, type, row) {
+   //             render: function (data, type, row) {
                     // If display or filter data is requested, format the date
-                    if (type === 'display' || type === 'filter') {
-                        var d = new Date(data * 1000);
+    //                if (type === 'display' || type === 'filter') {
+      //                  var d = new Date(data * 1000);
 
-                        return d.getDate() + '.' + (d.getMonth() + 1) + '.' + d.getFullYear() + ' - ' + d.getHours() + ':' + d.getMinutes();
-                    }
+      //                  return d.getDate() + '.' + (d.getMonth() + 1) + '.' + d.getFullYear() + ' - ' + d.getHours() + ':' + d.getMinutes();
+                    },
 
                     // Otherwise the data type requested (`type`) is type detection or
                     // sorting data, for which we want to use the integer, so just return
                     // that, unaltered
-                    return data;
-                }
-            },
+      //              return data;
+      //          }
+      //      },
             {mData: 'friends'},
             {mData: 'tocken'},
             {mData: 'adv'},
@@ -341,10 +355,29 @@ require_once 'inc/alerts.php';
                     return data;
                 }
             },
-            {mData: 'action'},
+
             {mData: 'ar'},
             {mData: 'spst'},
-            {mData: 'fa'}
+            {mData: 'fa'},
+            {mData: 'ig'},
+            {
+                mData: 'created_acc',
+                render: function (data, type, row) {
+                    // If display or filter data is requested, format the date
+                    if (type === 'display' || type === 'filter') {
+                        var d = new Date(data * 1000);
+
+                        return d.getDate() + '.' + (d.getMonth() + 1) + '.' + d.getFullYear();
+                    }
+
+                    // Otherwise the data type requested (`type`) is type detection or
+                    // sorting data, for which we want to use the integer, so just return
+                    // that, unaltered
+                    return data;
+                }
+            },
+            {mData: 'action'},
+
         ],
 
 
@@ -364,7 +397,7 @@ require_once 'inc/alerts.php';
 
         'columnDefs':
             [{
-                'targets': [0, 4, 5, 6, 7, 11, 14, 15], // column index (start from 0)
+                'targets': [0, 4, 5, 7, 11, 14, 15], // column index (start from 0)
                 'orderable': false, // set orderable false for selected columns
             }],
 
@@ -372,8 +405,8 @@ require_once 'inc/alerts.php';
 		initComplete: function () {
 
 			const table = this.api();
-			const filterColumns = [4, 5, 6, 7, 11, 14, 15];
-			const filterColumnsMultiple = [9, 8];
+			const filterColumns = [4, 5,  7, 11, 14, 15];
+			const filterColumnsMultiple = [9, 8, 6];
 
 			table.columns(filterColumns).every(function () {
 				const column = this;
