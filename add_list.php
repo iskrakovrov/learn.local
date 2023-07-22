@@ -8,11 +8,11 @@ require_once($lang);
 if (!empty($_REQUEST['name'])) {
     $name = $_REQUEST['name'];
     $cat = $_REQUEST['cat'];
-    $sql = "SELECT * FROM lists WHERE cat = ? AND name = ?";
+    $sql = 'SELECT * FROM lists WHERE cat = ? AND name = ?';
     $args = [$cat, $name];
     $query = select($sql, $args);
     if (empty($query)) {
-        $sql = "INSERT INTO lists (cat, name) VALUES (?, ?)";
+        $sql = 'INSERT INTO lists (cat, name) VALUES (?, ?)';
         $args = [$cat, $name];
         $query = select($sql, $args);
         header('Location: add_list.php');

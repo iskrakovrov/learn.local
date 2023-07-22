@@ -325,6 +325,15 @@ if (empty($qw)) {
     $qw = create($sql);
 }
 
+$sql = "SHOW COLUMNS FROM oai WHERE FIELD = 'error'";
+$qw = create($sql);
+if (empty($qw)) {
+    $sql = "ALTER TABLE `oai` ADD `error` VARCHAR(255) NULL AFTER `usage`";
+    $qw = create($sql);
+
+}
+
+
 
 
 

@@ -35,14 +35,14 @@ $pp = selectAll($sql);
             padding-top: 0.55em;
 
         }
-		</style>
+    </style>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css">
-	     <style>
-			.select2-container--default .select2-selection--single .select2-selection__clear {
+    <style>
+        .select2-container--default .select2-selection--single .select2-selection__clear {
             margin-right: -5px;
-			margin-top: -10px;
+            margin-top: -10px;
         }
-		</style>
+    </style>
 
 </head>
 
@@ -114,7 +114,7 @@ require_once 'inc/alerts.php';
                     <option value="clear_task.php"><?php echo $txtlogin16 ?></option>
                     <option value="" disabled="disabled">----------</option>
                     <option
-                        value="acc_go_proxy.php?gr=0"><?php echo 'Account without proxy'?></option>
+                        value="acc_go_proxy.php?gr=0"><?php echo 'Account without proxy' ?></option>
                     <?php foreach ($pp as $p) { ?>
                         <option
                             value="acc_go_proxy.php?gr=<?php echo $p['id'] ?>"><?php echo 'Add account to proxy group ' . $p['name_group'] ?></option>
@@ -167,7 +167,8 @@ require_once 'inc/alerts.php';
                         <button class="btn btn-danger" onClick="return confirm( '<?php echo $txtaccounts5 ?>' )"
                                 name="add_task" id="add_task" value="del_acc.php">DELETE ACCOUNTS
                         </button>
-						&nbsp; &nbsp; &nbsp; <button id="clearFiltersBtn" class="btn btn-primary">Clear Filters</button>
+                        &nbsp; &nbsp; &nbsp;
+                        <button id="clearFiltersBtn" class="btn btn-primary">Clear Filters</button>
 
                     </div>
                 </div>
@@ -198,6 +199,7 @@ require_once 'inc/alerts.php';
                         <label for="all"></label>
                         <input type="checkbox" id="all" value=""/>
                     </th>
+                    <th class="select-filter">Name</th>
                     <th class="select-filter">Login</th>
                     <th class="select-filter">Mail</th>
                     <th class="select-filter">Phone</th>
@@ -220,6 +222,8 @@ require_once 'inc/alerts.php';
                     <th class="select-filter">2fa</th>
                     <th class="select-filter">ig</th>
                     <th class="select-filter">Created acc</th>
+
+
                     <th class="select-filter">Action</th>
                 </tr>
                 </thead>
@@ -227,6 +231,7 @@ require_once 'inc/alerts.php';
                 <tfoot>
                 <tr>
                     <th class="select-filter"></th>
+                    <th class="select-filter">Name</th>
                     <th class="select-filter">Login</th>
                     <th class="select-filter">Mail</th>
                     <th class="select-filter">Phone</th>
@@ -249,6 +254,8 @@ require_once 'inc/alerts.php';
                     <th class="select-filter">2fa</th>
                     <th class="select-filter">ig</th>
                     <th class="select-filter">Created acc</th>
+
+
                     <th class="select-filter">Action</th>
 
                 </tr>
@@ -304,9 +311,11 @@ require_once 'inc/alerts.php';
 
         "ajax": "acc.php",
         "deferRender": true,
+
         "columns": [
 
             {mData: 'ids'},
+            {mData: 'name'},
             {mData: 'login'},
             {mData: 'mail'},
             {mData: 'phone'},
@@ -322,20 +331,20 @@ require_once 'inc/alerts.php';
                 mData: 'life'
                 //,
 
-   //             render: function (data, type, row) {
-                    // If display or filter data is requested, format the date
-    //                if (type === 'display' || type === 'filter') {
-      //                  var d = new Date(data * 1000);
+                //             render: function (data, type, row) {
+                // If display or filter data is requested, format the date
+                //                if (type === 'display' || type === 'filter') {
+                //                  var d = new Date(data * 1000);
 
-      //                  return d.getDate() + '.' + (d.getMonth() + 1) + '.' + d.getFullYear() + ' - ' + d.getHours() + ':' + d.getMinutes();
-                    },
+                //                  return d.getDate() + '.' + (d.getMonth() + 1) + '.' + d.getFullYear() + ' - ' + d.getHours() + ':' + d.getMinutes();
+            },
 
-                    // Otherwise the data type requested (`type`) is type detection or
-                    // sorting data, for which we want to use the integer, so just return
-                    // that, unaltered
-      //              return data;
-      //          }
-      //      },
+            // Otherwise the data type requested (`type`) is type detection or
+            // sorting data, for which we want to use the integer, so just return
+            // that, unaltered
+            //              return data;
+            //          }
+            //      },
             {mData: 'friends'},
             {mData: 'tocken'},
             {mData: 'adv'},
@@ -376,6 +385,7 @@ require_once 'inc/alerts.php';
                     return data;
                 }
             },
+
             {mData: 'action'},
 
         ],
@@ -397,82 +407,82 @@ require_once 'inc/alerts.php';
 
         'columnDefs':
             [{
-                'targets': [0, 4, 5, 7, 11, 14, 15], // column index (start from 0)
+                'targets': [0, 5, 6, 7, 8, 9, 10, 12, 13, 15, 16], // column index (start from 0)
                 'orderable': false, // set orderable false for selected columns
             }],
 
 
-		initComplete: function () {
+        initComplete: function () {
 
-			const table = this.api();
-			const filterColumns = [4, 5,  7, 11, 14, 15];
-			const filterColumnsMultiple = [9, 8, 6];
+            const table = this.api();
+            const filterColumns = [5, 6, 8, 12,  15, 16];
+            const filterColumnsMultiple = [13, 10, 9, 7];
 
-			table.columns(filterColumns).every(function () {
-				const column = this;
-				const select = $('<select><option value=""></option></select>')
-					.appendTo($(column.header()))
-					.on('change', function () {
-						const selectedValue = $(this).val();
-						const escapedValue = $.fn.dataTable.util.escapeRegex(selectedValue);
+            table.columns(filterColumns).every(function () {
+                const column = this;
+                const select = $('<select><option value=""></option></select>')
+                    .appendTo($(column.header()))
+                    .on('change', function () {
+                        const selectedValue = $(this).val();
+                        const escapedValue = $.fn.dataTable.util.escapeRegex(selectedValue);
 
-						column.search(escapedValue ? '^' + escapedValue + '$' : '', true, false).draw();
-						 // Save the state of this Select2 widget.
-						localStorage.setItem('select2-' + column.index(), selectedValue);
-					});
+                        column.search(escapedValue ? '^' + escapedValue + '$' : '', true, false).draw();
+                        // Save the state of this Select2 widget.
+                        localStorage.setItem('select2-' + column.index(), selectedValue);
+                    });
 
-				column.data()
-					.unique()
-					.sort()
-					.each(function (d) {
-						select.append($('<option></option>').attr('value', d).text(d));
-					});
-				select.select2({
-					placeholder: 'Filter',
-					allowClear: true
-				}); // Initialize Select2 on the select element
-				// Restore the state of this Select2 widget.
-				const savedValue = localStorage.getItem('select2-' + column.index());
-				if (savedValue !== null) {
-					select.val(savedValue).trigger('change');
-				}
-			});
+                column.data()
+                    .unique()
+                    .sort()
+                    .each(function (d) {
+                        select.append($('<option></option>').attr('value', d).text(d));
+                    });
+                select.select2({
+                    placeholder: 'Filter',
+                    allowClear: true
+                }); // Initialize Select2 on the select element
+                // Restore the state of this Select2 widget.
+                const savedValue = localStorage.getItem('select2-' + column.index());
+                if (savedValue !== null) {
+                    select.val(savedValue).trigger('change');
+                }
+            });
 
-			table.columns(filterColumnsMultiple).every(function () {
-				const column = this;
-				const select = $('<select multiple></select>')
-					.appendTo($(column.header()))
-					.on('change', function () {
-						const selectedValues = $(this).val();
+            table.columns(filterColumnsMultiple).every(function () {
+                const column = this;
+                const select = $('<select multiple></select>')
+                    .appendTo($(column.header()))
+                    .on('change', function () {
+                        const selectedValues = $(this).val();
 
-                                        if (!selectedValues || selectedValues.length === 0 || (selectedValues.length === 1 && selectedValues[0] === '')) {
-						column.search('').draw(); // Clear the filter
-                                                localStorage.removeItem('select2-' + column.index()); // Clear the saved state
-						return;
-					}
+                        if (!selectedValues || selectedValues.length === 0 || (selectedValues.length === 1 && selectedValues[0] === '')) {
+                            column.search('').draw(); // Clear the filter
+                            localStorage.removeItem('select2-' + column.index()); // Clear the saved state
+                            return;
+                        }
 
-						column.search(selectedValues ? '^(' + selectedValues.join('|') + ')$' : '', true, false).draw(); // Use regex to search for multiple values
-						// Save the state of this Select2 widget.
-						localStorage.setItem('select2-' + column.index(), selectedValues.join(','));
-					});
+                        column.search(selectedValues ? '^(' + selectedValues.join('|') + ')$' : '', true, false).draw(); // Use regex to search for multiple values
+                        // Save the state of this Select2 widget.
+                        localStorage.setItem('select2-' + column.index(), selectedValues.join(','));
+                    });
 
-				column.data()
-					.unique()
-					.sort()
-					.each(function (d) {
-						select.append($('<option></option>').attr('value', d).text(d));
-					});
-				select.select2({
-					placeholder: 'Filter',
-					allowClear: true
-				}); // Initialize Select2 on the select element
-				// Restore the state of this Select2 widget.
-				const savedValues = localStorage.getItem('select2-' + column.index());
-				if (savedValues !== null) {
-					select.val(savedValues.split(',')).trigger('change');
-				}
-			});
-		},
+                column.data()
+                    .unique()
+                    .sort()
+                    .each(function (d) {
+                        select.append($('<option></option>').attr('value', d).text(d));
+                    });
+                select.select2({
+                    placeholder: 'Filter',
+                    allowClear: true
+                }); // Initialize Select2 on the select element
+                // Restore the state of this Select2 widget.
+                const savedValues = localStorage.getItem('select2-' + column.index());
+                if (savedValues !== null) {
+                    select.val(savedValues.split(',')).trigger('change');
+                }
+            });
+        },
 
     });
 
@@ -495,19 +505,19 @@ require_once 'inc/alerts.php';
 
     $(document).ready(function () {
         const table = $('#dr_table').DataTable();
-		
-		// Event listener to the Clear Filters button
-		$('#clearFiltersBtn').on('click', function () {
-			event.preventDefault();
 
-			table.search('').columns().search('').draw(); // Clear the search and column filters
-			table.columns().every(function () {
-				const column = this;
-				const header = $(column.header());
-				header.find('select').val(null).trigger('change'); // Clear any select filters
-				localStorage.removeItem('select2-' + column.index()); // Clear the saved state
-			});
-		});
+        // Event listener to the Clear Filters button
+        $('#clearFiltersBtn').on('click', function () {
+            event.preventDefault();
+
+            table.search('').columns().search('').draw(); // Clear the search and column filters
+            table.columns().every(function () {
+                const column = this;
+                const header = $(column.header());
+                header.find('select').val(null).trigger('change'); // Clear any select filters
+                localStorage.removeItem('select2-' + column.index()); // Clear the saved state
+            });
+        });
 
         // Event listener to the two range filtering inputs to redraw on input
         $('#min, #max').keyup(function () {

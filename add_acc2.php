@@ -8,6 +8,7 @@ $nr = $_REQUEST['accs'];
 $serv = $_REQUEST['server'];
 $group = $_REQUEST['group'];
 $comm = $_REQUEST['comms1'];
+$pg = $_REQUEST['pg'];
 
 
 if (!empty($nr) && !empty($serv) && !empty($group) && isset($_POST['accs'])) {

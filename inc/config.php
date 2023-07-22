@@ -1,8 +1,13 @@
 <?php
 $driver = 'mysql';
-$host = 'localhost';
+//$host = 'dom.fbcombo.com';
+//$db_name = 'admin_basa';
 //$db_name = 'admin_facebook';
-$db_name = 'fb_uk';
+//$db_user = 'admin_basa';
+//$db_pass = 'Kamel1979!';
+$host = 'localhost';
+//$db_name = 'admin_basa';
+$db_name = 'admin_facebook';
 $db_user = 'admin_facebook';
 $db_pass = 'Kamel1979';
 $charset = 'utf8';

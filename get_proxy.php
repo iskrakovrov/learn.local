@@ -9,7 +9,7 @@ $sql = "SELECT * FROM proxy WHERE status != 'bad' AND group_proxy = $gp ORDER BY
 //$sql = "SELECT * FROM proxy, accounts WHERE proxy.status = 'ok' ORDER BY 'proxy.use_proxy' ASC, 'proxy.work' ASC";
 $query = select($sql);
 $id = $query['id'];
-$time = Time();
+$time = Time()+60;
 $sql = 'UPDATE proxy SET work = ? WHERE id = ?';
 $args = [$time, $id];
 $query1 = update($sql, $args);

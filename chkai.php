@@ -1,7 +1,8 @@
 <?php
-include_once('inc/init.php');
 require_once('inc/db.php');
 require_once('function/function.php');
+
+
 $id = $_REQUEST['id'];
 
 $sql = 'SELECT code FROM oai WHERE id = ?';
@@ -15,10 +16,12 @@ $statusAI = checkAPIKey($apiKey);
 if ($statusAI === true) {
     $sql = 'UPDATE oai SET status = 0 WHERE id = ? ';
     $argc = [$id];
+    $message = 'true';
 } else {
     $err = $statusAI[1];
     $sql = 'UPDATE oai SET status = 1, error = ? WHERE id = ? ';
     $argc = [$err, $id];
+    $message = 'false';
 }
 
 $query = update($sql, $argc);
@@ -34,5 +37,5 @@ if ($balance !== false) {
 $argc = [$id];
 $query = update($sql, $argc);
 
-header('Location: open_ai.php');
+echo $message;
 

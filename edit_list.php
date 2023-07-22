@@ -17,20 +17,35 @@ if (!empty($_REQUEST['key'])) {
     $key = addslashes($_REQUEST['key']);
     $array = explode("\r\n", $key);
 
-    foreach ($array as $key) {
-        $i++;
-        $res = parse_key($key);
-        $sql = $res[0];
 
-        if (!empty($sql)) {
-            $argc = [$key];
-            $ins = insert($sql,$argc);
+    $batchSize = 1000;
+    $batches = array_chunk($array, $batchSize);
 
+    // Перебор и обработка каждого пакета данных
+    foreach ($batches as $batch) {
+        // Создание пустого массива для значений
+        $values = [];
 
+        // Формирование строки значений для пакетной вставки
+        foreach ($batch as $data) {
+            // Экранирование значений и добавление в массив
+     //       $escapedData = escapeString($data);
+            $values[] = $data;
         }
 
 
+        $placeholders = implode(',', array_fill(0, count($values), '(?, ?)'));
+        $val = [];
+        foreach ($values as $dat) {
+            $val[] = $dat;
+            $val[] = $cat;
+        }
+        $sql = "INSERT INTO value_lists (value, list) VALUES $placeholders";
+        $args = $val;
+        insert($sql, $args);
+
     }
+
 
     header('Refresh: 0');
 }
@@ -114,16 +129,15 @@ $ser = selectAll($sql, $args);
             </form>
             <br>
             Загрузить из файла
-            <form method="POST" action="upload_val.php?id=<?php echo $cat?>" enctype="multipart/form-data">
+            <form method="POST" action="upload_val.php?id=<?php echo $cat ?>" enctype="multipart/form-data">
                 <div>
                     <span>Upload a File:</span>
-                    <input type="file" name="uploadedFile" />
+                    <input type="file" name="uploadedFile"/>
                 </div>
 
 
-
                 <br>
-                <input type="submit" name="uploadBtn" value="Upload" />
+                <input type="submit" name="uploadBtn" value="Upload"/>
             </form>
         </div>
     </div>

@@ -59,7 +59,9 @@ foreach ($query as $a) {
     } else {
         $tocken = 'NO';
     }
-
+    //  $t = $a['id'];
+    //  $sql = "SELECT count(task) FROM task WHERE account = $t";
+    //   $tk = selectAll($sql);
 
     $tk = $a['task_count'] - 1;
 
@@ -236,5 +238,3 @@ $data = array(
 $json_data = json_encode($data, JSON_THROW_ON_ERROR);
 print $json_data;
 $time = microtime(true) - $start;
-
-

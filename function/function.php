@@ -429,7 +429,9 @@ function checkAPIKey($apiKey)
     if (isset($decodedResponse['id']) && isset($decodedResponse['object']) && isset($decodedResponse['model'])) {
         return true; // Ключ действителен
     } else {
-        return false; // Ключ недействителен
+$err1 = $decodedResponse['error'];
+$err = $err1['code'];
+       return [false, $err];
     }
 }
 
@@ -557,15 +559,16 @@ function gen_task($ids, $st, $add_task, $numberTemplate)
 function check_proxy($pr)
 {
 
-    global $proxy;
+
     $ip = $pr['ip'];
     $port = $pr['port'];
     $protocol = $pr['protocol'];
     $login = $pr['login'];
     $pswd = $pr['pswd'];
-    $proxy .= $ip;
-    $proxy .= ':';
-    $proxy .= $port;
+    $pr1 = NULL;
+    $pr1 .= $ip;
+    $pr1 .= ':';
+    $pr1 .= $port;
 
     $proxyauth = '';
     $proxyauth .= $login;
@@ -583,7 +586,7 @@ function check_proxy($pr)
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
     curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-    curl_setopt($ch, CURLOPT_PROXY, $proxy);
+    curl_setopt($ch, CURLOPT_PROXY, $pr1);
     curl_setopt($ch, CURLOPT_PROXYUSERPWD, $proxyauth);
     curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -604,4 +607,99 @@ function check_proxy($pr)
     $id = $pr['id'];
     $sql = "UPDATE proxy SET status = '$st' WHERE id = $id ";
     $stat = update($sql);
+}
+
+
+function escapeString($string)
+{
+    global $pdo;
+
+    return $pdo->quote($string);
+
+}
+
+function generate_article_with_markup($title, $keywords, $language, $api_key, $desired_lengths) {
+
+
+    // Создаем заголовок статьи
+    $article_content = '<!-- Заголовок статьи -->';
+    $article_content .= '<h1>' . $title . '</h1>';
+
+    // Добавляем мета-теги для поисковой оптимизации
+    $article_content .= '<!-- Теги для поисковой оптимизации -->';
+    $article_content .= '<meta name="keywords" content="' . $keywords . '">';
+    $article_content .= '<meta name="description" content="' . $title . '">';
+
+    // Получаем ключевые слова как массив
+    $keywords_array = explode(', ', $keywords);
+
+    // Генерируем текст для каждого ключевого слова (подзаголовки)
+    foreach ($keywords_array as $index => $keyword) {
+        // Получаем желаемую длину для текущей части статьи (подзаголовка)
+        $desired_length = $desired_lengths[$index];
+
+        // Генерируем текст с помощью OpenAI API
+        $generated_text = generate_text_by_keyword($keyword, $language, $api_key, $desired_length);
+
+        // Добавляем сгенерированный текст с подзаголовком в статью
+        $article_content .= '<!-- Подзаголовок: ' . $keyword . ' -->';
+        $article_content .= '<h2>' . $keyword . '</h2>';
+        $article_content .= '<div class="article-content">';
+        $article_content .= $generated_text;
+        $article_content .= '</div>';
+
+        // Добавляем задержку между запросами, чтобы не превышать лимиты
+        sleep(30);
+    }
+
+
+    return $article_content;
+}
+
+// Функция для генерации текста по ключевому слову с помощью OpenAI API
+function generate_text_by_keyword($keyword, $language, $api_key, $desired_length) {
+    $url = 'https://api.openai.com/v1/chat/completions';
+
+    // Формируем prompt с ключевым словом
+    $prompt = "Тема: $keyword\nЯзык: $language\n\n";
+
+    // Строка для хранения сгенерированного текста
+    $generated_text = '';
+
+    // Выполняем цикл до тех пор, пока не сгенерируем достаточное количество токенов
+    while (strlen($generated_text) < $desired_length) {
+        // Максимальное количество токенов, которое можно сгенерировать за один запрос
+        $max_tokens_per_request = 4000;
+
+        // Вычисляем количество токенов, которое нужно сгенерировать в текущем запросе
+        $tokens_to_generate = min($desired_length - strlen($generated_text), $max_tokens_per_request);
+
+        $data = array(
+            'model' => 'text-davinci-003',
+            'prompt' => $prompt . $generated_text,
+            'max_tokens' => $tokens_to_generate,
+            'temperature' => 0.7, // Уровень "творчества" генератора (от 0.2 до 1.0)
+            'stop' => ['\n'], // Массив с условиями для остановки генерации текста
+        );
+
+        $headers = array(
+            'Content-Type: application/json',
+            'Authorization: Bearer ' . $api_key,
+        );
+
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        $response = curl_exec($ch);
+        curl_close($ch);
+
+        $result = json_decode($response, true);
+
+        // Добавляем сгенерированный текст к общему результату
+        $generated_text .= $result['choices'][0]['text'];
+    }
+
+    return $generated_text;
 }

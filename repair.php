@@ -18,6 +18,8 @@ $sql = 'DELETE FROM stat_invite WHERE (id_acc) NOT IN (SELECT id FROM accounts )
 $qw = delete($sql,$argc);
 $sql = 'DELETE FROM ava WHERE (id_acc) NOT IN (SELECT id FROM accounts )';
 $qw = delete($sql,$argc);
+$sql = 'DELETE FROM all_stat WHERE all_friends < 2';
+$qw = delete($sql,$argc);
 
 
 header('Location: accounts.php');

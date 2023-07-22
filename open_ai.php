@@ -63,6 +63,7 @@ $ser = selectAll($sql);
                 </th>
                 <th>Chat Open_ai key</th>
                 <th>Status</th>
+                <th>Error</th>
                 <th>Usage</th>
                 <th>Action</th>
             </tr>
@@ -84,7 +85,7 @@ $ser = selectAll($sql);
                             echo 'bad';
                         }?></td>
                     <td><?php echo $a['usage'] ?></td>
-
+                    <td><?php echo $a['error'] ?></td>
                     <td>
                         <div class="col">
 
@@ -106,6 +107,7 @@ $ser = selectAll($sql);
                 <th></th>
                 <th>Chat Open_ai key</th>
                 <th>Status</th>
+                <th>Error</th>
                 <th>Usage</th>
                 <th>Action</th>
             </tr>
