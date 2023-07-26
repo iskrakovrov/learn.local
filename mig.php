@@ -332,8 +332,20 @@ if (empty($qw)) {
     $qw = create($sql);
 
 }
+$sql = "SHOW COLUMNS FROM oai WHERE FIELD = 'used'";
+$qw = create($sql);
+if (empty($qw)) {
+    $sql = "ALTER TABLE `oai` ADD `used` INT(25) NULL AFTER `error`";
+    $qw = create($sql);
 
+}
+$sql = "SHOW COLUMNS FROM oai WHERE FIELD = 'working'";
+$qw = create($sql);
+if (empty($qw)) {
+    $sql = "ALTER TABLE `oai` ADD `working` INT(1) NULL AFTER `used`";
+    $qw = create($sql);
 
+}
 
 
 

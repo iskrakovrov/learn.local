@@ -13,7 +13,8 @@ $statusAI = checkAPIKey($apiKey);
 
 
 if ($statusAI === true) {
-    $sql = 'UPDATE oai SET status = 0 WHERE id = ? ';
+    $time = Time();
+    $sql = "UPDATE oai SET status = 0, error = 'no error', oai.used = $time  WHERE id = ?";
     $argc = [$id];
 } else {
     $err = $statusAI[1];

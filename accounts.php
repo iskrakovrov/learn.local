@@ -295,7 +295,7 @@ require_once 'inc/alerts.php';
     dr_table = $('#dr_table').DataTable({
 
 
-        bProcessing: false,
+        bProcessing: true,
 
         stateSave: true,
         searching: true,
@@ -407,7 +407,7 @@ require_once 'inc/alerts.php';
 
         'columnDefs':
             [{
-                'targets': [0, 5, 6, 7, 8, 9, 10, 12, 13, 15, 16], // column index (start from 0)
+                'targets': [0, 5, 6, 7, 8, 9, 10, 12, 13, 15, 16, 18], // column index (start from 0)
                 'orderable': false, // set orderable false for selected columns
             }],
 
@@ -415,7 +415,7 @@ require_once 'inc/alerts.php';
         initComplete: function () {
 
             const table = this.api();
-            const filterColumns = [5, 6, 8, 12,  15, 16];
+            const filterColumns = [5, 6, 8, 12,  15, 16, 18];
             const filterColumnsMultiple = [13, 10, 9, 7];
 
             table.columns(filterColumns).every(function () {
@@ -490,7 +490,7 @@ require_once 'inc/alerts.php';
     $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
         const min = parseInt($('#min').val(), 10);
         const max = parseInt($('#max').val(), 10);
-        const age = parseFloat(data[13]) || 0; // use data for the age column
+        const age = parseFloat(data[14]) || 0; // use data for the age column
 
         if (
             (isNaN(min) && isNaN(max)) ||
