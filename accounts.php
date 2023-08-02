@@ -114,10 +114,10 @@ require_once 'inc/alerts.php';
                     <option value="clear_task.php"><?php echo $txtlogin16 ?></option>
                     <option value="" disabled="disabled">----------</option>
                     <option
-                        value="acc_go_proxy.php?gr=0"><?php echo 'Account without proxy' ?></option>
+                            value="acc_go_proxy.php?gr=0"><?php echo 'Account without proxy' ?></option>
                     <?php foreach ($pp as $p) { ?>
                         <option
-                            value="acc_go_proxy.php?gr=<?php echo $p['id'] ?>"><?php echo 'Add account to proxy group ' . $p['name_group'] ?></option>
+                                value="acc_go_proxy.php?gr=<?php echo $p['id'] ?>"><?php echo 'Add account to proxy group ' . $p['name_group'] ?></option>
 
                     <?php } ?>
 
@@ -129,14 +129,14 @@ require_once 'inc/alerts.php';
                     <option value="" disabled="disabled">----------</option>
                     <?php foreach ($gg as $g) { ?>
                         <option
-                            value="go_group.php?gr=<?php echo $g['id'] ?>"><?php echo $txtaccounts40 . $g['name_group'] ?></option>
+                                value="go_group.php?gr=<?php echo $g['id'] ?>"><?php echo $txtaccounts40 . $g['name_group'] ?></option>
 
                     <?php } ?>
 
                     <option value="" disabled="disabled">----------</option>
                     <?php foreach ($ss as $s) { ?>
                         <option
-                            value="go_server.php?se=<?php echo $s['id'] ?>"><?php echo $txtaccounts41 . $s['name_server'] ?></option>
+                                value="go_server.php?se=<?php echo $s['id'] ?>"><?php echo $txtaccounts41 . $s['name_server'] ?></option>
 
                     <?php } ?>
                     <option value="" disabled="disabled">----------</option>
@@ -296,11 +296,12 @@ require_once 'inc/alerts.php';
 
 
         bProcessing: true,
-
+        orderClasses: false,
         stateSave: true,
         searching: true,
 
         serverSide: false,
+
         orderCellsTop: true,
         scrollX: false,
         iLeftWidth: 120,
@@ -309,7 +310,14 @@ require_once 'inc/alerts.php';
         dom: '<"top"lpif<"clear">>rt<"bottom"lpif<"clear">>',
 
 
-        "ajax": "acc.php",
+        "ajax": {
+            url: "acc.php",
+            headers: {
+                "Accept": "application/ld+json",
+
+            },
+        },
+
         "deferRender": true,
 
         "columns": [
@@ -329,22 +337,10 @@ require_once 'inc/alerts.php';
             {mData: 'use'},
             {
                 mData: 'life'
-                //,
 
-                //             render: function (data, type, row) {
-                // If display or filter data is requested, format the date
-                //                if (type === 'display' || type === 'filter') {
-                //                  var d = new Date(data * 1000);
-
-                //                  return d.getDate() + '.' + (d.getMonth() + 1) + '.' + d.getFullYear() + ' - ' + d.getHours() + ':' + d.getMinutes();
             },
 
-            // Otherwise the data type requested (`type`) is type detection or
-            // sorting data, for which we want to use the integer, so just return
-            // that, unaltered
-            //              return data;
-            //          }
-            //      },
+
             {mData: 'friends'},
             {mData: 'tocken'},
             {mData: 'adv'},
@@ -415,7 +411,7 @@ require_once 'inc/alerts.php';
         initComplete: function () {
 
             const table = this.api();
-            const filterColumns = [5, 6, 8, 12,  15, 16, 18];
+            const filterColumns = [5, 6, 8, 12, 15, 16, 18];
             const filterColumnsMultiple = [13, 10, 9, 7];
 
             table.columns(filterColumns).every(function () {

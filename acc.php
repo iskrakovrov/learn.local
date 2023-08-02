@@ -4,10 +4,10 @@ include_once('inc/init.php');
 require_once('inc/db.php');
 require_once('function/function.php');
 
-$start = microtime(true);
+//$start = microtime(true);
 //$sql = 'SELECT id, login_fb, pass_fb, id_fb, name, gender, avatar, created, group_acc, server, id_proxy, status, works, useacc, friends, last_start, tocken, mail, phone, adv, 2fa, ar, created_acc, ig, life, gpoup_proxy  FROM accounts ';
 
-$sql = 'SELECT
+ $sql = 'SELECT
    accounts.id, login_fb, pass_fb, id_fb, name, gender, avatar, accounts.created, group_acc,
    server, id_proxy, status, works, useacc, friends, last_start, tocken, mail, phone,
    adv, 2fa, ar, created_acc, ig, life, gpoup_proxy, COUNT(task.task) as task_count
@@ -17,6 +17,28 @@ LEFT JOIN
    task ON accounts.id = task.account
 GROUP BY
    accounts.id';
+//$sql = 'SELECT
+//   acc.id, login_fb, pass_fb, id_fb, name, gender, avatar, acc.created, group_acc,
+//   server, id_proxy, status, works, useacc, acc.friends, last_start, tocken, mail, phone,
+//   adv, 2fa, ar, created_acc, ig, life, gpoup_proxy,
+//   COUNT(task.task) AS task_count,
+//   (
+//   SELECT
+//         f1.friends
+//      FROM
+//         friends f1
+//      WHERE
+//         f1.id_acc = acc.id
+//      ORDER BY
+//         f1.created DESC
+//      LIMIT 1 OFFSET 1
+//   ) AS friends_friends
+//FROM
+//   accounts acc
+//LEFT JOIN
+//   task ON acc.id = task.account
+//GROUP BY
+//   acc.id';
 
 
 $query = selectAll($sql);
@@ -113,24 +135,36 @@ foreach ($query as $a) {
             $st = $z['status'];
         }
     }
-    $id1 = $a['id'];
-    $sql = "SELECT friends FROM friends WHERE id_acc = {$id1}  ORDER BY created DESC LIMIT 1, 1 ";
-
-    $qw7 = select($sql);
 
 
-    if ($qw7 === false) {
-        $friends = '<div style="color: #000000FF"><strong>';
-    } else {
-        $colorFriends = $a['friends'] - $qw7['friends'];
-        if ($colorFriends < 0) {
-            $friends = '<div style="color: #b70202"><strong>';
-        } else {
-            $friends = '<div style="color: #02b711"><strong>';
-        }
-    }
-    $friends .= $a['friends'];
-    $friends .= '</strong></div>';
+//    $fr = $a['friends']-$a['friends_friends'];
+//    if ($fr===0){
+//        $friends .= '<strong>';
+//    }else if ($colorFriends < 0) {
+//           $friends .= '<strong>';
+//      } else {
+//         $friends .= '<strong>';
+//      }
+
+//    $id1 = $a['id'];
+ //   $sql = "SELECT friends FROM friends WHERE id_acc = {$id1}  ORDER BY created DESC LIMIT 1, 1 ";
+
+ //   $qw7 = select($sql);
+
+
+//  if ($a['friends_friends'] === false) {
+//        $friends = '<div style="color: #000000FF"><strong>';
+//    } else {
+//        $colorFriends = $a['friends'] - $a['friends_friends'];
+//       if ($colorFriends < 0) {
+//           $friends = '<div style="color: #b70202"><strong>';
+//      } else {
+//           $friends = '<div style="color: #02b711"><strong>';
+//       }
+//  }
+    $friends = $a['friends'];
+
+//    $friends .= '</strong>';
 
 
     $id = '<div style="text-align: center;"><input type="checkbox" name="a[]" value="';
@@ -233,8 +267,14 @@ $data = array(
 );
 
 // Convert PHP array to JSON array
-$json_data = json_encode($data, JSON_THROW_ON_ERROR);
+try {
+    $json_data = json_encode($data, JSON_THROW_ON_ERROR);
+} catch (JsonException $e) {
+}
+
 print $json_data;
-$time = microtime(true) - $start;
+
+//$time = microtime(true) - $start;
+
 
 

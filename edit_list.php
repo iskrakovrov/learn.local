@@ -18,7 +18,7 @@ if (!empty($_REQUEST['key'])) {
     $array = explode("\r\n", $key);
 
 
-    $batchSize = 1000;
+    $batchSize = 4000;
     $batches = array_chunk($array, $batchSize);
 
     // Перебор и обработка каждого пакета данных
