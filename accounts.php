@@ -297,7 +297,7 @@ require_once 'inc/alerts.php';
 
         bProcessing: true,
         orderClasses: false,
-        stateSave: true,
+        stateSave: false,
         searching: true,
 
         serverSide: false,
@@ -306,9 +306,9 @@ require_once 'inc/alerts.php';
         scrollX: false,
         iLeftWidth: 120,
         sLeftWidth: 'relative',
+
         "lengthMenu": [[30, 100, 250, 500, 1000], [30, 100, 250, 500, 1000]],
         dom: '<"top"lpif<"clear">>rt<"bottom"lpif<"clear">>',
-
 
         "ajax": {
             url: "acc.php",

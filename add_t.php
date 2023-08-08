@@ -12,8 +12,8 @@ if (!empty($_REQUEST['add_task'])){
     header("Location: $url");
     return true;
 }
-if (empty($_REQUEST['add_task'])){
+
     header('Location: accounts.php');
-}
+
 
 

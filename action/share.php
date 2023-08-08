@@ -4,6 +4,7 @@ $qw = selectAll($sql);
 $sql = 'SELECT * FROM lists WHERE cat = 5';
 $qw1 = selectAll($sql);
 
+
 ?>
 
 <main class="container-fluid ">
@@ -40,9 +41,10 @@ $qw1 = selectAll($sql);
                     </select>
                     <br>
 
-                    <label for="url" class="control-label">URL of posts to share</label>
+                    <label for="url" class="control-label">URL of posts or Pages to share</label>
 
                     <select name="url" id="url" class="form-control">
+
                         <?php
                         $i = 0;
                         foreach ($qw as $a) {

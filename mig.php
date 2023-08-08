@@ -347,6 +347,15 @@ if (empty($qw)) {
 
 }
 
+$sql = "SHOW COLUMNS FROM stat_share WHERE FIELD = 'create'";
+$qw = create($sql);
+if (!empty($qw)) {
+    $sql = "ALTER TABLE `stat_share` CHANGE `create` `created` INT(20) NULL";
+    $qw = create($sql);
+
+}
+
+
 
 
 
