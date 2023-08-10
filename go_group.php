@@ -6,7 +6,7 @@ require_once('function/function.php');
 $id = $_SESSION['ids'];
 $yy = $_GET['gr'];
 foreach ($id as $a) {
-$sql = "UPDATE accounts SET group_acc = ? WHERE id = ?";
+$sql = 'UPDATE accounts SET group_acc = ? WHERE id = ?';
 $args = [$yy, $a];
 $q = update($sql, $args);
 }

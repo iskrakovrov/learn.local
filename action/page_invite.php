@@ -1,5 +1,5 @@
 <?php
-$sql = 'SELECT * FROM lists WHERE cat = 10 OR cat = 9';
+$sql = 'SELECT * FROM lists WHERE cat = 11';
 $qw = selectAll($sql);
 
 ?>
@@ -37,20 +37,6 @@ $qw = selectAll($sql);
                             <option value="<?php echo $a['id'] ?>"><?php echo $a['name']; ?></option>
                         <?php } ?>
                     </select>
-
-                    <br>
-
-                    <label for="mode" class="control-label"><?php echo $txtipage3 ?></label>
-                    <select class="form-select" id="mode" name="mode" aria-label="mode">
-
-                        <option value="all">All</option>
-                        <option value="obo">One by one</option>
-
-                    </select>
-                    <br>
-                    <label for="num_i"><?php echo $txtipage4 ?></label>
-                    <input type="number" name="num_i" id="num_i" class="form-control"
-                           placeholder="100">
 
                     <br>
 

@@ -3,6 +3,8 @@ $sql = 'SELECT * FROM lists WHERE cat = 11';
 $qw = selectAll($sql);
 $sql = 'SELECT * FROM lists WHERE cat = 5';
 $qw1 = selectAll($sql);
+$sql = 'SELECT * FROM account_tags';
+$at1 = selectAll($sql);
 
 
 ?>
@@ -44,12 +46,25 @@ $qw1 = selectAll($sql);
                     <label for="url" class="control-label">URL of posts or Pages to share</label>
 
                     <select name="url" id="url" class="form-control">
-
+                        <option value="0">Your accounts</option>
                         <?php
                         $i = 0;
                         foreach ($qw as $a) {
                             $i++; ?>
                             <option value="<?php echo $a['id'] ?>"><?php echo $a['name']; ?></option>
+                        <?php } ?>
+                    </select>
+
+                    <br>
+                    <label for="acc" class="control-label">Accounts for share</label>
+
+                    <select name="acc" id="acc" class="form-control">
+
+                        <?php
+                        $i = 0;
+                        foreach ($at1 as $c) {
+                            $i++; ?>
+                            <option value="<?php echo $c['id'] ?>"><?php echo $c['tag']; ?></option>
                         <?php } ?>
                     </select>
 

@@ -247,6 +247,18 @@ if ($add_task == 'happy') {
     );
     gen_task($ids, $st, $add_task, $numberTemplate);
 }
+if ($add_task == 'page_invite') {
+    $setup = $_POST['action'];
+    $st[] = array(
+
+
+        'cat' => $_REQUEST['cat'],
+        'f24' => $_REQUEST['f24'],
+
+
+    );
+    gen_task($ids, $st, $add_task, $numberTemplate);
+}
 
 if ($add_task == 'commenting') {
 
@@ -272,6 +284,7 @@ if ($add_task == 'share') {
 
         'one' => $_REQUEST['one'],
         'url' => $_REQUEST['url'],
+        'acc' => $_REQUEST['acc'],
         'stxt' => $_REQUEST['stxt'],
         'num_cp' => $_REQUEST['num_cp'],
         'num_sd' => $_REQUEST['num_sd'],

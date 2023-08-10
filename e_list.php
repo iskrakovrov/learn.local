@@ -32,7 +32,7 @@ require_once($lang);
     include_once 'inc/header.php';
     $cat = $_REQUEST['cat'];
 
-    $sql = "SELECT * FROM lists WHERE cat = ?";
+    $sql = 'SELECT * FROM lists WHERE cat = ?';
     $args = [$cat];
     $ser = selectAll($sql, $args);
 
@@ -91,7 +91,7 @@ require_once($lang);
                                 <td><?php echo $a['name'] ?></td>
                                 <td><?php
                                 $cat1 = $a['id'];
-                                    $sql = "SELECT COUNT(*) FROM value_lists WHERE list = ?";
+                                    $sql = 'SELECT COUNT(*) FROM value_lists WHERE list = ?';
                                     $args = [$cat1];
                                     $ww = select($sql, $args);
 

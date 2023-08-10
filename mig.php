@@ -355,6 +355,18 @@ if (!empty($qw)) {
 
 }
 
+$sql = "SHOW TABLES LIKE 'account_tags'";
+$qw = create($sql);
+
+if (empty($qw)) {
+
+    $sql = "CREATE TABLE `account_tags` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `tag` VARCHAR(50) NOT NULL , PRIMARY KEY (`id`), UNIQUE `tag` (`tag`)) ENGINE = InnoDB;";
+    $qw = create($sql);
+    $sql = "ALTER TABLE `accounts` ADD `account_tags` INT(11) NULL AFTER `group_acc`";
+    $qw = create($sql);
+}
+
+
 
 
 

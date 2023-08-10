@@ -1,9 +1,9 @@
 <?php
-include_once('inc/init.php');
-require_once('inc/db.php');
-require_once('function/function.php');
+include_once 'inc/init.php';
+require_once 'inc/db.php';
+require_once 'function/function.php';
 $lang = $_SESSION['lang'] . '.php';
-require_once($lang);
+require_once $lang;
 
 $sql = "SELECT * FROM group_acc";
 $gg = selectAll($sql);
@@ -11,6 +11,8 @@ $sql = "SELECT * FROM servers";
 $ss = selectAll($sql);
 $sql = "SELECT * FROM group_proxy";
 $pp = selectAll($sql);
+$sql = "SELECT * FROM account_tags";
+$at = selectAll($sql);
 
 ?>
 <!doctype html>
@@ -18,7 +20,7 @@ $pp = selectAll($sql);
 <head>
 
     <?php
-    require_once('inc/meta.php');
+    require_once 'inc/meta.php';
     ?>
 
 
@@ -34,6 +36,18 @@ $pp = selectAll($sql);
 
             padding-top: 0.55em;
 
+        }
+
+        #settings-panel {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .toggle-column {
+            margin-left: 10px;
         }
     </style>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css">
@@ -86,7 +100,7 @@ require_once 'inc/alerts.php';
 
                     <a class="btn btn-secondary" href="servers.php" role="button">Servers</a>
                     <a class="btn btn-secondary" href="groups.php" role="button">Account groups</a>
-
+                    <a class="btn btn-secondary" href="tags.php" role="button">Account tags</a>
                     <a class="btn btn-success" href="add_acc2.php" role="button">Add accounts</a>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
@@ -130,6 +144,13 @@ require_once 'inc/alerts.php';
                     <?php foreach ($gg as $g) { ?>
                         <option
                                 value="go_group.php?gr=<?php echo $g['id'] ?>"><?php echo $txtaccounts40 . $g['name_group'] ?></option>
+
+                    <?php } ?>
+
+                    <option value="" disabled="disabled">----------</option>
+                    <?php foreach ($at as $r) { ?>
+                        <option
+                                value="go_tag.php?gr=<?php echo $r['id'] ?>"><?php echo 'assign an ' . $r['tag'] .' tag to accounts'?></option>
 
                     <?php } ?>
 
@@ -189,6 +210,48 @@ require_once 'inc/alerts.php';
 
                 </tbody>
             </table>
+            <div class="accordion" id="settings-accordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="settings-heading">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#settings-panel" aria-expanded="false" aria-controls="settings-panel">
+                            Column Settings
+                        </button>
+                    </h2>
+                    <div id="settings-panel" class="accordion-collapse collapse" aria-labelledby="settings-heading"
+                         data-bs-parent="#settings-accordion">
+                        <div class="accordion-body">
+                            <input type="checkbox" class="toggle-column" data-column="0">Id
+                            <input type="checkbox" class="toggle-column" data-column="1">Name
+                            <input type="checkbox" class="toggle-column" data-column="2">Login
+                            <input type="checkbox" class="toggle-column" data-column="3">Mail
+                            <input type="checkbox" class="toggle-column" data-column="4">Phone
+                            <input type="checkbox" class="toggle-column" data-column="5">gender
+                            <input type="checkbox" class="toggle-column" data-column="6">Avatar
+                            <input type="checkbox" class="toggle-column" data-column="7">Proxy
+                            <input type="checkbox" class="toggle-column" data-column="8">Server
+                            <input type="checkbox" class="toggle-column" data-column="9">Group
+                            <input type="checkbox" class="toggle-column" data-column="10">Tag
+                            <input type="checkbox" class="toggle-column" data-column="11">Status
+                            <input type="checkbox" class="toggle-column" data-column="12">Task
+                            <input type="checkbox" class="toggle-column" data-column="13">Use
+                            <input type="checkbox" class="toggle-column" data-column="14">Life
+                            <input type="checkbox" class="toggle-column" data-column="15">Friends
+                            <input type="checkbox" class="toggle-column" data-column="16">Tocken
+                            <input type="checkbox" class="toggle-column" data-column="17">Adv
+                            <input type="checkbox" class="toggle-column" data-column="18">Last Start
+                            <input type="checkbox" class="toggle-column" data-column="19">AR
+                            <input type="checkbox" class="toggle-column" data-column="20">!
+                            <input type="checkbox" class="toggle-column" data-column="21">2fa
+                            <input type="checkbox" class="toggle-column" data-column="22">ig
+                            <input type="checkbox" class="toggle-column" data-column="23">Created acc
+                            <input type="checkbox" class="toggle-column" data-column="24">Action
+                            <button id="showAllBtn" class="btn btn-primary">Show all</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <br>
 
             <table id="dr_table" class="table table-responsive table-striped table-bordered table-hover"
@@ -208,6 +271,7 @@ require_once 'inc/alerts.php';
                     <th class="select-filter">Proxy</th>
                     <th class="select-filter">Server</th>
                     <th class="select-filter">Group</th>
+                    <th class="select-filter">Tag</th>
                     <th class="select-filter">Status</th>
                     <th class="select-filter">Task</th>
                     <th class="select-filter">Use</th>
@@ -240,6 +304,7 @@ require_once 'inc/alerts.php';
                     <th class="select-filter">Proxy</th>
                     <th class="select-filter">Server</th>
                     <th class="select-filter">Group</th>
+                    <th class="select-filter">Tag</th>
                     <th class="select-filter">Status</th>
                     <th class="select-filter">Task</th>
                     <th class="select-filter">Use</th>
@@ -297,7 +362,7 @@ require_once 'inc/alerts.php';
 
         bProcessing: true,
         orderClasses: false,
-        stateSave: false,
+        stateSave: true,
         searching: true,
 
         serverSide: false,
@@ -306,9 +371,9 @@ require_once 'inc/alerts.php';
         scrollX: false,
         iLeftWidth: 120,
         sLeftWidth: 'relative',
-
         "lengthMenu": [[30, 100, 250, 500, 1000], [30, 100, 250, 500, 1000]],
         dom: '<"top"lpif<"clear">>rt<"bottom"lpif<"clear">>',
+
 
         "ajax": {
             url: "acc.php",
@@ -332,6 +397,7 @@ require_once 'inc/alerts.php';
             {mData: 'proxy'},
             {mData: 'server'},
             {mData: 'group'},
+            {mData: 'tag'},
             {mData: 'status'},
             {mData: 'task'},
             {mData: 'use'},
@@ -403,7 +469,7 @@ require_once 'inc/alerts.php';
 
         'columnDefs':
             [{
-                'targets': [0, 5, 6, 7, 8, 9, 10, 12, 13, 15, 16, 18], // column index (start from 0)
+                'targets': [0, 5, 6, 7, 8, 9, 10, 11, 13, 14, 16, 17, 19], // column index (start from 0)
                 'orderable': false, // set orderable false for selected columns
             }],
 
@@ -411,8 +477,8 @@ require_once 'inc/alerts.php';
         initComplete: function () {
 
             const table = this.api();
-            const filterColumns = [5, 6, 8, 12, 15, 16, 18];
-            const filterColumnsMultiple = [13, 10, 9, 7];
+            const filterColumns = [5, 6, 8, 16, 17, 19];
+            const filterColumnsMultiple = [11, 13, 14, 10, 9, 7];
 
             table.columns(filterColumns).every(function () {
                 const column = this;
@@ -518,6 +584,32 @@ require_once 'inc/alerts.php';
         // Event listener to the two range filtering inputs to redraw on input
         $('#min, #max').keyup(function () {
             table.draw();
+        });
+
+
+        // Show or hide columns based on DataTables saved state
+        var state = dr_table.state.loaded();
+        if (state) {
+            // Apply the visibility settings from the saved state
+            $.each(state.columns, function (index, column) {
+                dr_table.column(index).visible(column.visible);
+                $('#settings-panel .toggle-column[data-column="' + index + '"]').prop('checked', column.visible);
+            });
+        } else {
+            // If no saved state, use default behavior
+            $('#settings-panel .toggle-column').prop('checked', true);
+        }
+
+        // Toggle columns when checkbox is clicked
+        $('#settings-panel .toggle-column').on('change', function () {
+            var column = dr_table.column($(this).data('column'));
+            column.visible($(this).prop('checked'));
+        });
+        $('#showAllBtn').on('click', function () {
+            event.preventDefault();
+            localStorage.removeItem('tableSettings'); // Clear the saved columns state
+            dr_table.columns().visible(true);
+            $('#settings-panel .toggle-column').prop('checked', true);
         });
     });
 

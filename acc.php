@@ -8,7 +8,7 @@ require_once('function/function.php');
 //$sql = 'SELECT id, login_fb, pass_fb, id_fb, name, gender, avatar, created, group_acc, server, id_proxy, status, works, useacc, friends, last_start, tocken, mail, phone, adv, 2fa, ar, created_acc, ig, life, gpoup_proxy  FROM accounts ';
 
  $sql = 'SELECT
-   accounts.id, login_fb, pass_fb, id_fb, name, gender, avatar, accounts.created, group_acc,
+   accounts.id, login_fb, pass_fb, id_fb, name, gender, avatar, accounts.created, group_acc, account_tags,
    server, id_proxy, status, works, useacc, friends, last_start, tocken, mail, phone,
    adv, 2fa, ar, created_acc, ig, life, gpoup_proxy, COUNT(task.task) as task_count
 FROM
@@ -48,7 +48,8 @@ $sql = 'SELECT * FROM servers';
 $ser1 = selectAll($sql);
 $sql = 'SELECT * FROM status';
 $st1 = selectAll($sql);
-
+$sql = 'SELECT * FROM account_tags';
+$tag1 = selectAll($sql);
 
 foreach ($query as $a) {
     if (!empty ($a['avatar'])) {
@@ -102,7 +103,17 @@ foreach ($query as $a) {
         $gr = 'No Group';
     }
 
+    $id_tag = $a['account_tags'];
+    $tag2 = array_filter($tag1, fn(array $data4): bool => $data4['id'] == $id_tag);
+    if (!empty($tag2)) {
 
+
+        foreach ($tag2 as $x) {
+            $t = $x['tag'];
+        }
+    } else {
+        $t = 'No tag';
+    }
 
 
     $life = $a['life'];
@@ -243,6 +254,7 @@ foreach ($query as $a) {
         'proxy' => $pr,
         'server' => $ser,
         'group' => $gr,
+        'tag' => $t,
         'status' => $st,
         'task' => $tk,
         'use' => $use,
