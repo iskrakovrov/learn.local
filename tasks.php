@@ -253,6 +253,8 @@ if ($add_task == 'page_invite') {
 
 
         'cat' => $_REQUEST['cat'],
+        'inv' => $_REQUEST['inv'],
+        'n_inv' => $_REQUEST['n_inv'],
         'f24' => $_REQUEST['f24'],
 
 

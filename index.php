@@ -52,20 +52,9 @@ require_once 'inc/header.php'
                 <br>
 
 
-                <a href="https://soft.fbcombo.com/update.zip"><?php echo $txtindex11?> <strong><?php echo $homepage?></strong> <span>DOWNLOAD</span></a>
-                <br>
-                <?php echo $txtindex2 ?>
-                <br>
-                <?php echo $txtindex6 ?>
-                <br>
-                <?php echo $txtindex3 ?>
+                <a href="https://bit.ly/45jPed2"><?php echo $txtindex11?> <strong><?php echo $homepage?></strong> <span>DOWNLOAD</span></a>
                 <br>
 
-                <a href="https://t.me/iskrakovrov"><?php echo $txtindex7 ?></a>
-                <br>
-                <br>
-                <?php echo $txtindex4 ?>
-                <br>
 <br>
                 <div class="alert alert-success" role="alert">
                     <?php echo $txtindex5 ?>

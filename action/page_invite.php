@@ -39,6 +39,18 @@ $qw = selectAll($sql);
                     </select>
 
                     <br>
+                    <label for="inv" class="control-label">Invite type</label>
+                    <select name="inv" id="inv" class="form-control">
+                        <option value="0">40 invites at a time</option>
+                        <option value="1">All</option>
+                    </select>
+
+                    <br>
+
+                    <label for="n_inv">How many times if the mode is 40 invites</label>
+                    <input type="number" name="n_inv" id="n_inv" class="form-control"
+                           value="2">
+                    <br>
 
                     <label for="f24"><?php echo $txtfarmi11 ?></label>
                     <input type="number" name="f24" id="f24" class="form-control"

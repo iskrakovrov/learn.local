@@ -42,9 +42,7 @@ $txtaddpr1 = 'Adding a proxy. Format
 
 <p>http://username:password@hostname:9090|link</p>
 
-<p>socks5://username:password@hostname:9090|link</p>
-<br> 
-<a href="https://soft.fbcombo.com/en/accounts-and-proxies-in-fbcombo-account-groups-servers-for-work/" target="_blank"><strong>Read more</strong></a>';
+<p>socks5://username:password@hostname:9090|link</p>';
 $txttask1 = 'Choose and customize actions.';
 $txttask2 = 'Farm cookie(visit sites)';
 $txttask3 = 'Farm interests(get interests from Facebook)';
@@ -127,27 +125,27 @@ $txtaccounts7 = 'USE. WORK - account in work. If in the work process there was a
 $txtaccounts8 = 'Use proxy. Refresh proxy';
 
 $txtlogin13 = 'If there is no avatar, install it from the folder?';
-$txterinv = "Deleting invitations";
-$txterinv1 = "Facebook won`t let you send invites if you have 1000 unanswered invites. You can delete unanswered invitations in this mode. The mode is performed one time and removed from tasks";
-$txterinv2 = "How many invitations to delete?";
+$txterinv = 'Deleting invitations';
+$txterinv1 = 'Facebook won`t let you send invites if you have 1000 unanswered invites. You can delete unanswered invitations in this mode. The mode is performed one time and removed from tasks';
+$txterinv2 = 'How many invitations to delete?';
 $txtlogin14 = 'Selfie photo by default. Male or Female.';
 $txtlogin15 = 'How long to wait before closing the account after the end of work(time in seconds) ';
 $txtlogin16 = 'Delete all tasks from selected accounts';
 $txttask30 = 'Add mail';
-$txtmail1 = "Put a text file in the root of the working folder <strong>mail.txt</strong> in format <p>login;password</p> or <p>login;password;imap_password</p><p>The mode is performed once and removed from the list of tasks</p>";
+$txtmail1 = 'Put a text file in the root of the working folder <strong>mail.txt</strong> in format <p>login;password</p> or <p>login;password;imap_password</p><p>The mode is performed once and removed from the list of tasks</p>';
 $txtmail2 = 'Change mail if there has already been a successful  mail replacement on the account?';
 $txtaccounts40 = 'Move to group ';
 $txtaccounts41 = 'Move to server ';
-$txtnewacc = "Pumping new accounts(recently registred)";
+$txtnewacc = 'Pumping new accounts(recently registred)';
 $txtnewacc1 = "<p>This mode invites people from the search with the geolocation that you need. This forms a list of suggested ones you need and gets the first friends in the most secure way.</p>
 <p>The search specifies the name and compares it with the ID. Or if there is no suitable ID, the geolocation of account is checked and if it is suitable, then this person is invited. </p>
 <p>Make sure to select the list for the initial invite to accounts in the form:Name;ID  If the list isn't created you need to create it in the category ID Lists. Select the list of required geolocations. If the list doesn't exist yet, then create it in the GEO(geolocation) Lists category. Fill in the rest of the fields for enter</p> ";
-$txtnewacc2 = "Choose a list of people to invite";
-$txtnewacc3 = "Select a list of suitable geolocations.";
-$txtnewacc4 = "The number of invites per launch.";
-$txtnewacc5 = "Pause in seconds from and to. For example 5-10.";
-$txtnewacc6 = "Number of alerts from Facebook per one launch";
-$txtinv3 = "Invite suggested people";
+$txtnewacc2 = 'Choose a list of people to invite';
+$txtnewacc3 = 'Select a list of suitable geolocations.';
+$txtnewacc4 = 'The number of invites per launch.';
+$txtnewacc5 = 'Pause in seconds from and to. For example 5-10.';
+$txtnewacc6 = 'Number of alerts from Facebook per one launch';
+$txtinv3 = 'Invite suggested people';
 $txtinv30 = "Select the desired geolocation. Select filter by name. Specify whether to use a global blacklist so that accounts don't invite the same ones. This mode is for inviting people that Facebook offers as friends";
 $txtinv31 = "List of geolocations";
 $txtinv32 = "List of Names - Black List";
@@ -201,8 +199,8 @@ $txtindex1 = '<p>My friends! For reasons that completely beyond my control, the 
 				<p>Write to the developer in Telegram for all questions and ideas for new modes. We will add what is possible and useful.</p>
 				<p>Follow the program updates in the private chat. I will describe details there.</p>
 				<p>By the way, you can give some ideas optional how this page should look like:) what information should post here</p>
-                    <p>Thank you for participating in testing new release of the FBcombo combine</p>
-					<p>Your Victor. Glory to Ukraine!​💙💛🇺🇦​</p>';
+                    <p>Thank you for participating in testing new release of the FBcombo combine</p>';
+
 $txtserver = 'Create server names. It will also need to be specified in the Zennoposter template settings';
 $txtserver1 = "Accounts linked to this server will remain unlinked until you configure this action";
 $txtserver2 = "Add server";
