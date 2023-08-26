@@ -191,19 +191,16 @@ function parse_acc1($acc, $comm, $serv, $group): ?array
     $login = $accs[0];
     $pass = $accs[1];
     if (empty($login)) {
-        $sql = null;
-        return $sql;
+        return null;
 
     }
     if (empty($pass)) {
-        $sql = null;
-        return $sql;
+        return null;
     }
     $sql = "SELECT * FROM accounts WHERE login_fb = '$login'";
     $querty = selectAll($sql);
     if (!empty($querty)) {
-        $sql = null;
-        return $sql;
+        return null;
     }
     $time = Time();
     $sql = "INSERT INTO `accounts` (`id`, `login_fb`, `pass_fb`, `id_fb`, `name`, `bd`, `mb`, `yb`, `gender`, `avatar`, `created`, `comment`, `group_acc`, `server`, `id_proxy`, `status`, `works`, `useacc`, `friends`, `last_start`) VALUES (NULL, '$login', '$pass', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '$time', '$comm', '$group', '$serv', NULL, '1', NULL, NULL, NULL, NULL)";

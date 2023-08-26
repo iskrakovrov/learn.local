@@ -552,7 +552,7 @@ require_once 'inc/alerts.php';
     $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
         const min = parseInt($('#min').val(), 10);
         const max = parseInt($('#max').val(), 10);
-        const age = parseFloat(data[14]) || 0; // use data for the age column
+        const age = parseFloat(data[15]) || 0; // use data for the age column
 
         if (
             (isNaN(min) && isNaN(max)) ||

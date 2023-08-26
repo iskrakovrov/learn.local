@@ -86,7 +86,7 @@ $_SESSION['numberTemplate'] = $numberTemplate;
                                 <?php echo $txttask3?>
                             </label>
                         </div>
-                        <!--  Фарм интересов -->
+                        <!--  2fa -->
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="2fa.php" id="2fa">
                             <label class="form-check-label" for="2fa">
@@ -121,13 +121,7 @@ $_SESSION['numberTemplate'] = $numberTemplate;
                                 Share
                             </label>
                         </div>
-                        <!--  Прокачка новорегов no global -->
-                        <div class="form-check">
-                            <input class="form-check-input" name="task[]" type="checkbox" value="ngnew_accounts.php" id="ngnew_accounts" disabled>
-                            <label class="form-check-label" for="ngnew_accounts">
-                                <?php echo $txttask4?> No global
-                            </label>
-                        </div>
+
                         <!--  Инвайт 3 Приглашение предложенных -->
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="invite_suggestions.php"
@@ -136,14 +130,8 @@ $_SESSION['numberTemplate'] = $numberTemplate;
                                 <?php echo $txttask5?>
                             </label>
                         </div>
-                        <!--  Инвайт 3 Приглашение предложенных -->
-                        <div class="form-check">
-                            <input class="form-check-input" name="task[]" type="checkbox" value="nginvite_suggestions.php"
-                                   id="nginvite_suggestions" disabled>
-                            <label class="form-check-label" for="nginvite_suggestions">
-                                <?php echo $txttask5?> No global
-                            </label>
-                        </div>
+
+
                         <!--  Инвайт из групп -->
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="invite_from_group.php" id="invite_from_group">
@@ -159,12 +147,7 @@ $_SESSION['numberTemplate'] = $numberTemplate;
                             </label>
                         </div>
                         <!--  Фарм кук -->
-                        <div class="form-check">
-                            <input class="form-check-input" name="task[]" type="checkbox" value="invite1" id="task3" disabled>
-                            <label class="form-check-label" for="defaultCheck1">
-                                Приглашение друзей- друзей
-                            </label>
-                        </div>
+
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="" id="task4" disabled>
                             <label class="form-check-label" for="defaultCheck2">
@@ -178,7 +161,7 @@ $_SESSION['numberTemplate'] = $numberTemplate;
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" name="task[]" type="checkbox" value="" id="task6" disabled>
+                            <input class="form-check-input" name="task[]" type="checkbox" value="invite_to_group.php" id="invite_to_group" >
                             <label class="form-check-label" for="defaultCheck2">
                                 <?php echo $txttask9?>
                             </label>
@@ -291,7 +274,7 @@ $_SESSION['numberTemplate'] = $numberTemplate;
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" name="task[]" type="checkbox" value="" id="task6" >
+                            <input class="form-check-input" name="task[]" type="checkbox" value="happy.php" id="happy" >
                             <label class="form-check-label" for="defaultCheck2">
                                 <?php echo $txttask26?>
                             </label>

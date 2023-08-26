@@ -261,6 +261,20 @@ if ($add_task == 'page_invite') {
     );
     gen_task($ids, $st, $add_task, $numberTemplate);
 }
+if ($add_task == 'invite_to_group') {
+    $setup = $_POST['action'];
+    $st[] = array(
+
+
+        'cat' => $_REQUEST['cat'],
+        'n_gr' => $_REQUEST['n_gr'],
+        'n_inv' => $_REQUEST['n_inv'],
+        'f24' => $_REQUEST['f24'],
+
+
+    );
+    gen_task($ids, $st, $add_task, $numberTemplate);
+}
 
 if ($add_task == 'commenting') {
 

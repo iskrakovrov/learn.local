@@ -81,6 +81,10 @@ $homepage = file_get_contents('https://soft.fbcombo.com/ver.php');
                                     <hr class="dropdown-divider">
                                 </li>
                                 <li><a class="dropdown-item" href="repair.php">Database repair</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="del_acc_list.php">Deleting accounts by login</a></li>
                             </ul>
                         </li>
                         <li class="nav-item">
