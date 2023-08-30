@@ -43,7 +43,7 @@ $array = array_diff($array1, array(''));
     }
 
 
-    header('Refresh: 0');
+    header('Location: repair.php');
 }
 
 ?>

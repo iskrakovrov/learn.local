@@ -267,8 +267,6 @@ if (empty($qw)) {
 $sql = "SET SESSION sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));";
 $qw = create($sql);
 
-$sql = "SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))";
-$qw = create($sql);
 $sql = "SHOW COLUMNS FROM accounts WHERE FIELD = 'created_acc'";
 $qw = create($sql);
 if (empty($qw)) {
@@ -367,7 +365,18 @@ if (empty($qw)) {
     $sql = "ALTER TABLE `accounts` ADD `account_tags` INT(11) NULL AFTER `group_acc`";
     $qw = create($sql);
 }
-
+if (version_compare($ver, '5.05.19') < 0) { //Проверяем текущая версия ниже 5.05.18 ?
+    $sql = "ALTER TABLE accounts ADD PRIMARY KEY (id);";
+    $qw = update($sql);
+    $sql = "CREATE INDEX idx_accounts_id_created_acc ON accounts (id, created_acc);";
+    $qw = update($sql);
+    $sql = "CREATE INDEX idx_task_account ON task (account);";
+    $qw = update($sql);
+    $sql = "CREATE INDEX idx_friends_id_acc_created ON friends (id_acc, created);";
+    $qw = update($sql);
+    $sql = "CREATE INDEX idx_friends_id_acc ON friends (id_acc);";
+    $qw = update($sql);
+}
 
 
 

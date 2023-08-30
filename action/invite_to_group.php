@@ -41,7 +41,7 @@ $qw = selectAll($sql);
 
                     <br>
 
-                    <label for="n_gr">How many invitations to make in one run</label>
+                    <label for="n_gr">How many groups to invite at a time</label>
                     <input type="number" name="n_gr" id="n_gr" class="form-control"
                            value="1">
                     <br>
@@ -54,7 +54,7 @@ $qw = selectAll($sql);
 
                     <label for="f24"><?php echo $txtfarmi11 ?></label>
                     <input type="number" name="f24" id="f24" class="form-control"
-                           placeholder="3" required>
+                           value="3" required>
 
                     <br>
 
