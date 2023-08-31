@@ -67,6 +67,18 @@ if ($add_task == 'global_invite') {
     );
     gen_task($ids, $st, $add_task, $numberTemplate);
 }
+if ($add_task == 'banhammer') {
+
+    $options = implode(',', $_POST['bh']);
+
+    $st[] = array(
+        'bh1' => $_REQUEST['bh'],
+
+
+
+    );
+    gen_task($ids, $st, $add_task, $numberTemplate);
+}
 if ($add_task == 'instagram') {
     $st[] = array(
 
@@ -421,7 +433,10 @@ if (empty($task)) {
     <link href="css/dt.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/bootstrap-multiselect.css" type="text/css"/>
     <link href="css/style.css" rel="stylesheet">
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <title>FB Combo | Edit Task</title>
 </head>
 <body>
@@ -448,6 +463,8 @@ $_SESSION['ids'] = $ids;
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
+<script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
+
 
 <!-- Option 2: Separate Popper and Bootstrap JS -->
 <!--
