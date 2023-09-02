@@ -377,7 +377,14 @@ if (version_compare($ver, '5.05.19') < 0) { //Проверяем текущая 
     $sql = "CREATE INDEX idx_friends_id_acc ON friends (id_acc);";
     $qw = update($sql);
 }
+$sql = "SHOW TABLES LIKE 's_stat'";
+$qw = create($sql);
 
+if (empty($qw)) {
+
+    $sql = "CREATE TABLE `s_stat` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `all_friends` INT(11) NOT NULL , `created` INT(11) NOT NULL , `type` INT(11) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;";
+    $qw = create($sql);
+}
 
 
 

@@ -3,6 +3,8 @@ include_once('inc/init.php');
 require_once('inc/db.php');
 require_once('function/function.php');
 require_once('inc/version.php');
+$sql = 'SELECT * FROM servers';
+$se = selectAll($sql);
 $sql = 'SELECT COUNT(*) FROM accounts';
 $acc = select($sql);
 $sql = 'SELECT COUNT(*) FROM proxy';
@@ -174,8 +176,21 @@ $homepage = file_get_contents('https://soft.fbcombo.com/ver.php');
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="#">Messenger</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="all_stat.php">Statistic</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link active active dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                               data-bs-toggle="dropdown" aria-expanded="false">
+                                STATISTIC
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="all_stat.php">All Statistic</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <?php foreach ($se as $s) { ?>
+                                    <li><a class="dropdown-item" href="stat_s.php?id=<?php echo $s['id'] ?>"><?php echo 'Statistic ' . $s['name_server'] . ' server' ?></a></li>
+
+                                <?php } ?>
+                            </ul>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="parse_lists.php">Parse Lists</a>

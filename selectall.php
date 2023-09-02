@@ -9,5 +9,8 @@ $sql = (string)$sql;
 
 $sel = selectAll($sql);
 
-$json_data = json_encode($sel, JSON_THROW_ON_ERROR);
+try {
+    $json_data = json_encode($sel, JSON_THROW_ON_ERROR);
+} catch (JsonException $e) {
+}
 print $json_data;
