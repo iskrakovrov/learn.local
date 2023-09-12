@@ -19,7 +19,8 @@ $fname = 'accounts-' . $today . '.txt';
 
 $fp = fopen('tmp/' . $fname, 'w');
 foreach ($id as $b) {
-    $sql = 'SELECT login_fb, pass_fb, mail, mail_pass, imap_mail, 2fa, phone, coockie, bd, mb, yb, tocken, id_fb FROM accounts WHERE id = ?';
+    $sql = "SELECT login_fb, pass_fb, mail, mail_pass, imap_mail, 2fa, phone, coockie, bd, mb, yb, tocken, CONCAT('www.facebook.com/', id_fb), ua AS facebook_url FROM accounts WHERE id = ?";
+
     $args = [$b];
     $query = selectAll($sql, $args);
 

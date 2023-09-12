@@ -256,8 +256,8 @@ $_SESSION['numberTemplate'] = $numberTemplate;
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" name="task[]" type="checkbox" value="" id="task6" disabled>
-                            <label class="form-check-label" for="defaultCheck2">
+                            <input class="form-check-input" name="task[]" type="checkbox" value="create_pages.php" id="create_pages">
+                            <label class="form-check-label" for="create_pages">
                                 <?php echo $txttask23?>
                             </label>
                         </div>

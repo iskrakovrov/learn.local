@@ -126,6 +126,15 @@ $apost = selectAll($sql);
                     </select>
 
                     <br>
+                    <br>
+                    <label for="priv">Setup privacy</label>
+                    <select class="form-select" id="priv" name="priv">
+
+                        <option value="no">No</option>
+                        <option value="yes">Yes</option>
+
+                    </select>
+                    <br>
 
                     <button class="btn btn-secondary" name="add_task" id="add_task" value="filling_accounts">ACTIVATE
                     </button>

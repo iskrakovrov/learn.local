@@ -54,6 +54,19 @@ if ($add_task == 'new_accounts') {
     );
     gen_task($ids, $st, $add_task, $numberTemplate);
 }
+
+if ($add_task == 'create_pages') {
+    $st[] = array(
+        'mode' => $_REQUEST['mode'],
+        'names' => $_REQUEST['names'],
+        'num_p' => $_REQUEST['num_p'],
+
+
+
+    );
+    gen_task($ids, $st, $add_task, $numberTemplate);
+}
+
 if ($add_task == 'global_invite') {
     $st[] = array(
         'ti0' => $_REQUEST['ti0'],
@@ -136,6 +149,7 @@ if ($add_task == 'filling_accounts') {
         'cover' => $_REQUEST['cover'],
         'ava' => $_REQUEST['ava'],
         'apost' => $_REQUEST['apost'],
+        'priv' =>   $_REQUEST['priv'],
 
     );
     gen_task($ids, $st, $add_task, $numberTemplate);

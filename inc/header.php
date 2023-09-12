@@ -213,7 +213,7 @@ $homepage = file_get_contents('https://soft.fbcombo.com/ver.php');
                             $lm = '#';
                         } ?>
                         <li class="nav-item">
-                            <a class="nav-link active" href="<?php echo $lm ?>"><strong><?php echo $m ?></strong></a>
+                            <a class="nav-link active" href="/"><strong><?php echo $m ?></strong></a>
                         </li>
 
 

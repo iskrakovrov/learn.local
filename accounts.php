@@ -371,7 +371,7 @@ require_once 'inc/alerts.php';
         scrollX: false,
         iLeftWidth: 120,
         sLeftWidth: 'relative',
-        "lengthMenu": [[1000, 100, 250, 500, 1000], [1000, 30, 100, 250, 500, 1000]],
+        "lengthMenu": [[1000, 30, 100, 250, 500, 1500], [1000, 30, 100, 250, 500, 1500]],
         dom: '<"top"lpif<"clear">>rt<"bottom"lpif<"clear">>',
 
 

@@ -1,8 +1,8 @@
 <?php
 require_once('inc/db.php');
 require_once('function/function.php');
-//$gp = $_GET['gp'];
-$gp=2;
+$gp = $_GET['gp'];
+
 $sql= 'LOCK TABLES `proxy` WRITE';
 $data = create($sql);
 $sql = "SELECT * FROM proxy WHERE status != 'bad' AND group_proxy = $gp ORDER BY `work` , `use_proxy`  LIMIT 1";
