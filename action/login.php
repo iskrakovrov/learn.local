@@ -123,11 +123,9 @@
 
 
                     <input class="form-check-input" name="action[10]" type="checkbox"
-                           id="action[10]">
-                    <label class="form-check-label" for="action[10]">
-                        <?php echo $txtlogin10 ?>
-                    </label>
-                <br>
+                           id="action[10]" style="display:none">
+
+
                     <br>
 
                 <!-- GET -->

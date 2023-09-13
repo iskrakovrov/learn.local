@@ -469,7 +469,7 @@ require_once 'inc/alerts.php';
 
         'columnDefs':
             [{
-                'targets': [0, 5, 6, 7, 8, 9, 10, 11, 13, 14, 16, 17, 19], // column index (start from 0)
+                'targets': [0, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16, 17, 19], // column index (start from 0)
                 'orderable': false, // set orderable false for selected columns
             }],
 
@@ -478,7 +478,7 @@ require_once 'inc/alerts.php';
 
             const table = this.api();
             const filterColumns = [5, 6, 8, 16, 17, 19];
-            const filterColumnsMultiple = [11, 13, 14, 10, 9, 7];
+            const filterColumnsMultiple = [11, 12, 13, 14, 10, 9, 7];
 
             table.columns(filterColumns).every(function () {
                 const column = this;
