@@ -312,6 +312,24 @@ if ($add_task == 'commenting') {
         'num_cp' => $_REQUEST['num_cp'],
         'num_cd' => $_REQUEST['num_cd'],
         'pause' => $_REQUEST['pause'],
+        'uq' => $_REQUEST['uq'],
+        'like' => $_REQUEST['like'],
+        'f24' => $_REQUEST['f24'],
+
+
+    );
+    gen_task($ids, $st, $add_task, $numberTemplate);
+}
+
+if ($add_task == 'review_page') {
+
+    $st[] = array(
+
+
+        'url' => $_REQUEST['url'],
+        'coml' => $_REQUEST['coml'],
+        'num_cp' => $_REQUEST['num_cp'],
+
         'like' => $_REQUEST['like'],
         'f24' => $_REQUEST['f24'],
 

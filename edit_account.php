@@ -26,8 +26,8 @@ if (!empty($_POST)) {
     $status = $_POST['status'];
     $fa = $_POST['fa'];
 
-    $sql = 'UPDATE accounts SET login_fb = ?, pass_fb = ?, group_acc = ?, server = ?, phone = ?, mail_pass = ?, status = ?, comment = ?, 2fa = ? WHERE id = ?';
-    $args = [$login, $pass, $group, $server, $ph, $mail_pass, $status, $comm, $fa, $id];
+    $sql = 'UPDATE accounts SET login_fb = ?, pass_fb = ?, group_acc = ?, server = ?, phone = ?,mail = ?, mail_pass = ?, status = ?, comment = ?, 2fa = ? WHERE id = ?';
+    $args = [$login, $pass, $group, $server, $ph, $mail, $mail_pass, $status, $comm, $fa, $id];
     $qwer = update($sql, $args);
 
     header('Location: /edit_account.php?id=' . $id);
