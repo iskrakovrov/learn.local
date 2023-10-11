@@ -1,5 +1,5 @@
 <?php
-$sql = "SELECT * FROM lists WHERE cat = 6";
+$sql = 'SELECT * FROM lists WHERE cat = 5';
 $qw = selectAll($sql);
 
 ?>
@@ -40,7 +40,12 @@ $qw = selectAll($sql);
 
                     <br>
 
+                    <label for="none">Maximum number of congratulations per launch</label>
+                    <input type="number" name="none" id="none" class="form-control"
+                           value="15" required>
 
+
+                    <br>
 
                     <label for="f24"><?php echo $txtfarmi11 ?></label>
                     <input type="number" name="f24" id="f24" class="form-control"

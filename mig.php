@@ -385,9 +385,13 @@ if (empty($qw)) {
     $sql = "CREATE TABLE `s_stat` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `all_friends` INT(11) NOT NULL , `created` INT(11) NOT NULL , `type` INT(11) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;";
     $qw = create($sql);
 }
+$sql = "SHOW TABLES LIKE 'stat_rss'";
+$qw = create($sql);
 
+if (empty($qw)) {
 
-
-
+    $sql = "CREATE TABLE `stat_rss` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `id_acc` INT NOT NULL , `url` VARCHAR(255) NOT NULL , `created` INT(25) NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB";
+    $qw = create($sql);
+}
 
 

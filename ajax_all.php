@@ -5,7 +5,7 @@ require_once('function/function.php');
 $sql = 'SELECT created, MAX(all_friends) AS all_friends
 FROM all_stat
 WHERE created >= unix_timestamp(current_date - interval 200 day)
-GROUP BY DATE(from_unixtime(created));';
+GROUP BY DATE(from_unixtime(created))';
 //$sql = 'SELECT * FROM all_stat WHERE created >= unix_timestamp(current_date - interval 200 day ) GROUP BY  DATE(from_unixtime(created))';
 $qwery = selectall($sql);
 foreach ($qwery as $a) {

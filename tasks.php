@@ -103,6 +103,25 @@ if ($add_task == 'instagram') {
     gen_task($ids, $st, $add_task, $numberTemplate);
 }
 
+
+if ($add_task == 'rss_post') {
+    $st[] = array(
+
+        'cat' => $_REQUEST['cat'],
+        'mode' => $_REQUEST['mode'],
+        'txt' => $_REQUEST['txt'],
+        'uniq' => $_REQUEST['uniq'],
+        'prc' => $_REQUEST['prc'],
+        'save' => $_REQUEST['save'],
+        'f24' => $_REQUEST['f24'],
+
+
+    );
+    gen_task($ids, $st, $add_task, $numberTemplate);
+}
+
+
+
 if ($add_task == 'coockie') {
     $st[] = array(
         'cat' => $_REQUEST['cat'],
@@ -267,6 +286,8 @@ if ($add_task == 'happy') {
 
 
         'cat' => $_REQUEST['cat'],
+
+        'none' => $_REQUEST['none'],
         'f24' => $_REQUEST['f24'],
 
 

@@ -32,3 +32,6 @@ $sql ='UNLOCK TABLES';
 $data = create($sql);
 echo $json_data;
 
+
+
+

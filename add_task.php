@@ -54,7 +54,7 @@ $_SESSION['numberTemplate'] = $numberTemplate;
             <form method="post" action="tasks.php">
 
                 <div class="form-check">
-                    <div style="align-content: left">&#9989; Login</div>
+                    <div style="align-content: flex-start">&#9989; Login</div>
                     <!--<input class="form-check-input" name="task[]"   value="login.php" id="login" checked="checked" ">
                        <label class="form-check-label" for="defaultCheck1"  >
                            Login
@@ -62,7 +62,7 @@ $_SESSION['numberTemplate'] = $numberTemplate;
                     <input type="hidden" name="task[]" value="login.php">
                 </div>
                 <div class="form-check">
-                    <div style="align-content: left">&#9989; <?php echo $txtglobali ?> </div>
+                    <div style="align-content: flex-start">&#9989; <?php echo $txtglobali ?> </div>
                     <!--<input class="form-check-input" name="task[]"   value="login.php" id="login" checked="checked" ">
                        <label class="form-check-label" for="defaultCheck1"  >
                            Login
@@ -257,8 +257,14 @@ $_SESSION['numberTemplate'] = $numberTemplate;
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="review_page.php" id="review_page">
-                            <label class="form-check-label" for="defaultCheck2">
+                            <label class="form-check-label" for="review_page">
                                 Page Review
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" name="task[]" type="checkbox" value="rss_post.php" id="rss_post">
+                            <label class="form-check-label" for="rss_post">
+                                Rss posting
                             </label>
                         </div>
                         <div class="form-check">
