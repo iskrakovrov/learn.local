@@ -12,8 +12,8 @@ $numberTemplate = $_SESSION['numberTemplate'];
 $add_task = $_POST['add_task'];
 $setup = $_POST['action'];
 
-if ($add_task == 'login') {
 
+if ($add_task == 'login') {
 
     $st[] = array(
 
@@ -37,7 +37,7 @@ if ($add_task == 'login') {
 
 
     );
-    gen_task($ids, $st, $add_task, $numberTemplate);
+    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
 }
 
 if ($add_task == 'new_accounts') {
@@ -52,7 +52,7 @@ if ($add_task == 'new_accounts') {
 
 
     );
-    gen_task($ids, $st, $add_task, $numberTemplate);
+    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
 }
 
 if ($add_task == 'create_pages') {
@@ -64,7 +64,7 @@ if ($add_task == 'create_pages') {
 
 
     );
-    gen_task($ids, $st, $add_task, $numberTemplate);
+    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
 }
 
 if ($add_task == 'global_invite') {
@@ -78,7 +78,7 @@ if ($add_task == 'global_invite') {
 
 
     );
-    gen_task($ids, $st, $add_task, $numberTemplate);
+    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
 }
 if ($add_task == 'banhammer') {
 
@@ -90,7 +90,7 @@ if ($add_task == 'banhammer') {
 
 
     );
-    gen_task($ids, $st, $add_task, $numberTemplate);
+    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
 }
 if ($add_task == 'instagram') {
     $st[] = array(
@@ -100,7 +100,7 @@ if ($add_task == 'instagram') {
 
 
     );
-    gen_task($ids, $st, $add_task, $numberTemplate);
+    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
 }
 
 
@@ -117,7 +117,7 @@ if ($add_task == 'rss_post') {
 
 
     );
-    gen_task($ids, $st, $add_task, $numberTemplate);
+    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
 }
 
 
@@ -128,7 +128,7 @@ if ($add_task == 'coockie') {
         'num_s' => $_REQUEST['num_s'],
 
     );
-    gen_task($ids, $st, $add_task, $numberTemplate);
+    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
 }
 if ($add_task == 'add_mail') {
     $st[] = array(
@@ -137,7 +137,7 @@ if ($add_task == 'add_mail') {
 
 
     );
-    gen_task($ids, $st, $add_task, $numberTemplate);
+    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
 }
 
 if ($add_task == 'farm') {
@@ -156,7 +156,7 @@ if ($add_task == 'farm') {
         'p_like_adv' => $_REQUEST['p_like_adv'],
         'f24' => $_REQUEST['f24'],
     );
-    gen_task($ids, $st, $add_task, $numberTemplate);
+    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
 }
 if ($add_task == 'filling_accounts') {
     $st[] = array(
@@ -171,7 +171,7 @@ if ($add_task == 'filling_accounts') {
         'priv' =>   $_REQUEST['priv'],
 
     );
-    gen_task($ids, $st, $add_task, $numberTemplate);
+    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
 }
 if ($add_task == 'post_to_group') {
     $st[] = array(
@@ -187,14 +187,14 @@ if ($add_task == 'post_to_group') {
         'f24' => $_REQUEST['f24'],
 
     );
-    gen_task($ids, $st, $add_task, $numberTemplate);
+    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
 }
 if ($add_task == 'erase_invite') {
     $st[] = array(
         'num_e' => $_REQUEST['num_e'],
 
     );
-    gen_task($ids, $st, $add_task, $numberTemplate);
+    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
 }
 
 if ($add_task == 'parse_group') {
@@ -206,7 +206,7 @@ if ($add_task == 'parse_group') {
 
 
     );
-    gen_task($ids, $st, $add_task, $numberTemplate);
+    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
 }
 if ($add_task == 'invite_suggestions') {
     $setup = $_POST['action'];
@@ -225,7 +225,7 @@ if ($add_task == 'invite_suggestions') {
 
 
     );
-    gen_task($ids, $st, $add_task, $numberTemplate);
+    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
 }
 
 if ($add_task == 'invite_from_group') {
@@ -247,7 +247,7 @@ if ($add_task == 'invite_from_group') {
 
 
     );
-    gen_task($ids, $st, $add_task, $numberTemplate);
+    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
 }
 
 if ($add_task == 'post_to_profile') {
@@ -263,7 +263,7 @@ if ($add_task == 'post_to_profile') {
 
 
     );
-    gen_task($ids, $st, $add_task, $numberTemplate);
+    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
 }
 
 if ($add_task == 'like') {
@@ -278,7 +278,7 @@ if ($add_task == 'like') {
 
 
     );
-    gen_task($ids, $st, $add_task, $numberTemplate);
+    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
 }
 if ($add_task == 'happy') {
     $setup = $_POST['action'];
@@ -292,7 +292,7 @@ if ($add_task == 'happy') {
 
 
     );
-    gen_task($ids, $st, $add_task, $numberTemplate);
+    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
 }
 if ($add_task == 'page_invite') {
     $setup = $_POST['action'];
@@ -306,7 +306,7 @@ if ($add_task == 'page_invite') {
 
 
     );
-    gen_task($ids, $st, $add_task, $numberTemplate);
+    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
 }
 if ($add_task == 'invite_to_group') {
     $setup = $_POST['action'];
@@ -320,7 +320,7 @@ if ($add_task == 'invite_to_group') {
 
 
     );
-    gen_task($ids, $st, $add_task, $numberTemplate);
+    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
 }
 
 if ($add_task == 'commenting') {
@@ -339,7 +339,7 @@ if ($add_task == 'commenting') {
 
 
     );
-    gen_task($ids, $st, $add_task, $numberTemplate);
+    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
 }
 
 if ($add_task == 'review_page') {
@@ -356,7 +356,7 @@ if ($add_task == 'review_page') {
 
 
     );
-    gen_task($ids, $st, $add_task, $numberTemplate);
+    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
 }
 
 if ($add_task == 'share') {
@@ -376,7 +376,7 @@ if ($add_task == 'share') {
 
 
     );
-    gen_task($ids, $st, $add_task, $numberTemplate);
+    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
 }
 if ($add_task == 'comm_public') {
 
@@ -393,7 +393,7 @@ if ($add_task == 'comm_public') {
 
 
     );
-    gen_task($ids, $st, $add_task, $numberTemplate);
+    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
 }
 
 if ($add_task == 'comoai') {
@@ -411,7 +411,7 @@ if ($add_task == 'comoai') {
 
 
     );
-    gen_task($ids, $st, $add_task, $numberTemplate);
+    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
 }
 
 if ($add_task == 'accept_friends') {
@@ -428,7 +428,7 @@ if ($add_task == 'accept_friends') {
 
 
     );
-    gen_task($ids, $st, $add_task, $numberTemplate);
+    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
 }
 if ($add_task == 'post_oai') {
     $setup = $_POST['action'];
@@ -440,7 +440,7 @@ if ($add_task == 'post_oai') {
 
 
     );
-    gen_task($ids, $st, $add_task, $numberTemplate);
+    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
 }
 
 if ($add_task == 'parse_active') {
@@ -452,7 +452,7 @@ if ($add_task == 'parse_active') {
 
 
     );
-    gen_task($ids, $st, $add_task, $numberTemplate);
+    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
 }
 
 if ($add_task == '2fa') {
@@ -460,7 +460,7 @@ if ($add_task == '2fa') {
         '2fa' => $_REQUEST['2fa'],
 
     );
-    gen_task($ids, $st, $add_task, $numberTemplate);
+    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
 
 }
 

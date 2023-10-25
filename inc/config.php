@@ -9,4 +9,3 @@ $db_pass = 'Kamel1979';
 //$db_user = 'admin_facebook';
 //$db_pass = 'Kamel1979';
 $charset = 'utf8';
-

@@ -8,61 +8,61 @@ function tt($value)
 }
 
 //Проверка выполнения запроса к бд
-function dbCheckError($query)
-{
-
+// Функция обработки ошибок базы данных
+function dbCheckError($query) {
     $errorInfo = $query->errorInfo();
-
-
     if ($errorInfo[0] !== PDO::ERR_NONE) {
-        echo $errorInfo[2];
-        exit();
+        // Лучше не выводить ошибку на экран, а логировать ее
+        error_log("Error: " . $errorInfo[2]);
+        return false;
     }
     return true;
-
 }
 
-// Запрос Select к бд
-function select($sel, $args = [])
-{
+// Запрос Select к базе данных (возвращает одну строку)
+function select($sql, $args = []) {
     global $pdo;
-    $sql = $sel;
     $query = $pdo->prepare($sql);
-    $query->execute($args);
-    dbCheckError($query);
-    return $query->fetch();
+    if ($query->execute($args)) {
+        if (dbCheckError($query)) {
+            return $query->fetch(PDO::FETCH_ASSOC);
+        }
+    }
+    return false;
 }
 
-function selectAll($sel, $args = [])
-{
+// Запрос Select к базе данных (возвращает все строки)
+function selectAll($sql, $args = []) {
     global $pdo;
-    $sql = $sel;
     $query = $pdo->prepare($sql);
-    $query->execute($args);
-    dbCheckError($query);
-    return $query->fetchAll();
+    if ($query->execute($args)) {
+        if (dbCheckError($query)) {
+            return $query->fetchAll(PDO::FETCH_ASSOC);
+        }
+    }
+    return false;
 }
 
-function insert($ins, $args = [])
+
+function execute($sql, $args = []): bool
 {
-
     global $pdo;
-    $sql = $ins;
     $query = $pdo->prepare($sql);
-    $query->execute($args);
-    dbCheckError($query);
-
-
+    if ($query->execute($args)) {
+        return dbCheckError($query);
+    }
+    return false;
 }
 
-function update($upd, $args = [])
+function insert($ins, $args = []): bool
+{
+    return execute($ins, $args);
+}
+
+function update($upd, $args = []): bool
 {
 
-    global $pdo;
-    $sql = $upd;
-    $query = $pdo->prepare($sql);
-    $query->execute($args);
-    dbCheckError($query);
+    return execute($upd, $args);
 
 
 }
@@ -137,47 +137,33 @@ function processForm($array)
 function delete($del, $args = []): string
 {
 
-    global $pdo;
-    $sql = $del;
-    $query = $pdo->prepare($sql);
-    $query->execute($args);
-    dbCheckError($query);
-    return 'ok';
+    return execute($del, $args);
 
 }
 
 function parse_proxy($pr, $comm, $pg): ?array
 {
-    if($pg==0){
+    if ($pg == 0) {
         $pg = 'null';
     }
+
     $link = explode("|", $pr);
     $prx = $link[0];
-
-
     $arr_pr = parse_url($prx);
 
+    $mode = $arr_pr['scheme'] ?? 'http';
+    $host = $arr_pr['host'] ?? null;
+    $port = $arr_pr['port'] ?? null;
+    $user = $arr_pr['user'] ?? null;
+    $pass = $arr_pr['pass'] ?? null;
+    $link = $link[1] ?? 'NULL';
+    $comm = $comm ?? 'NULL';
 
-    $mode = $arr_pr['scheme'];
-    $host = $arr_pr['host'];
-    $port = $arr_pr['port'];
-    $user = $arr_pr['user'];
-    $pass = $arr_pr['pass'];
-    $link = $link[1];
-    if (empty ($host)) {
+    if (empty($host)) {
         return null;
     }
-    if (empty($mode)) {
-        $mode = 'http';
 
-    }
-    if (empty($link)) {
-        $link = 'NULL';
-    }
-    if (empty($comm)) {
-        $comm = 'NULL';
-    }
-    $time = Time();
+    $time = time();
     $sql1 = "SELECT * FROM proxy WHERE proxy = '$pr'";
     $sql = "INSERT INTO `proxy` (`id`, `protocol`, `proxy`, `ip`, `port`, `login`, `pswd`, `link_proxy`, `status`, `work`, `created`, `comment`, `use_proxy`, `group_proxy`) VALUES (NULL, '$mode', '$pr', '$host', '$port', '$user', '$pass', '$link', 'ok','0', '$time', '$comm', 0, $pg)";
     return [$sql, $sql1];
@@ -285,25 +271,22 @@ function parse_acc2($acc, $comm, $serv, $group, $cock, $pg)
 }
 
 
-function add_task($add_task, $json_data, $time, $account)
-{
+function add_task($add_task, $json_data, $time, $account) {
     $a = $account;
-
 
     $sql = 'SELECT id FROM task WHERE task = ? AND account = ?';
     $args = [$add_task, $a];
     $query = select($sql, $args);
-    $id_tr = $query['id'];
+
     if (empty($query)) {
         $sql = 'INSERT INTO task (id, account, task, setup, created) VALUES (NULL, ?, ?, ?, ?)';
         $args = [$a, $add_task, $json_data, $time];
-        $query = insert($sql, $args);
     } else {
         $sql = 'UPDATE task SET setup = ?, created = ? WHERE id = ?';
-        $args = [$json_data, $time, $id_tr];
-        $query = update($sql, $args);
-
+        $args = [$json_data, $time, $query['id']];
     }
+
+    $query = execute($sql, $args);
 }
 
 function parse_key($key): array
@@ -389,11 +372,8 @@ function add_template($add_task, $json_data, $time, $numberTemplate)
 
 }
 
-function checkAPIKey($apiKey)
-{
-    // Создание HTTP-запроса к API-серверу для проверки ключа
+function checkAPIKey($apiKey) {
     $url = 'https://api.openai.com/v1/engines/text-davinci-003/completions';
-
 
     $headers = array(
         'Content-Type: application/json',
@@ -412,23 +392,25 @@ function checkAPIKey($apiKey)
     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
-    $response = curl_exec($ch);
+    try {
+        $response = curl_exec($ch);
+        $httpStatus = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
 
-    curl_close($ch);
-
-    // Проверка ответа от API-сервера
-    if ($response === false) {
-        return false; // Ошибка при отправке запроса
-    }
-
-    $decodedResponse = json_decode($response, true);
-
-    if (isset($decodedResponse['id']) && isset($decodedResponse['object']) && isset($decodedResponse['model'])) {
-        return true; // Ключ действителен
-    } else {
-$err1 = $decodedResponse['error'];
-$err = $err1['code'];
-       return [false, $err];
+        if ($httpStatus === 200) {
+            $decodedResponse = json_decode($response, true);
+            if (isset($decodedResponse['id']) && isset($decodedResponse['object']) && isset($decodedResponse['model'])) {
+                return true; // Ключ действителен
+            } else {
+                $err1 = $decodedResponse['error'];
+                $err = $err1['code'];
+                return [false, $err];
+            }
+        } else {
+            return false; // Неудачный HTTP-статус
+        }
+    } catch (Exception $e) {
+        return false; // Ошибка CURL
     }
 }
 
@@ -493,119 +475,137 @@ function del_acc($args): bool
  * @param $args
  * @return void
  */
-function d_acc($args): void
-{
-    $sql = 'DELETE FROM task WHERE account = ?';
+function d_acc($args): void {
+    // Массив с названиями таблиц для удаления записей
+    $tables = [
+        'task',
+        'temp_task',
+    ];
+    foreach ($tables as $table) {
+        $sql = "DELETE FROM $table WHERE account = ?";
+        delete($sql, $args);
+    }
+    $tables = [
 
-    $qu1 = delete($sql, $args);
+        'stat_comm',
+        'stat_invite',
+        'stat_like',
+        'stat_post',
+        'friends',
+        'stat_sugg'
+    ];
 
-    $sql = 'DELETE FROM temp_task WHERE account = ?';
-
-    $qu1 = delete($sql, $args);
-
-    $sql = 'DELETE FROM stat_comm WHERE id_acc = ?';
-
-    $qu1 = delete($sql, $args);
-
-    $sql = 'DELETE FROM stat_invite WHERE id_acc = ?';
-
-    $qu1 = delete($sql, $args);
-
-    $sql = 'DELETE FROM stat_like WHERE id_acc = ?';
-
-    $qu1 = delete($sql, $args);
-
-    $sql = 'DELETE FROM stat_post WHERE id_acc = ?';
-
-    $qu1 = delete($sql, $args);
-
-    $sql = 'DELETE FROM friends WHERE id_acc = ?';
-
-    $qu1 = delete($sql, $args);
-
-    $sql = 'DELETE FROM stat_sugg WHERE id_acc = ?';
-
-    $qu1 = delete($sql, $args);
+    // Перебираем массив и удаляем записи из каждой таблицы
+    foreach ($tables as $table) {
+        $sql = "DELETE FROM $table WHERE id_acc = ?";
+        delete($sql, $args);
+    }
 }
 
-function gen_task($ids, $st, $add_task, $numberTemplate)
-{
+function gen_task($ids, $st, $add_task, $numberTemplate) {
     $data = array(
-
         'data' => $st,
     );
 
     try {
         $json_data = json_encode($data, JSON_THROW_ON_ERROR);
     } catch (JsonException $e) {
+        // Обработка ошибки JSON, если необходимо
     }
 
+    $time = Time();
+
     foreach ($ids as $a) {
-        $time = Time();
-
         if ($a != 't') {
-
-            $r = add_task($add_task, $json_data, $time, $a);
-
+            add_task($add_task, $json_data, $time, $a);
         } else {
-            $r = add_template($add_task, $json_data, $time, $numberTemplate);
+            add_template($add_task, $json_data, $time, $numberTemplate);
         }
     }
 }
 
-function check_proxy($pr)
-{
-
-
+function check_proxy($pr) {
     $ip = $pr['ip'];
     $port = $pr['port'];
     $protocol = $pr['protocol'];
     $login = $pr['login'];
     $pswd = $pr['pswd'];
-    $pr1 = NULL;
-    $pr1 .= $ip;
-    $pr1 .= ':';
-    $pr1 .= $port;
 
-    $proxyauth = '';
-    $proxyauth .= $login;
-    $proxyauth .= ':';
-    $proxyauth .= $pswd;
+    $pr1 = "$ip:$port";
+    $proxyauth = $login !== '' ? "$login:$pswd" : '';
+
     $url = 'http://ip-api.com/json';
     $ch = curl_init();
-    if ($protocol == 'socks5') {
-        curl_setopt($ch, CURLOPT_PROXYTYPE, CURLPROXY_SOCKS5);
-    }else{
-        curl_setopt($ch, CURLOPT_PROXYTYPE, CURLPROXY_HTTP);
-    }
 
-    curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36');
-    curl_setopt($ch, CURLOPT_URL, $url);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-    curl_setopt($ch, CURLOPT_PROXY, $pr1);
-    curl_setopt($ch, CURLOPT_PROXYUSERPWD, $proxyauth);
-    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($ch, CURLOPT_HEADER, 0);
+    $proxytype = $protocol === 'socks5' ? CURLPROXY_SOCKS5 : CURLPROXY_HTTP;
+
+    curl_setopt_array($ch, [
+        CURLOPT_PROXYTYPE => $proxytype,
+        CURLOPT_USERAGENT => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36',
+        CURLOPT_URL => $url,
+        CURLOPT_SSL_VERIFYPEER => false,
+        CURLOPT_SSL_VERIFYHOST => false,
+        CURLOPT_PROXY => $pr1,
+        CURLOPT_PROXYUSERPWD => $proxyauth,
+        CURLOPT_FOLLOWLOCATION => 1,
+        CURLOPT_RETURNTRANSFER => 1,
+        CURLOPT_HEADER => 0,
+    ]);
+
     $curl_scraped_page = curl_exec($ch);
     curl_close($ch);
+
     $response = json_decode($curl_scraped_page, true);
-
-    if ($response['status'] == 'success') {
-        $st = '';
-        $st .= $response['countryCode'];
-        $st .= ',';
-        $st .= $response['city'];
-
-    } else {
-        $st = 'bad';
-    }
+    $st = $response['status'] === 'success' ? $response['countryCode'] . ',' . $response['city'] : 'bad';
     $id = $pr['id'];
-    $sql = "UPDATE proxy SET status = '$st' WHERE id = $id ";
-    $stat = update($sql);
+
+    $sql = "UPDATE proxy SET status = '$st' WHERE id = $id";
+    update($sql);
 }
 
+function check_facebook_access($pr) {
+    $ip = $pr['ip'];
+    $port = $pr['port'];
+    $protocol = $pr['protocol'];
+    $login = $pr['login'];
+    $pswd = $pr['pswd'];
+
+    $pr1 = "$ip:$port";
+    $proxyauth = $login !== '' ? "$login:$pswd" : '';
+
+    $url = 'https://www.facebook.com';
+
+    $ch = curl_init();
+
+    $proxytype = $protocol === 'socks5' ? CURLPROXY_SOCKS5 : CURLPROXY_HTTP;
+
+    curl_setopt_array($ch, [
+        CURLOPT_PROXYTYPE => $proxytype,
+        CURLOPT_USERAGENT => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36',
+        CURLOPT_URL => $url,
+        CURLOPT_SSL_VERIFYPEER => false,
+        CURLOPT_SSL_VERIFYHOST => false,
+        CURLOPT_PROXY => $pr1,
+        CURLOPT_PROXYUSERPWD => $proxyauth,
+        CURLOPT_NOBODY => true, // Запрос только заголовков, чтобы уменьшить загрузку страницы
+        CURLOPT_FOLLOWLOCATION => true, // Разрешить следовать перенаправлениям
+    ]);
+
+    curl_exec($ch);
+    $httpStatus = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+
+    if ($httpStatus === 200 || ($httpStatus >= 301 && $httpStatus <= 303)) {
+        $st = 'access_granted';
+    } else {
+        $st = 'access_denied';
+    }
+
+    $id = $pr['id'];
+
+    $sql = "UPDATE proxy SET status = '$st' WHERE id = $id";
+    update($sql);
+}
 
 function escapeString($string)
 {
@@ -699,4 +699,46 @@ function generate_text_by_keyword($keyword, $language, $api_key, $desired_length
     }
 
     return $generated_text;
+}
+function generateAndExecuteTask($add_task, $st, $ids, $numberTemplate) {
+    gen_task($ids, $st, $add_task, $numberTemplate);
+}
+
+
+function getAccountsData() {
+    $sql = 'SELECT
+   accounts.id, login_fb, pass_fb, id_fb, name, gender, avatar, accounts.created, group_acc, account_tags,
+   server, id_proxy, status, works, useacc, friends, last_start, tocken, mail, phone,
+   adv, 2fa, ar, created_acc, ig, life, gpoup_proxy, COUNT(task.task) as task_count
+FROM
+   accounts
+LEFT JOIN
+   task ON accounts.id = task.account
+GROUP BY
+   accounts.id'; // ваш SQL-запрос
+    return selectAll($sql);
+}
+
+function getGroupData() {
+    $sql = 'SELECT * FROM group_acc';
+    return selectAll($sql);
+}
+
+function getServerData() {
+    $sql = 'SELECT * FROM servers';
+    return selectAll($sql);
+}
+
+function getStatusData() {
+    $sql = 'SELECT * FROM status';
+    return selectAll($sql);
+}
+
+function getAccountTagsData() {
+    $sql = 'SELECT * FROM account_tags';
+    return selectAll($sql);
+}
+function getProxyGroup() {
+    $sql = 'SELECT * FROM group_proxy';
+    return selectAll($sql);
 }
