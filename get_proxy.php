@@ -1,24 +1,31 @@
 <?php
+
 require_once('inc/db.php');
 require_once('function/function.php');
+
 $gp = $_GET['gp'];
 
-$sql= 'LOCK TABLES `proxy` WRITE';
-$data = create($sql);
-$sql = "SELECT * FROM proxy WHERE status != 'bad' AND group_proxy = $gp ORDER BY `work` , `use_proxy`  LIMIT 1";
-//$sql = "SELECT * FROM proxy, accounts WHERE proxy.status = 'ok' ORDER BY 'proxy.use_proxy' ASC, 'proxy.work' ASC";
-$query = select($sql);
-$id = $query['id'];
-$time = Time()+60;
-$sql = 'UPDATE proxy SET work = ? WHERE id = ?';
-$args = [$time, $id];
-$query1 = update($sql, $args);
+// Используйте тернарный оператор для установки значения переменной $sql
+$sqlLock = 'LOCK TABLES `proxy` WRITE';
+$data = create($sqlLock);
 
-$sql ='UNLOCK TABLES';
-$data = create($sql);
+$sqlSelect = "SELECT * FROM proxy WHERE status != 'bad' AND group_proxy = $gp ORDER BY `work` , `use_proxy`  LIMIT 1";
+$query = select($sqlSelect);
+
+$id = $query['id'];
+$time = time() + 60;
+
+$sqlUpdate = 'UPDATE proxy SET work = ? WHERE id = ?';
+$argsUpdate = [$time, $id];
+$query1 = update($sqlUpdate, $argsUpdate);
+
+$sqlUnlock = 'UNLOCK TABLES';
+$data = create($sqlUnlock);
 
 try {
     $json_data = json_encode($query, JSON_THROW_ON_ERROR);
 } catch (JsonException $e) {
 }
+
 echo $json_data;
+?>

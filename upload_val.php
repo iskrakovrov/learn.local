@@ -1,11 +1,12 @@
 <?php
-include_once "inc/init.php";
+session_start();
+include_once ('inc/init.php');
 require_once('inc/db.php');
 require_once('function/function.php');
 $cat = $_REQUEST['id'];
 set_time_limit(3600);
 
-session_start();
+
 
 $message = '';
 if (isset($_POST['uploadBtn']) && $_POST['uploadBtn'] == 'Upload') {

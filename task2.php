@@ -27,10 +27,10 @@ require_once($lang);
 </head>
 <body>
 <?php
+session_start();
 include_once 'inc/header.php';
 $ids = $_SESSION['ids'];
 $i = 0;
-session_start();
 $_SESSION['ids'] = $ids;
 
 

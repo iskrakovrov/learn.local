@@ -118,21 +118,7 @@ function get_extension($imagetype)
     }
 }
 
-function processForm($array)
-{
 
-    // обрабатываешь данные формы и возвращаешь сообщение о результате
-
-    if ($a == 1) {
-
-        // Если регистрация прошла успешно
-        return '<p class="alert alert-success">СЕРВЕР НЕ ДОБАВЛЕН</p>';
-    }
-
-// Если регистрация не удалась
-    return '<p class="alert alert-danger">Сервер  добавлен</p>';
-
-}
 
 function delete($del, $args = []): string
 {
@@ -247,19 +233,19 @@ function parse_acc2($acc, $comm, $serv, $group, $cock, $pg)
         $id_mail = 'NULL';
     }
     if (empty($cock)) {
-        $cock = "NULL";
+        $cock = 'NULL';
     }
     if (empty($fa)) {
-        $fa = "NULL";
+        $fa = 'NULL';
     }
     if (empty($bd)) {
-        $bd = "NULL";
+        $bd = 'NULL';
     }
     if (empty($mb)) {
-        $mb = "NULL";
+        $mb = 'NULL';
     }
     if (empty($yb)) {
-        $yb = "NULL";
+        $yb = 'NULL';
     }
 
     $time = Time();
@@ -475,31 +461,39 @@ function del_acc($args): bool
  * @param $args
  * @return void
  */
-function d_acc($args): void {
-    // Массив с названиями таблиц для удаления записей
-    $tables = [
-        'task',
-        'temp_task',
-    ];
-    foreach ($tables as $table) {
-        $sql = "DELETE FROM $table WHERE account = ?";
-        delete($sql, $args);
-    }
-    $tables = [
+function d_acc($args): void
+{
+    $sql = 'DELETE FROM task WHERE account = ?';
 
-        'stat_comm',
-        'stat_invite',
-        'stat_like',
-        'stat_post',
-        'friends',
-        'stat_sugg'
-    ];
+    $qu1 = delete($sql, $args);
 
-    // Перебираем массив и удаляем записи из каждой таблицы
-    foreach ($tables as $table) {
-        $sql = "DELETE FROM $table WHERE id_acc = ?";
-        delete($sql, $args);
-    }
+    $sql = 'DELETE FROM temp_task WHERE account = ?';
+
+    $qu1 = delete($sql, $args);
+
+    $sql = 'DELETE FROM stat_comm WHERE id_acc = ?';
+
+    $qu1 = delete($sql, $args);
+
+    $sql = 'DELETE FROM stat_invite WHERE id_acc = ?';
+
+    $qu1 = delete($sql, $args);
+
+    $sql = 'DELETE FROM stat_like WHERE id_acc = ?';
+
+    $qu1 = delete($sql, $args);
+
+    $sql = 'DELETE FROM stat_post WHERE id_acc = ?';
+
+    $qu1 = delete($sql, $args);
+
+    $sql = 'DELETE FROM friends WHERE id_acc = ?';
+
+    $qu1 = delete($sql, $args);
+
+    $sql = 'DELETE FROM stat_sugg WHERE id_acc = ?';
+
+    $qu1 = delete($sql, $args);
 }
 
 function gen_task($ids, $st, $add_task, $numberTemplate) {

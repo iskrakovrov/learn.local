@@ -1,3 +1,1 @@
-Options -Indexes
-php_flag output_buffering on
-php_value max_execution_time 600
+php_value max_execution_time 3600

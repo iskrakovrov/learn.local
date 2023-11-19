@@ -10,6 +10,8 @@ foreach ($id as $a) {
     $args = [$a];
     $sql = 'SELECT * FROM accounts WHERE id = ?';
     $qu = select($sql, $args);
+
+
     d_acc($args);
 
     $p = $qu['$id_proxy'];

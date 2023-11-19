@@ -6,12 +6,13 @@ require_once ('inc/alerts.php');
 $error = '';
 
 
-if (!empty($_REQUEST["submit"])) {
-    $login = isset($_POST["login"]) ? trim($_POST["login"]) : '';
-    $pswd = isset($_POST["pswd"]) ? trim($_POST["pswd"]) : '';
-    $sql = "SELECT * FROM users WHERE login = ? AND pass = ?";
+if (!empty($_REQUEST['submit'])) {
+    $login = isset($_POST['login']) ? trim($_POST['login']) : '';
+    $pswd = isset($_POST['pswd']) ? trim($_POST['pswd']) : '';
+    $sql = 'SELECT * FROM users WHERE login = ? AND pass = ?';
     $args = [$login, $pswd];
     $x = select($sql, $args);
+
     if (empty($x)) {
         session_start();
         $_SESSION['alert'] = 3;
@@ -22,9 +23,9 @@ if (!empty($_REQUEST["submit"])) {
     if ($error === '') {
         $sql = 'SELECT lang FROM users';
         $lang = select($sql);
-        $_SESSION["admin"] = 1;
+        $_SESSION['admin'] = 1;
         $lang = $lang['lang'];
-        $_SESSION["lang"] = $lang;
+        $_SESSION['lang'] = $lang;
 
         header('Location: index.php');
     }

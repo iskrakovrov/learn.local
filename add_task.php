@@ -1,9 +1,11 @@
 <!doctype html>
 <?php
+session_start();
 include_once('inc/init.php');
 require_once('inc/db.php');
 require_once('function/function.php');
 $lang = $_SESSION['lang'] . '.php';
+
 require_once($lang);
 
 
@@ -33,7 +35,7 @@ include_once 'inc/header.php';
 $ids = $_SESSION['ids'];
 $numberTemplate = $_SESSION['numberTemplate'];
 $i = 0;
-session_start();
+
 $_SESSION['ids'] = $ids;
 $_SESSION['numberTemplate'] = $numberTemplate;
 
