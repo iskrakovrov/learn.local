@@ -6,10 +6,10 @@ require_once('function/function.php');
 if (empty ($_REQUEST['id'])) {
 
     $sql = 'SELECT * FROM proxy';
-    $args = [0];
-    $querty = selectAll($sql,$args);
+
+    $querty = selectAll($sql);
     foreach ($querty as $a) {
-$pr = $a;
+    $pr = $a;
 check_proxy($pr);
 
     }

@@ -42,7 +42,7 @@ $qw = selectAll($sql);
 
 
                         <label for="num_s"><?php echo $txtcook2 ?></label>
-                        <input type="text" name="num_s" id="num_s" class="form-control" placeholder="10-20" pattern="([0-9]{1,3})-([0-9]{1,3})" required>
+                        <input type="text" name="num_s" id="num_s" class="form-control" value="2-4" pattern="([0-9]{1,3})-([0-9]{1,3})" required>
 
 
                         <br>

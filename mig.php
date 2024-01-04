@@ -264,7 +264,7 @@ if (empty($qw)) {
     $qw = create($sql);
 }
 
-$sql = "SET SESSION sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));";
+$sql = "SET SESSION sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))";
 $qw = create($sql);
 
 $sql = "SHOW COLUMNS FROM accounts WHERE FIELD = 'created_acc'";
@@ -312,6 +312,7 @@ if (empty($qw)) {
 
 $sql = "SHOW TABLES LIKE 'group_proxy'";
 $qw = create($sql);
+
 
 if (empty($qw)) {
 
@@ -393,5 +394,23 @@ if (empty($qw)) {
     $sql = "CREATE TABLE `stat_rss` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `id_acc` INT NOT NULL , `url` VARCHAR(255) NOT NULL , `created` INT(25) NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB";
     $qw = create($sql);
 }
+
+
+$sql = "ALTER TABLE value_lists CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci";
+$qw = create($sql);
+
+$sql = "SHOW TABLES LIKE 'stat_rss'";
+$qw = create($sql);
+
+if (empty($qw)) {
+
+    $sql = "CREATE TABLE `st_gr` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `post` INT(11) NOT NULL , `id_acc` INT(11) NOT NULL , `created` INT(25) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;";
+    $qw = create($sql);
+    $sql ="ALTER TABLE `st_gr` ADD `list` INT(11) NOT NULL AFTER `id_acc`";
+    $qw = create($sql);
+    $sql = "ALTER TABLE `st_gr` ADD `gr` INT NOT NULL AFTER `id`";
+    $qw = create($sql);
+}
+
 
 
