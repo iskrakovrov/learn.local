@@ -725,16 +725,85 @@ function generateAndExecuteTask($add_task, $st, $ids, $numberTemplate) {
 
 
 function getAccountsData() {
+   // $sql = 'SELECT
+ //  accounts.id, login_fb, pass_fb, id_fb, name, gender, avatar, accounts.created, group_acc, account_tags,
+//   server, id_proxy, status, works, useacc, friends, last_start, tocken, mail, phone,
+//   adv, 2fa, ar, created_acc, ig, life, gpoup_proxy, COUNT(task.task) as task_count
+//FROM
+//   accounts
+//LEFT JOIN
+//   task ON accounts.id = task.account
+//GROUP BY
+ //  accounts.id'; // ваш SQL-запрос
+
+
     $sql = 'SELECT
-   accounts.id, login_fb, pass_fb, id_fb, name, gender, avatar, accounts.created, group_acc, account_tags,
-   server, id_proxy, status, works, useacc, friends, last_start, tocken, mail, phone,
-   adv, 2fa, ar, created_acc, ig, life, gpoup_proxy, COUNT(task.task) as task_count
+    accounts.id,
+    login_fb,
+    pass_fb,
+    id_fb,
+    name,
+    gender,
+    avatar,
+    accounts.created,
+    group_acc,
+    account_tags,
+    server,
+    id_proxy,
+    status,
+    works,
+    useacc,
+    friends,
+    (
+        SELECT friends
+        FROM friends
+        WHERE id_acc = accounts.id
+        ORDER BY created DESC
+        LIMIT 1
+    ) as friends1,
+    last_start,
+    tocken,
+    mail,
+    phone,
+    adv,
+    2fa,
+    ar,
+    created_acc,
+    ig,
+    life,
+    gpoup_proxy,
+    COUNT(task.task) as task_count
 FROM
-   accounts
+    accounts
 LEFT JOIN
-   task ON accounts.id = task.account
+    task ON accounts.id = task.account
 GROUP BY
-   accounts.id'; // ваш SQL-запрос
+    accounts.id,
+    login_fb,
+    pass_fb,
+    id_fb,
+    name,
+    gender,
+    avatar,
+    accounts.created,
+    group_acc,
+    account_tags,
+    server,
+    id_proxy,
+    status,
+    works,
+    useacc,
+    last_start,
+    tocken,
+    mail,
+    phone,
+    adv,
+    2fa,
+    ar,
+    created_acc,
+    ig,
+    life,
+    gpoup_proxy;';
     return selectAll($sql);
 }
 

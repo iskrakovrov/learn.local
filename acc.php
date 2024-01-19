@@ -93,7 +93,7 @@ foreach ($accountsData as $a) {
         }
     }
 
-    $life = $a['life'];
+    $life = !empty($a['life']) ? $a['life'] : 'No';
 
     $id_s = $a['server'];
     foreach ($getServerData as $ser) {
@@ -133,7 +133,23 @@ foreach ($accountsData as $a) {
     }
 
 
-    $friends = $a['friends'];
+
+
+$friends = $a['friends'];
+$friends1 = $a['friends1'];
+
+// Проверяем условия
+if ($friends > $friends1) {
+    // Если friends больше friends1
+    $friends =  '<span style="font-weight: bold; color: green;">' . $friends .  '</span>';
+} elseif ($friends < $friends1) {
+    // Если friends меньше friends1
+    $friends = '<span style="font-weight: bold; color: red;">' . $friends .  '</span>';
+} else {
+    // Если friends равно friends1
+    $friends =  '<span style="font-weight: bold;">' . $friends . '</span>';
+}
+
 
     $id = '<div style="text-align: center;"><input type="checkbox" name="a[]" value="';
     $id .= $a['id'];

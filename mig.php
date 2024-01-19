@@ -427,3 +427,14 @@ if (empty($qw)) {
     $sql = "INSERT INTO `status` (`id`, `status`) VALUES ('21', 'Update mail')";
     $qw = insert($sql);
 }
+
+$sql = "CREATE INDEX IF NOT EXISTS idx_id ON accounts (id);";
+$qw = create($sql);
+$sql = "CREATE INDEX IF NOT EXISTS idx_id_acc ON friends (id_acc)";
+$qw = create($sql);
+$sql = "CREATE INDEX IF NOT EXISTS  idx_account ON task (account);";
+$qw = create($sql);
+$sql = "CREATE INDEX IF NOT EXISTS idx_id_acc_created ON friends (id_acc, created)";
+$qw = create($sql);
+$sql = "CREATE INDEX IF NOT EXISTS  idx_id_acc ON friends (id_acc)";
+$qw = create($sql);
