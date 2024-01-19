@@ -411,6 +411,19 @@ if (empty($qw)) {
     $sql = "ALTER TABLE `st_gr` ADD `gr` INT NOT NULL AFTER `id`";
     $qw = create($sql);
 }
+$sql = "CREATE TABLE IF NOT EXISTS selected_values (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  value_id INT,
+  post INT,
+  id_acc INT,
+  created INT(25),
+  UNIQUE KEY (value_id)
+);";
+$qw = create($sql);
 
-
-
+$sql = "SELECT * FROM status WHERE id = 21";
+$qw = select($sql);
+if (empty($qw)) {
+    $sql = "INSERT INTO `status` (`id`, `status`) VALUES ('21', 'Update mail')";
+    $qw = insert($sql);
+}

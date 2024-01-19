@@ -19,6 +19,10 @@ $sql = 'DELETE FROM stat_invite WHERE (id_acc) NOT IN (SELECT id FROM accounts )
 $qw = delete($sql,);
 $sql = 'DELETE FROM ava WHERE (id_acc) NOT IN (SELECT id FROM accounts )';
 $qw = delete($sql);
+$sql = 'DELETE FROM task WHERE (account) NOT IN (SELECT id FROM accounts )';
+$qw = delete($sql);
+$sql = 'DELETE FROM temp_task WHERE (account) NOT IN (SELECT id FROM accounts )';
+$qw = delete($sql);
 $sql = 'DELETE FROM all_stat WHERE all_friends < 2';
 $qw = delete($sql);
 

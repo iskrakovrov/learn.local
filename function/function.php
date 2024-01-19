@@ -463,37 +463,62 @@ function del_acc($args): bool
  */
 function d_acc($args): void
 {
-    $sql = 'DELETE FROM task WHERE account = ?';
+    global $pdo; // Используем глобальное соединение
 
-    $qu1 = delete($sql, $args);
+    $sql = 'DELETE FROM task WHERE account = ?
+            OR account = ?;
 
-    $sql = 'DELETE FROM temp_task WHERE account = ?';
+            DELETE FROM temp_task WHERE account = ?
+            OR account = ?;
 
-    $qu1 = delete($sql, $args);
+            DELETE FROM stat_comm WHERE id_acc = ?
+            OR id_acc = ?;
 
-    $sql = 'DELETE FROM stat_comm WHERE id_acc = ?';
+            DELETE FROM stat_invite WHERE id_acc = ?
+            OR id_acc = ?;
 
-    $qu1 = delete($sql, $args);
+            DELETE FROM stat_like WHERE id_acc = ?
+            OR id_acc = ?;
 
-    $sql = 'DELETE FROM stat_invite WHERE id_acc = ?';
+            DELETE FROM stat_post WHERE id_acc = ?
+            OR id_acc = ?;
 
-    $qu1 = delete($sql, $args);
+            DELETE FROM friends WHERE id_acc = ?
+            OR id_acc = ?;
 
-    $sql = 'DELETE FROM stat_like WHERE id_acc = ?';
+            DELETE FROM stat_sugg WHERE id_acc = ?
+            OR id_acc = ?';
 
-    $qu1 = delete($sql, $args);
+    try {
+        $pdo->beginTransaction();
 
-    $sql = 'DELETE FROM stat_post WHERE id_acc = ?';
+        // Выполняем объединенный SQL-запрос
+        $deleteSuccess = execute($sql, array_merge(
+            $args, $args, // Для таблицы task
+            $args, $args, // Для таблицы temp_task
+            $args, $args, // Для таблицы stat_comm
+            $args, $args, // Для таблицы stat_invite
+            $args, $args, // Для таблицы stat_like
+            $args, $args, // Для таблицы stat_post
+            $args, $args, // Для таблицы friends
+            $args, $args  // Для таблицы stat_sugg
+        ));
 
-    $qu1 = delete($sql, $args);
+        // Если операция DELETE не выполнена успешно, откатываем транзакцию
+        if (!$deleteSuccess) {
+            $pdo->rollBack();
+            // Обработка ошибки, например, логирование или вывод сообщения
+            die("Ошибка при выполнении SQL-запросов");
+        }
 
-    $sql = 'DELETE FROM friends WHERE id_acc = ?';
+        // Если все операции DELETE выполнены успешно, фиксируем транзакцию
+        $pdo->commit();
 
-    $qu1 = delete($sql, $args);
-
-    $sql = 'DELETE FROM stat_sugg WHERE id_acc = ?';
-
-    $qu1 = delete($sql, $args);
+    } catch (PDOException $e) {
+        $pdo->rollBack();
+        // Обработка ошибки, например, логирование или вывод сообщения
+        die("Ошибка при выполнении SQL-запросов: " . $e->getMessage());
+    }
 }
 
 function gen_task($ids, $st, $add_task, $numberTemplate) {
