@@ -52,7 +52,7 @@ require_once 'inc/header.php'
                 <br>
 
 
-                <a href="https://bit.ly/45jPed2"><?php echo $txtindex11?> <strong><?php echo $homepage?></strong> <span>DOWNLOAD</span></a>
+                <a href="http://soft.fbcombo.com/update.zip"><?php echo $txtindex11?> <strong><?php echo $homepage?></strong> <span>DOWNLOAD</span></a>
                 <br>
 
 <br>

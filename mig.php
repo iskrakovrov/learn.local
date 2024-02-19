@@ -428,13 +428,31 @@ if (empty($qw)) {
     $qw = insert($sql);
 }
 
-$sql = "CREATE INDEX IF NOT EXISTS idx_id ON accounts (id);";
+//$sql = "CREATE INDEX IF NOT EXISTS idx_id ON accounts (id);";
+//$qw = create($sql);
+//$sql = "CREATE INDEX IF NOT EXISTS idx_id_acc ON friends (id_acc)";
+//$qw = create($sql);
+//$sql = "CREATE INDEX IF NOT EXISTS  idx_account ON task (account);";
+//$qw = create($sql);
+//$sql = "CREATE INDEX IF NOT EXISTS idx_id_acc_created ON friends (id_acc, created)";
+//$qw = create($sql);
+//$sql = "CREATE INDEX IF NOT EXISTS  idx_id_acc ON friends (id_acc)";
+//$qw = create($sql);
+
+$sql = "SHOW TABLES LIKE 'post_group'";
 $qw = create($sql);
-$sql = "CREATE INDEX IF NOT EXISTS idx_id_acc ON friends (id_acc)";
+
+if (empty($qw)) {
+
+    $sql = "CREATE TABLE `post_group` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `id_acc` INT(11) NOT NULL , `id_gr` INT(11) NOT NULL , `created` INT(25) NOT NULL , `type` INT(11) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;";
+    $qw = create($sql);
+}
+
+
+$sql = "SHOW COLUMNS FROM selected_values WHERE FIELD = 'task'";
 $qw = create($sql);
-$sql = "CREATE INDEX IF NOT EXISTS  idx_account ON task (account);";
-$qw = create($sql);
-$sql = "CREATE INDEX IF NOT EXISTS idx_id_acc_created ON friends (id_acc, created)";
-$qw = create($sql);
-$sql = "CREATE INDEX IF NOT EXISTS  idx_id_acc ON friends (id_acc)";
-$qw = create($sql);
+if (!empty($qw)) {
+    $sql = "ALTER TABLE `selected_values` ADD `task` INT(11) NOT NULL AFTER `id_acc`;";
+    $qw = create($sql);
+
+}

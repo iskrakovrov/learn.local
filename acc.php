@@ -27,7 +27,7 @@ foreach ($accountsData as $a) {
         }
     }
 
-     if ($pgr2===0) {
+    if ($pgr2===0) {
         $pr = 'FREE';
     } else if ($pgr2 !== null) {
         $pr = $pgr2;
@@ -135,20 +135,21 @@ foreach ($accountsData as $a) {
 
 
 
-$friends = $a['friends'];
-$friends1 = $a['friends1'];
+    $friends = $a['friends'];
+    $friends1 = $a['friends1'];
+    $fd = $friends - $friends1;
 
 // Проверяем условия
-if ($friends > $friends1) {
-    // Если friends больше friends1
-    $friends =  '<span style="font-weight: bold; color: green;">' . $friends .  '</span>';
-} elseif ($friends < $friends1) {
-    // Если friends меньше friends1
-    $friends = '<span style="font-weight: bold; color: red;">' . $friends .  '</span>';
-} else {
-    // Если friends равно friends1
-    $friends =  '<span style="font-weight: bold;">' . $friends . '</span>';
-}
+    if ($fd > 0) {
+        // Если friends больше friends1
+        $friends =  '<span style="font-weight: bold; color: #50dd24;">' . $friends .  '</span>';
+    } elseif ($fd < 0) {
+        // Если friends меньше friends1
+        $friends = '<span style="font-weight: bold; color: red;">' . $friends .  '</span>';
+    } else {
+        // Если friends равно friends1
+        $friends =  '<span style="font-weight: bold;">' . $friends . '</span>';
+    }
 
 
     $id = '<div style="text-align: center;"><input type="checkbox" name="a[]" value="';

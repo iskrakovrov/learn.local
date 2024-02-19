@@ -319,13 +319,13 @@ function create($create)
 {
     global $pdo;
     $sql = $create;
-       try {
-    $query = $pdo->prepare($sql);
-    $query->execute();
-      } catch(PDOException $e) {
-          echo 'Error: Unable to execute query. SQL: ' . $sql . ' Error message: ' . $e->getMessage();
-       die();
-   }
+    try {
+        $query = $pdo->prepare($sql);
+        $query->execute();
+    } catch(PDOException $e) {
+        echo 'Error: Unable to execute query. SQL: ' . $sql . ' Error message: ' . $e->getMessage();
+        die();
+    }
     dbCheckError($query);
     return $query->fetchAll();
 }
@@ -725,8 +725,8 @@ function generateAndExecuteTask($add_task, $st, $ids, $numberTemplate) {
 
 
 function getAccountsData() {
-   // $sql = 'SELECT
- //  accounts.id, login_fb, pass_fb, id_fb, name, gender, avatar, accounts.created, group_acc, account_tags,
+    // $sql = 'SELECT
+    //  accounts.id, login_fb, pass_fb, id_fb, name, gender, avatar, accounts.created, group_acc, account_tags,
 //   server, id_proxy, status, works, useacc, friends, last_start, tocken, mail, phone,
 //   adv, 2fa, ar, created_acc, ig, life, gpoup_proxy, COUNT(task.task) as task_count
 //FROM
@@ -734,7 +734,7 @@ function getAccountsData() {
 //LEFT JOIN
 //   task ON accounts.id = task.account
 //GROUP BY
- //  accounts.id'; // ваш SQL-запрос
+    //  accounts.id'; // ваш SQL-запрос
 
 
     $sql = 'SELECT
@@ -758,8 +758,8 @@ function getAccountsData() {
         SELECT friends
         FROM friends
         WHERE id_acc = accounts.id
-        ORDER BY created DESC
-        LIMIT 1
+        ORDER BY friends.created DESC
+        LIMIT 1,1
     ) as friends1,
     last_start,
     tocken,
@@ -778,32 +778,8 @@ FROM
 LEFT JOIN
     task ON accounts.id = task.account
 GROUP BY
-    accounts.id,
-    login_fb,
-    pass_fb,
-    id_fb,
-    name,
-    gender,
-    avatar,
-    accounts.created,
-    group_acc,
-    account_tags,
-    server,
-    id_proxy,
-    status,
-    works,
-    useacc,
-    last_start,
-    tocken,
-    mail,
-    phone,
-    adv,
-    2fa,
-    ar,
-    created_acc,
-    ig,
-    life,
-    gpoup_proxy;';
+    accounts.id
+   ';
     return selectAll($sql);
 }
 
