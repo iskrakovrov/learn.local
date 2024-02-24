@@ -62,7 +62,6 @@ if ($add_task == 'create_pages') {
         'num_p' => $_REQUEST['num_p'],
 
 
-
     );
     generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
 }
@@ -86,7 +85,6 @@ if ($add_task == 'banhammer') {
 
     $st[] = array(
         'bh1' => $_REQUEST['bh'],
-
 
 
     );
@@ -119,7 +117,6 @@ if ($add_task == 'rss_post') {
     );
     generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
 }
-
 
 
 if ($add_task == 'coockie') {
@@ -168,13 +165,14 @@ if ($add_task == 'filling_accounts') {
         'cover' => $_REQUEST['cover'],
         'ava' => $_REQUEST['ava'],
         'apost' => $_REQUEST['apost'],
-        'priv' =>   $_REQUEST['priv'],
+        'priv' => $_REQUEST['priv'],
 
     );
     generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
 }
 if ($add_task == 'post_to_group') {
     $st[] = array(
+        'ntask' => $_REQUEST['ntask'],
         'day' => $_REQUEST['day'],
         'type' => $_REQUEST['type'],
         'post' => $_REQUEST['post'],
@@ -480,8 +478,8 @@ if (empty($task)) {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
-        rel="stylesheet">
+            href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
+            rel="stylesheet">
     <!-- Bootstrap CSS -->
     <link href="css/dt.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"

@@ -23,6 +23,13 @@ $sql = "UPDATE options SET ver = ?";
 $args = [$vers];
 $qw = update($sql, $args);
 
+
+//$sql = "SET SESSION sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))";  //Hosting
+//$qw = create($sql);
+$sql = "SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))"; // Windows
+$qw = create($sql);
+
+
 $sql = "SHOW COLUMNS FROM groups_fb WHERE FIELD = 'url'";
 $qw = create($sql);
 if (empty($qw)) {
@@ -264,8 +271,6 @@ if (empty($qw)) {
     $qw = create($sql);
 }
 
-$sql = "SET SESSION sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))";
-$qw = create($sql);
 
 $sql = "SHOW COLUMNS FROM accounts WHERE FIELD = 'created_acc'";
 $qw = create($sql);
@@ -451,8 +456,15 @@ if (empty($qw)) {
 
 $sql = "SHOW COLUMNS FROM selected_values WHERE FIELD = 'task'";
 $qw = create($sql);
-if (!empty($qw)) {
-    $sql = "ALTER TABLE `selected_values` ADD `task` INT(11) NOT NULL AFTER `id_acc`;";
+if (empty($qw)) {
+    $sql = "ALTER TABLE `selected_values` ADD `task` INT(11) NOT NULL AFTER `id_acc`";
     $qw = create($sql);
 
 }
+$sql = "SHOW INDEX FROM selected_values WHERE Key_name = 'value_id'";
+$qw = create($sql);
+
+if (!empty($qw)) {
+    $sql = "ALTER TABLE selected_values DROP INDEX value_id";
+    $qw = create($sql);
+} 

@@ -29,7 +29,9 @@ $qw2 = selectAll($sql);
         <div class="row justify-content-center">
             <div class="col-sm-2 text-center">
                 <form method="post" onSubmit="return Complete();">
-
+                    <label for="ntask">Index task</label>
+                    <input type="number" name="ntask" id="ntask" class="form-control" value="1" required>
+                    <br>
                     <label for="day" class="control-label"><?php echo $txtpgroup7 ?></label>
                     <select name="day" id="day" class="form-control">
                         <option value="1">YES</option>

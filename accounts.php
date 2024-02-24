@@ -335,16 +335,27 @@ require_once 'inc/alerts.php';
 </main>
 
 <!--<script src="js/bootstrap.bundle.min.js"</script> -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.0.js"></script>
+ <script type="text/javascript" src="js/jquery.dataTables.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
-<script src="js/jquery.js"></script>
-<script src="js/dtjquery.js"></script>
-
 
 <script src="js/dataTables.bootstrap.js"></script>
-<script type="text/javascript" charset="utf-8" src="js/ColumnFilterWidgets.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+            integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+            crossorigin="anonymous"></script>
+    
+   
+    <script type="text/javascript" src="js/shCore.js"></script>
+
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css">
+
+    <script type="text/javascript"
+            src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+			<script type="text/javascript" charset="utf-8" src="js/ColumnFilterWidgets.js"></script>
 
 <script>
     $('#alert').delay(5000).fadeOut('slow');
@@ -360,36 +371,48 @@ require_once 'inc/alerts.php';
     dr_table = $('#dr_table').DataTable({
 
 
-        bProcessing: true,
+        
         orderClasses: false,
         stateSave: true,
         searching: true,
 
-        serverSide: false,
+        "processing": false,
+        "serverSide": false,
 
         orderCellsTop: true,
         scrollX: false,
         iLeftWidth: 120,
         sLeftWidth: 'relative',
-        "lengthMenu": [[1000, 30, 100, 250, 500, 1500], [1000, 30, 100, 250, 500, 1500]],
+        "lengthMenu": [[ 30, 100, 250, 500, 1500, 5000], [ 30, 100, 250, 500, 1500, 5000]],
         dom: '<"top"lpif<"clear">>rt<"bottom"lpif<"clear">>',
 
 
-        "ajax": {
-            url: "acc.php",
-            headers: {
-                "Accept": "application/ld+json",
+        ajax: {
+                url: 'acc.php',
+
+            type: 'POST',
+            "deferRender": true,
 
             },
-        },
+        
 
-        "deferRender": true,
+
 
         "columns": [
 
-            {mData: 'ids'},
+            {
+                mData: 'ids',
+                orderable: false,
+                searchable: false,
+                render: function (data, type, row) {
+                    return '<div style="text-align: center;"><input type="checkbox" name="a[]" value="' + row.action + '"></div>';
+                }
+            },
             {mData: 'name'},
-            {mData: 'login'},
+            {
+                mData: 'login',
+
+                },
             {mData: 'mail'},
             {mData: 'phone'},
             {mData: 'gender'},
@@ -407,7 +430,24 @@ require_once 'inc/alerts.php';
             },
 
 
-            {mData: 'friends'},
+            {
+                mData: 'friends',
+                render: function (data, type, row) {
+                    var friends1 = row.friends1;
+                    var fd = data - friends1;
+
+                    if (fd > 0) {
+                        // Если friends больше friends1
+                        return '<span style="font-weight: bold; color: #50dd24;">' + data + '</span>';
+                    } else if (fd < 0) {
+                        // Если friends меньше friends1
+                        return '<span style="font-weight: bold; color: red;">' + data + '</span>';
+                    } else {
+                        // Если friends равно friends1
+                        return '<span style="font-weight: bold;">' + data + '</span>';
+                    }
+                }
+            },
             {mData: 'tocken'},
             {mData: 'adv'},
             {
@@ -448,7 +488,18 @@ require_once 'inc/alerts.php';
                 }
             },
 
-            {mData: 'action'},
+            {
+                mData: 'action',
+                orderable: false,
+                searchable: false,
+                render: function (data, type, row) {
+                    return '<div class="btn-group">' +
+                        '<a href="edit_account.php?id=' + data + '" class="btn btn-success" title="Edit"><i class="bi bi-pencil-square"></i></a>' +
+                        '<a href="stat_account.php?id=' + data + '" class="btn btn-success" title="Stat"><i class="bi bi-star"></i></a>' +
+                        '<a href="del_account.php?id=' + data + '" class="btn btn-danger" title="Del"><i class="bi bi-x-circle-fill"></i></a>' +
+                        '</div>';
+                }
+            },
 
         ],
 

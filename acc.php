@@ -137,32 +137,9 @@ foreach ($accountsData as $a) {
 
     $friends = $a['friends'];
     $friends1 = $a['friends1'];
-    $fd = $friends - $friends1;
-
-// Проверяем условия
-    if ($fd > 0) {
-        // Если friends больше friends1
-        $friends =  '<span style="font-weight: bold; color: #50dd24;">' . $friends .  '</span>';
-    } elseif ($fd < 0) {
-        // Если friends меньше friends1
-        $friends = '<span style="font-weight: bold; color: red;">' . $friends .  '</span>';
-    } else {
-        // Если friends равно friends1
-        $friends =  '<span style="font-weight: bold;">' . $friends . '</span>';
-    }
 
 
-    $id = '<div style="text-align: center;"><input type="checkbox" name="a[]" value="';
-    $id .= $a['id'];
-    $id .= '"></div>';
 
-    $action = '<div class="btn-group"><a href="edit_account.php?id=';
-    $action .= $a['id'];
-    $action .= '" class="btn btn-success" title="Edit" ><i class="bi bi-pencil-square"></i></a><a href="stat_account.php?id=';
-    $action .= $a['id'];
-    $action .= '" class="btn btn-success" title="Stat"><i class="bi bi-star"></i></a><a href="del_account.php?id=';
-    $action .= $a['id'];
-    $action .= '" class="btn btn-danger" title="Del"><i class="bi bi-x-circle-fill"></i></a></div>';
 
 
     $cr_acc = $data = $a['created_acc'];
@@ -188,6 +165,8 @@ foreach ($accountsData as $a) {
     } else {
         $lfb = $a['login_fb'];
     }
+
+
     $fa = $a['2fa'];
     if ($fa == 'NULL' || $fa == 'None') {
         $fa = '-';
@@ -213,8 +192,7 @@ foreach ($accountsData as $a) {
         $ar = '?';
     }
     $mysql_data[] = array(
-
-        'ids' => $id,
+        'ids' => $a['id'],
         'login' => $lfb,
         'mail' => $a['mail'],
         'phone' => $a['phone'],
@@ -229,10 +207,11 @@ foreach ($accountsData as $a) {
         'use' => $use,
         'life' => $life,
         'friends' => $friends,
+        'friends1' => $friends1, // Добавлено
         'tocken' => $tocken,
         'adv' => $adv,
         'last_start' => $ls,
-        'action' => $action,
+        'action'=> $a['id'],
         'spst' => $spst,
         'fa' => $fa,
         'ar' => $ar,
@@ -251,5 +230,5 @@ try {
     $json_data = json_encode($data, JSON_THROW_ON_ERROR);
 } catch (JsonException $e) {
 }
-
-print $json_data;
+header('Content-Type: application/json');
+echo $json_data;
