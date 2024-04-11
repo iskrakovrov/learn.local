@@ -170,6 +170,16 @@ if ($add_task == 'filling_accounts') {
     );
     generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
 }
+
+if ($add_task == 'mess_sbor') {
+    $st[] = array(
+        'vm' => $_REQUEST['vm'],
+        'f24' => $_REQUEST['f24'],
+
+    );
+    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
+}
+
 if ($add_task == 'post_to_group') {
     $st[] = array(
         'ntask' => $_REQUEST['ntask'],

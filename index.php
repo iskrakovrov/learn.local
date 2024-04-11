@@ -58,6 +58,21 @@ require_once 'inc/header.php'
                 <br>
 
 <br>
+
+
+
+
+                <h2>Auto update for Windows</h2>
+                <form action="download.php" method="post">
+                    <button type="submit">Update</button>
+                </form>
+                <br>
+                <h2>Auto update for Unix hosting</h2>
+                <form action="download1.php" method="post">
+                    <button type="submit">Update</button>
+                </form>
+                <br>
+                </html>
                 <div class="alert alert-success" role="alert">
                     <?php echo $txtindex5 ?>
                 </div>

@@ -27,15 +27,13 @@ foreach ($accountsData as $a) {
         }
     }
 
-    if ($pgr2===0) {
+    if ($pgr2 === 0) {
         $pr = 'FREE';
     } else if ($pgr2 !== null) {
         $pr = $pgr2;
-    }  else {
+    } else {
         $pr = 'NO group';
     }
-
-
 
 
     if ($a['useacc'] == '0') {
@@ -133,13 +131,8 @@ foreach ($accountsData as $a) {
     }
 
 
-
-
     $friends = $a['friends'];
     $friends1 = $a['friends1'];
-
-
-
 
 
     $cr_acc = $data = $a['created_acc'];
@@ -156,15 +149,15 @@ foreach ($accountsData as $a) {
     }
     $idf = $a['id_fb'];
 
-    if (!empty($idf)) {
-        $lfb = '<a href="https://facebook.com/';
-        $lfb .= $idf;
-        $lfb .= ' "target="_blank">';
-        $lfb .= $a['login_fb'];
-        $lfb .= '</a>';
-    } else {
-        $lfb = $a['login_fb'];
-    }
+    //   if (!empty($idf)) {
+    //      $lfb = '<a href="https://facebook.com/';
+    //       $lfb .= $idf;
+    //       $lfb .= ' "target="_blank">';
+//        $lfb .= $a['login_fb'];
+    //       $lfb .= '</a>';
+    //   } else {
+//       $lfb = $a['login_fb'];
+    //   }
 
 
     $fa = $a['2fa'];
@@ -193,7 +186,7 @@ foreach ($accountsData as $a) {
     }
     $mysql_data[] = array(
         'ids' => $a['id'],
-        'login' => $lfb,
+        'login' => $a['login_fb'],
         'mail' => $a['mail'],
         'phone' => $a['phone'],
         'gender' => $a['gender'],
@@ -211,13 +204,14 @@ foreach ($accountsData as $a) {
         'tocken' => $tocken,
         'adv' => $adv,
         'last_start' => $ls,
-        'action'=> $a['id'],
+        'action' => $a['id'],
         'spst' => $spst,
         'fa' => $fa,
         'ar' => $ar,
         'created_acc' => $cr_acc,
         'name' => $name,
         'ig' => $ig,
+        'idf' => $a['id_fb'],
 
     );
 }

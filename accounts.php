@@ -50,8 +50,11 @@ $at = selectAll($sql);
             margin-left: 10px;
         }
     </style>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css">
+
+
     <style>
+
+
         .select2-container--default .select2-selection--single .select2-selection__clear {
             margin-right: -5px;
             margin-top: -10px;
@@ -150,7 +153,7 @@ require_once 'inc/alerts.php';
                     <option value="" disabled="disabled">----------</option>
                     <?php foreach ($at as $r) { ?>
                         <option
-                                value="go_tag.php?gr=<?php echo $r['id'] ?>"><?php echo 'assign an ' . $r['tag'] .' tag to accounts'?></option>
+                                value="go_tag.php?gr=<?php echo $r['id'] ?>"><?php echo 'assign an ' . $r['tag'] . ' tag to accounts' ?></option>
 
                     <?php } ?>
 
@@ -333,29 +336,27 @@ require_once 'inc/alerts.php';
 
 
 </main>
-
-<!--<script src="js/bootstrap.bundle.min.js"</script> -->
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.0.js"></script>
- <script type="text/javascript" src="js/jquery.dataTables.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
+<!--<script src="js/bootstrap.bundle.min.js"</script> -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<script type="text/javascript" src="js/jquery.dataTables.js"></script>
+
 
 <script src="js/dataTables.bootstrap.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
-            integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
-            crossorigin="anonymous"></script>
-    
-   
-    <script type="text/javascript" src="js/shCore.js"></script>
 
-    <link rel="stylesheet" type="text/css"
-          href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css">
 
-    <script type="text/javascript"
-            src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
-			<script type="text/javascript" charset="utf-8" src="js/ColumnFilterWidgets.js"></script>
+
+<script type="text/javascript" src="js/shCore.js"></script>
+
+<link rel="stylesheet" type="text/css"
+      href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css">
+
+<script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/ColumnFilterWidgets.js"></script>
 
 <script>
     $('#alert').delay(5000).fadeOut('slow');
@@ -371,7 +372,6 @@ require_once 'inc/alerts.php';
     dr_table = $('#dr_table').DataTable({
 
 
-        
         orderClasses: false,
         stateSave: true,
         searching: true,
@@ -383,23 +383,19 @@ require_once 'inc/alerts.php';
         scrollX: false,
         iLeftWidth: 120,
         sLeftWidth: 'relative',
-        "lengthMenu": [[ 30, 100, 250, 500, 1500, 5000], [ 30, 100, 250, 500, 1500, 5000]],
+        "lengthMenu": [[30, 100, 250, 500, 1500, 5000], [30, 100, 250, 500, 1500, 5000]],
         dom: '<"top"lpif<"clear">>rt<"bottom"lpif<"clear">>',
 
-
         ajax: {
-                url: 'acc.php',
+            url: 'acc.php',
 
             type: 'POST',
             "deferRender": true,
 
-            },
-        
-
+        },
 
 
         "columns": [
-
             {
                 mData: 'ids',
                 orderable: false,
@@ -408,50 +404,73 @@ require_once 'inc/alerts.php';
                     return '<div style="text-align: center;"><input type="checkbox" name="a[]" value="' + row.action + '"></div>';
                 }
             },
-            {mData: 'name'},
+            {mData: 'name', orderable: true},
             {
                 mData: 'login',
-
-                },
-            {mData: 'mail'},
-            {mData: 'phone'},
-            {mData: 'gender'},
-            {mData: 'avatar'},
-            {mData: 'proxy'},
-            {mData: 'server'},
-            {mData: 'group'},
-            {mData: 'tag'},
-            {mData: 'status'},
-            {mData: 'task'},
-            {mData: 'use'},
-            {
-                mData: 'life'
-
-            },
-
-
-            {
-                mData: 'friends',
+                orderable: true,
                 render: function (data, type, row) {
-                    var friends1 = row.friends1;
-                    var fd = data - friends1;
+                    var lfb;
 
-                    if (fd > 0) {
-                        // Если friends больше friends1
-                        return '<span style="font-weight: bold; color: #50dd24;">' + data + '</span>';
-                    } else if (fd < 0) {
-                        // Если friends меньше friends1
-                        return '<span style="font-weight: bold; color: red;">' + data + '</span>';
+                    if (row.idf !== '') {
+                        lfb = '<a href="https://facebook.com/' + row.idf + '" target="_blank">' + data + '</a>';
                     } else {
-                        // Если friends равно friends1
-                        return '<span style="font-weight: bold;">' + data + '</span>';
+                        lfb = data;
+                    }
+
+                    return lfb;
+                }
+            },
+            {mData: 'mail', orderable: true},
+            {
+                mData: 'phone',
+                orderable: true,
+                render: function (data, type, row) {
+                    // Если значение данных равно NULL, вернуть пустую строку
+                    if (data === 'NULL') {
+                        return '';
+                    } else {
+                        return data; // Вернуть исходное значение данных
                     }
                 }
             },
-            {mData: 'tocken'},
-            {mData: 'adv'},
+            {mData: 'gender', orderable: false},
+            {mData: 'avatar', orderable: false},
+            {mData: 'proxy', orderable: false},
+            {mData: 'server', orderable: false},
+            {mData: 'group', orderable: false},
+            {mData: 'tag', orderable: false},
+            {
+                mData: 'status',
+                orderable: false,
+            },
+            {mData: 'task', orderable: false},
+            {mData: 'use', orderable: false},
+            {mData: 'life', orderable: false},
+            {
+                mData: 'friends',
+                orderable: true,
+                render: function (data, type, row) {
+                    var friends1 = row.friends1;
+                    var fd = (data !== null) ? data - friends1 : 0;
+                    var displayedData = (data !== null) ? data : 0;
+
+                    if (fd > 0) {
+                        // Если friends больше friends1
+                        return '<span style="font-weight: bold; color: #50dd24;">' + displayedData + '</span>';
+                    } else if (fd < 0) {
+                        // Если friends меньше friends1
+                        return '<span style="font-weight: bold; color: red;">' + displayedData + '</span>';
+                    } else {
+                        // Если friends равно friends1
+                        return '<span style="font-weight: bold;">' + displayedData + '</span>';
+                    }
+                }
+            },
+            {mData: 'tocken', orderable: false},
+            {mData: 'adv', orderable: false},
             {
                 mData: 'last_start',
+                orderable: true,
                 render: function (data, type, row) {
                     // If display or filter data is requested, format the date
                     if (type === 'display' || type === 'filter') {
@@ -466,13 +485,13 @@ require_once 'inc/alerts.php';
                     return data;
                 }
             },
-
-            {mData: 'ar'},
-            {mData: 'spst'},
-            {mData: 'fa'},
-            {mData: 'ig'},
+            {mData: 'ar', orderable: false},
+            {mData: 'spst', orderable: false},
+            {mData: 'fa', orderable: false},
+            {mData: 'ig', orderable: false},
             {
                 mData: 'created_acc',
+                orderable: true,
                 render: function (data, type, row) {
                     // If display or filter data is requested, format the date
                     if (type === 'display' || type === 'filter') {
@@ -487,7 +506,6 @@ require_once 'inc/alerts.php';
                     return data;
                 }
             },
-
             {
                 mData: 'action',
                 orderable: false,
@@ -499,10 +517,8 @@ require_once 'inc/alerts.php';
                         '<a href="del_account.php?id=' + data + '" class="btn btn-danger" title="Del"><i class="bi bi-x-circle-fill"></i></a>' +
                         '</div>';
                 }
-            },
-
+            }
         ],
-
 
         "aoColumnDefs":
             [
@@ -516,13 +532,6 @@ require_once 'inc/alerts.php';
             "Total of _TOTAL_ records (showing _START_ to _END_)",
         "sInfoFiltered":
             "(filtered from _MAX_ total records)",
-
-
-        'columnDefs':
-            [{
-                'targets': [0, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16, 17, 19], // column index (start from 0)
-                'orderable': false, // set orderable false for selected columns
-            }],
 
 
         initComplete: function () {
@@ -551,7 +560,7 @@ require_once 'inc/alerts.php';
                         select.append($('<option></option>').attr('value', d).text(d));
                     });
                 select.select2({
-                    placeholder: 'Filter',
+                    placeholder: '',
                     allowClear: true
                 }); // Initialize Select2 on the select element
                 // Restore the state of this Select2 widget.
@@ -586,7 +595,7 @@ require_once 'inc/alerts.php';
                         select.append($('<option></option>').attr('value', d).text(d));
                     });
                 select.select2({
-                    placeholder: 'Filter',
+                    placeholder: '',
                     allowClear: true
                 }); // Initialize Select2 on the select element
                 // Restore the state of this Select2 widget.
