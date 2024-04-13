@@ -87,10 +87,7 @@ include_once 'inc/header.php';
                     <div class="col">
                         <button type="button" class="btn btn-success">Save answer</button>
 
-                        <a href="del_server.php?id=<?php echo $a['id'] ?>" class="btn btn-danger"
-                           title="Delete Server"
-                           onClick="return confirm( 'WARNING!!! DELETE SERVER? <?php echo $txtserver1 ?>' )">Delete
-                            Server <i class="bi bi-x-circle-fill"></i></a>
+                        <button type="button" class="btn btn-danger delete-row-btn" data-message-id="<?php echo $a['id'] ?>">Delete</button>
                     </div>
                 </td>
             </tr>
@@ -179,6 +176,28 @@ include_once 'inc/header.php';
                 var answer = $(this).val();
                 saveAnswerWithDelay(messageId, answer);
             }
+        });
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        // Обработчик события клика на кнопку удаления строки
+        $('.delete-row-btn').click(function() {
+            var messageId = $(this).data('message-id');
+
+            $.ajax({
+                url: 'delete_message.php', // Путь к скрипту для удаления строки на сервере
+                method: 'POST',
+                data: { messageId: messageId },
+                success: function(response) {
+                    // Если удаление прошло успешно, обновляем таблицу
+                    alert('Message deleted successfully!');
+                    location.reload(); // Обновляем страницу
+                },
+                error: function(xhr, status, error) {
+                    alert('Error deleting message: ' + error);
+                }
+            });
         });
     });
 </script>
