@@ -473,7 +473,7 @@ $qw = create($sql);
 
 if (empty($qw)) {
 
-    $sql = "CREATE TABLE `mess` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `id_acc` INT NOT NULL , `url` VARCHAR(4089) NOT NULL , `text_mess` VARCHAR(4089) NULL , `answer` INT NULL , `name` VARCHAR(250) NULL , `data_mess` INT(24) NULL , `type` INT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;";
+    $sql = "CREATE TABLE `mess` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `id_acc` INT NOT NULL , `url` VARCHAR(700) NOT NULL , `text_mess` VARCHAR(700) NULL , `answer` INT NULL , `name` VARCHAR(250) NULL , `data_mess` INT(24) NULL , `type` INT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;";
     $qw = create($sql);
     $sql = " ALTER TABLE `mess` ADD UNIQUE(`url`);";
     $qw = create($sql);

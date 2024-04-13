@@ -174,7 +174,7 @@ $homepage = file_get_contents('https://soft.fbcombo.com/ver.php');
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Messenger</a>
+                            <a class="nav-link active" aria-current="page" href="messenger.php">Messenger</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link active active dropdown-toggle" href="#" id="navbarDropdown" role="button"
