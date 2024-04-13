@@ -78,8 +78,10 @@ include_once 'inc/header.php';
                 <td><?php echo date('d.m.Y', $a['data_mess']); ?></td>
                 <td><?php echo $a['name'] ?></td>
                 <td><?php echo $a['text_mess'] ?></td>
-                <td> <input type="text" class="form-control" id="answer" name="an[]" value=" <?php echo $a['answer'] ?>"></td>
-
+                <td> <td>
+                    <input type="text" class="form-control answer-field" name="answer" value="<?php echo $a['answer'] ?>">
+                    <input type="hidden" class="message-id" value="<?php echo $a['id'] ?>">
+                </td>
 
                 <td>
                     <div class="col">
@@ -141,6 +143,43 @@ include_once 'inc/header.php';
         stateSave: true,
 
 
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        // Функция для сохранения ответа с задержкой
+        function saveAnswerWithDelay(messageId, answer) {
+            setTimeout(function() {
+                $.ajax({
+                    url: 'save_answer.php',
+                    method: 'POST',
+                    data: { messageId: messageId, answer: answer },
+                    success: function(response) {
+                        alert('Answer saved successfully!');
+                        // Здесь можно обновить таблицу или другие элементы страницы для отображения изменений
+                    },
+                    error: function(xhr, status, error) {
+                        alert('Error saving answer: ' + error);
+                    }
+                });
+            }, 500); // Задержка в миллисекундах (в данном случае 0.5 секунды)
+        }
+
+        // Обработчик события blur для поля ввода
+        $('.answer-field').blur(function() {
+            var messageId = $(this).closest('tr').find('.message-id').val();
+            var answer = $(this).val();
+            saveAnswerWithDelay(messageId, answer);
+        });
+
+        // Обработчик события keyup для поля ввода
+        $('.answer-field').keyup(function(event) {
+            if (event.keyCode === 13) { // Если нажата клавиша Enter
+                var messageId = $(this).closest('tr').find('.message-id').val();
+                var answer = $(this).val();
+                saveAnswerWithDelay(messageId, answer);
+            }
+        });
     });
 </script>
 </body>
