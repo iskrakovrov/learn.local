@@ -144,39 +144,37 @@ include_once 'inc/header.php';
 </script>
 <script>
     $(document).ready(function() {
-        // Функция для сохранения ответа с задержкой
-        function saveAnswerWithDelay(messageId, answer) {
-            setTimeout(function() {
-                $.ajax({
-                    url: 'save_answer.php',
-                    method: 'POST',
-                    data: { messageId: messageId, answer: answer },
-                    success: function(response) {
-                        alert('Answer saved successfully!');
-                        // Здесь можно обновить таблицу или другие элементы страницы для отображения изменений
-                    },
-                    error: function(xhr, status, error) {
-                        alert('Error saving answer: ' + error);
-                    }
-                });
-            }, 500); // Задержка в миллисекундах (в данном случае 0.5 секунды)
-        }
-
-        // Обработчик события blur для поля ввода
-        $('.answer-field').blur(function() {
+        // Обработчик события клика на кнопку "Save answer"
+        $('.save-answer-btn').click(function() {
             var messageId = $(this).closest('tr').find('.message-id').val();
-            var answer = $(this).val();
-            saveAnswerWithDelay(messageId, answer);
+            var answer = $(this).closest('tr').find('.answer-field').val();
+            saveAnswer(messageId, answer);
         });
 
-        // Обработчик события keyup для поля ввода
+        // Обработчик события keyup для поля ввода ответа
         $('.answer-field').keyup(function(event) {
             if (event.keyCode === 13) { // Если нажата клавиша Enter
                 var messageId = $(this).closest('tr').find('.message-id').val();
                 var answer = $(this).val();
-                saveAnswerWithDelay(messageId, answer);
+                saveAnswer(messageId, answer);
             }
         });
+
+        // Функция для сохранения ответа на сервере
+        function saveAnswer(messageId, answer) {
+            $.ajax({
+                url: 'save_answer.php',
+                method: 'POST',
+                data: { messageId: messageId, answer: answer },
+                success: function(response) {
+                    alert('Answer saved successfully!');
+                    // Здесь можно обновить таблицу или другие элементы страницы для отображения изменений
+                },
+                error: function(xhr, status, error) {
+                    alert('Error saving answer: ' + error);
+                }
+            });
+        }
     });
 </script>
 <script>
