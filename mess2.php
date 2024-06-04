@@ -78,7 +78,7 @@ include_once 'inc/header.php';
                 <td><?php echo date('d.m.Y', $a['data_mess']); ?></td>
                 <td><?php echo $a['name'] ?></td>
                 <td><?php echo $a['text_mess'] ?></td>
-                <td> <td>
+                <td>
                     <input type="text" class="form-control answer-field" name="answer" value="<?php echo $a['answer'] ?>">
                     <input type="hidden" class="message-id" value="<?php echo $a['id'] ?>">
                 </td>

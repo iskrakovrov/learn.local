@@ -1,7 +1,8 @@
 <?php
 $sql = 'SELECT * FROM lists WHERE cat = 5';
 $qw = selectAll($sql);
-
+$sql = 'SELECT * FROM lists WHERE cat = 11';
+$qw2 = selectAll($sql);
 ?>
 
 <main class="container-fluid ">
@@ -59,6 +60,24 @@ $qw = selectAll($sql);
                         <option value="1">YES</option>
                         <option value="2">NO</option>
                     </select>
+                    <br>
+                    <br>
+                    <label for="spost" class="control-label"><?php echo $txtpgroup9  ?></label>
+
+                    <select name="spost" id="spost" class="form-control">
+                        <?php
+                        $i = 0;
+                        foreach ($qw2 as $c) {
+                            $i++; ?>
+                            <option value="<?php echo $c['id'] ?>"><?php echo $c['name']; ?></option>
+                        <?php } ?>
+                    </select>
+                    <br>
+
+                    <label for="prc">Post probability in %</label>
+                    <input type="number" name="prc" id="prc" class="form-control" value="100" required>
+
+                    <br>
                     <br>
 
 
