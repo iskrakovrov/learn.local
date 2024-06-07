@@ -1,5 +1,5 @@
 <?php
-
+require_once('db.php'); // Подключаем файл с настройками подключения к базе данных
 function tt($value)
 {
     echo '<pre>';
