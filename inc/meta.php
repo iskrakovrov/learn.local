@@ -14,4 +14,19 @@
 <link href="/css/jquery.dataTables.yadcf.css" rel="stylesheet">
 
 
+<style>
+    /* Your custom styles here */
+    .fixed-counter {
+        position: fixed;
+        top: 100px;
+        left: 100px;
+        background-color: #f0f0f0;
+        padding: 10px;
+        border: 1px solid #ccc;
+        z-index: 1000;
+        cursor: move; /* Добавляем курсор перемещения */
+    }
+    }
+</style>
+
 

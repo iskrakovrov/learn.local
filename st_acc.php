@@ -4,7 +4,7 @@ require_once('inc/db.php');
 require_once('function/function.php');
 $lang = $_SESSION['lang'] . '.php';
 require_once($lang);
-
+session_start();
 ?>
 <!doctype html>
 <html lang="en">
@@ -19,53 +19,55 @@ require_once($lang);
 <?php
 
 require_once 'inc/header.php';
-$server = $_GET['id'];
+$id_array = $_SESSION['ids'];
+$in  = str_repeat('?,', count($id_array) - 1) . '?';
 
-$sql = "SELECT COUNT(id) AS count FROM stat_invite WHERE  id_acc IN (SELECT ID FROM accounts WHERE server = $server) ";
-$dall = $d30 = select($sql);
+$sql = 'SELECT * FROM friends WHERE id_acc IN (' . $in . ') ORDER BY created DESC LIMIT 20';
+$statFriends = selectAll($sql, $id_array);
 
-$sql = "SELECT COUNT(id) AS count FROM stat_invite WHERE  id_acc IN (SELECT ID FROM accounts WHERE server = $server) AND created >= unix_timestamp(now()-interval 30 day)";
-$d30 = select($sql);
-$sql = "SELECT COUNT(id) AS count FROM stat_invite WHERE id_acc IN (SELECT ID FROM accounts WHERE server = $server) AND created >= unix_timestamp(now()-interval 7 day)";
-$d7 = select($sql);
-$sql = "SELECT COUNT(id) AS count FROM stat_invite WHERE id_acc IN (SELECT ID FROM accounts WHERE server = $server) AND created >= unix_timestamp(now()-interval 1 day)";
-$d1 = select($sql);
+// Получение общего количества записей в stat_invite
+$sql = 'SELECT COUNT(id) AS count FROM stat_invite WHERE id_acc IN (' . $in . ')';
+$dall = select($sql, $id_array);
 $dall = $dall['count'];
+
+// Получение количества записей за последние 30 дней
+$sql = 'SELECT COUNT(id) AS count FROM stat_invite WHERE id_acc IN (' . $in . ') AND created >= UNIX_TIMESTAMP(NOW() - INTERVAL 30 DAY)';
+$d30 = select($sql, $id_array);
 $d30 = $d30['count'];
+
+// Получение количества записей за последние 7 дней
+$sql = 'SELECT COUNT(id) AS count FROM stat_invite WHERE id_acc IN (' . $in . ') AND created >= UNIX_TIMESTAMP(NOW() - INTERVAL 7 DAY)';
+$d7 = select($sql, $id_array);
 $d7 = $d7['count'];
+
+// Получение количества записей за последний день
+$sql = 'SELECT COUNT(id) AS count FROM stat_invite WHERE id_acc IN (' . $in . ') AND created >= UNIX_TIMESTAMP(NOW() - INTERVAL 1 DAY)';
+$d1 = select($sql, $id_array);
 $d1 = $d1['count'];
-$sql = "SELECT COUNT(id) AS count FROM stat_like WHERE id_acc IN (SELECT ID FROM accounts WHERE server = $server)";
-$lall = select($sql);
-$sql = "SELECT COUNT(id) AS count FROM stat_like WHERE id_acc IN (SELECT ID FROM accounts WHERE server = $server) AND created >= unix_timestamp(now()-interval 30 day)";
-$l30 = select($sql);
-$sql = "SELECT COUNT(id) AS count FROM stat_like WHERE id_acc IN (SELECT ID FROM accounts WHERE server = $server) AND created >= unix_timestamp(now()-interval 7 day)";
-$l7 = select($sql);
-$sql = "SELECT COUNT(id) AS count FROM stat_like WHERE id_acc IN (SELECT ID FROM accounts WHERE server = $server) AND created >= unix_timestamp(now()-interval 1 day)";
-$l1 = select($sql);
+
+// Получение общего количества записей в stat_like
+$sql = 'SELECT COUNT(id) AS count FROM stat_like WHERE id_acc IN (' . $in . ')';
+$lall = select($sql, $id_array);
 $lall = $lall['count'];
+
+// Получение количества записей в stat_like за последние 30 дней
+$sql = 'SELECT COUNT(id) AS count FROM stat_like WHERE id_acc IN (' . $in . ') AND created >= UNIX_TIMESTAMP(NOW() - INTERVAL 30 DAY)';
+$l30 = select($sql, $id_array);
 $l30 = $l30['count'];
+
+// Получение количества записей в stat_like за последние 7 дней
+$sql = 'SELECT COUNT(id) AS count FROM stat_like WHERE id_acc IN (' . $in . ') AND created >= UNIX_TIMESTAMP(NOW() - INTERVAL 7 DAY)';
+$l7 = select($sql, $id_array);
 $l7 = $l7['count'];
+
+// Получение количества записей в stat_like за последний день
+$sql = 'SELECT COUNT(id) AS count FROM stat_like WHERE id_acc IN (' . $in . ') AND created >= UNIX_TIMESTAMP(NOW() - INTERVAL 1 DAY)';
+$l1 = select($sql, $id_array);
 $l1 = $l1['count'];
-$sql = "SELECT SUM(f.friends) FROM friends f
-INNER JOIN (
-    SELECT id_acc, MAX(created) AS max_created
-    FROM friends
-    GROUP BY id_acc
-) f2 ON f.id_acc = f2.id_acc AND f.created = f2.max_created
-INNER JOIN accounts a ON f.id_acc = a.id
-WHERE  a.server = $server AND (a.status = 1 OR a.status = 15 OR a.status = 20 OR a.status = 21 OR a.status = 18)";
-$fr = select($sql);
-
-$t = Time();
-$afr = $fr['SUM(f.friends)'];
-if (empty($afr)) {
-    $afr = 0;
-}
-
-$sql = "INSERT INTO s_stat (id, s_stat.all_friends, created, type) VALUES (NULL, $afr, $t, $server)";
-$fr = insert($sql);
-echo $fr['all_friends'];
 ?>
+
+
+
 
 
 <main class="container-fluid ">
@@ -88,8 +90,15 @@ echo $fr['all_friends'];
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-sm-8 text-center">
-                <div class="card-body">
-                    <div id="container"></div>
+
+                <div class="card text-center">
+                    <div class="card-header">
+                        <h5> Invites </h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="container"></div>
+
+                    </div>
 
                 </div>
 
@@ -153,6 +162,9 @@ echo $fr['all_friends'];
 </main>
 
 
+
+
+
 <!-- Option 1: Bootstrap Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
@@ -160,14 +172,15 @@ echo $fr['all_friends'];
 <script src="https://code.highcharts.com/stock/highstock.js"></script>
 <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
 <script src="https://code.highcharts.com/stock/modules/accessibility.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script>
+
 
 
     let params = (new URL(document.location)).searchParams;
     id = params.get("id")
-
     console.log(params.get("id"));
+
 
 
     function ajaxRequest(callback) {
@@ -176,19 +189,19 @@ echo $fr['all_friends'];
         $.ajax({
             type: "GET",
 
-            url: "ajax_s.php?id=" + id,
-            async: false,
+            url: "ajax.php?id="+id,
+            async:false,
 
             /* прочие настройки */
-            success: function (data) {
+            success: function(data) {
                 response = data;
                 callback(response);
             }
         });
         return response;
-    }
+    };
 
-    dat1 = ajaxRequest(function (response) {
+    dat1 = ajaxRequest(function(response){
 
     });
 
@@ -221,6 +234,7 @@ echo $fr['all_friends'];
             data: parsedData
         }]
     });
+
 
 
 </script>

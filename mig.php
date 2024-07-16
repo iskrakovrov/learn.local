@@ -24,9 +24,9 @@ $args = [$vers];
 $qw = update($sql, $args);
 
 
-//$sql = "SET SESSION sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))";  //Hosting
+$sql = "SET SESSION sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))";  //Hosting
 //$qw = create($sql);
-$sql = "SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))"; // Windows
+//$sql = "SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))"; // Windows
 $qw = create($sql);
 
 
@@ -482,4 +482,5 @@ if (empty($qw)) {
 
 }
 
-ALTER TABLE `value_lists` CHANGE `value` `value` VARCHAR(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL;
+$sql = "ALTER TABLE `value_lists` CHANGE `value` `value` VARCHAR(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL";
+$qw = create($sql);

@@ -195,7 +195,9 @@ if ($add_task == 'post_to_group') {
         'f24' => $_REQUEST['f24'],
 
     );
+    //todo Delete ntask
     generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
+
 }
 if ($add_task == 'erase_invite') {
     $st[] = array(
