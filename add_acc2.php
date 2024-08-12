@@ -144,53 +144,8 @@ $pr_gr = selectall($sql);
                     <br>
                 </div>
             </form>
-            <br>
-Загрузить файл
-            <br>
-            <?php
-            if (isset($_SESSION['message']) && $_SESSION['message'])
-            {
-                printf('<b>%s</b>', $_SESSION['message']);
-                unset($_SESSION['message']);
-            }
-            ?>
-            <form method="POST" action="upload_acc.php" enctype="multipart/form-data">
-                <div>
-                    <span>Upload a File:</span>
-                    <input type="file" name="uploadedFile" />
-                </div>
-                <strong><label><?php echo $txtaddacc3 ?></label></strong>
-                <select class="form-select" name="s1">
-                    <option disabled selected value>Open this select menu</option>
-                    <?php
-                    $i = 0;
-                    foreach ($ser as $a) {
-                        $i++; ?>
-                        <option value="<?php echo $a['id'] ?>"><?php echo $a['name_server'] ?></option>
-                    <?php }
-                    ?>
-                </select>
-                <strong><label><?php echo $txtaddacc4 ?></label></strong>
-                <select class="form-select" name="g1">
-                    <option disabled selected value>Open this select menu</option>
-                    <?php
-                    $i = 0;
-                    foreach ($gr as $b) {
-                        $i++; ?>
-                        <option value="<?php echo $b['id'] ?>"><?php echo $b['name_group'] ?></option>
-                    <?php }
-                    ?>
-
-                </select>
-                <br>
-                <strong><label><?php echo $txtnoreq ?></label></strong>
-                <input type="text" class="form-control" id="c1" name="c1"
-                       placeholder="<?php echo $txtcomm ?>">
 
 
-                <br>
-                <input type="submit" name="uploadBtn" value="Upload" />
-            </form>
 
 
 

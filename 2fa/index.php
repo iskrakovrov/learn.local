@@ -21,4 +21,4 @@ if(isset($_REQUEST['key'])){
     $list = ['key' =>$key, 'code' =>$code];
     echo json_encode($list, JSON_PRETTY_PRINT);
 }
-?>
+

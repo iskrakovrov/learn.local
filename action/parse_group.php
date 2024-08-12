@@ -52,7 +52,11 @@ $qw1 = selectAll($sql);
                             <option value="<?php echo $b['id'] ?>"><?php echo $b['name']; ?></option>
                         <?php } ?>
                     </select>
-
+                    <br>
+                    <input class="form-check-input" type="checkbox" value="num" name="num" id="num" checked>
+                    <label class="form-check-label" for="flexCheckChecked">
+                        Collecting the number of people in groups
+                    </label>
 
                     <br>
 

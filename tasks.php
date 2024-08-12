@@ -213,6 +213,7 @@ if ($add_task == 'parse_group') {
 
         'key' => $_REQUEST['cat'],
         'group' => $_REQUEST['cat1'],
+        'num' => $_REQUEST['num'],
 
 
     );

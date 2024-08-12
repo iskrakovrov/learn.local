@@ -89,7 +89,7 @@ include_once 'inc/header.php'
               value="<?php echo $user['login']?>">
 
                 <br>
-                <label for="pass">Login</label>
+                <label for="pass">Password</label>
                 <input type="text" class="form-control rounded-0" id="pass" name="pass"
                           value="<?php echo $user['pass']?>">
                 <br>
