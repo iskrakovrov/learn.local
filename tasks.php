@@ -34,6 +34,7 @@ if ($add_task == 'login') {
         'sf' => $setup[14],
         'end' => $setup[15],
         'hand' => $setup[16],
+        'per' => $setup[17],
 
 
     );
@@ -280,6 +281,20 @@ if ($add_task == 'post_to_profile') {
 }
 
 if ($add_task == 'like') {
+    $setup = $_POST['action'];
+    $st[] = array(
+
+
+        'cat' => $_REQUEST['cat'],
+        'num_l' => $_REQUEST['num_l'],
+        'pause' => $_REQUEST['pause'],
+        'f24' => $_REQUEST['f24'],
+
+
+    );
+    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
+}
+if ($add_task == 'join_group') {
     $setup = $_POST['action'];
     $st[] = array(
 

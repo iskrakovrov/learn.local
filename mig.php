@@ -484,3 +484,13 @@ if (empty($qw)) {
 
 $sql = "ALTER TABLE `value_lists` CHANGE `value` `value` VARCHAR(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL";
 $qw = create($sql);
+
+$sql = "SHOW TABLES LIKE 'bad_mail'";
+$qw = create($sql);
+
+if (empty($qw)) {
+
+    $sql = "CREATE TABLE `bad_mail` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `mail` VARCHAR(255) NOT NULL , `pass_mail` VARCHAR(255) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;";
+    $qw = create($sql);
+}
+

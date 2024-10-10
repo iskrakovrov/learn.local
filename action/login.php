@@ -21,10 +21,17 @@
             <div class="col-sm-2 text-center">
                 <form method="post" onSubmit="return Complete();">
 
+               <input class="form-check-input" name="action[17]" type="checkbox" value="per"
+                             id="action[17]">
+                    <label class="form-check-label" for="action[17]">
+                        Switch the account language to English for the program to work correctly
+                    </label>
+
+
                     <!-- Ручной режим -->
 
                     <br>
-                    <!-- Удалять телефон -->
+
 
                     <input class="form-check-input" name="action[16]" type="checkbox" value="hand"
                            id="action[16]">
@@ -115,7 +122,7 @@
                     <label class="form-check-label" for="action[9]">
                         <?php echo $txtlogin9 ?>
                     </label>
-                    <input class="form-control" name="action[9]" type="number" id="action[9]" value="600" required>
+                    <input class="form-control" name="action[9]" type="number" id="action[9]" value="180" required>
 
                 <br>
 

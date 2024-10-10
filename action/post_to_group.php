@@ -34,8 +34,9 @@ $qw2 = selectAll($sql);
                     <br>
                     <label for="day" class="control-label"><?php echo $txtpgroup7 ?></label>
                     <select name="day" id="day" class="form-control">
-                        <option value="1">YES</option>
                         <option value="2">NO</option>
+                        <option value="1">YES</option>
+
                     </select>
                     <br>
                     <label for="type" class="control-label"><?php echo $txtpgroup1 ?></label>
@@ -66,15 +67,17 @@ $qw2 = selectAll($sql);
 
                     <label for="mod1" class="control-label"><?php echo $txtpgroup4 ?></label>
                     <select name="mod1" id="mod1" class="form-control">
-                        <option value="1">NO</option>
                         <option value="2">YES</option>
+                        <option value="1">NO</option>
+
                     </select>
                     <br>
 
                     <label for="mod2" class="control-label"><?php echo $txtpgroup2 ?></label>
                     <select name="mod2" id="mod2" class="form-control">
-                        <option value="1">NO</option>
                         <option value="2">YES</option>
+                        <option value="1">NO</option>
+
                     </select>
                     <br>
 
@@ -89,8 +92,9 @@ $qw2 = selectAll($sql);
                     <br>
                     <label for="mod4" class="control-label"><?php echo $txtpgroup8 ?></label>
                     <select name="mod4" id="mod4" class="form-control">
-                        <option value="1">NO</option>
                         <option value="2">YES</option>
+                        <option value="1">NO</option>
+
                     </select>
                     <br>
                     <label for="spost" class="control-label"><?php echo $txtpgroup9  ?></label>

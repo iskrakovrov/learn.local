@@ -181,8 +181,8 @@ $_SESSION['numberTemplate'] = $numberTemplate;
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" name="task[]" type="checkbox" value="" id="task6" >
-                            <label class="form-check-label" for="defaultCheck2">
+                            <input class="form-check-input" name="task[]" type="checkbox" value="join_group.php" id="join_group" >
+                            <label class="form-check-label" for="join_group">
                                 <?php echo $txttask12?>
                             </label>
                         </div>

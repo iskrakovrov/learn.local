@@ -28,4 +28,4 @@ try {
 }
 
 echo $json_data;
-?>
+

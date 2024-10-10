@@ -149,15 +149,15 @@ foreach ($accountsData as $a) {
     }
     $idf = $a['id_fb'];
 
-    //   if (!empty($idf)) {
-    //      $lfb = '<a href="https://facebook.com/';
-    //       $lfb .= $idf;
-    //       $lfb .= ' "target="_blank">';
-//        $lfb .= $a['login_fb'];
-    //       $lfb .= '</a>';
-    //   } else {
-//       $lfb = $a['login_fb'];
-    //   }
+  //  if (!empty($idf)) {
+   //     $lfb = '<a href="https://facebook.com/';
+    //    $lfb .= $idf;
+   //     $lfb .= ' "target="_blank">';
+  //      $lfb .= $a['login_fb'];
+  //      $lfb .= '</a>';
+  //  } else {
+//        $lfb = $a['login_fb'];
+ //   }
 
 
     $fa = $a['2fa'];

@@ -92,9 +92,9 @@ include_once 'inc/header.php';
                                 $er = $a['type'];
 
 
-                                if ($er == 0) {
+                                if ($er == 1) {
                                     $q1 = 'login Ok';
-                                } elseif ($er == 1) {
+                                } elseif ($er == 0) {
                                     $q1 = 'login No Ok';
                                 } elseif ($er == 3) {
                                     $q1 = 'Time Out';
