@@ -8,7 +8,7 @@ $qw1 = selectAll($sql);
 
 <main class="container-fluid ">
     <div class="row text-center">
-        <h2>Сommenting</h2>
+        <h2>Like + Сommenting</h2>
     </div>
     <div class="col align-center">
 
@@ -27,10 +27,7 @@ $qw1 = selectAll($sql);
         <div class="row justify-content-center">
             <div class="col-sm-2 text-center">
                 <form method="post" onSubmit="return Complete();">
-                    <br>
-                    <label for="fname">Project name</label>
-                    <input name="fname" id="fname" class="form-control" value="project" required>
-                    <br>
+
 
                     <label for="url" class="control-label"><?php echo $txtcomm2 ?></label>
 
@@ -45,20 +42,8 @@ $qw1 = selectAll($sql);
 
                     <br>
 
-                    <label for="like" class="control-label">Mode</label>
-                    <select name="like" id="like" class="form-control">
 
-                        <option value="1">
-                            Like
-                        </option>
-                        <option value="2">
-                            Commenting
-                        </option>
-                        <option value="3">
-                            Like+Commenting
-                        </option>
 
-                    </select>
                     <label for="coml" class="control-label"><?php echo $txtcomm3 ?></label>
 
                     <select name="coml" id="coml" class="form-control">
@@ -95,17 +80,11 @@ $qw1 = selectAll($sql);
                         </option>
 
                     </select>
-
-
                     <br>
-                    <label for="f24"><?php echo $txtfarmi11 ?></label>
-                    <input type="number" name="f24" id="f24" class="form-control"
-                           value="5">
 
-                    <br>
-                    <label for="scr" class="control-label">Screenshot</label>
+                    <label for="like" class="control-label"><?php echo $txtcomm7 ?></label>
 
-                    <select name="scr" id="scr" class="form-control">
+                    <select name="like" id="like" class="form-control">
 
                         <option value="1">
                             Yes
@@ -115,6 +94,12 @@ $qw1 = selectAll($sql);
                         </option>
 
                     </select>
+                    <br>
+                    <label for="f24"><?php echo $txtfarmi11 ?></label>
+                    <input type="number" name="f24" id="f24" class="form-control"
+                           value = "5">
+
+                    <br>
                     <br>
 
                     <button class="btn btn-secondary" name="add_task" id="add_task" value="commenting">ACTIVATE

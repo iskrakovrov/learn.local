@@ -196,17 +196,17 @@ $_SESSION['numberTemplate'] = $numberTemplate;
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox"  id="commenting" value="commenting.php">
                             <label class="form-check-label" for="commenting">
-                                <?php echo $txttask14?>
+                                Like + comments
                             </label>
                         </div>
                         <!--  Лайк -->
-                        <div class="form-check">
+      <!---                  <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="like.php" id="like">
                             <label class="form-check-label" for="like">
-                                <?php echo $txttask15?>
+                                <?php //echo $txttask15?>
                             </label>
                         </div>
-
+-->
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox" value="" id="task6" disabled>
                             <label class="form-check-label" for="defaultCheck2">
@@ -318,12 +318,7 @@ $_SESSION['numberTemplate'] = $numberTemplate;
                                 Parse active users
                             </label>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" name="task[]" type="checkbox" value="instagram.php" id="instagram" >
-                            <label class="form-check-label" for="instagram">
-                                Instagram
-                            </label>
-                        </div>
+
 
                     </div>
                 </div>

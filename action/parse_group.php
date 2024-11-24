@@ -53,11 +53,9 @@ $qw1 = selectAll($sql);
                         <?php } ?>
                     </select>
                     <br>
-                    <input class="form-check-input" type="checkbox" value="num" name="num" id="num" checked>
-                    <label class="form-check-label" for="flexCheckChecked">
-                        Collecting the number of people in groups
-                    </label>
-
+                    <label for="num">Number of groups with one keyword</label>
+                    <input type="number" name="num" id="num" class="form-control" value="1000"
+                           max = 1500 required>
                     <br>
                     <br>
                     <button class="btn btn-secondary" name="add_task" id="add_task" value="parse_group">ACTIVATE

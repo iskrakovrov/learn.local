@@ -24,11 +24,21 @@ $args = [$vers];
 $qw = update($sql, $args);
 
 
-$sql = "SET SESSION sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))";  //Hosting
+//$sql = "SET SESSION sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))";  //Hosting
 //$qw = create($sql);
 //$sql = "SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))"; // Windows
-$qw = create($sql);
+//$qw = create($sql);
 
+if ($_SERVER['SERVER_NAME'] == 'localhost' || $_SERVER['SERVER_ADDR'] == '127.0.0.1') {
+    // Если это локальный сервер (OpenServer)
+    $sql = "SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))";
+} else {
+    // Если это хостинг
+    $sql = "SET SESSION sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))";
+}
+
+// Выполняем выбранный запрос
+$qw = create($sql);
 
 $sql = "SHOW COLUMNS FROM groups_fb WHERE FIELD = 'url'";
 $qw = create($sql);
@@ -491,6 +501,53 @@ $qw = create($sql);
 if (empty($qw)) {
 
     $sql = "CREATE TABLE `bad_mail` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `mail` VARCHAR(255) NOT NULL , `pass_mail` VARCHAR(255) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;";
+    $qw = create($sql);
+}
+
+$sql = "SHOW TABLES LIKE 'post_logs'";
+$qw = create($sql);
+
+if (empty($qw)) {
+
+    $sql = "CREATE TABLE post_logs (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    group_id INT NOT NULL,
+    project_id INT NOT NULL,
+    post_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (group_id) REFERENCES value_lists(id)
+);";
+    $qw = create($sql);
+}
+$sql = "SHOW TABLES LIKE 'current_position'";
+$qw = create($sql);
+
+if (empty($qw)) {
+    $sql = "CREATE TABLE current_position (
+        project_id INT PRIMARY KEY,
+    last_group_id INT
+);";
+    $qw = create($sql);
+}
+
+$sql = "SHOW TABLES LIKE 'group_locks'";
+$qw = create($sql);
+
+if (empty($qw)) {
+    $sql = "CREATE TABLE IF NOT EXISTS group_locks (
+    group_id INT NOT NULL,
+    project_id INT NOT NULL,
+    locked_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (group_id, project_id),
+    FOREIGN KEY (group_id) REFERENCES value_lists(id)
+);;";
+    $qw = create($sql);
+}
+$sql = "SHOW TABLES LIKE 'hm'";
+$qw = create($sql);
+
+if (empty($qw)) {
+
+    $sql = "CREATE TABLE `hm` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `mail` VARCHAR(150) NOT NULL , `pass_mail` VARCHAR(150) NOT NULL , `hm` VARCHAR(150) NULL , `hmpass` VARCHAR(150) NULL , `phone` VARCHAR(150) NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;";
     $qw = create($sql);
 }
 

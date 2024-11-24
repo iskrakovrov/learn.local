@@ -16,7 +16,12 @@ $sql = "SELECT * FROM group_proxy";
 $pp = selectAll($sql);
 $sql = "SELECT * FROM account_tags";
 $at = selectAll($sql);
-
+$sql = "SELECT DISTINCT(
+    SUBSTRING_INDEX(SUBSTRING_INDEX(setup, '\"ntask\":\"', -1), '\"', 1)
+) AS ntask
+        FROM task
+        WHERE task = 'post_to_group';";
+$ntasks = selectall($sql);
 ?>
 <!doctype html>
 <html lang="en">
@@ -115,7 +120,19 @@ require_once 'inc/alerts.php';
                     <a class="btn btn-secondary" href="groups.php" role="button">Account groups</a>
                     <a class="btn btn-secondary" href="tags.php" role="button">Account tags</a>
                     <a class="btn btn-success" href="add_acc2.php" role="button">Add accounts</a>
+                    <form action="reset_groups.php" method="post" class="d-inline">
 
+                        <select name="ntask" id="ntask" class="form-select d-inline"
+                                style="width: auto; display: inline-block;">
+                            <option value="all">ALL</option>
+                            <?php foreach ($ntasks as $row): ?>
+                                <option
+                                        value="<?= htmlspecialchars($row['ntask']) ?>"><?= htmlspecialchars($row['ntask']) ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                        <button type="submit" class="btn btn-warning">
+                            Reset groups if necessary before posting</button>
+                    </form>
 
                     <a class="btn btn-outline-primary" href="all_free_acc.php" role="button"
                        onClick="return confirm( 'SET FREE STATUS for ALL ACCOUNT???' )">All accounts have free
@@ -193,8 +210,8 @@ require_once 'inc/alerts.php';
                         <a class="btn btn-secondary" href="all_proxy.php" role="button"
                            onClick="return confirm( '<?php echo $txtaccounts4 ?>' )">
                             Proxy for all accounts</a>
-                        <button class="btn btn-secondary" name="add_task" id="add_task" value="gr_erase.php">Sending to groups. Click before starting the task.
-                        </button>
+
+
                         <button class="btn btn-success" name="add_task" id="add_task" value="task2.php">ADD TASK
                         </button>
 

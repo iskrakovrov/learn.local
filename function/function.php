@@ -7,7 +7,7 @@ function tt($value)
     echo '</pre>';
 }
 
-//Проверка выполнения запроса к бд
+//Проверка выполнения запроса дк б
 // Функция обработки ошибок базы данных
 function dbCheckError($query) {
     $errorInfo = $query->errorInfo();
@@ -805,4 +805,108 @@ function getAccountTagsData() {
 function getProxyGroup() {
     $sql = 'SELECT * FROM group_proxy';
     return selectAll($sql);
+}
+function beginTransaction() {
+    global $pdo;
+    return $pdo->beginTransaction();
+}
+
+function commit() {
+    global $pdo;
+    return $pdo->commit();
+}
+
+function rollBack() {
+    global $pdo;
+    return $pdo->rollBack();
+}
+function group_lock($group_id, $project_id) {
+    global $pdo;
+    $sql = 'INSERT INTO group_locks (group_id, project_id) VALUES (?, ?) 
+            ON DUPLICATE KEY UPDATE locked_at = CURRENT_TIMESTAMP';
+
+    $stmt = $pdo->prepare($sql);
+    return $stmt->execute([$group_id, $project_id]);
+}
+
+function group_unlock($group_id, $project_id) {
+    global $pdo;
+    $sql = 'DELETE FROM group_locks WHERE group_id = ? AND project_id = ?';
+    $stmt = $pdo->prepare($sql);
+    return $stmt->execute([$group_id, $project_id]);
+}
+
+function is_locked($group_id, $project_id) {
+    global $pdo;
+    $sql = 'SELECT COUNT(*) as count FROM group_locks WHERE group_id = ? AND project_id = ?';
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([$group_id, $project_id]);
+    return $stmt->fetchColumn() > 0;
+}
+// Функция для вставки данных в базу
+function insertBatch($batch_data) {
+    foreach ($batch_data as $item) {
+        // Подготавливаем SQL-запрос для вставки данных
+        $sql = 'INSERT INTO `hm` (`mail`, `pass_mail`, `hm`, `hmpass`, `phone`) 
+                VALUES (:mail, :pass_mail, :hm, :hmpass, :phone)';
+
+        // Выполняем вставку данных
+        insert($sql, [
+            'mail' => $item['mail'],
+            'pass_mail' => $item['pass_mail'],
+            'hm' => $item['hm'],
+            'hmpass' => $item['hmpass'],
+            'phone' => $item['phone']
+        ]);
+    }
+}
+
+// Функция для получения имени группы прокси
+function getProxyGroupName($proxyGroupId, $proxyGroups) {
+    foreach ($proxyGroups as $pgr) {
+        if ($pgr['id'] == $proxyGroupId) {
+            return $pgr['name_group'];
+        }
+    }
+    return 'No group'; // Если группа не найдена
+}
+
+// Функция для получения имени группы аккаунта
+function getGroupName($groupId, $groupData) {
+    foreach ($groupData as $group) {
+        if ($group['id'] == $groupId) {
+            return $group['name_group'];
+        }
+    }
+    return 'No Group'; // Если группа не найдена
+}
+
+// Функция для получения имени тега
+function getTagName($tagId, $accountTagsData) {
+    foreach ($accountTagsData as $tag) {
+        if ($tag['id'] == $tagId) {
+            return $tag['tag'];
+        }
+    }
+    return 'No tag'; // Если тег не найден
+}
+
+// Функция для получения имени сервера
+function getServerName($serverId, $getServerData) {
+    foreach ($getServerData as $ser) {
+        if ($ser['id'] == $serverId) {
+            return $ser['name_server'];
+        }
+    }
+    return 'No server'; // Если сервер не найден
+}
+
+// Функция для получения статуса аккаунта
+function getStatusName($statusId, $statusData) {
+    foreach ($statusData as $status) {
+        if ($status['id'] == $statusId) {
+            return $status['status'];
+        }
+    }
+    return 'No'; // Если статус не найден
 }

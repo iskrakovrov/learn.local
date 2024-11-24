@@ -184,19 +184,20 @@ if ($add_task == 'mess_sbor') {
 if ($add_task == 'post_to_group') {
     $st[] = array(
         'ntask' => $_REQUEST['ntask'],
-        'day' => $_REQUEST['day'],
+        'mode3' => $_REQUEST['mode3'],
         'type' => $_REQUEST['type'],
         'post' => $_REQUEST['post'],
         'mod1' => $_REQUEST['mod1'],
-        'mod2' => $_REQUEST['mod2'],
+        'res' => $_REQUEST['res'],
         'npost' => $_REQUEST['npost'],
-        'mod3' => $_REQUEST['mod3'],
+        'scr' => $_REQUEST['scr'],
         'mod4' => $_REQUEST['mod4'],
         'spost' => $_REQUEST['spost'],
+        'fname' => $_REQUEST['fname'],
         'f24' => $_REQUEST['f24'],
 
     );
-    //todo Delete ntask
+
     generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
 
 }
@@ -364,6 +365,8 @@ if ($add_task == 'commenting') {
         'uq' => $_REQUEST['uq'],
         'like' => $_REQUEST['like'],
         'f24' => $_REQUEST['f24'],
+        'scr' => $_REQUEST['scr'],
+        'fname' => $_REQUEST['fname'],
 
 
     );
