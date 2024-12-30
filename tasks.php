@@ -35,6 +35,7 @@ if ($add_task == 'login') {
         'end' => $setup[15],
         'hand' => $setup[16],
         'per' => $setup[17],
+        'groups' => $setup[18],
 
 
     );
@@ -182,6 +183,26 @@ if ($add_task == 'mess_sbor') {
 }
 
 if ($add_task == 'post_to_group') {
+    $st[] = array(
+        'ntask' => $_REQUEST['ntask'],
+        'mode3' => $_REQUEST['mode3'],
+        'type' => $_REQUEST['type'],
+        'post' => $_REQUEST['post'],
+        'mod1' => $_REQUEST['mod1'],
+        'res' => $_REQUEST['res'],
+        'npost' => $_REQUEST['npost'],
+        'scr' => $_REQUEST['scr'],
+        'mod4' => $_REQUEST['mod4'],
+        'spost' => $_REQUEST['spost'],
+        'fname' => $_REQUEST['fname'],
+        'f24' => $_REQUEST['f24'],
+
+    );
+
+    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
+
+}
+if ($add_task == 'a_post_to_group') {
     $st[] = array(
         'ntask' => $_REQUEST['ntask'],
         'mode3' => $_REQUEST['mode3'],

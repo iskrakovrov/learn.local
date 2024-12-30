@@ -51,6 +51,31 @@ if (!empty($_REQUEST['key'])) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     <link href="css/style.css" rel="stylesheet">
     <title>FB Combo Edit post</title>
+    <style>
+        .image-container {
+            position: relative;
+            display: inline-block;
+            width: 150px;
+            height: 150px;
+        }
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+        .image-container .text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 18px;
+            color: white;
+            background: rgba(0, 0, 0, 0.5); /* Полупрозрачный фон */
+            padding: 5px;
+            border-radius: 5px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 <?php
@@ -233,7 +258,12 @@ $ser = selectAll($sql, $args);
 
                             ?>
 
-                            <td><img src="<?php echo $img ?>"  width="150" height="150"></td>
+                            <td>
+                                <div class="image-container">
+                                    <img src="<?php echo $img; ?>" alt="Image">
+                                    <div class="text"><?php echo $a['img']; ?></div>
+                                </div>
+                            </td>
 
                             <td>
                                 <div class="col">

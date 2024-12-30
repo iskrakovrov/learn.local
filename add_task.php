@@ -192,6 +192,16 @@ $_SESSION['numberTemplate'] = $numberTemplate;
                                 <?php echo $txttask13?>
                             </label>
                         </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" name="task[]" type="checkbox" value="a_post_to_group.php" id="a_post_to_group"  >
+                            <label class="form-check-label" for="a_post_to_group">
+                                Advanced spam in Facebook group (Purchase and activation required)
+                            </label>
+                        </div>
+
+                         <!---- advanced spam in Facebook group --?
+
                         <!--  комменты -->
                         <div class="form-check">
                             <input class="form-check-input" name="task[]" type="checkbox"  id="commenting" value="commenting.php">

@@ -8,7 +8,7 @@ $qw1 = selectAll($sql);
 
 <main class="container-fluid ">
     <div class="row text-center">
-        <h2>Сommenting</h2>
+        <h2>Like + Сommenting</h2>
     </div>
     <div class="col align-center">
 

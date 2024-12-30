@@ -550,4 +550,30 @@ if (empty($qw)) {
     $sql = "CREATE TABLE `hm` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `mail` VARCHAR(150) NOT NULL , `pass_mail` VARCHAR(150) NOT NULL , `hm` VARCHAR(150) NULL , `hmpass` VARCHAR(150) NULL , `phone` VARCHAR(150) NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;";
     $qw = create($sql);
 }
+$sql = "SHOW TABLES LIKE 'groups'";
+$qw = create($sql);
+
+if (empty($qw)) {
+
+    $sql = "CREATE TABLE `groups` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `group` VARCHAR(255) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;";
+    $qw = create($sql);
+}
+
+
+
+$sql = "ALTER TABLE `task` CHANGE `setup` `setup` VARCHAR(1000) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;";
+$qw = create($sql);
+$sql = "ALTER TABLE `task` CHANGE `setup` `setup` VARCHAR(1000) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;";
+$qw = create($sql);
+$sql = "ALTER TABLE `temp_task` CHANGE `setup` `setup` VARCHAR(1000) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;";
+$qw = create($sql);
+
+
+$sql = "SHOW TABLES LIKE 'a_groups'";
+$qw = create($sql);
+if (empty($qw)) {
+
+    $sql = "CREATE TABLE `a_groups` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `id_acc` INT(11) NOT NULL , `group` VARCHAR(255) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;";
+    $qw = create($sql);
+}
 

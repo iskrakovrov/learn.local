@@ -172,12 +172,19 @@
                             </select>
 
                     <br>
+
+                    <input class="form-check-input" name="action[18]" type="checkbox"
+                           id="action[18]" value="groups">
+                    <label class="form-check-label" for="action[18]">
+                        Collect the list of groups once
+                    </label>
+                    <br>
                     <!-- Время после работы -->
 
                     <label class="form-check-label" for="action[15]">
                         <?php echo $txtlogin15 ?>
                     </label>
-                    <input class="form-control" name="action[15]" type="number" id="action[15]" value="10" required>
+                    <input class="form-control" name="action[15]" type="number" id="action[15]" value="3" required>
 
                     <br>
 
