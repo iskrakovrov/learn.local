@@ -200,9 +200,17 @@ $homepage = file_get_contents('https://soft.fbcombo.com/ver.php');
                         <li class="nav-item">
                             <a class="nav-link active" href="note.php"><strong>Note</strong></a>
                         </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link active" href="logout.php">Exit</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                               data-bs-toggle="dropdown" aria-expanded="false">
+                                <span class="text-danger">Account Creator</span>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="acc_creator.php">About the account creator</a></li>
+                                <li><a class="dropdown-item" href="acc_creator_settings.php">Settings</a></li>
+                                <li><a class="dropdown-item" href="acc_creator_sms.php">SMS services</a></li>
+                                <li><a class="dropdown-item" href="acc_creator_phone.php">Phone settings</a></li>
+                            </ul>
                         </li>
 
                         <?php if ($homepage != $vers) {

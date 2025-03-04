@@ -27,7 +27,10 @@ $result = [
 ];
 
 // Кодирование данных в JSON
-$json_data = json_encode($result, JSON_UNESCAPED_UNICODE);
+try {
+    $json_data = json_encode($result, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE);
+} catch (JsonException $e) {
+}
 
 // Вывод JSON
 print $json_data;

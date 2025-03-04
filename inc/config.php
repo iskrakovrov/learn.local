@@ -1,11 +1,11 @@
 <?php
 $driver = 'mysql';
 $host = 'localhost';
-$db_name = 'admin_facebook';
-$db_user = 'facebook';
+$db_name = 'facebook';
+$db_user = 'admin';
 //$db_pass = 'Kamel1979';
 //$host = 'localhost';
-//$db_name = 'is';
-//$db_user = 'is';
-$db_pass = 'Kamel1979';
+//$db_name = 'facebook';
+//$db_user = 'facebook';
+$db_pass = 'admin123';
 $charset = 'utf8mb4';

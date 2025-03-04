@@ -105,7 +105,7 @@ $qw1 = selectAll($sql);
                     <br>
                     <label for="scr" class="control-label">Screenshot</label>
 
-                    <select name="scr" id="scr" class="form-control">
+                    <select name="scr" id="scr"  class="form-control">
 
                         <option value="1">
                             Yes

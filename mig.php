@@ -567,7 +567,8 @@ $sql = "ALTER TABLE `task` CHANGE `setup` `setup` VARCHAR(1000) CHARACTER SET ut
 $qw = create($sql);
 $sql = "ALTER TABLE `temp_task` CHANGE `setup` `setup` VARCHAR(1000) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;";
 $qw = create($sql);
-
+$sql = "ALTER TABLE `template` CHANGE `setup` `setup` VARCHAR(1000) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;";
+$qw = create($sql);
 
 $sql = "SHOW TABLES LIKE 'a_groups'";
 $qw = create($sql);
@@ -577,3 +578,24 @@ if (empty($qw)) {
     $qw = create($sql);
 }
 
+$sql = "SHOW COLUMNS FROM stat_parse WHERE FIELD = 'cat'";
+$qw = create($sql);
+if (empty($qw)) {
+    $sql = "ALTER TABLE `stat_parse` ADD `cat` INT(11) NOT NULL AFTER `id_url`;";
+    $qw = create($sql);
+}
+
+$sql = "SELECT * FROM `status` WHERE `status` = 'BLOCK'";
+$qw = select($sql); // Предполагается, что `create()` выполняет запрос и возвращает результат.
+
+if (empty($qw)) {
+    $sql = "INSERT INTO `status` (`status`) VALUES ('BLOCK')";
+    $qw = insert($sql); // Выполняем запрос на добавление строки.
+}
+$sql = "SELECT * FROM `status` WHERE `status` = 'LANG'";
+$qw = select($sql); // Предполагается, что `create()` выполняет запрос и возвращает результат.
+
+if (empty($qw)) {
+    $sql = "INSERT INTO `status` (`status`) VALUES ('LANG')";
+    $qw = insert($sql); // Выполняем запрос на добавление строки.
+}
