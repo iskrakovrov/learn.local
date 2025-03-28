@@ -910,3 +910,264 @@ function getStatusName($statusId, $statusData) {
     }
     return 'No'; // Если статус не найден
 }
+
+
+/**
+ * SMS API Error Messages (English)
+ */
+
+
+/**
+ * SMS API Integration (Improved Version)
+ * - No hardcoded values
+ * - All parameters passed via variables
+ * - Proper error handling
+ * - Strict typing
+ */
+
+/**
+ * SMS Error Messages (English)
+ */
+function getSMSErrorMessages() {
+    return [
+        'ACCESS_ACTIVATION' => 'Service successfully activated',
+        'ACCESS_CANCEL'     => 'Activation canceled',
+        'ACCESS_READY'      => 'Waiting for new SMS',
+        'ACCESS_RETRY_GET'  => 'Number readiness confirmed',
+        'ACCOUNT_INACTIVE'  => 'No available numbers',
+        'ALREADY_FINISH'    => 'Rent already finished',
+        'ALREADY_CANCEL'    => 'Rent already canceled',
+        'BAD_ACTION'        => 'Invalid action (action parameter)',
+        'BAD_SERVICE'       => 'Invalid service name (service parameter)',
+        'BAD_KEY'           => 'Invalid API access key',
+        'BAD_STATUS'        => 'Attempt to set non-existent status',
+        'BANNED'            => 'Account banned',
+        'CANT_CANCEL'       => 'Cannot cancel rent (more than 20 minutes passed)',
+        'ERROR_SQL'         => 'One of parameters has invalid value',
+        'NO_NUMBERS'        => 'No available numbers for SMS reception',
+        'NO_BALANCE'       => 'Insufficient balance',
+        'NO_YULA_MAIL'     => 'Need more than 500 RUB balance for Mail.ru and Mamba services',
+        'NO_CONNECTION'    => 'No connection to sms-activate servers',
+        'NO_ID_RENT'       => 'Rent ID not specified',
+        'NO_ACTIVATION'    => 'Specified activation ID doesn\'t exist',
+        'STATUS_CANCEL'    => 'Activation/rent canceled',
+        'STATUS_FINISH'    => 'Rent paid and finished',
+        'STATUS_WAIT_CODE' => 'Waiting for first SMS',
+        'STATUS_WAIT_RETRY'=> 'Waiting for code clarification',
+        'SQL_ERROR'        => 'One of parameters has invalid value',
+        'INVALID_PHONE'    => 'Number not rented by you (wrong rent ID)',
+        'INCORECT_STATUS'  => 'Missing or invalid status',
+        'WRONG_SERVICE'    => 'Service doesn\'t support forwarding',
+        'WRONG_SECURITY'   => 'Error trying to pass activation ID without forwarding, or completed/inactive activation'
+    ];
+}
+
+/**
+ * Unified API Request Handler
+ */
+function sendSMSRequest(
+    string $apiKey,
+    array $requestData,
+    string $method,
+    string $smsDomain,
+    bool $parseAsJSON = false
+) {
+    $baseUrl = "https://$smsDomain/stubs/handler_api.php";
+    $method = strtoupper($method);
+
+    // Validate HTTP method
+    if (!in_array($method, ['GET', 'POST'])) {
+        throw new InvalidArgumentException('Invalid HTTP method. Only GET or POST allowed.');
+    }
+
+    // Add API key to request data
+    $requestData['api_key'] = $apiKey;
+    $queryString = http_build_query($requestData);
+
+    // Prepare request context
+    $contextOptions = [
+        'http' => [
+            'header' => "Content-type: application/x-www-form-urlencoded\r\n",
+            'method' => $method,
+            'content' => $method === 'POST' ? $queryString : null
+        ]
+    ];
+
+    $requestUrl = $method === 'GET' ? "$baseUrl?$queryString" : $baseUrl;
+    $context = stream_context_create($contextOptions);
+
+    // Execute request
+    $response = file_get_contents($requestUrl, false, $context);
+
+    if ($response === false) {
+        throw new RuntimeException('Failed to connect to SMS service.');
+    }
+
+    // Check for API errors
+    $errorMessages = getSMSErrorMessages();
+    if (isset($errorMessages[$response])) {
+        throw new RuntimeException($errorMessages[$response]);
+    }
+
+    return $parseAsJSON ? json_decode($response, true) : $response;
+}
+
+/**
+ * Get Account Balance
+ */
+function getBalance(
+    string $apiKey,
+    string $smsDomain
+): string {
+    return sendSMSRequest(
+        $apiKey,
+        ['action' => 'getBalance'],
+        'GET',
+        $smsDomain
+    );
+}
+
+/**
+ * Request Phone Number
+ */
+function getNumber(
+    string $apiKey,
+    string $service,
+    string $smsDomain,
+    int $countryCode,
+    bool $forward = false,
+    ?string $operator = null,
+    ?string $referral = null
+): array {
+    $requestData = [
+        'action' => 'getNumber',
+        'service' => $service,
+        'country' => $countryCode,
+        'forward' => (int)$forward
+    ];
+
+    if ($operator !== null) {
+        $requestData['operator'] = $operator;
+    }
+
+    if ($referral !== null) {
+        $requestData['ref'] = $referral;
+    }
+
+    $response = sendSMSRequest($apiKey, $requestData, 'POST', $smsDomain);
+    return explode(':', $response);
+}
+
+/**
+ * Check Activation Status
+ */
+function getStatus(
+    string $apiKey,
+    int $activationId,
+    string $smsDomain
+): array {
+    $response = sendSMSRequest(
+        $apiKey,
+        ['action' => 'getStatus', 'id' => $activationId],
+        'GET',
+        $smsDomain
+    );
+    return explode(':', $response);
+}
+
+/**
+ * Update Activation Status
+ */
+function setStatus(
+    string $apiKey,
+    int $activationId,
+    int $status,
+    string $smsDomain,
+    bool $forward = false
+): string {
+    $requestData = [
+        'action' => 'setStatus',
+        'id' => $activationId,
+        'status' => $status,
+        'forward' => (int)$forward
+    ];
+
+    return sendSMSRequest($apiKey, $requestData, 'POST', $smsDomain);
+}
+
+/**
+ * Get Available Countries
+ */
+function getCountries(
+    string $apiKey,
+    string $smsDomain
+): array {
+    return sendSMSRequest(
+        $apiKey,
+        ['action' => 'getCountries'],
+        'GET',
+        $smsDomain,
+        true
+    );
+}
+
+/**
+ * Get Service Prices
+ */
+function getPrices(
+    string $apiKey,
+    string $smsDomain,
+    ?int $countryCode = null,
+    ?string $service = null,
+    ?string $operator = null
+): array {
+    $requestData = ['action' => 'getPrices'];
+
+    if ($countryCode !== null) {
+        $requestData['country'] = $countryCode;
+    }
+
+    if ($service !== null) {
+        $requestData['service'] = $service;
+    }
+
+    if ($operator !== null) {
+        $requestData['operator'] = $operator;
+    }
+
+    return sendSMSRequest($apiKey, $requestData, 'GET', $smsDomain, true);
+}
+function new_insert($sql, $args = []) {
+    global $pdo;
+    // Автоматически экранируем имена таблиц в INSERT запросах
+    $sql = preg_replace('/INSERT\s+INTO\s+(\w+)/i', 'INSERT INTO `$1`', $sql);
+    $stmt = $pdo->prepare($sql);
+    return $stmt->execute($args);
+}
+
+function new_update($sql, $args = []) {
+    global $pdo;
+    // Экранируем имена таблиц и полей в UPDATE
+    $sql = preg_replace('/UPDATE\s+(\w+)/i', 'UPDATE `$1`', $sql);
+    $sql = preg_replace('/SET\s+(\w+)\s*=/i', 'SET `$1` =', $sql);
+    $stmt = $pdo->prepare($sql);
+    return $stmt->execute($args);
+}
+
+function new_delete($sql, $args = []) {
+    global $pdo;
+    // Экранируем имена таблиц в DELETE
+    $sql = preg_replace('/DELETE\s+FROM\s+(\w+)/i', 'DELETE FROM `$1`', $sql);
+    $sql = preg_replace('/WHERE\s+(\w+)\s*=/i', 'WHERE `$1` =', $sql);
+    $stmt = $pdo->prepare($sql);
+    return $stmt->execute($args);
+}
+
+function new_selectAll($sql, $args = []) {
+    global $pdo;
+    // Экранируем имена таблиц в SELECT
+    $sql = preg_replace('/(FROM|JOIN)\s+(\w+)/i', '$1 `$2`', $sql);
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute($args);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
