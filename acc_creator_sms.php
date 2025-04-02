@@ -232,5 +232,16 @@ if (isset($_GET['edit'])) {
         <div class="alert alert-info">No SMS services found</div>
     <?php endif; ?>
 </main>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Активация dropdown-меню Bootstrap
+        $('.dropdown-toggle').dropdown();
+
+        // Проверка ошибок в консоли
+        console.log('Document ready');
+    });
+</script>
 </body>
 </html>

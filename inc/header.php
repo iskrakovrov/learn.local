@@ -193,7 +193,7 @@ $homepage = file_get_contents('https://soft.fbcombo.com/ver.php');
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="parse_lists.php">Parse Lists</a>
+                            <a class="nav-link active" aria-current="page" href="sms_services.php">SMS Services</a>
                         </li>
 
 

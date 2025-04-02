@@ -1171,3 +1171,13 @@ function new_selectAll($sql, $args = []) {
     $stmt->execute($args);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+function log_to_file($message) {
+    if (!file_exists(__DIR__ . '/error.log')) {
+        file_put_contents(__DIR__ . '/error.log', "Log file created\n");
+        chmod(__DIR__ . '/error.log', 0666); // Устанавливаем разрешения
+    }
+    $log_file = __DIR__ . '/error.log';
+    $timestamp = date('[Y-m-d H:i:s]');
+    $message = is_array($message) ? print_r($message, true) : $message;
+    file_put_contents($log_file, "$timestamp $message\n", FILE_APPEND);
+}

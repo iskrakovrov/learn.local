@@ -833,94 +833,342 @@ if (empty($result)) {
 }
 
 
-$sql = "SHOW TABLES LIKE 'country2'";
+
+
+$defaultServices = [
+    [
+        'name' => 'sms-activate',
+        'title' => 'SMS-Activate',
+        'api_url' => 'https://sms-activate.org/stubs/handler_api.php',
+        'is_active' => true
+    ],
+    [
+        'name' => 'sms-hub',
+        'title' => 'SMS-Hub',
+        'api_url' => 'https://smshub.org/stubs/handler_api.php',
+        'is_active' => true
+    ],
+    [
+        'name' => 'vak-sms',
+        'title' => 'VAK-SMS',
+        'api_url' => 'https://vak-sms.com/stubs/handler_api.php',
+        'is_active' => true
+    ],
+    [
+        'name' => 'grizzly-sms',
+        'title' => '7GrizzlySMS',
+        'api_url' => 'https://api.7grizzlysms.com/stubs/handler_api.php',
+        'is_active' => true
+    ],
+    [
+        'name' => 'api-365',
+        'title' => '365API',
+        'api_url' => 'https://365api.net/stubs/handler_api.php',
+        'is_active' => true
+    ],
+    [
+        'name' => 'sms-bower',
+        'title' => 'SMSBower',
+        'api_url' => 'https://smsbower.online/stubs/handler_api.php',
+        'is_active' => true
+    ],
+    [
+        'name' => 'sms-live',
+        'title' => 'SMSLive',
+        'api_url' => 'https://api.smslive.pro/stubs/handler_api.php',
+        'is_active' => true
+    ]
+];
+
+try {
+    // 1. Проверяем существование таблицы sms_services
+    $tableExists = create("SHOW TABLES LIKE 'sms_services'");
+
+    if (empty($tableExists)) {
+        // Создаем таблицу со всеми нужными столбцами
+        $createTable = "CREATE TABLE `sms_services` (
+            `id` INT AUTO_INCREMENT PRIMARY KEY,
+            `name` VARCHAR(50) NOT NULL COMMENT 'Системное название',
+            `title` VARCHAR(100) NOT NULL COMMENT 'Название для интерфейса',
+            `api_url` VARCHAR(255) NOT NULL,
+            `api_key` VARCHAR(255) NULL,
+            `is_active` BOOLEAN DEFAULT TRUE,
+            `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            UNIQUE KEY `uk_name` (`name`)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci";
+
+        create($createTable);
+    } else {
+        // 2. Проверяем существование столбца api_key
+        $columnCheck = create("SHOW COLUMNS FROM `sms_services` LIKE 'api_key'");
+        if (empty($columnCheck)) {
+            create("ALTER TABLE `sms_services` ADD COLUMN `api_key` VARCHAR(255) NULL AFTER `api_url`");
+        }
+    }
+
+    // 3. Добавляем/обновляем сервисы
+    foreach ($defaultServices as $service) {
+        $exists = create("SELECT id FROM sms_services WHERE name = '".$service['name']."'");
+
+        if (empty($exists)) {
+            $sql = "INSERT INTO sms_services (name, title, api_url, is_active) VALUES (
+                '".$service['name']."',
+                '".$service['title']."',
+                '".$service['api_url']."',
+                ".(int)$service['is_active']."
+            )";
+            create($sql);
+        }
+    }
+} catch (PDOException $e) {
+    die('Ошибка базы данных: ' . $e->getMessage());
+}
+
+$sql = "SHOW TABLES LIKE 'service_countries'";
 $result = select($sql);
+
 if (empty($result)) {
     // Создаем таблицу
-    $sql = "CREATE TABLE country2 (
-        id INT PRIMARY KEY,
-        name VARCHAR(255) NOT NULL
-    )";
+    $sql = "CREATE TABLE `service_countries` (
+        `id` int(11) NOT NULL AUTO_INCREMENT,
+        `service_id` int(11) NOT NULL,
+        `country_code` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+        `country_name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+        PRIMARY KEY (`id`),
+        UNIQUE KEY `service_country` (`service_id`,`country_code`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci";
+
     create($sql);
 
-    // Вставляем данные
-    $insertSql = "INSERT INTO country2 (name, code) VALUES
-('Russia', 'ru'),
-('Ukraine', 'ua'),
-('Kazakhstan', 'kz'),
-('Uzbekistan', 'uz'),
-('Tajikistan', 'tj'),
-('Kyrgyzstan', 'kg'),
-('Belarus', 'by'),
-('Azerbaijan', 'az'),
-('Georgia', 'ge'),
-('Moldova', 'md'),
-('Armenia', 'am'),
-('United States', 'us'),
-('United States Virtual', 'usv'),
-('Canada Virtual', 'cav'),
-('United Kingdom', 'gb'),
-('Germany', 'de'),
-('France', 'fr'),
-('Spain', 'es'),
-('Italy', 'it'),
-('Poland', 'pl'),
-('Netherlands', 'nl'),
-('Portugal', 'pt'),
-('Belgium', 'be'),
-('Czech Republic', 'cz'),
-('Austria', 'at'),
-('Switzerland', 'ch'),
-('Sweden', 'se'),
-('Denmark', 'dk'),
-('Norway', 'no'),
-('Finland', 'fi'),
-('Israel', 'il'),
-('Turkey', 'tr'),
-('Egypt', 'eg'),
-('Saudi Arabia', 'sa'),
-('United Arab Emirates', 'ae'),
-('India', 'in'),
-('Indonesia', 'id'),
-('Philippines', 'ph'),
-('Vietnam', 'vn'),
-('Thailand', 'th'),
-('Malaysia', 'my'),
-('Singapore', 'sg'),
-('China', 'cn'),
-('Hong Kong', 'hk'),
-('Japan', 'jp'),
-('South Korea', 'kr'),
-('Australia', 'au'),
-('Brazil', 'br'),
-('Argentina', 'ar'),
-('Mexico', 'mx'),
-('Colombia', 'co'),
-('Peru', 'pe'),
-('Chile', 'cl'),
-('South Africa', 'za'),
-('Nigeria', 'ng'),
-('Kenya', 'ke'),
-('Ghana', 'gh'),
-('Morocco', 'ma'),
-('Algeria', 'dz'),
-('Tunisia', 'tn'),
-('Kosovo', 'xk'),
-('Serbia', 'rs'),
-('Croatia', 'hr'),
-('Slovenia', 'si'),
-('Slovakia', 'sk'),
-('Hungary', 'hu'),
-('Romania', 'ro'),
-('Bulgaria', 'bg'),
-('Greece', 'gr'),
-('Cyprus', 'cy'),
-('Estonia', 'ee'),
-('Latvia', 'lv'),
-('Lithuania', 'lt'),
-('Iceland', 'is'),
-('Ireland', 'ie'),
-('New Zealand', 'nz')";
+    // Маппинг стран (код => название на английском)
+    $countries = [
+        "0" => "Russia",
+        "1" => "Ukraine",
+        "2" => "Kazakhstan",
+        "3" => "China",
+        "4" => "Philippines",
+        "5" => "Myanmar",
+        "6" => "Indonesia",
+        "7" => "Malaysia",
+        "8" => "Kenya",
+        "9" => "Tanzania",
+        "10" => "Vietnam",
+        "11" => "Kyrgyzstan",
+        "13" => "Israel",
+        "14" => "Hong Kong",
+        "15" => "Poland",
+        "16" => "United Kingdom",
+        "17" => "Madagascar",
+        "18" => "DR Congo",
+        "19" => "Nigeria",
+        "20" => "Macau",
+        "21" => "Egypt",
+        "22" => "India",
+        "23" => "Ireland",
+        "24" => "Cambodia",
+        "25" => "Laos",
+        "26" => "Haiti",
+        "27" => "Ivory Coast",
+        "28" => "Gambia",
+        "29" => "Serbia",
+        "30" => "Yemen",
+        "31" => "South Africa",
+        "32" => "Romania",
+        "33" => "Colombia",
+        "34" => "Estonia",
+        "35" => "Azerbaijan",
+        "36" => "Canada",
+        "37" => "Morocco",
+        "38" => "Ghana",
+        "39" => "Argentina",
+        "40" => "Uzbekistan",
+        "41" => "Cameroon",
+        "42" => "Chad",
+        "43" => "Germany",
+        "44" => "Lithuania",
+        "45" => "Croatia",
+        "46" => "Sweden",
+        "47" => "Iraq",
+        "48" => "Netherlands",
+        "49" => "Latvia",
+        "50" => "Austria",
+        "51" => "Belarus",
+        "52" => "Thailand",
+        "53" => "Saudi Arabia",
+        "54" => "Mexico",
+        "55" => "Taiwan",
+        "56" => "Spain",
+        "57" => "Iran",
+        "58" => "Algeria",
+        "59" => "Slovenia",
+        "60" => "Bangladesh",
+        "61" => "Senegal",
+        "62" => "Turkey",
+        "63" => "Czech Republic",
+        "64" => "Sri Lanka",
+        "65" => "Peru",
+        "66" => "Pakistan",
+        "67" => "New Zealand",
+        "68" => "Guinea",
+        "69" => "Mali",
+        "70" => "Venezuela",
+        "71" => "Ethiopia",
+        "72" => "Mongolia",
+        "73" => "Brazil",
+        "74" => "Afghanistan",
+        "75" => "Uganda",
+        "76" => "Angola",
+        "77" => "Cyprus",
+        "78" => "France",
+        "79" => "Papua New Guinea",
+        "80" => "Mozambique",
+        "81" => "Nepal",
+        "82" => "Belgium",
+        "83" => "Bulgaria",
+        "84" => "Hungary",
+        "85" => "Moldova",
+        "86" => "Italy",
+        "87" => "Paraguay",
+        "88" => "Honduras",
+        "89" => "Tunisia",
+        "90" => "Nicaragua",
+        "91" => "Timor-Leste",
+        "92" => "Bolivia",
+        "93" => "Costa Rica",
+        "94" => "Guatemala",
+        "95" => "United Arab Emirates",
+        "96" => "Zimbabwe",
+        "97" => "Puerto Rico",
+        "98" => "Sudan",
+        "99" => "Togo",
+        "100" => "Kuwait",
+        "101" => "El Salvador",
+        "102" => "Libya",
+        "103" => "Jamaica",
+        "104" => "Trinidad and Tobago",
+        "105" => "Ecuador",
+        "106" => "Eswatini",
+        "107" => "Oman",
+        "108" => "Bosnia and Herzegovina",
+        "109" => "Dominican Republic",
+        "110" => "Syria",
+        "111" => "Qatar",
+        "112" => "Panama",
+        "113" => "Cuba",
+        "114" => "Mauritania",
+        "115" => "Sierra Leone",
+        "116" => "Jordan",
+        "117" => "Portugal",
+        "118" => "Barbados",
+        "119" => "Burundi",
+        "120" => "Benin",
+        "121" => "Brunei",
+        "122" => "Bahamas",
+        "123" => "Botswana",
+        "124" => "Belize",
+        "125" => "Central African Republic",
+        "126" => "Dominica",
+        "127" => "Grenada",
+        "128" => "Georgia",
+        "129" => "Greece",
+        "130" => "Guinea-Bissau",
+        "131" => "Guyana",
+        "132" => "Iceland",
+        "133" => "Comoros",
+        "134" => "Saint Kitts and Nevis",
+        "135" => "Liberia",
+        "136" => "Lesotho",
+        "137" => "Malawi",
+        "138" => "Namibia",
+        "139" => "Niger",
+        "140" => "Rwanda",
+        "141" => "Slovakia",
+        "142" => "Suriname",
+        "143" => "Tajikistan",
+        "144" => "Monaco",
+        "145" => "Bahrain",
+        "146" => "Réunion",
+        "147" => "Zambia",
+        "148" => "Armenia",
+        "149" => "Somalia",
+        "150" => "Congo",
+        "151" => "Chile",
+        "152" => "Burkina Faso",
+        "153" => "Lebanon",
+        "154" => "Gabon",
+        "155" => "Albania",
+        "156" => "Uruguay",
+        "157" => "Mauritius",
+        "158" => "Bhutan",
+        "159" => "Maldives",
+        "160" => "Guadeloupe",
+        "161" => "Turkmenistan",
+        "162" => "French Guiana",
+        "163" => "Finland",
+        "164" => "Saint Lucia",
+        "165" => "Luxembourg",
+        "166" => "Saint Vincent and the Grenadines",
+        "167" => "Equatorial Guinea",
+        "168" => "Djibouti",
+        "169" => "Antigua and Barbuda",
+        "170" => "Cayman Islands",
+        "171" => "Montenegro",
+        "172" => "Denmark",
+        "173" => "Switzerland",
+        "174" => "Norway",
+        "175" => "Australia",
+        "176" => "Eritrea",
+        "177" => "South Sudan",
+        "178" => "Sao Tome and Principe",
+        "179" => "Aruba",
+        "180" => "Montserrat",
+        "181" => "Anguilla",
+        "182" => "Japan",
+        "183" => "North Macedonia",
+        "184" => "Seychelles",
+        "185" => "New Caledonia",
+        "186" => "Cape Verde",
+        "187" => "United States",
+        "188" => "Palestine",
+        "189" => "Fiji",
+        "196" => "Singapore",
+        "199" => "Malta",
+        "201" => "Gibraltar",
+        "203" => "Kosovo",
+        "204" => "Niue"
+    ];
 
-    create($insertSql);
+    // Заполняем таблицу данными стран (service_id = 0 для базового списка)
+    foreach ($countries as $code => $name) {
+        $sql = "INSERT INTO service_countries (service_id, country_code, country_name) 
+                VALUES (0, '$code', '$name')";
+        create($sql);
+    }
+}
+// Проверяем существование столбца balance
+$sql = "SHOW COLUMNS FROM `sms_services` WHERE Field = 'balance'";
+$qw = create($sql);
+
+if (empty($qw)) {
+    // Если столбец не существует - добавляем его
+    $sql = "ALTER TABLE `sms_services` ADD `balance` DECIMAL(10,2) DEFAULT NULL AFTER `is_active`";
+    $qw = create($sql);
+}
+$column_exists = new_selectAll(
+    "SHOW COLUMNS FROM `sms_services` LIKE 'balance_updated'"
+);
+
+if (empty($column_exists)) {
+    @new_update(
+        "ALTER TABLE `sms_services` ADD `balance_updated` DATETIME NULL AFTER `balance`"
+    );
+}
+$sql = "SHOW COLUMNS FROM `users` WHERE Field = 'api_key'";
+$column_check = new_selectAll($sql);
+
+if (empty($column_check)) {
+    // 2. Добавляем столбец api_key
+    $sql = "ALTER TABLE `users` 
+            ADD `api_key` VARCHAR(64) NULL DEFAULT NULL AFTER `pass`";
+    new_update($sql);
 }
