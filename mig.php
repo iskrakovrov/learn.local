@@ -1172,3 +1172,48 @@ if (empty($column_check)) {
             ADD `api_key` VARCHAR(64) NULL DEFAULT NULL AFTER `pass`";
     new_update($sql);
 }
+$sql = "SHOW TABLES LIKE 'samsung_devices'";
+$result = select($sql);
+
+if (empty($result)) {
+    require 'phone/samsung.php';
+}
+$sql = "SHOW TABLES LIKE 'google_devices'";
+$result = select($sql);
+
+if (empty($result)) {
+    require 'phone/google.php';
+}
+$sql = "SHOW TABLES LIKE 'huawei_devices'";
+$result = select($sql);
+
+if (empty($result)) {
+    require 'phone/huawei.php';
+}
+$sql = "SHOW TABLES LIKE 'oneplus_devices'";
+$result = select($sql);
+
+if (empty($result)) {
+    require 'phone/oneplus.php';
+}
+$sql = "SHOW TABLES LIKE 'xiaomi_devices'";
+$result = select($sql);
+
+if (empty($result)) {
+    require 'phone/xiaomi.php';
+}
+$sql = "SHOW TABLES LIKE 'oppo_devices'";
+$result = select($sql);
+
+if (empty($result)) {
+    require 'phone/oppo.php';
+}
+
+$sql = "SELECT * FROM `cat_lists` WHERE `id` = 13 AND `name` = 'Email lists'";
+$row = select($sql);
+
+if (!$row) {
+    // Если строки нет, добавляем ее
+    $sql = "INSERT INTO `cat_lists` (`id`, `cat`, `name`) VALUES (13, 13, 'Email lists')";
+    $result = insert($sql);
+}

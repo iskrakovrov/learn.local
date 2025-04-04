@@ -79,6 +79,7 @@ include_once 'inc/header.php'
                     <div class="col">
                         <select name="cat" id="cat" class="form-control">
                             <option value="1">Black lists</option>
+                            <option value="13">Email lists</option>
                             <option value="2">Geo lists</option>
                             <option value="3">Name lists</option>
                             <option value="4">ID lists</option>
@@ -115,6 +116,7 @@ include_once 'inc/header.php'
                         <select name="catedit" id="cat" class="form-control">
                             <option value="1">Black lists</option>
                             <option value="2">Geo lists</option>
+                            <option value="13">Email lists</option>
                             <option value="3">Name lists</option>
                             <option value="4">ID lists</option>
                             <option value="5">Post lists</option>

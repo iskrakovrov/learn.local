@@ -5,45 +5,82 @@ require_once('function/function.php');
 $lang = $_SESSION['lang'] . '.php';
 require_once($lang);
 ?>
+
 <!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
-    <!-- Required meta tags -->
     <?php
     require_once('inc/meta.php');
     ?>
-    <title>FB Combo </title>
+    <title>Mobile phones</title>
+    <!-- Подключаем Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 <?php
-
-require_once 'inc/header.php'
-
+require_once 'inc/header.php';
 ?>
 
-
-
-<main class="container-fluid ">
+<main class="container-fluid">
     <div class="row text-center">
-        <h2>Setting up uniqueness of mobile devices.</h2>
+        <h2 class="my-4">Setting up uniqueness of mobile devices</h2>
     </div>
 
+    <div class="container">
+        <div class="table-responsive">
+            <table class="table table-striped table-hover table-bordered">
+                <thead class="table-dark">
+                <tr>
+                    <th>Brand</th>
+                    <th>Product Line</th>
+                    <th>Model Name</th>
+                    <th>Codename</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                // Запросы для каждой таблицы устройств
+                $brands = [
+                    'Google' => ['table' => 'google_devices', 'has_codename' => true],
+                    'Huawei' => ['table' => 'huawei_devices', 'has_codename' => true],
+                    'OnePlus' => ['table' => 'oneplus_devices', 'has_codename' => true],
+                    'Oppo' => ['table' => 'oppo_devices', 'has_codename' => true],
+                    'Samsung' => ['table' => 'samsung_devices', 'has_codename' => false],
+                    'Xiaomi' => ['table' => 'xiaomi_devices', 'has_codename' => true]
+                ];
 
+                foreach ($brands as $brand => $data) {
+                    // Для Samsung используем model_group вместо product_line
+                    $productLineField = ($brand === 'Samsung') ? 'model_group' : 'product_line';
+
+                    // Формируем список полей для выборки
+                    $fields = "$productLineField AS product_line, model_name";
+                    if ($data['has_codename']) {
+                        $fields .= ", codename";
+                    } else {
+                        $fields .= ", 'N/A' AS codename";
+                    }
+
+                    $sql = "SELECT $fields FROM {$data['table']}";
+                    $stmt = $pdo->query($sql);
+
+                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                        echo '<tr>';
+                        echo '<td>' . htmlspecialchars($brand) . '</td>';
+                        echo '<td>' . htmlspecialchars($row['product_line']) . '</td>';
+                        echo '<td>' . htmlspecialchars($row['model_name']) . '</td>';
+                        echo '<td>' . htmlspecialchars($row['codename']) . '</td>';
+                        echo '</tr>';
+                    }
+                }
+                ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </main>
 
-
-
-
-
-<!-- Option 1: Bootstrap Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
-
-<!-- Option 2: Separate Popper and Bootstrap JS -->
-<!--
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
--->
+<!-- Подключаем Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
