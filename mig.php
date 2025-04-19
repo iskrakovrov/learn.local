@@ -1217,3 +1217,41 @@ if (!$row) {
     $sql = "INSERT INTO `cat_lists` (`id`, `cat`, `name`) VALUES (13, 13, 'Email lists')";
     $result = insert($sql);
 }
+$sql = "SHOW TABLES LIKE 'proxy_usage'";
+$result = select($sql);
+if (empty($result)) {
+    // Создаем таблицу
+    $sql = "CREATE TABLE `proxy_usage` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `proxy_id` int(11) NOT NULL,
+  `last_used` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `usage_count` int(11) NOT NULL DEFAULT 0,
+  `is_active` tinyint(1) NOT NULL DEFAULT 1,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `proxy_id` (`proxy_id`),
+  FOREIGN KEY (`proxy_id`) REFERENCES `proxy`(`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
+
+    create($sql);
+}
+// Создаем таблицу reg_options, если она не существует
+$createTableQuery = "CREATE TABLE IF NOT EXISTS reg_options (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    proxy_group INT,
+    server INT,
+    account_group INT,
+    email INT,
+    registration_method INT,
+    link_email INT,
+    gender INT,
+    avatar INT,
+    city INT,
+    first_name INT,
+    last_name INT,
+    mode INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    UNIQUE KEY (user_id)
+)";
+create($createTableQuery);
