@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
               WHERE user_id = ?";
 
         // Выполняем запрос
-        executeQuery($query, [$userId]);
+        update($query, [$userId]);
 
         // Перенаправляем на эту же страницу
         header("Location: ".$_SERVER['PHP_SELF']);
@@ -104,6 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 ?>
+
 
 <!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">

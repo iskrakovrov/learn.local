@@ -46,13 +46,33 @@ $homepage = file_get_contents('https://soft.fbcombo.com/ver.php');
     #navbarSupportedContent > ul.nav.justify-content-end > li:nth-child(2) > a {
         color: aliceblue;
     }
+
+    .navbar-brand img {
+        transition: transform 0.3s ease;
+        margin-right: 10px;
+        max-height: 40px;
+    }
+    .navbar-brand img:hover {
+        transform: scale(1.05);
+    }
+    .navbar-brand {
+        display: flex;
+        align-items: center;
+    }
+    .brand-text {
+        font-weight: bold;
+        margin-left: 10px;
+        color: white;
+    }
 </style>
 <div class="outer">
     <header class="container-fluid bg-secondary">
-
         <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
             <div class="container-fluid">
-                <a class="navbar-brand" href="/">FB Combo</a>
+                <a class="navbar-brand" href="/">
+                    <img src="images/logo.png" alt="FB Combo Logo" height="40">
+
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -76,7 +96,7 @@ $homepage = file_get_contents('https://soft.fbcombo.com/ver.php');
                                     <hr class="dropdown-divider">
                                 </li>
                                 <li><a class="dropdown-item" href="error.php">Errors <span
-                                            class="badge badge-danger"><?php echo $er ?></span></a></li>
+                                                class="badge badge-danger"><?php echo $er ?></span></a></li>
                                 <li>
                                     <hr class="dropdown-divider">
 
@@ -91,7 +111,7 @@ $homepage = file_get_contents('https://soft.fbcombo.com/ver.php');
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="accounts.php">Accounts <span
-                                    class="badge badge-primary"><?php echo $a ?></span></a>
+                                        class="badge badge-primary"><?php echo $a ?></span></a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link active dropdown-toggle" href="#" id="proxy" role="button"
@@ -103,8 +123,6 @@ $homepage = file_get_contents('https://soft.fbcombo.com/ver.php');
                                 <li><a class="dropdown-item" href="proxy_gr.php">Proxy group</a></li>
                                 <li><a class="dropdown-item" href="add_proxy_group.php">Add Proxy group</a></li>
                                 <li><a class="dropdown-item" href="proxy.php">Proxy</a></li>
-
-
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
@@ -139,7 +157,6 @@ $homepage = file_get_contents('https://soft.fbcombo.com/ver.php');
                                 </li>
                                 <li><a class="dropdown-item" href="e_list.php?cat=5">Post & comments lists</a></li>
                                 <li>
-
                                     <hr class="dropdown-divider">
                                 </li>
                                 <li><a class="dropdown-item" href="e_list.php?cat=7">Keywords lists</a></li>
@@ -171,7 +188,7 @@ $homepage = file_get_contents('https://soft.fbcombo.com/ver.php');
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="add_template.php">Task Templates <span
-                                    class="badge badge-primary"><?php echo $templ ?></span></a>
+                                        class="badge badge-primary"><?php echo $templ ?></span></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="e_list.php?cat=5">Posts</a>
@@ -192,14 +209,12 @@ $homepage = file_get_contents('https://soft.fbcombo.com/ver.php');
                                 </li>
                                 <?php foreach ($se as $s) { ?>
                                     <li><a class="dropdown-item" href="stat_s.php?id=<?php echo $s['id'] ?>"><?php echo 'Statistic ' . $s['name_server'] . ' server' ?></a></li>
-
                                 <?php } ?>
                             </ul>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="sms_services.php">SMS Services</a>
                         </li>
-
 
                         <li class="nav-item">
                             <a class="nav-link active" href="note.php"><strong>Note</strong></a>
@@ -227,24 +242,19 @@ $homepage = file_get_contents('https://soft.fbcombo.com/ver.php');
                         <li class="nav-item">
                             <a class="nav-link active" href="/"><strong><?php echo $m ?></strong></a>
                         </li>
-
-
-
                     </ul>
                     <ul class="nav justify-content-end">
-
                         <li class="nav-item">
                             <a class="nav-item" aria-current="page">Accounts Work <span
-                                    class="badge badge-primary"><?php echo $wo ?></span></a>
+                                        class="badge badge-primary"><?php echo $wo ?></span></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-item" aria-current="page">Accounts with task <span
-                                    class="badge badge-primary"><?php echo $tas ?></span></a>
+                                        class="badge badge-primary"><?php echo $tas ?></span></a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
-
     </header>
 </div>
