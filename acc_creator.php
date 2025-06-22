@@ -34,16 +34,7 @@ require_once 'inc/header.php'
 
 
                 <p class="alert alert-info" role="alert">
-                    We present to you a new software product, the Account Creator. This program is integrated with the FB Combo panel for creating Facebook accounts.
-                    The software is designed to register accounts using SMS or email (depending on what Facebook allows) and also for the initial setup of accounts
-                    immediately after registration. In the future, additional modes will be added to the program, which are not available in the desktop version of Facebook.
-                    These include features such as increasing followers on accounts, an advanced mode for mass posting in Facebook groups, more convenient modes for inviting
-                    friends to groups and pages, and much more. The program will operate within mobile device emulators, such as Bluestacks. It includes support for proxies,
-                    device fingerprinting, and utilizes the new Facebook app for Android.
-            <br>
-                The program's release is scheduled for April. The price will be $410, plus small monthly fees (including the Zennoposter activation cost). Until April or the release (if it happens earlier), the pre-order price is $360 for a version without additional payments (including the Zennoposter activation cost).
-
-                    For any questions, contact Viktor on Telegram: @iskrakovrov.</p>
+                    The account registration tool is running in test mode until July 1 for the group that pre-ordered. If you want to join the test group, the price of the Facebook Account Registration Tool is $410. For everyone who purchases before July 1, the program will remain free forever—no subscription fees or additional payments. For any questions, contact Viktor.</p>
                 </div>
             </div>
 
@@ -54,11 +45,7 @@ require_once 'inc/header.php'
 
 
             <p class="alert alert-info" role="alert">
-                Представляем вам новый программный продукт Создатель аккаунтов. Это программа интегрированная с панелью FB Combo для создания аккаунтов Facebook. Программа предназначена для регистрации аккаунтов с помощью СМС или почт (в зависимости от того, как это позволяет сделать Facebook), а так же для первоначального заполнения аккаунтов сразу после регистрации.
-                В будущем помимо регистрации в программу будут добавляться дополнительные режимы, недоступные в desktop версии Facebook, такие, как Увеличение подписчиков на аккаунтах, расширенный режим массового постинга по группам Facebook, более удобные режимы приглашения в группы и на страницы друзей аккаунтов.
-                Работа будет вестись в эмуляторах мобильных устройств - Bluestacks. Реализована работа с прокси, уникализация устройств, используется новое приложение Facebook для Android.
-                <br>
-                Релиз программы намечен на апрель. Цена программы будет 410$ + небольшие ежемесячные оплаты (с ценой активации Zennoposter). До апреля или релиза, если он произойдет раньше апреля цена предварительного заказа 360$ за версию без дополнительных оплат (с ценой активации Zennoposter) По всем вопросам пишите Виктору в телеграм iskrakovrov.</p>
+                Регистратор аккаунтов запущен до 1 июля в тестовом режиме группе, сделавшей предзаказ. Если вы хотите присоединиться к тестовой группе, то цена Регистратора аккаунтов Facebook 410 долларов. И всем кто купил до 1 июля программа на всегда останется без абонентских плат и доплат. По всем вопросам пишите Виктору</p>
         </div>
     </div>
 

@@ -219,21 +219,30 @@ $homepage = file_get_contents('https://soft.fbcombo.com/ver.php');
                         <li class="nav-item">
                             <a class="nav-link active" href="note.php"><strong>Note</strong></a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="spin.php">Spintax</a>
+                        </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                data-bs-toggle="dropdown" aria-expanded="false">
-                                <span class="text-white bg-danger">MOBILE</span>
+    <span class="text-white bg-danger px-2 py-1 rounded"
+          style="background-color: #ff0000 !important;
+                 text-shadow: 0 0 3px rgba(0,0,0,0.5);
+                 box-shadow: 0 0 5px rgba(255,0,0,0.5);
+                 font-weight: bold;">
+        MOBILE
+    </span>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="acc_creator.php">About the account creator</a></li>
                                 <li><a class="dropdown-item" href="acc_creator_settings.php">Settings</a></li>
-                                <li><a class="dropdown-item" href="acc_creator_sms.php">SMS services</a></li>
+                                <li><a class="dropdown-item" href="res_bs.php">Blustacks service</a></li>
                                 <li><a class="dropdown-item" href="acc_creator_phone.php">Phone settings</a></li>
                             </ul>
                         </li>
 
                         <?php if ($homepage != $vers) {
-                            $m = 'UPDATE PANEL!!!';
+                            $m = '<span style="background-color: #555; color: #ff0; padding: 2px 5px; border-radius: 3px; font-weight: bold;">UPDATE PANEL!!!</span>';
                             $lm = 'index.php';
                         } else {
                             $m = 'Panel vers.' . $vers;

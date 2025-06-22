@@ -5,7 +5,13 @@ require_once('function/function.php');
 $lang = $_SESSION['lang'] . '.php';
 require_once($lang);
 
-
+// Проверяем, есть ли поле bio в таблице reg_options, если нет — добавляем
+$sql = "SHOW COLUMNS FROM reg_options LIKE 'bio'";
+$qw = create($sql);
+if (empty($qw)) {
+    $sql = "ALTER TABLE `reg_options` ADD `bio` INT(11) NOT NULL DEFAULT 0 AFTER `mode`;";
+    create($sql);
+}
 
 // Получаем данные для выпадающих списков
 $proxyGroups = selectAll("SELECT id, name_group FROM group_proxy ORDER BY name_group");
@@ -15,6 +21,7 @@ $emails = selectAll("SELECT id, name FROM lists WHERE cat = 13 ORDER BY name");
 $firstNames = selectAll("SELECT id, name FROM lists WHERE cat = 3 ORDER BY name");
 $lastNames = selectAll("SELECT id, name FROM lists WHERE cat = 3 ORDER BY name");
 $cities = selectAll("SELECT id, name FROM lists WHERE cat = 2 ORDER BY name");
+$bioOptions = selectAll("SELECT id, name FROM lists WHERE cat = 5 ORDER BY name");
 
 // Получаем сохраненные настройки пользователя
 $userId = $_SESSION['user_id'] ?? 0;
@@ -23,7 +30,7 @@ $savedOptions = select("SELECT * FROM reg_options WHERE user_id = ?", [$userId])
 // Обработка формы
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['reset'])) {
-        // Обновляем запись, устанавливая все значения в NULL или 0
+        // Обновляем запись, устанавливая все значения в NULL или 0 (bio — в 0)
         $query = "UPDATE reg_options SET 
               proxy_group = NULL,
               server = NULL,
@@ -36,19 +43,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
               city = NULL,
               first_name = NULL,
               last_name = NULL,
-              mode = NULL
+              mcc_mnc_source = NULL,
+              mode = NULL,
+              bio = 0
               WHERE user_id = ?";
 
-        // Выполняем запрос
         update($query, [$userId]);
 
-        // Перенаправляем на эту же страницу
-        header("Location: ".$_SERVER['PHP_SELF']);
+        header("Location: " . $_SERVER['PHP_SELF']);
         exit;
     }
 
     if (isset($_POST['mode'])) {
-        // Сохранение/обновление настроек
+        // Подготовка данных из формы
         $data = [
             'user_id' => $userId,
             'proxy_group' => $_POST['proxy_group'] ?? null,
@@ -62,7 +69,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             'city' => $_POST['city'] ?? null,
             'first_name' => $_POST['first_name'] ?? null,
             'last_name' => $_POST['last_name'] ?? null,
-            'mode' => $_POST['mode']
+            'mcc_mnc_source' => $_POST['mcc_mnc_source'] ?? null,
+            'mode' => $_POST['mode'],
+            'bio' => $_POST['bio'] ?? 0,
         ];
 
         if ($savedOptions) {
@@ -79,16 +88,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                       city = :city,
                       first_name = :first_name,
                       last_name = :last_name,
-                      mode = :mode
+                      mcc_mnc_source = :mcc_mnc_source,
+                      mode = :mode,
+                      bio = :bio
                       WHERE user_id = :user_id";
         } else {
             // Вставляем новые настройки
             $query = "INSERT INTO reg_options 
                       (user_id, proxy_group, server, account_group, email, registration_method, 
-                       link_email, gender, avatar, city, first_name, last_name, mode)
+                       link_email, gender, avatar, city, first_name, last_name, mcc_mnc_source, mode, bio)
                       VALUES 
                       (:user_id, :proxy_group, :server, :account_group, :email, :registration_method,
-                       :link_email, :gender, :avatar, :city, :first_name, :last_name, :mode)";
+                       :link_email, :gender, :avatar, :city, :first_name, :last_name, :mcc_mnc_source, :mode, :bio)";
         }
 
         insert($query, $data);
@@ -105,15 +116,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 ?>
 
-
 <!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <!-- Required meta tags -->
-    <?php
-    require_once('inc/meta.php');
-    ?>
-    <title>FB Combo </title>
+    <?php require_once('inc/meta.php'); ?>
+    <title>FB Combo</title>
     <style>
         .form-label {
             font-weight: 500;
@@ -137,12 +145,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         .btn-reset {
             margin-left: 10px;
         }
+        .mcc-mnc-info {
+            font-size: 0.85rem;
+            color: #6c757d;
+            margin-top: -0.5rem;
+            margin-bottom: 1rem;
+        }
     </style>
 </head>
 <body>
-<?php
-require_once 'inc/header.php';
-?>
+<?php require_once 'inc/header.php'; ?>
 
 <main class="container-fluid">
     <div class="row text-center mb-4">
@@ -157,7 +169,6 @@ require_once 'inc/header.php';
                     <p class="mb-0">Please configure all required settings before activation</p>
                 </div>
 
-                <!-- Форма выбора -->
                 <form method="POST">
                     <div class="row">
                         <div class="col-md-6">
@@ -175,6 +186,22 @@ require_once 'inc/header.php';
                             </select>
                         </div>
 
+                        <div class="col-md-6">
+                            <h5 class="section-title">MCC-MNC Settings</h5>
+
+                            <label for="mccMncSource" class="form-label">Determine MCC-MNC by:</label>
+                            <select class="form-select" id="mccMncSource" name="mcc_mnc_source" aria-label="MCC-MNC source select">
+                                <option selected disabled>Select MCC-MNC source</option>
+                                <option value="0" <?= isset($savedOptions['mcc_mnc_source']) && $savedOptions['mcc_mnc_source'] == 0 ? 'selected' : '' ?>>Phone number</option>
+                                <option value="1" <?= isset($savedOptions['mcc_mnc_source']) && $savedOptions['mcc_mnc_source'] == 1 ? 'selected' : '' ?>>Proxy IP</option>
+                            </select>
+                            <div class="mcc-mnc-info">
+                                MCC (Mobile Country Code) and MNC (Mobile Network Code) will be automatically determined based on the selected source.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
                         <div class="col-md-6">
                             <h5 class="section-title">Account Settings</h5>
 
@@ -200,9 +227,7 @@ require_once 'inc/header.php';
                                 <?php endforeach; ?>
                             </select>
                         </div>
-                    </div>
 
-                    <div class="row mt-3">
                         <div class="col-md-6">
                             <h5 class="section-title">Email Settings</h5>
 
@@ -231,7 +256,9 @@ require_once 'inc/header.php';
                                 <option value="2" <?= ($savedOptions['link_email'] ?? null) == 2 ? 'selected' : '' ?>>Yes</option>
                             </select>
                         </div>
+                    </div>
 
+                    <div class="row mt-3">
                         <div class="col-md-6">
                             <h5 class="section-title">Profile Settings</h5>
 
@@ -261,9 +288,7 @@ require_once 'inc/header.php';
                                 <?php endforeach; ?>
                             </select>
                         </div>
-                    </div>
 
-                    <div class="row mt-3">
                         <div class="col-md-6">
                             <h5 class="section-title">Name Settings</h5>
 
@@ -279,10 +304,8 @@ require_once 'inc/header.php';
                                     <?php endforeach; ?>
                                 </select>
                             </div>
-                        </div>
 
-                        <div class="col-md-6">
-                            <div class="mb-3" style="margin-top: 2.6rem;">
+                            <div class="mb-3">
                                 <label for="lastName" class="form-label">Last names</label>
                                 <select class="form-select" id="lastName" name="last_name" aria-label="Last name select">
                                     <option selected disabled>Select last name list</option>
@@ -294,6 +317,24 @@ require_once 'inc/header.php';
                                     <?php endforeach; ?>
                                 </select>
                             </div>
+                        </div>
+                    </div>
+
+                    <!-- BIO Section -->
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <h5 class="section-title">BIO Settings</h5>
+
+                            <label for="bio" class="form-label">Set BIO for the account?</label>
+                            <select class="form-select" id="bio" name="bio" aria-label="BIO select">
+                                <option value="0" <?= ($savedOptions['bio'] ?? null) == 0 ? 'selected' : '' ?>>No BIO</option>
+                                <?php foreach ($bioOptions as $option): ?>
+                                    <option value="<?= $option['id'] ?>"
+                                        <?= ($savedOptions['bio'] ?? null) == $option['id'] ? 'selected' : '' ?>>
+                                        <?= htmlspecialchars($option['name']) ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
                         </div>
                     </div>
 
@@ -312,7 +353,6 @@ require_once 'inc/header.php';
                 </form>
 
                 <?php
-                // Показать ошибку, если не выбран режим
                 if (isset($error)) {
                     echo '<div class="alert alert-danger mt-3" role="alert">' . $error . '</div>';
                 }
@@ -322,23 +362,9 @@ require_once 'inc/header.php';
     </div>
 </main>
 
-<!-- Option 1: Bootstrap Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
-
-<script>
-    // Добавляем обработчик для кнопок выбора режима
-    document.addEventListener('DOMContentLoaded', function() {
-        // Можно добавить кнопки для выбора режима, если нужно
-        // document.querySelector('.btn-mode-1').addEventListener('click', function() {
-        //     document.querySelector('input[name="mode"]').value = '1';
-        // });
-        // document.querySelector('.btn-mode-2').addEventListener('click', function() {
-        //     document.querySelector('input[name="mode"]').value = '2';
-        // });
-    });
-</script>
 
 </body>
 </html>

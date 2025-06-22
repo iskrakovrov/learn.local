@@ -1255,3 +1255,50 @@ $createTableQuery = "CREATE TABLE IF NOT EXISTS reg_options (
     UNIQUE KEY (user_id)
 )";
 create($createTableQuery);
+
+$sql = "SHOW TABLES LIKE 'mcc_mnc'";
+$qw = create($sql);
+
+if (empty($qw)) {
+ require_once ('function/mcc.php');
+}
+
+$sql = "SHOW COLUMNS FROM `reg_options` WHERE Field = 'mcc_mnc_source'";
+$qw = create($sql);
+
+if (empty($qw)) {
+    // Если столбец не существует - добавляем его
+   $sql= "ALTER TABLE `reg_options` ADD `mcc_mnc_source` TINYINT DEFAULT NULL AFTER `last_name`;";
+    $qw = create($sql);
+}
+$sql = "SELECT * FROM `status` WHERE `status` = 'vselphy'";
+$qw = select($sql); // Предполагается, что `create()` выполняет запрос и возвращает результат.
+
+if (empty($qw)) {
+    $sql = "INSERT INTO `status` (`status`) VALUES ('vselphy')";
+    $qw = insert($sql); // Выполняем запрос на добавление строки.
+}
+$sql = "
+    SELECT COLUMN_TYPE 
+    FROM INFORMATION_SCHEMA.COLUMNS 
+    WHERE 
+        TABLE_SCHEMA = DATABASE() AND
+        TABLE_NAME = 'mcc_mnc' AND
+        COLUMN_NAME = 'iso'
+";
+$columnInfo = selectAll($sql);
+
+// 2. If column type is CHAR(2), include p.php
+if (!empty($columnInfo) && strtoupper($columnInfo[0]['COLUMN_TYPE']) === 'CHAR(2)') {
+    $sql = "DROP TABLE mcc_mnc";  // Added TABLE keyword
+    $qw = create($sql);
+    require_once("function/mcc.php");
+
+}
+
+$sql = "SHOW COLUMNS FROM reg_options LIKE 'bio'";
+$qw = create($sql);
+if (empty($qw)) {
+    $sql = "ALTER TABLE `reg_options` ADD `bio` INT(11) NOT NULL DEFAULT 0 AFTER `mode`;";
+    create($sql);
+}

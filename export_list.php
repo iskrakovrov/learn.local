@@ -3,6 +3,18 @@ ini_set('error_reporting', E_ALL);
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 
+// Создаем папку tmp если не существует
+if (!file_exists('tmp')) {
+    mkdir('tmp', 0755, true);
+}
+
+// Очистка файлов старше 24 часов
+foreach (glob("tmp/list-*.txt") as $file) {
+    if (filemtime($file) < time() - 86400) { // 86400 секунд = 24 часа
+        unlink($file);
+    }
+}
+
 include_once('inc/init.php');
 require_once('inc/db.php');
 require_once('function/function.php');
@@ -14,18 +26,24 @@ $id = $_REQUEST['id'];
 $today = date('Y-m-d-H-i-s');
 $fname = 'list-' . $today . '.txt';
 
-$fp = fopen('tmp/' . $fname, 'w');
+// Проверяем и очищаем имя файла от недопустимых символов
+$fname = preg_replace('/[^a-zA-Z0-9\-\.]/', '', $fname);
+$filepath = 'tmp/' . $fname;
 
-$sql = 'SELECT value FROM value_lists WHERE list = ?';
-$args = [$id];
-$query = selectAll($sql, $args);
+// Записываем данные в файл
+$fp = fopen($filepath, 'w');
+if ($fp) {
+    $sql = 'SELECT value FROM value_lists WHERE list = ?';
+    $args = [$id];
+    $query = selectAll($sql, $args);
 
-// Открываем поток для записи
-foreach ($query as $a) {
-    fwrite($fp, implode(';', $a) . "\r\n");
+    foreach ($query as $a) {
+        fwrite($fp, implode(';', $a) . "\r\n");
+    }
+    fclose($fp);
+} else {
+    die("Error: Could not create file $filepath");
 }
-
-fclose($fp);
 ?>
 
 <!doctype html>
@@ -35,11 +53,9 @@ fclose($fp);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
-          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
     <link href="css/dt.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     <link href="css/style.css" rel="stylesheet">
     <title>FB Combo EXPORT list</title>
@@ -60,90 +76,17 @@ fclose($fp);
         </div>
     </div>
 
-    <br>
-
     <div class="row justify-content-center">
         <div class="col-6 text-center">
             <form method="post">
-                <br>
-                <br>
-                <a class="btn btn-secondary" href="<?php echo 'tmp/' . $fname ?>" role="button" download>DOWNLOAD</a>
-                <br>
+                <a class="btn btn-secondary" href="<?php echo htmlspecialchars($filepath) ?>" role="button" download>
+                    DOWNLOAD
+                </a>
             </form>
         </div>
     </div>
-    <br>
 </main>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
-
-</body>
-</html>
-
-<!doctype html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
-          rel="stylesheet">
-    <!-- Bootstrap CSS -->
-    <link href="css/dt.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
-    <link href="css/style.css" rel="stylesheet">
-    <title>FB Combo EXPORT list</title>
-</head>
-<body>
-<?php
-include_once 'inc/header.php';
-?>
-<main class="container-fluid ">
-    <div class="row text-center">
-        <h2>Export list</h2>
-    </div>
-    <div class="row justify-content-center">
-        <div class="col-6 text-center">
-
-
-            <div class="alert alert-info" role="alert">
-                <?php echo $txtexp ?>
-
-                <br>
-            </div>
-        </div>
-    </div>
-
-    <br>
-    <div class="row justify-content-center">
-        <div class="col-6 text-center">
-            <form method="post">
-
-                <br>
-                <br>
-                <a class="btn btn-secondary" href="<?php echo 'tmp/'. $fname ?>" role="button" download>
-                    DOWNLOAD</a>
-                <br>
-
-            </form>
-        </div>
-    </div>
-    <br>
-
-
-</main>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
-<script src="js/jquery.js"></script>
-<script src="js/dtjquery.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

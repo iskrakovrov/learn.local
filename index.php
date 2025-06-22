@@ -110,10 +110,10 @@ require_once 'inc/header.php'
 
                 <div class="alert update-notice" role="alert">
                     <h4>Mobile Module Announcement</h4>
-                    <p>The mobile module and account creator will be available for purchase and operation in a few days. Please follow our announcements for updates.</p>
+                    <p>The Facebook Account Creator is now in beta testing mode. <a href="/acc_creator.php">Read more here</a>.</p>
                     <hr>
                     <h4>Объявление о мобильном модуле</h4>
-                    <p>Продажа и работа мобильного модуля и регистратора аккаунтов начнется через несколько дней. Следите за нашими объявлениями для получения обновлений.</p>
+                    <p>Регистратор аккаунтов Facebook запущен в тестовом режиме. Подробнее читайте <a href="/acc_creator.php">Read more here</a></p>
                 </div>
             </div>
         </div>
