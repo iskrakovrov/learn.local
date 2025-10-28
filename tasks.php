@@ -1,529 +1,336 @@
-<!doctype html>
 <?php
+// Включение отображения всех ошибок
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+// Убираем session_start() здесь, так как он уже есть в inc/init.php
 include_once('inc/init.php');
 require_once('inc/db.php');
 require_once('function/function.php');
-$lang = $_SESSION['lang'] . '.php';
-require_once($lang);
 
-
-$ids = $_SESSION['ids'];
-$numberTemplate = $_SESSION['numberTemplate'];
-$add_task = $_POST['add_task'];
-$setup = $_POST['action'];
-
-
-if ($add_task == 'login') {
-
-    $st[] = array(
-
-        'sbor' => $setup[0],
-        'delphone' => $setup[1],
-        'smart' => $setup[2],
-        'tock' => $setup[3],
-        'minvite' => $setup[4],
-        'msuggest' => $setup[5],
-        'mlike' => $setup[6],
-        'mcomments' => $setup[7],
-        'mmessage' => $setup[8],
-        'tstart' => $setup[9],
-        'nproxy' => $setup[10],
-        'get' => $setup[11],
-        'bat' => $setup[12],
-        'ava' => $setup[13],
-        'sf' => $setup[14],
-        'end' => $setup[15],
-        'hand' => $setup[16],
-        'per' => $setup[17],
-        'groups' => $setup[18],
-
-
-    );
-    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
+$lang = isset($_SESSION['lang']) ? $_SESSION['lang'] . '.php' : 'ru.php';
+if (file_exists($lang)) {
+    require_once($lang);
+} else {
+    echo "Языковой файл $lang не найден!";
 }
 
-if ($add_task == 'new_accounts') {
-    $st[] = array(
-        'listid' => $_REQUEST['listid'],
-        'geo' => $_REQUEST['geo'],
-        'num_i' => $_REQUEST['num_i'],
-        'pause' => $_REQUEST['pause'],
-        'confirm' => $_REQUEST['confirm'],
-        'num_co' => $_REQUEST['num_co'],
-        'f24' => $_REQUEST['f24'],
+$ids = isset($_SESSION['ids']) ? $_SESSION['ids'] : [];
+$numberTemplate = isset($_SESSION['numberTemplate']) ? $_SESSION['numberTemplate'] : '';
+$add_task = isset($_POST['add_task']) ? $_POST['add_task'] : '';
+$setup = isset($_POST['action']) ? $_POST['action'] : [];
 
-
-    );
-    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
+// Функция для безопасного получения значений из REQUEST
+function getRequestValue($key, $default = '') {
+    return isset($_REQUEST[$key]) ? $_REQUEST[$key] : $default;
 }
 
-if ($add_task == 'create_pages') {
-    $st[] = array(
-        'mode' => $_REQUEST['mode'],
-        'names' => $_REQUEST['names'],
-        'num_p' => $_REQUEST['num_p'],
+// Конфигурация всех типов задач
+$taskConfigs = [
+    'login' => [
+        'sbor' => isset($setup[0]) ? $setup[0] : '',
+        'delphone' => isset($setup[1]) ? $setup[1] : '',
+        'smart' => isset($setup[2]) ? $setup[2] : '',
+        'tock' => isset($setup[3]) ? $setup[3] : '',
+        'minvite' => isset($setup[4]) ? $setup[4] : '',
+        'msuggest' => isset($setup[5]) ? $setup[5] : '',
+        'mlike' => isset($setup[6]) ? $setup[6] : '',
+        'mcomments' => isset($setup[7]) ? $setup[7] : '',
+        'mmessage' => isset($setup[8]) ? $setup[8] : '',
+        'tstart' => isset($setup[9]) ? $setup[9] : '',
+        'nproxy' => isset($setup[10]) ? $setup[10] : '',
+        'get' => isset($setup[11]) ? $setup[11] : '',
+        'bat' => isset($setup[12]) ? $setup[12] : '',
+        'ava' => isset($setup[13]) ? $setup[13] : '',
+        'sf' => isset($setup[14]) ? $setup[14] : '',
+        'end' => isset($setup[15]) ? $setup[15] : '',
+        'hand' => isset($setup[16]) ? $setup[16] : '',
+        'per' => isset($setup[17]) ? $setup[17] : '',
+        'groups' => isset($setup[18]) ? $setup[18] : '',
+    ],
+    'new_accounts' => [
+        'listid' => getRequestValue('listid'),
+        'geo' => getRequestValue('geo'),
+        'num_i' => getRequestValue('num_i'),
+        'pause' => getRequestValue('pause'),
+        'confirm' => getRequestValue('confirm'),
+        'num_co' => getRequestValue('num_co'),
+        'f24' => getRequestValue('f24'),
+    ],
+    'create_pages' => [
+        'mode' => getRequestValue('mode'),
+        'names' => getRequestValue('names'),
+        'num_p' => getRequestValue('num_p'),
+    ],
+    'global_invite' => [
+        'ti0' => getRequestValue('ti0'),
+        'ti1' => getRequestValue('ti1'),
+        'ti2' => getRequestValue('ti2'),
+        'ti3' => getRequestValue('ti3'),
+        'ti4' => getRequestValue('ti4'),
+        'ti5' => getRequestValue('ti5'),
+    ],
+    'banhammer' => [
+        'bh1' => getRequestValue('bh'),
+    ],
+    'instagram' => [
+        'cm' => getRequestValue('cm'),
+        'f24' => getRequestValue('f24'),
+    ],
+    'rss_post' => [
+        'cat' => getRequestValue('cat'),
+        'mode' => getRequestValue('mode'),
+        'txt' => getRequestValue('txt'),
+        'uniq' => getRequestValue('uniq'),
+        'prc' => getRequestValue('prc'),
+        'save' => getRequestValue('save'),
+        'f24' => getRequestValue('f24'),
+    ],
+    'invite_like' => [
+        'num_i' => getRequestValue('num_i'),
+        'pause' => getRequestValue('pause'),
+        'posts' => getRequestValue('posts'),
+        'confirm' => getRequestValue('confirm'),
+        'num_co' => getRequestValue('num_co'),
+        'f24' => getRequestValue('f24'),
+    ],
+    'coockie' => [
+        'cat' => getRequestValue('cat'),
+        'num_s' => getRequestValue('num_s'),
+    ],
+    'add_mail' => [
+        'am' => getRequestValue('am'),
+        'cm' => getRequestValue('cm'),
+    ],
+    'farm' => [
+        'cat' => getRequestValue('cat'),
+        'like_page' => getRequestValue('like_page'),
+        'num_lp' => getRequestValue('num_lp'),
+        'like_gr' => getRequestValue('like_gr'),
+        'num_gr' => getRequestValue('num_gr'),
+        'like_gr1' => getRequestValue('like_gr1'),
+        'num_gr1' => getRequestValue('num_gr1'),
+        'cat1' => getRequestValue('cat1'),
+        'like_feed' => getRequestValue('feed'),
+        'num_l' => getRequestValue('num_l'),
+        'like_adv' => getRequestValue('like_adv'),
+        'p_like_adv' => getRequestValue('p_like_adv'),
+        'f24' => getRequestValue('f24'),
+    ],
+    'filling_accounts' => [
+        'currc' => getRequestValue('currc'),
+        'edu' => getRequestValue('edu'),
+        'work' => getRequestValue('work'),
+        'fname' => getRequestValue('fname'),
+        'lname' => getRequestValue('lname'),
+        'cover' => getRequestValue('cover'),
+        'ava' => getRequestValue('ava'),
+        'apost' => getRequestValue('apost'),
+        'priv' => getRequestValue('priv'),
+    ],
+    'mess_sbor' => [
+        'vm' => getRequestValue('vm'),
+        'f24' => getRequestValue('f24'),
+    ],
+    'post_to_group' => [
+        'ntask' => getRequestValue('ntask'),
+        'mode3' => getRequestValue('mode3'),
+        'type' => getRequestValue('type'),
+        'post' => getRequestValue('post'),
+        'mod1' => getRequestValue('mod1'),
+        'res' => getRequestValue('res'),
+        'npost' => getRequestValue('npost'),
+        'nday' => getRequestValue('nday'),
+        'nfr' => getRequestValue('nfr'),
+        'nl' => getRequestValue('nl'),
+        'ng' => getRequestValue('ng'),
+        'scr' => getRequestValue('scr'),
+        'mod4' => getRequestValue('mod4'),
+        'spost' => getRequestValue('spost'),
+        'fname' => getRequestValue('fname'),
+        'f24' => getRequestValue('f24'),
+    ],
+    'a_post_to_group' => [
+        'ntask' => getRequestValue('ntask'),
+        'mode3' => getRequestValue('mode3'),
+        'type' => getRequestValue('type'),
+        'post' => getRequestValue('post'),
+        'mod1' => getRequestValue('mod1'),
+        'res' => getRequestValue('res'),
+        'npost' => getRequestValue('npost'),
+        'scr' => getRequestValue('scr'),
+        'mod4' => getRequestValue('mod4'),
+        'spost' => getRequestValue('spost'),
+        'fname' => getRequestValue('fname'),
+        'f24' => getRequestValue('f24'),
+    ],
+    'erase_invite' => [
+        'num_e' => getRequestValue('num_e'),
+    ],
+    'parse_group' => [
+        'key' => getRequestValue('cat'),
+        'group' => getRequestValue('cat1'),
+        'num' => getRequestValue('num'),
+    ],
+    'invite_suggestions' => [
+        'geo' => getRequestValue('geo'),
+        'num_i' => getRequestValue('num_i'),
+        'pause' => getRequestValue('pause'),
+        'filter' => getRequestValue('filter'),
+        'wln' => getRequestValue('wln'),
+        'bln' => getRequestValue('bln'),
+        'gbl' => getRequestValue('gbl'),
+        'confirm' => getRequestValue('confirm'),
+        'num_co' => getRequestValue('num_co'),
+        'f24' => getRequestValue('f24'),
+    ],
+    'invite_from_group' => [
+        'gr' => getRequestValue('gr'),
+        'mode' => getRequestValue('mode'),
+        'geo' => getRequestValue('geo'),
+        'num_i' => getRequestValue('num_i'),
+        'pause' => getRequestValue('pause'),
+        'filter' => getRequestValue('filter'),
+        'wln' => getRequestValue('wln'),
+        'bln' => getRequestValue('bln'),
+        'gbl' => getRequestValue('gbl'),
+        'confirm' => getRequestValue('confirm'),
+        'num_co' => getRequestValue('num_co'),
+        'parse' => getRequestValue('parse'),
+        'f24' => getRequestValue('f24'),
+    ],
+    'post_to_profile' => [
+        'cat' => getRequestValue('cat'),
+        'day' => getRequestValue('day'),
+        'multi1' => getRequestValue('multi1'),
+        'multi2' => getRequestValue('multi2'),
+        'spost' => getRequestValue('spost'),
+        'prc' => getRequestValue('prc'),
+        'tag' => getRequestValue('tag'),
+        'tag1' => getRequestValue('tag1'),
+        'f24' => getRequestValue('f24'),
+    ],
+    'like' => [
+        'cat' => getRequestValue('cat'),
+        'num_l' => getRequestValue('num_l'),
+        'pause' => getRequestValue('pause'),
+        'f24' => getRequestValue('f24'),
+    ],
+    'join_group' => [
+        'cat' => getRequestValue('cat'),
+        'num_l' => getRequestValue('num_l'),
+        'pause' => getRequestValue('pause'),
+        'f24' => getRequestValue('f24'),
+    ],
+    'happy' => [
+        'cat' => getRequestValue('cat'),
+        'none' => getRequestValue('none'),
+        'f24' => getRequestValue('f24'),
+    ],
+    'page_invite' => [
+        'cat' => getRequestValue('cat'),
+        'inv' => getRequestValue('inv'),
+        'n_inv' => getRequestValue('n_inv'),
+        'f24' => getRequestValue('f24'),
+    ],
+    'invite_to_group' => [
+        'cat' => getRequestValue('cat'),
+        'n_gr' => getRequestValue('n_gr'),
+        'n_inv' => getRequestValue('n_inv'),
+        'f24' => getRequestValue('f24'),
+    ],
+    'commenting' => [
+        'url' => getRequestValue('url'),
+        'coml' => getRequestValue('coml'),
+        'num_cp' => getRequestValue('num_cp'),
+        'num_cd' => getRequestValue('num_cd'),
+        'pause' => getRequestValue('pause'),
+        'uq' => getRequestValue('uq'),
+        'like' => getRequestValue('like'),
+        'f24' => getRequestValue('f24'),
+        'scr' => getRequestValue('scr'),
+        'fname' => getRequestValue('fname'),
+    ],
+    'review_page' => [
+        'url' => getRequestValue('url'),
+        'coml' => getRequestValue('coml'),
+        'num_cp' => getRequestValue('num_cp'),
+        'like' => getRequestValue('like'),
+        'f24' => getRequestValue('f24'),
+    ],
+    'share' => [
+        'one' => getRequestValue('one'),
+        'url' => getRequestValue('url'),
+        'acc' => getRequestValue('acc'),
+        'stxt' => getRequestValue('stxt'),
+        'num_cp' => getRequestValue('num_cp'),
+        'num_sd' => getRequestValue('num_sd'),
+        'prc' => getRequestValue('prc'),
+        'pause' => getRequestValue('pause'),
+        'like' => getRequestValue('like'),
+        'f24' => getRequestValue('f24'),
+    ],
+    'comm_public' => [
+        'url' => getRequestValue('url'),
+        'coml' => getRequestValue('coml'),
+        'num_cp' => getRequestValue('num_cp'),
+        'num_cd' => getRequestValue('num_cd'),
+        'pause' => getRequestValue('pause'),
+        'like' => getRequestValue('like'),
+        'f24' => getRequestValue('f24'),
+    ],
+    'comoai' => [
+        'url' => getRequestValue('url'),
+        'coml' => getRequestValue('coml'),
+        'num_cp' => getRequestValue('num_cp'),
+        'num_cd' => getRequestValue('num_cd'),
+        'pause' => getRequestValue('pause'),
+        'like' => getRequestValue('like'),
+        'f24' => getRequestValue('f24'),
+    ],
+    'accept_friends' => [
+        'cat' => getRequestValue('cat'),
+        'filter' => getRequestValue('filter'),
+        'black' => getRequestValue('black'),
+        'white' => getRequestValue('white'),
+        'one_s' => getRequestValue('one_s'),
+        'pause' => getRequestValue('pause'),
+        'f24' => getRequestValue('f24'),
+    ],
+    'post_oai' => [
+        'promt' => getRequestValue('promt'),
+        'img' => getRequestValue('img'),
+        'f24' => getRequestValue('f24'),
+    ],
+    'parse_active' => [
+        'urls' => getRequestValue('cat'),
+        'save_l' => getRequestValue('cat1'),
+    ],
+    '2fa' => [
+        '2fa' => getRequestValue('2fa'),
+    ],
+];
 
-
-    );
-    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
+// Обработка задачи, если она есть в конфигурации
+if (!empty($add_task)) {
+    if (isset($taskConfigs[$add_task])) {
+        $st[] = $taskConfigs[$add_task];
+        if (function_exists('generateAndExecuteTask')) {
+            generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
+        } else {
+            echo "Функция generateAndExecuteTask не найдена!";
+        }
+    } else {
+        echo "Конфигурация для задачи '$add_task' не найдена!";
+    }
 }
 
-if ($add_task == 'global_invite') {
-    $st[] = array(
-        'ti0' => $_REQUEST['ti0'],
-        'ti1' => $_REQUEST['ti1'],
-        'ti2' => $_REQUEST['ti2'],
-        'ti3' => $_REQUEST['ti3'],
-        'ti4' => $_REQUEST['ti4'],
-        'ti5' => $_REQUEST['ti5'],
-
-
-    );
-    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
-}
-if ($add_task == 'banhammer') {
-
-    $options = implode(',', $_POST['bh']);
-
-    $st[] = array(
-        'bh1' => $_REQUEST['bh'],
-
-
-    );
-    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
-}
-if ($add_task == 'instagram') {
-    $st[] = array(
-
-        'cm' => $_REQUEST['cm'],
-        'f24' => $_REQUEST['f24'],
-
-
-    );
-    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
-}
-
-
-if ($add_task == 'rss_post') {
-    $st[] = array(
-
-        'cat' => $_REQUEST['cat'],
-        'mode' => $_REQUEST['mode'],
-        'txt' => $_REQUEST['txt'],
-        'uniq' => $_REQUEST['uniq'],
-        'prc' => $_REQUEST['prc'],
-        'save' => $_REQUEST['save'],
-        'f24' => $_REQUEST['f24'],
-
-
-    );
-    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
-}
-
-
-if ($add_task == 'coockie') {
-    $st[] = array(
-        'cat' => $_REQUEST['cat'],
-        'num_s' => $_REQUEST['num_s'],
-
-    );
-    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
-}
-if ($add_task == 'add_mail') {
-    $st[] = array(
-        'am' => $_REQUEST['am'],
-        'cm' => $_REQUEST['cm'],
-
-
-    );
-    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
-}
-
-if ($add_task == 'farm') {
-    $st[] = array(
-        'cat' => $_REQUEST['cat'],
-        'like_page' => $_REQUEST['like_page'],
-        'num_lp' => $_REQUEST['num_lp'],
-        'like_gr' => $_REQUEST['like_gr'],
-        'num_gr' => $_REQUEST['num_gr'],
-        'like_gr1' => $_REQUEST['like_gr1'],
-        'num_gr1' => $_REQUEST['num_gr1'],
-        'cat1' => $_REQUEST['cat1'],
-        'like_feed' => $_REQUEST['feed'],
-        'num_l' => $_REQUEST['num_l'],
-        'like_adv' => $_REQUEST['like_adv'],
-        'p_like_adv' => $_REQUEST['p_like_adv'],
-        'f24' => $_REQUEST['f24'],
-    );
-    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
-}
-if ($add_task == 'filling_accounts') {
-    $st[] = array(
-        'currc' => $_REQUEST['currc'],
-        'edu' => $_REQUEST['edu'],
-        'work' => $_REQUEST['work'],
-        'fname' => $_REQUEST['fname'],
-        'lname' => $_REQUEST['lname'],
-        'cover' => $_REQUEST['cover'],
-        'ava' => $_REQUEST['ava'],
-        'apost' => $_REQUEST['apost'],
-        'priv' => $_REQUEST['priv'],
-
-    );
-    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
-}
-
-if ($add_task == 'mess_sbor') {
-    $st[] = array(
-        'vm' => $_REQUEST['vm'],
-        'f24' => $_REQUEST['f24'],
-
-    );
-    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
-}
-
-if ($add_task == 'post_to_group') {
-    $st[] = array(
-        'ntask' => $_REQUEST['ntask'],
-        'mode3' => $_REQUEST['mode3'],
-        'type' => $_REQUEST['type'],
-        'post' => $_REQUEST['post'],
-        'mod1' => $_REQUEST['mod1'],
-        'res' => $_REQUEST['res'],
-        'npost' => $_REQUEST['npost'],
-        'scr' => $_REQUEST['scr'],
-        'mod4' => $_REQUEST['mod4'],
-        'spost' => $_REQUEST['spost'],
-        'fname' => $_REQUEST['fname'],
-        'f24' => $_REQUEST['f24'],
-
-    );
-
-    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
-
-}
-if ($add_task == 'a_post_to_group') {
-    $st[] = array(
-        'ntask' => $_REQUEST['ntask'],
-        'mode3' => $_REQUEST['mode3'],
-        'type' => $_REQUEST['type'],
-        'post' => $_REQUEST['post'],
-        'mod1' => $_REQUEST['mod1'],
-        'res' => $_REQUEST['res'],
-        'npost' => $_REQUEST['npost'],
-        'scr' => $_REQUEST['scr'],
-        'mod4' => $_REQUEST['mod4'],
-        'spost' => $_REQUEST['spost'],
-        'fname' => $_REQUEST['fname'],
-        'f24' => $_REQUEST['f24'],
-
-    );
-
-    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
-
-}
-if ($add_task == 'erase_invite') {
-    $st[] = array(
-        'num_e' => $_REQUEST['num_e'],
-
-    );
-    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
-}
-
-if ($add_task == 'parse_group') {
-    $setup = $_POST['action'];
-    $st[] = array(
-
-        'key' => $_REQUEST['cat'],
-        'group' => $_REQUEST['cat1'],
-        'num' => $_REQUEST['num'],
-
-
-    );
-    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
-}
-if ($add_task == 'invite_suggestions') {
-    $setup = $_POST['action'];
-    $st[] = array(
-
-        'geo' => $_REQUEST['geo'],
-        'num_i' => $_REQUEST['num_i'],
-        'pause' => $_REQUEST['pause'],
-        'filter' => $_REQUEST['filter'],
-        'wln' => $_REQUEST['wln'],
-        'bln' => $_REQUEST['bln'],
-        'gbl' => $_REQUEST['gbl'],
-        'confirm' => $_REQUEST['confirm'],
-        'num_co' => $_REQUEST['num_co'],
-        'f24' => $_REQUEST['f24'],
-
-
-    );
-    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
-}
-
-if ($add_task == 'invite_from_group') {
-    $setup = $_POST['action'];
-    $st[] = array(
-        'gr' => $_REQUEST['gr'],
-        'mode' => $_REQUEST['mode'],
-        'geo' => $_REQUEST['geo'],
-        'num_i' => $_REQUEST['num_i'],
-        'pause' => $_REQUEST['pause'],
-        'filter' => $_REQUEST['filter'],
-        'wln' => $_REQUEST['wln'],
-        'bln' => $_REQUEST['bln'],
-        'gbl' => $_REQUEST['gbl'],
-        'confirm' => $_REQUEST['confirm'],
-        'num_co' => $_REQUEST['num_co'],
-        'parse' => $_REQUEST['parse'],
-        'f24' => $_REQUEST['f24'],
-
-
-    );
-    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
-}
-
-if ($add_task == 'post_to_profile') {
-    $setup = $_POST['action'];
-    $st[] = array(
-
-
-        'cat' => $_REQUEST['cat'],
-        'day' => $_REQUEST['day'],
-        'multi1' => $_REQUEST['multi1'],
-        'multi2' => $_REQUEST['multi2'],
-        'spost' => $_REQUEST['spost'],
-        'prc' => $_REQUEST['prc'],
-        'f24' => $_REQUEST['f24'],
-
-
-    );
-    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
-}
-
-if ($add_task == 'like') {
-    $setup = $_POST['action'];
-    $st[] = array(
-
-
-        'cat' => $_REQUEST['cat'],
-        'num_l' => $_REQUEST['num_l'],
-        'pause' => $_REQUEST['pause'],
-        'f24' => $_REQUEST['f24'],
-
-
-    );
-    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
-}
-if ($add_task == 'join_group') {
-    $setup = $_POST['action'];
-    $st[] = array(
-
-
-        'cat' => $_REQUEST['cat'],
-        'num_l' => $_REQUEST['num_l'],
-        'pause' => $_REQUEST['pause'],
-        'f24' => $_REQUEST['f24'],
-
-
-    );
-    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
-}
-if ($add_task == 'happy') {
-    $setup = $_POST['action'];
-    $st[] = array(
-
-
-        'cat' => $_REQUEST['cat'],
-
-        'none' => $_REQUEST['none'],
-        'f24' => $_REQUEST['f24'],
-
-
-    );
-    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
-}
-if ($add_task == 'page_invite') {
-    $setup = $_POST['action'];
-    $st[] = array(
-
-
-        'cat' => $_REQUEST['cat'],
-        'inv' => $_REQUEST['inv'],
-        'n_inv' => $_REQUEST['n_inv'],
-        'f24' => $_REQUEST['f24'],
-
-
-    );
-    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
-}
-if ($add_task == 'invite_to_group') {
-    $setup = $_POST['action'];
-    $st[] = array(
-
-
-        'cat' => $_REQUEST['cat'],
-        'n_gr' => $_REQUEST['n_gr'],
-        'n_inv' => $_REQUEST['n_inv'],
-        'f24' => $_REQUEST['f24'],
-
-
-    );
-    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
-}
-
-if ($add_task == 'commenting') {
-
-    $st[] = array(
-
-
-        'url' => $_REQUEST['url'],
-        'coml' => $_REQUEST['coml'],
-        'num_cp' => $_REQUEST['num_cp'],
-        'num_cd' => $_REQUEST['num_cd'],
-        'pause' => $_REQUEST['pause'],
-        'uq' => $_REQUEST['uq'],
-        'like' => $_REQUEST['like'],
-        'f24' => $_REQUEST['f24'],
-        'scr' => $_REQUEST['scr'],
-        'fname' => $_REQUEST['fname'],
-
-
-    );
-    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
-}
-
-if ($add_task == 'review_page') {
-
-    $st[] = array(
-
-
-        'url' => $_REQUEST['url'],
-        'coml' => $_REQUEST['coml'],
-        'num_cp' => $_REQUEST['num_cp'],
-
-        'like' => $_REQUEST['like'],
-        'f24' => $_REQUEST['f24'],
-
-
-    );
-    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
-}
-
-if ($add_task == 'share') {
-    $setup = $_POST['action'];
-    $st[] = array(
-
-        'one' => $_REQUEST['one'],
-        'url' => $_REQUEST['url'],
-        'acc' => $_REQUEST['acc'],
-        'stxt' => $_REQUEST['stxt'],
-        'num_cp' => $_REQUEST['num_cp'],
-        'num_sd' => $_REQUEST['num_sd'],
-        'prc' => $_REQUEST['prc'],
-        'pause' => $_REQUEST['pause'],
-        'like' => $_REQUEST['like'],
-        'f24' => $_REQUEST['f24'],
-
-
-    );
-    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
-}
-if ($add_task == 'comm_public') {
-
-    $st[] = array(
-
-
-        'url' => $_REQUEST['url'],
-        'coml' => $_REQUEST['coml'],
-        'num_cp' => $_REQUEST['num_cp'],
-        'num_cd' => $_REQUEST['num_cd'],
-        'pause' => $_REQUEST['pause'],
-        'like' => $_REQUEST['like'],
-        'f24' => $_REQUEST['f24'],
-
-
-    );
-    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
-}
-
-if ($add_task == 'comoai') {
-    $setup = $_POST['action'];
-    $st[] = array(
-
-
-        'url' => $_REQUEST['url'],
-        'coml' => $_REQUEST['coml'],
-        'num_cp' => $_REQUEST['num_cp'],
-        'num_cd' => $_REQUEST['num_cd'],
-        'pause' => $_REQUEST['pause'],
-        'like' => $_REQUEST['like'],
-        'f24' => $_REQUEST['f24'],
-
-
-    );
-    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
-}
-
-if ($add_task == 'accept_friends') {
-    $setup = $_POST['action'];
-    $st[] = array(
-
-        'cat' => $_REQUEST['cat'],
-        'filter' => $_REQUEST['filter'],
-        'black' => $_REQUEST['black'],
-        'white' => $_REQUEST['white'],
-        'one_s' => $_REQUEST['one_s'],
-        'pause' => $_REQUEST['pause'],
-        'f24' => $_REQUEST['f24'],
-
-
-    );
-    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
-}
-if ($add_task == 'post_oai') {
-    $setup = $_POST['action'];
-    $st[] = array(
-
-        'promt' => $_REQUEST['promt'],
-        'img' => $_REQUEST['img'],
-        'f24' => $_REQUEST['f24'],
-
-
-    );
-    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
-}
-
-if ($add_task == 'parse_active') {
-    $setup = $_POST['action'];
-    $st[] = array(
-
-        'urls' => $_REQUEST['cat'],
-        'save_l' => $_REQUEST['cat1'],
-
-
-    );
-    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
-}
-
-if ($add_task == '2fa') {
-    $st[] = array(
-        '2fa' => $_REQUEST['2fa'],
-
-    );
-    generateAndExecuteTask($add_task, $st, $ids, $numberTemplate);
-
-}
-
-
-$ids = $_SESSION['ids'];
-$task = $_REQUEST['task'];
-if (empty($task)) {
-    $task = $_SESSION['task'];
-}
+$ids = isset($_SESSION['ids']) ? $_SESSION['ids'] : [];
+$task = isset($_REQUEST['task']) ? $_REQUEST['task'] : (isset($_SESSION['task']) ? $_SESSION['task'] : []);
 
 ?>
+<!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <!-- Required meta tags -->
@@ -547,38 +354,33 @@ if (empty($task)) {
 <body>
 <?php
 
-$w = $task[0];
-if (!empty($w)) {
-    $url = 'action' . '/' . $w;
-    array_shift($task);
-    include_once($url);
+if (!empty($task) && is_array($task)) {
+    $w = $task[0];
+    if (!empty($w)) {
+        $url = 'action' . '/' . $w;
+        array_shift($task);
+        if (file_exists($url)) {
+            include_once($url);
+        } else {
+            echo "<div class='alert alert-danger'>Файл $url не найден!</div>";
+        }
+    } else {
+        header('Location: accounts.php');
+        exit;
+    }
 } else {
     header('Location: accounts.php');
-    exit;
 }
-session_start();
+
+// Убираем session_start() здесь тоже
 $_SESSION['task'] = $task;
 $_SESSION['ids'] = $ids;
 
-
 ?>
-
-
 <!-- Option 1: Bootstrap Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
 <script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
-
-
-<!-- Option 2: Separate Popper and Bootstrap JS -->
-<!--
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
--->
-
 </body>
 </html>
-
-
-

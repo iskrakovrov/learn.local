@@ -521,6 +521,10 @@ function d_acc($args): void
     }
 }
 
+function generateAndExecuteTask($add_task, $st, $ids, $numberTemplate) {
+    gen_task($ids, $st, $add_task, $numberTemplate);
+}
+
 function gen_task($ids, $st, $add_task, $numberTemplate) {
     $data = array(
         'data' => $st,
@@ -532,7 +536,7 @@ function gen_task($ids, $st, $add_task, $numberTemplate) {
         // Обработка ошибки JSON, если необходимо
     }
 
-    $time = Time();
+    $time = time();
 
     foreach ($ids as $a) {
         if ($a != 't') {
@@ -718,9 +722,6 @@ function generate_text_by_keyword($keyword, $language, $api_key, $desired_length
     }
 
     return $generated_text;
-}
-function generateAndExecuteTask($add_task, $st, $ids, $numberTemplate) {
-    gen_task($ids, $st, $add_task, $numberTemplate);
 }
 
 

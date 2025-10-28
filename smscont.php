@@ -25,7 +25,7 @@ try {
         throw new Exception('Bad API');
     }
 
-    // 3. Получаем сервисы с API-ключом и странами (включая api_key)
+    // 3. Получаем сервисы с API-ключом и странами (включая proxy_id)
     $services = selectAll(
         "SELECT 
             s.id, 
@@ -34,6 +34,7 @@ try {
             s.api_key,  
             s.balance,
             s.is_active,
+            s.proxy_id,
             DATE_FORMAT(s.balance_updated, '%Y-%m-%d %H:%i:%s') as balance_updated
          FROM sms_services s
          INNER JOIN service_countries sc ON s.id = sc.service_id

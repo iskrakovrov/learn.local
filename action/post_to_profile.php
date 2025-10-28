@@ -3,6 +3,8 @@ $sql = 'SELECT * FROM lists WHERE cat = 5';
 $qw = selectAll($sql);
 $sql = 'SELECT * FROM lists WHERE cat = 11';
 $qw2 = selectAll($sql);
+$sql = 'SELECT * FROM lists WHERE cat = 9';
+$qw3 = selectAll($sql);
 ?>
 
 <main class="container-fluid ">
@@ -38,6 +40,32 @@ $qw2 = selectAll($sql);
                             <option value="<?php echo $a['id'] ?>"><?php echo $a['name']; ?></option>
                         <?php } ?>
                     </select>
+
+                    <label for="tag" class="control-label">Tagging Friends. Dictionary.</label>
+
+                    <select name="tag" id="tag" class="form-control">
+                        <option value="0">Don't tag</option>
+                        <?php
+                        $i = 0;
+                        foreach ($qw3 as $t) {
+                            $i++; ?>
+                            <option value="<?php echo $t['id'] ?>"><?php echo $t['name']; ?></option>
+                        <?php } ?>
+                    </select>
+                    <br>
+                    <label for="tag1" class="control-label">Keep tag history?</label>
+                    <select name="tag1" id="tag1" class="form-control">
+                        <option value="1">YES</option>
+                        <option value="2">NO</option>
+                    </select>
+                    <br>
+
+
+
+
+                    <label for="mtag">Maximum number of tags</label>
+                    <input type="number" name="mtag" id="mtag" class="form-control" value="20" required>
+
 
                     <br>
 

@@ -50,6 +50,7 @@ $qw2 = selectAll($sql);
 
                     <label for="mode3" class="control-label">Mode posting</label>
                     <select name="mode3" id="mode3" class="form-control">
+                        <option value="4">Warm-up only </option>
                         <option value="1">Massive posting</option>
                         <option value="2">Posting once per.
                             Group reset after 24 hours</option>
@@ -103,7 +104,20 @@ $qw2 = selectAll($sql);
                     <br>
 
                     <label for="npost">How many posts should one account post per launch?</label>
-                    <input type="text" name="npost" id="npost" class="form-control" value="5" required>
+                    <input type="text" name="npost" id="npost" class="form-control" value="2" required>
+                    <br>
+
+                    <label for="nday">How many days should I wait after joining a group?</label>
+                    <input type="text" name="nday" id="nday" class="form-control" value="5" required>
+                    <br>
+
+                    <label for="nfr">If possible, how many people from the group should I invite as friends?</label>
+                    <input type="text" name="nfr" id="nfr" class="form-control" value="5" required>
+                    <br>
+
+
+                    <label for="nl">If possible, how many likes should I put in the group?</label>
+                    <input type="text" name="nl" id="nl" class="form-control" value="5" required>
                     <br>
                     <!--             <label for="mod3" class="control-label"></label>
                                  <select name="mod3" id="mod3" class="form-control">
@@ -119,7 +133,9 @@ $qw2 = selectAll($sql);
 
                     </select>
                     <br>
-
+                    <label for="ng">How many groups should I join if I'm not in a group?</label>
+                    <input type="text" name="ng" id="ng" class="form-control" value="3" required>
+                    <br>
                     <label for="scr" class="control-label">Take screenshots of published posts</label>
                     <select name="scr" id="scr" class="form-control">
                         <option value="1">YES</option>

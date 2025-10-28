@@ -120,6 +120,7 @@ require_once 'inc/alerts.php';
                     <a class="btn btn-secondary" href="groups.php" role="button">Account groups</a>
                     <a class="btn btn-secondary" href="tags.php" role="button">Account tags</a>
                     <a class="btn btn-success" href="add_acc2.php" role="button">Add accounts</a>
+                    <a class="btn btn-success" href="add_acc_proxy.php" role="button">Add accounts with individual proxies</a>
                     <form action="reset_groups.php" method="post" class="d-inline">
 
                         <select name="ntask" id="ntask" class="form-select d-inline"

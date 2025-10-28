@@ -32,6 +32,7 @@ $qw = selectAll($sql);
                         <option value="accept_friends"><?php echo $txttask21 ?></option>
                         <option value="invite_suggestions"><?php echo $txtglobali8 ?></option>
                         <option value="new_accounts"><?php echo $txtglobali11 ?></option>
+                        <option value="invite_like">Invite from likes</option>
                         <option value="invite_from_group"><?php echo $txtglobali9 ?></option>
                         <option value="stop"><?php echo $txtglobali13 ?></option>
 
@@ -45,6 +46,7 @@ $qw = selectAll($sql);
                         <option value="accept_friends"><?php echo $txttask21 ?></option>
                         <option value="invite_suggestions"><?php echo $txtglobali8 ?></option>
                         <option value="new_accounts"><?php echo $txtglobali11 ?></option>
+                        <option value="invite_like">Invite from likes</option>
                         <option value="invite_from_group"><?php echo $txtglobali9 ?></option>
                         <option value="stop"><?php echo $txtglobali13 ?></option>
 
@@ -57,6 +59,7 @@ $qw = selectAll($sql);
                         <option value="accept_friends"><?php echo $txttask21 ?></option>
                         <option value="invite_suggestions"><?php echo $txtglobali8 ?></option>
                         <option value="new_accounts"><?php echo $txtglobali11 ?></option>
+                        <option value="invite_like">Invite from likes</option>
                         <option value="invite_from_group"><?php echo $txtglobali9 ?></option>
                         <option value="stop"><?php echo $txtglobali13 ?></option>
 
@@ -68,6 +71,19 @@ $qw = selectAll($sql);
                     <select name="ti3" id="ti3" class="form-control">
                         <option value="accept_friends"><?php echo $txttask21 ?></option>
                         <option value="invite_suggestions"><?php echo $txtglobali8 ?></option>
+                        <option value="invite_like">Invite from likes</option>
+                        <option value="new_accounts"><?php echo $txtglobali11 ?></option>
+                        <option value="invite_from_group"><?php echo $txtglobali9 ?></option>
+                        <option value="stop"><?php echo $txtglobali13 ?></option>
+
+                    </select>
+                    <br>
+                    <label for="ti4" class="control-label">Fifth act</label>
+
+                    <select name="ti4" id="ti4" class="form-control">
+                        <option value="accept_friends"><?php echo $txttask21 ?></option>
+                        <option value="invite_suggestions"><?php echo $txtglobali8 ?></option>
+                        <option value="invite_like">Invite from likes</option>
                         <option value="new_accounts"><?php echo $txtglobali11 ?></option>
                         <option value="invite_from_group"><?php echo $txtglobali9 ?></option>
                         <option value="stop"><?php echo $txtglobali13 ?></option>

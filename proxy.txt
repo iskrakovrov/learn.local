@@ -1,0 +1,12 @@
+socks5://iskrakovrov:Kamel1979@ip.piratproxy.com:8901
+socks5://iskrakovrov:Kamel1979@ip.piratproxy.com:8902
+socks5://iskrakovrov:Kamel1979@ip.piratproxy.com:8903
+socks5://iskrakovrov:Kamel1979@ip.piratproxy.com:8904
+socks5://iskrakovrov:Kamel1979@ip.piratproxy.com:8905
+socks5://iskrakovrov:Kamel1979@ip.piratproxy.com:8906
+socks5://iskrakovrov:Kamel1979@ip.piratproxy.com:8907
+socks5://iskrakovrov:Kamel1979@ip.piratproxy.com:8908
+socks5://iskrakovrov:Kamel1979@ip.piratproxy.com:8909
+socks5://iskrakovrov:Kamel1979@ip.piratproxy.com:8910
+socks5://iskrakovrov:Kamel1979@ip.piratproxy.com:8911
+socks5://iskrakovrov:Kamel1979@ip.piratproxy.com:8912

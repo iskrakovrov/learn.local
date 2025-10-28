@@ -24,6 +24,7 @@ function getRegOptionsJson() {
             'first_name' => $option['first_name'] !== null ? (int)$option['first_name'] : null,
             'last_name' => $option['last_name'] !== null ? (int)$option['last_name'] : null,
             'mode' => (int)$option['mode'],
+            'bio' => (int)$option['bio'],
             'created_at' => $option['created_at'],
             'updated_at' => $option['updated_at']
         ];

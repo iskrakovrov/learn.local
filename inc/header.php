@@ -3,6 +3,44 @@ include_once('inc/init.php');
 require_once('inc/db.php');
 require_once('function/function.php');
 require_once('inc/version.php');
+
+// Создаем папку cache если ее нет
+if (!file_exists('cache')) {
+    mkdir('cache', 0755, true);
+}
+
+// Файлы для хранения данных
+define('CHANGE_LOG_LAST_MODIFIED_FILE', 'cache/cl_last_modified.txt');
+define('CHANGE_LOG_LAST_READ_FILE', 'cache/cl_last_read.txt');
+
+// Функция проверки обновлений Change Log
+function checkChangeLogUpdates() {
+    $remoteUrl = 'http://soft.fbcombo.com/cl.txt';
+
+    // Получаем заголовки с сервера
+    $headers = @get_headers($remoteUrl, 1);
+
+    if ($headers && isset($headers['Last-Modified'])) {
+        $lastModified = strtotime($headers['Last-Modified']);
+
+        // Сохраняем последнее время изменения
+        file_put_contents(CHANGE_LOG_LAST_MODIFIED_FILE, $lastModified);
+
+        // Получаем время последнего прочтения
+        $lastRead = file_exists(CHANGE_LOG_LAST_READ_FILE)
+            ? (int)file_get_contents(CHANGE_LOG_LAST_READ_FILE)
+            : 0;
+
+        // Если файл изменялся после последнего прочтения
+        return $lastModified > $lastRead;
+    }
+
+    return false;
+}
+
+$hasChangeLogUpdates = checkChangeLogUpdates();
+
+// Запросы к базе данных
 $sql = 'SELECT * FROM servers';
 $se = selectAll($sql);
 $sql = 'SELECT COUNT(*) FROM accounts';
@@ -64,6 +102,25 @@ $homepage = file_get_contents('https://soft.fbcombo.com/ver.php');
         margin-left: 10px;
         color: white;
     }
+    .change-log-updated {
+        position: relative;
+    }
+    .change-log-updated::after {
+        content: "";
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        width: 8px;
+        height: 8px;
+        background-color: #ff0000;
+        border-radius: 50%;
+        animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse {
+        0% { transform: scale(1); opacity: 1; }
+        50% { transform: scale(1.3); opacity: 0.7; }
+        100% { transform: scale(1); opacity: 1; }
+    }
 </style>
 <div class="outer">
     <header class="container-fluid bg-secondary">
@@ -71,7 +128,6 @@ $homepage = file_get_contents('https://soft.fbcombo.com/ver.php');
             <div class="container-fluid">
                 <a class="navbar-brand" href="/">
                     <img src="images/logo.png" alt="FB Combo Logo" height="40">
-
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -99,8 +155,6 @@ $homepage = file_get_contents('https://soft.fbcombo.com/ver.php');
                                                 class="badge badge-danger"><?php echo $er ?></span></a></li>
                                 <li>
                                     <hr class="dropdown-divider">
-
-                                    <hr class="dropdown-divider">
                                 </li>
                                 <li><a class="dropdown-item" href="repair.php">Database repair</a></li>
                                 <li>
@@ -118,7 +172,6 @@ $homepage = file_get_contents('https://soft.fbcombo.com/ver.php');
                                data-bs-toggle="dropdown" aria-expanded="false">
                                 Proxy <span class="badge badge-primary"><?php echo $cp ?></span>
                             </a>
-
                             <ul class="dropdown-menu" aria-labelledby="proxy">
                                 <li><a class="dropdown-item" href="proxy_gr.php">Proxy group</a></li>
                                 <li><a class="dropdown-item" href="add_proxy_group.php">Add Proxy group</a></li>
@@ -193,7 +246,6 @@ $homepage = file_get_contents('https://soft.fbcombo.com/ver.php');
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="e_list.php?cat=5">Posts</a>
                         </li>
-
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="messenger.php">Messenger</a>
                         </li>
@@ -215,12 +267,20 @@ $homepage = file_get_contents('https://soft.fbcombo.com/ver.php');
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="sms_services.php">SMS Services</a>
                         </li>
-
                         <li class="nav-item">
                             <a class="nav-link active" href="note.php"><strong>Note</strong></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" href="spin.php">Spintax</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active <?php echo $hasChangeLogUpdates ? 'change-log-updated' : '' ?>"
+                               href="change_log.php">
+                                Change Log
+                                <?php if ($hasChangeLogUpdates): ?>
+                                    <span class="badge bg-danger ms-1">New!</span>
+                                <?php endif; ?>
+                            </a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -240,7 +300,6 @@ $homepage = file_get_contents('https://soft.fbcombo.com/ver.php');
                                 <li><a class="dropdown-item" href="acc_creator_phone.php">Phone settings</a></li>
                             </ul>
                         </li>
-
                         <?php if ($homepage != $vers) {
                             $m = '<span style="background-color: #555; color: #ff0; padding: 2px 5px; border-radius: 3px; font-weight: bold;">UPDATE PANEL!!!</span>';
                             $lm = 'index.php';
