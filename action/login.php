@@ -1,199 +1,153 @@
-<main class="container-fluid ">
+<?php
+$taskFile = basename(__FILE__);
+$setup = $_SESSION['setup'][$taskFile] ?? [];
+
+// value
+function fv($index, $default = '') {
+    global $setup;
+    return htmlspecialchars($setup[$index] ?? $default);
+}
+// checkbox state
+function fch($index) {
+    global $setup;
+    return (!empty($setup[$index])) ? 'checked' : '';
+}
+// select state
+function fsel($index, $val) {
+    global $setup;
+    return (isset($setup[$index]) && $setup[$index] == $val) ? 'selected' : '';
+}
+?>
+
+<main class="container-fluid">
     <div class="row text-center">
         <h2>LOGIN</h2>
     </div>
-    <div class="col align-center">
 
-        <div class="row justify-content-center">
-            <div class="col-6 text-center">
-
-
-                <div class="alert alert-info" role="alert">
-                    <?php echo $txtlogin ?>
-                </div>
+    <div class="row justify-content-center">
+        <div class="col-6 text-center">
+            <div class="alert alert-info" role="alert">
+                <?= $txtlogin ?>
             </div>
         </div>
     </div>
 
+    <div class="row justify-content-center">
+        <div class="col-sm-2 text-center">
+            <form method="post" onsubmit="return Complete();">
 
-    <div class="container-fluid">
-        <div class="row justify-content-center">
-            <div class="col-sm-2 text-center">
-                <form method="post" onSubmit="return Complete();">
+                <input type="checkbox" name="action[17]" id="action[17]" value="per" <?= fch(17) ?>>
+                <label for="action[17]">
+                    Switch the account language to English for the program to work correctly
+                </label>
 
-               <input class="form-check-input" name="action[17]" type="checkbox" value="per"
-                             id="action[17]">
-                    <label class="form-check-label" for="action[17]">
-                        Switch the account language to English for the program to work correctly
-                    </label>
+                <br><br>
 
+                <input type="checkbox" name="action[16]" id="action[16]" value="hand" <?= fch(16) ?>>
+                <label for="action[16]"><?= $txtlogin40 ?></label>
 
-                    <!-- Ручной режим -->
+                <br><br>
 
-                    <br>
-
-
-                    <input class="form-check-input" name="action[16]" type="checkbox" value="hand"
-                           id="action[16]">
-                    <label class="form-check-label" for="action[16]">
-                        <?php echo $txtlogin40 ?>
-                    </label>
-
-                    <br>
-
-            <!-- Сбор информации одноразово -->
-
-                    <input class="form-check-input" name="action[0]" type="checkbox" value="sbor"
-                           id="action[0]">
-                    <label class="form-check-label" for="action[0]">
-                        <?php echo $txtlogin1 ?>
-                    </label>
-
-                <br>
-                <!-- Удалять телефон -->
-
-                    <input class="form-check-input" name="action[1]" type="checkbox" value="delphone"
-                           id="action[1]">
-                    <label class="form-check-label" for="action[1]">
-                        <?php echo $txtlogin2 ?>
-                    </label>
-
-                <br>
-                <!-- Быстрый логин -->
-
-                    <input class="form-check-input" name="action[2]" type="checkbox" value="smart"
-                           id="action[2]">
-                    <label class="form-check-label" for="action[2]">
-                        <?php echo $txtlogin3 ?>
-                    </label>
-
-                <br>
-                <!-- Собрать Токен -->
-
-                    <input class="form-check-input" name="action[3]" type="checkbox"
-                           id="action[3]" value="tock">
-                    <label class="form-check-label" for="action[3]">
-                        <?php echo $txtlogin4 ?>
-                    </label>
-
-                <br>
-                <!-- Макс инвайтов -->
-
-                    <label class="form-check-label" for="action[4]">
-                        <?php echo $txtlogin5 ?>
-                    </label>
-                    <input class="form-control" name="action[4]" type="number" id="action[4]" value ="150">
-
-                <br>
-                <!-- Макс принятий -->
-
-                    <label class="form-check-label" for="action[5]">
-                        <?php echo $txtlogin11 ?>
-                    </label>
-                    <input class="form-control" name="action[5]" type="number" id="action[5]" value="200">
-
-                <br>
-                <!-- Макс лайков -->
-
-                    <label class="form-check-label" for="action[6]">
-                        <?php echo $txtlogin6 ?>
-                    </label>
-                    <input class="form-control" name="action[6]" type="number" id="action[6]" value="50">
-
-                <br>
-                <!-- Макс комментариев -->
-
-                    <label class="form-check-label" for="action[7]">
-                        <?php echo $txtlogin7 ?>
-                    </label>
-                    <input class="form-control" name="action[7]" type="number" id="action[7]" value="50">
-
-                <br>
-                <!-- Макс лички -->
-
-                    <label class="form-check-label" for="action[8]">
-                        <?php echo $txtlogin8 ?>
-                    </label>
-                    <input class="form-control" name="action[8]" type="number" id="action[8]" value="20">
-
-                <br>
-                <!-- Время до запуска -->
-
-                    <label class="form-check-label" for="action[9]">
-                        <?php echo $txtlogin9 ?>
-                    </label>
-                    <input class="form-control" name="action[9]" type="number" id="action[9]" value="180" required>
+                <input type="checkbox" name="action[0]" id="action[0]" value="sbor" <?= fch(0) ?>>
+                <label for="action[0]"><?= $txtlogin1 ?></label>
 
                 <br>
 
-                <!-- Можно без прокси -->
-
-
-                    <input class="form-check-input" name="action[10]" type="checkbox"
-                           id="action[10]" style="display:none">
-
-
-                    <br>
-
-                <!-- GET -->
-
-                    <label class="form-check-label" for="action[11]">
-                        GET
-                    </label>
-                    <input class="form-control" name="action[11]" type="text" id="action[11]">
+                <input type="checkbox" name="action[1]" id="action[1]" value="delphone" <?= fch(1) ?>>
+                <label for="action[1]"><?= $txtlogin2 ?></label>
 
                 <br>
-                <!-- bat -->
 
-                    <input class="form-check-input" name="action[12]" type="checkbox"
-                           id="action[12]">
-                    <label class="form-check-label" for="action[12]">
-                        <?php echo $txtlogin12 ?>
-                    </label>
+                <input type="checkbox" name="action[2]" id="action[2]" value="smart" <?= fch(2) ?>>
+                <label for="action[2]"><?= $txtlogin3 ?></label>
 
-                    <br>
-                    <!-- ava -->
-
-                    <input class="form-check-input" name="action[13]" type="checkbox"
-                           id="action[13]">
-                    <label class="form-check-label" for="action[13]">
-                        <?php echo $txtlogin13 ?>
-                    </label>
                 <br>
-                    <br>
 
-                            <label for="floatingSelect"><?php echo $txtlogin14 ?></label>
-                            <select class="form-select" id="action[14]" name="action[14]" aria-label="Floating label select example">
+                <input type="checkbox" name="action[3]" id="action[3]" value="tock" <?= fch(3) ?>>
+                <label for="action[3]"><?= $txtlogin4 ?></label>
 
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
+                <br><br>
 
+                <label for="action[4]"><?= $txtlogin5 ?></label>
+                <input type="number" class="form-control" name="action[4]" id="action[4]"
+                       value="<?= fv(4, 150) ?>">
 
-                            </select>
+                <br>
 
-                    <br>
+                <label for="action[5]"><?= $txtlogin11 ?></label>
+                <input type="number" class="form-control" name="action[5]" id="action[5]"
+                       value="<?= fv(5, 200) ?>">
 
-                    <input class="form-check-input" name="action[18]" type="checkbox"
-                           id="action[18]" value="groups">
-                    <label class="form-check-label" for="action[18]">
-                        Collect the list of groups once
-                    </label>
-                    <br>
-                    <!-- Время после работы -->
+                <br>
 
-                    <label class="form-check-label" for="action[15]">
-                        <?php echo $txtlogin15 ?>
-                    </label>
-                    <input class="form-control" name="action[15]" type="number" id="action[15]" value="3" required>
+                <label for="action[6]"><?= $txtlogin6 ?></label>
+                <input type="number" class="form-control" name="action[6]" id="action[6]"
+                       value="<?= fv(6, 50) ?>">
 
-                    <br>
+                <br>
 
-                <button class="btn btn-secondary" name="add_task" id="add_task" value="login">ACTIVATE</button>
+                <label for="action[7]"><?= $txtlogin7 ?></label>
+                <input type="number" class="form-control" name="action[7]" id="action[7]"
+                       value="<?= fv(7, 50) ?>">
 
+                <br>
 
-                </form>
-            </div>
+                <label for="action[8]"><?= $txtlogin8 ?></label>
+                <input type="number" class="form-control" name="action[8]" id="action[8]"
+                       value="<?= fv(8, 20) ?>">
+
+                <br>
+
+                <label for="action[9]"><?= $txtlogin9 ?></label>
+                <input type="number" class="form-control" name="action[9]" id="action[9]"
+                       value="<?= fv(9, 180) ?>" required>
+
+                <br>
+
+                <input type="checkbox" name="action[10]" id="action[10]" style="display:none" <?= fch(10) ?>>
+
+                <br>
+
+                <label for="action[11]">GET</label>
+                <input type="text" class="form-control" name="action[11]" id="action[11]"
+                       value="<?= fv(11) ?>">
+
+                <br>
+
+                <input type="checkbox" name="action[12]" id="action[12]" value="bat" <?= fch(12) ?>>
+                <label for="action[12]"><?= $txtlogin12 ?></label>
+
+                <br>
+
+                <input type="checkbox" name="action[13]" id="action[13]" value="ava" <?= fch(13) ?>>
+                <label for="action[13]"><?= $txtlogin13 ?></label>
+
+                <br><br>
+
+                <label for="action[14]"><?= $txtlogin14 ?></label>
+                <select class="form-select" name="action[14]" id="action[14]">
+                    <option value="male" <?= fsel(14, 'male') ?>>Male</option>
+                    <option value="female" <?= fsel(14, 'female') ?>>Female</option>
+                </select>
+
+                <br>
+
+                <input type="checkbox" name="action[18]" id="action[18]" value="groups" <?= fch(18) ?>>
+                <label for="action[18]">Collect the list of groups once</label>
+
+                <br><br>
+
+                <label for="action[15]"><?= $txtlogin15 ?></label>
+                <input type="number" class="form-control" name="action[15]" id="action[15]"
+                       value="<?= fv(15, 3) ?>" required>
+
+                <br>
+
+                <button class="btn btn-secondary" name="add_task" value="login">
+                    ✅ SAVE
+                </button>
+
+            </form>
         </div>
     </div>
-
 </main>

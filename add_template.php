@@ -1,144 +1,154 @@
 <!doctype html>
 <?php
+session_start();
 include_once('inc/init.php');
 require_once('inc/db.php');
 require_once('function/function.php');
+
 $lang = $_SESSION['lang'] . '.php';
 require_once($lang);
-$sql = 'SELECT * FROM templates';
-$qw = selectAll($sql);
 
+// ✅ Создание шаблона
+if (isset($_POST['action']) && $_POST['action'] === 'add') {
+    $nameTemplate = trim($_POST['nameTemplate'] ?? '');
+
+    if ($nameTemplate === '') {
+        $_SESSION['msg'] = ['type' => 'danger', 'text' => 'Template name cannot be empty!'];
+    } else {
+        // Проверка дубля
+        $check = select('SELECT id FROM templates WHERE name = ?', [$nameTemplate]);
+        if ($check) {
+            $_SESSION['msg'] = ['type' => 'warning', 'text' => 'Template already exists!'];
+        } else {
+            $sql = 'INSERT INTO templates (name) VALUE (?)';
+            $insertId = insert($sql, [$nameTemplate]);
+
+            $_SESSION['msg'] = ['type' => 'success', 'text' => 'Template added! ✅'];
+
+            header('Location: add_task.php?template_id=' . $insertId);
+            exit;
+        }
+    }
+}
+
+// ✅ Массовое удаление
+if (isset($_POST['action']) && $_POST['action'] === 'delete' && !empty($_POST['ids'])) {
+    $in = implode(',', array_fill(0, count($_POST['ids']), '?'));
+    $sql = "DELETE FROM templates WHERE id IN ($in)";
+    delete($sql, $_POST['ids']);
+
+    $_SESSION['msg'] = ['type' => 'success', 'text' => 'Selected templates deleted ✅'];
+    header("Location: add_template.php");
+    exit;
+}
+
+// ✅ Получаем список шаблонов
+$qw = selectAll("SELECT t.id, t.name,
+GROUP_CONCAT(DISTINCT tp.task ORDER BY tp.step_order SEPARATOR ', ') AS tasks
+FROM templates t
+LEFT JOIN template tp ON t.id = tp.id_template
+GROUP BY t.id
+ORDER BY t.id DESC");
 ?>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="en">
 <head>
-   <?php
-   require_once ('inc/meta.php');
-   ?>
-    <title>FB Combo | Add task</title>
+    <?php require_once('inc/meta.php'); ?>
+    <title>FB Combo | Add template</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/dtjq.css"/>
 </head>
 <body>
-<?php
 
-$ids = array('t');
-$i = 0;
-$nameTemplate = $_POST['nameTemplate'];
-if (!empty($nameTemplate)) {
-    $sql = 'INSERT INTO templates (name) VALUE (?)';
-    $args = [$nameTemplate];
-    $qwe = insert($sql, $args);
-    $sql = 'SELECT LAST_INSERT_ID()';
-    $qwert = select($sql);
-    $numberTemplate = $qwert['LAST_INSERT_ID()'];
-    session_start();
-    $_SESSION['ids'] = $ids;
-    $_SESSION['numberTemplate'] = $numberTemplate;
-    header('Location: add_task.php');
-}
-require_once 'inc/header.php';
-?>
-<main class="container-fluid ">
-    <div class="row text-center">
-        <h2>Add template</h2>
-    </div>
+<?php require_once 'inc/header.php'; ?>
+
+<main class="container-fluid">
+
+    <?php if (!empty($_SESSION['msg'])): ?>
+        <div class="alert alert-<?= $_SESSION['msg']['type'] ?>">
+            <?= $_SESSION['msg']['text'] ?>
+        </div>
+        <?php unset($_SESSION['msg']); ?>
+    <?php endif; ?>
+
+    <h2 class="text-center mb-3">Templates</h2>
+
     <div class="row justify-content-center">
-        <div class="col-6 text-center">
+        <div class="col-8">
 
-
-            <div class="alert alert-info" role="alert">
-                <?php echo $txttask1 ?>
-            </div>
-
-
-
-
-            <form method="post">
-                <label for="nameTemplate">Name template</label>
-                <input type="text" name="nameTemplate" id="nameTemplate" class="form-control"  required>
-                <br>
-
-
-                <br>
-                <button class="btn btn-secondary">Create template
-                </button>
+            <form method="post" class="mb-4">
+                <input type="hidden" name="action" value="add">
+                <label for="nameTemplate" class="form-label">Name template</label>
+                <input type="text" name="nameTemplate" id="nameTemplate" class="form-control" required>
+                <button class="btn btn-secondary mt-3">Create template</button>
             </form>
-<br>
 
-            <table id="example" class="cell-border" style="width:100%">
-                <thead>
-                <tr>
-                    <th class="check" style="text-align: center;">
-                        <input type="checkbox" id="all" value=""/>
-                    </th>
-                    <th>Name template</th>
+            <form id="bulkForm" method="post">
+                <input type="hidden" name="action" value="delete">
+                <button type="submit" class="btn btn-danger mb-3">Delete selected</button>
 
-                    <th>Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php
-                $i = 0;
-                foreach ($qw as $b) {
-                    $i++; ?>
+                <table id="example" class="table table-striped table-bordered">
+                    <thead>
                     <tr>
-                        <td style="text-align: center;"><input type="checkbox" name="a[]"
-                                                               value="<?php echo $b['id'] ?>">
-                        </td>
-                        <td><?php $nam = $b['name'];
-                        echo $nam ?></td>
-
-
-                        <td>
-                            <div class="col">
-
-
-                                <a href="del_template.php?id=<?php echo $b['id'] ?>" class="btn btn-danger"
-                                   title="Delete Server"
-                                   onClick="return confirm( 'WARNING!!! DELETE Template? ' )">Delete
-                                    Template <i class="bi bi-x-circle-fill"></i></a>
-                            </div>
-                        </td>
+                        <th><input type="checkbox" id="all"></th>
+                        <th>Name template</th>
+                        <th>Tasks</th>
+                        <th>Action</th>
                     </tr>
-                <?php } ?>
+                    </thead>
+                    <tbody>
+                    <?php foreach ($qw as $b): ?>
+                        <tr>
+                            <td><input type="checkbox" name="ids[]" value="<?= $b['id'] ?>"></td>
 
+                            <!-- Editable name -->
+                            <td contenteditable="true" class="editable" data-id="<?= $b['id'] ?>">
+                                <?= htmlspecialchars($b['name']) ?>
+                            </td>
 
-                </tbody>
-                <tfoot>
-                <tr>
-                    <th></th>
-                    <th>Name template</th>
+                            <!-- ✅ Tasks list -->
+                            <td class="text-primary">
+                                <?= $b['tasks'] ? htmlspecialchars($b['tasks']) : '<span class="text-muted">No tasks</span>' ?>
+                            </td>
 
-                    <th>Action</th>
-                </tr>
-                </tfoot>
-            </table>
+                            <td>
+                                <a href="add_task.php?template_id=<?= $b['id'] ?>" class="btn btn-warning btn-sm">Edit</a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
 
+            </form>
+        </div>
+    </div>
 </main>
 
 
-<!-- Option 1: Bootstrap Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
 <script src="js/jquery.js"></script>
 <script src="js/dtjquery.js"></script>
-<!-- Option 2: Separate Popper and Bootstrap JS -->
-<!--
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
--->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
 <script>
-    $('#all').click(function (e) {
-        $('#example tbody :checkbox').prop('checked', $(this).is(':checked'));
-        e.stopImmediatePropagation();
+    // ✅ Выделить все
+    $('#all').click(function () {
+        $('tbody input[type="checkbox"]').prop('checked', this.checked);
     });
 
+    // ✅ DataTables
+    $('#example').DataTable({
+        "pageLength": 30,
+        stateSave: true
+    });
 
-    dr_table = $('#example').DataTable({
+    // ✅ AJAX редактирование имён
+    $('.editable').blur(function () {
+        let newText = $(this).text().trim();
+        let id = $(this).data('id');
 
-        "lengthMenu": [[100, 300, 500, -1], [30, 100, 200, "All"]],
-        stateSave: true,
-
-
+        $.post('edit_template.php', {id: id, name: newText}, function (res) {
+            console.log(res);
+        });
     });
 </script>
 

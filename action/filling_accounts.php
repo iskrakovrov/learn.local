@@ -1,149 +1,152 @@
 <?php
-$sql = 'SELECT * FROM lists WHERE cat = 2 OR cat = 9 LIMIT 500';
-$csity = selectAll($sql);
-$sql = 'SELECT * FROM lists WHERE  cat = 9 LIMIT 500';
-$edu = selectAll($sql);
-$sql = 'SELECT * FROM lists WHERE  cat = 9 LIMIT 500';
-$work = selectAll($sql);
-$sql = 'SELECT * FROM lists WHERE  cat = 3 LIMIT 500';
-$fname = selectAll($sql);
-$sql = 'SELECT * FROM lists WHERE  cat = 3 LIMIT 500';
-$lname = selectAll($sql);
-$sql = 'SELECT * FROM lists WHERE  cat = 5 LIMIT 500';
-$apost = selectAll($sql);
+$taskFile = basename(__FILE__);
+$setup = $_SESSION['setup'][$taskFile] ?? [];
+
+function fv($name, $default = '') {
+    global $setup;
+    return htmlspecialchars($setup[$name] ?? $default);
+}
+
+function fsel($name, $value) {
+    global $setup;
+    return (isset($setup[$name]) && $setup[$name] == $value) ? 'selected' : '';
+}
+
+// Lists
+$csity = selectAll('SELECT * FROM lists WHERE cat = 2 OR cat = 9 LIMIT 500');
+$edu   = selectAll('SELECT * FROM lists WHERE cat = 9 LIMIT 500');
+$work  = selectAll('SELECT * FROM lists WHERE cat = 9 LIMIT 500');
+$fnames = selectAll('SELECT * FROM lists WHERE cat = 3 LIMIT 500');
+$lnames = selectAll('SELECT * FROM lists WHERE cat = 3 LIMIT 500');
+$apost = selectAll('SELECT * FROM lists WHERE cat = 5 LIMIT 500');
 ?>
-<main class="container-fluid ">
+
+<main class="container-fluid">
     <div class="row text-center">
-        <h2><?php echo $txtmen ?></h2>
+        <h2><?= $txtmen ?></h2>
     </div>
-    <div class="col align-center">
 
-        <div class="row justify-content-center">
-            <div class="col-6 text-center">
-
-
-                <div class="alert alert-info" role="alert">
-                    <?php echo $txtfill ?>
-                </div>
+    <div class="row justify-content-center">
+        <div class="col-6 text-center">
+            <div class="alert alert-info" role="alert">
+                <?= $txtfill ?>
             </div>
         </div>
     </div>
 
-    <div class="container-fluid">
-        <div class="row justify-content-center">
-            <div class="col-sm-2 text-center">
-                <form method="post" onSubmit="return Complete();">
+    <div class="row justify-content-center">
+        <div class="col-sm-2 text-center">
 
-                    <!-- Город рождения и проживания -->
-                    <label for="currc" class="control-label"><?php echo $txtfill2 ?></label>
+            <form method="post" onsubmit="return Complete();">
 
-                    <select name="currc" id="currc" class="form-control">
-                        <option value="no"><?php echo $txtfill5 ?></option>
-                        <?php
-                        $i = 0;
-                        foreach ($csity as $a) {
-                            $i++; ?>
-                            <option value="<?php echo $a['id'] ?>"><?php echo $a['name']; ?></option>
-                        <?php } ?>
-                    </select>
+                <!-- Город -->
+                <label for="currc"><?= $txtfill2 ?></label>
+                <select name="currc" id="currc" class="form-control">
+                    <option value="no" <?= fsel('currc', 'no') ?>><?= $txtfill5 ?></option>
+                    <?php foreach ($csity as $a): ?>
+                        <option value="<?= $a['id'] ?>" <?= fsel('currc', $a['id']) ?>>
+                            <?= $a['name'] ?>
+                        </option>
+                    <?php endforeach ?>
+                </select>
+                <br>
 
-                    <br>
-                    <label for="edu" class="control-label"><?php echo $txtfill4 ?></label>
+                <!-- Учёба -->
+                <label for="edu"><?= $txtfill4 ?></label>
+                <select name="edu" id="edu" class="form-control">
+                    <option value="no" <?= fsel('edu', 'no') ?>><?= $txtfill5 ?></option>
+                    <?php foreach ($edu as $b): ?>
+                        <option value="<?= $b['id'] ?>" <?= fsel('edu', $b['id']) ?>>
+                            <?= $b['name'] ?>
+                        </option>
+                    <?php endforeach ?>
+                </select>
+                <br>
 
-                    <!-- Место учебы -->
-                    <select name="edu" id="edu" class="form-control">
-                        <option value="no"><?php echo $txtfill5 ?></option>
-                        <?php
-                        $i = 0;
-                        foreach ($edu as $b) {
-                            $i++; ?>
-                            <option value="<?php echo $b['id'] ?>"><?php echo $b['name']; ?></option>
-                        <?php } ?>
-                    </select>
-                    <br>
-                    <label for="work" class="control-label"><?php echo $txtfill3 ?></label>
-                    <!-- Место работы -->
-                    <select name="work" id="work" class="form-control">
-                        <option value="no"><?php echo $txtfill5 ?></option>
-                        <?php
-                        $i = 0;
-                        foreach ($work as $c) {
-                            $i++; ?>
-                            <option value="<?php echo $c['id'] ?>"><?php echo $c['name']; ?></option>
-                        <?php } ?>
-                    </select>
-                    <label for="fname" class="control-label">First name</label>
-                    <!-- Имя -->
-                    <select name="fname" id="fname" class="form-control">
-                        <option value="no"><?php echo $txtfill5 ?></option>
-                        <?php
-                        $i = 0;
-                        foreach ($fname as $e) {
-                            $i++; ?>
-                            <option value="<?php echo $e['id'] ?>"><?php echo $e['name']; ?></option>
-                        <?php } ?>
-                    </select>
-                    <label for="lname" class="control-label">Last name</label>
+                <!-- Работа -->
+                <label for="work"><?= $txtfill3 ?></label>
+                <select name="work" id="work" class="form-control">
+                    <option value="no" <?= fsel('work', 'no') ?>><?= $txtfill5 ?></option>
+                    <?php foreach ($work as $c): ?>
+                        <option value="<?= $c['id'] ?>" <?= fsel('work', $c['id']) ?>>
+                            <?= $c['name'] ?>
+                        </option>
+                    <?php endforeach ?>
+                </select>
+                <br>
 
-                    <select name="lname" id="work" class="form-control">
-                        <option value="no"><?php echo $txtfill5 ?></option>
-                        <?php
-                        $i = 0;
-                        foreach ($lname as $d) {
-                            $i++; ?>
-                            <option value="<?php echo $d['id'] ?>"><?php echo $d['name']; ?></option>
-                        <?php } ?>
-                    </select>
+                <!-- Имя -->
+                <label for="fname">First name</label>
+                <select name="fname" id="fname" class="form-control">
+                    <option value="no" <?= fsel('fname', 'no') ?>><?= $txtfill5 ?></option>
+                    <?php foreach ($fnames as $e): ?>
+                        <option value="<?= $e['id'] ?>" <?= fsel('fname', $e['id']) ?>>
+                            <?= $e['name'] ?>
+                        </option>
+                    <?php endforeach ?>
+                </select>
+                <br>
 
+                <!-- Фамилия -->
+                <label for="lname">Last name</label>
+                <select name="lname" id="lname" class="form-control">
+                    <option value="no" <?= fsel('lname', 'no') ?>><?= $txtfill5 ?></option>
+                    <?php foreach ($lnames as $d): ?>
+                        <option value="<?= $d['id'] ?>" <?= fsel('lname', $d['id']) ?>>
+                            <?= $d['name'] ?>
+                        </option>
+                    <?php endforeach ?>
+                </select>
 
-                    <br>
-                    <label for="cover">Install cover</label>
-                    <select class="form-select" id="cover" name="cover">
+                <br>
 
-                        <option value="no">No</option>
-                        <option value="yes">Yes</option>
+                <!-- Cover -->
+                <label for="cover">Install cover</label>
+                <select class="form-select" id="cover" name="cover">
+                    <option value="no" <?= fsel('cover', 'no') ?>>No</option>
+                    <option value="yes" <?= fsel('cover', 'yes') ?>>Yes</option>
+                </select>
 
-                    </select>
+                <br>
 
-                    <br>
-                    <label for="ava">Install avatar</label>
-                    <select class="form-select" id="ava" name="ava">
+                <!-- Avatar -->
+                <label for="ava">Install avatar</label>
+                <select class="form-select" id="ava" name="ava">
+                    <option value="no" <?= fsel('ava', 'no') ?>>No</option>
+                    <option value="yes" <?= fsel('ava', 'yes') ?>>Yes</option>
+                </select>
 
-                        <option value="no">No</option>
-                        <option value="yes">Yes</option>
+                <br>
 
-                    </select>
-                    <br>
-                    <label for="apost">Text for avatar</label>
-                    <select name="apost" id="apost" class="form-control">
-                        <option value="no"><?php echo 'No text for avatar'?></option>
-                        <?php
-                        $i = 0;
-                        foreach ($apost as $t) {
-                            $i++; ?>
-                            <option value="<?php echo $t['id'] ?>"><?php echo $t['name']; ?></option>
-                        <?php } ?>
-                    </select>
+                <!-- Текст для аватарки -->
+                <label for="apost">Text for avatar</label>
+                <select name="apost" id="apost" class="form-control">
+                    <option value="no" <?= fsel('apost', 'no') ?>>No text for avatar</option>
+                    <?php foreach ($apost as $t): ?>
+                        <option value="<?= $t['id'] ?>" <?= fsel('apost', $t['id']) ?>>
+                            <?= $t['name'] ?>
+                        </option>
+                    <?php endforeach ?>
+                </select>
 
-                    <br>
-                    <br>
-                    <label for="priv">Setup privacy</label>
-                    <select class="form-select" id="priv" name="priv">
+                <br>
 
-                        <option value="no">No</option>
-                        <option value="yes">Yes</option>
+                <!-- Privacy -->
+                <label for="priv">Setup privacy</label>
+                <select class="form-select" id="priv" name="priv">
+                    <option value="no" <?= fsel('priv', 'no') ?>>No</option>
+                    <option value="yes" <?= fsel('priv', 'yes') ?>>Yes</option>
+                </select>
 
-                    </select>
-                    <br>
+                <br>
+                <br>
 
-                    <button class="btn btn-secondary" name="add_task" id="add_task" value="filling_accounts">ACTIVATE
-                    </button>
+                <button class="btn btn-secondary" name="add_task" value="filling_accounts">
+                    ✅ SAVE
+                </button>
 
+            </form>
 
-                </form>
-            </div>
         </div>
     </div>
-
-
 </main>

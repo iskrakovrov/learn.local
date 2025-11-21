@@ -1,21 +1,23 @@
 <?php
-$sql = "SELECT * FROM lists WHERE cat = 8 OR cat = 9";
-$qw = selectAll($sql);
+$taskFile = basename(__FILE__);
+$setup = $_SESSION['setup'][$taskFile] ?? [];
 
+function fsel($name, $value) {
+    global $setup;
+    return (isset($setup[$name]) && $setup[$name] == $value) ? 'selected' : '';
+}
 ?>
 
 <main class="container-fluid ">
     <div class="row text-center">
-        <h2><?php echo $txtglobali ?></h2>
+        <h2><?= $txtglobali ?></h2>
     </div>
-    <div class="col align-center">
 
+    <div class="col align-center">
         <div class="row justify-content-center">
             <div class="col-6 text-center">
-
-
                 <div class="alert alert-info" role="alert">
-                    <?php echo $txtglobali1 ?>
+                    <?= $txtglobali1 ?>
                 </div>
             </div>
         </div>
@@ -24,87 +26,48 @@ $qw = selectAll($sql);
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-sm-2 text-center">
-                <form method="post" onSubmit="return Complete();">
 
-                    <label for="ti0" class="control-label"><?php echo $txtglobali2 ?></label>
+                <form method="post" onsubmit="return Complete();">
 
-                    <select name="ti0" id="ti0" class="form-control">
-                        <option value="accept_friends"><?php echo $txttask21 ?></option>
-                        <option value="invite_suggestions"><?php echo $txtglobali8 ?></option>
-                        <option value="new_accounts"><?php echo $txtglobali11 ?></option>
-                        <option value="invite_like">Invite from likes</option>
-                        <option value="invite_from_group"><?php echo $txtglobali9 ?></option>
-                        <option value="stop"><?php echo $txtglobali13 ?></option>
+                    <?php
+                    $fields = [
+                        "ti0" => $txtglobali2,
+                        "ti1" => $txtglobali3,
+                        "ti2" => $txtglobali4,
+                        "ti3" => $txtglobali5,
+                        "ti4" => "Fifth act"
+                    ];
 
+                    $options = [
+                        "accept_friends" => $txttask21,
+                        "invite_suggestions" => $txtglobali8,
+                        "new_accounts" => $txtglobali11,
+                        "invite_like" => "Invite from likes",
+                        "invite_from_group" => $txtglobali9,
+                        "stop" => $txtglobali13
+                    ];
 
-                    </select>
-
-                    <br>
-                    <label for="ti1" class="control-label"><?php echo $txtglobali3 ?></label>
-
-                    <select name="ti1" id="ti1" class="form-control">
-                        <option value="accept_friends"><?php echo $txttask21 ?></option>
-                        <option value="invite_suggestions"><?php echo $txtglobali8 ?></option>
-                        <option value="new_accounts"><?php echo $txtglobali11 ?></option>
-                        <option value="invite_like">Invite from likes</option>
-                        <option value="invite_from_group"><?php echo $txtglobali9 ?></option>
-                        <option value="stop"><?php echo $txtglobali13 ?></option>
-
-                    </select>
-
-                    <br>
-                    <label for="ti2" class="control-label"><?php echo $txtglobali4 ?></label>
-
-                    <select name="ti2" id="ti2" class="form-control">
-                        <option value="accept_friends"><?php echo $txttask21 ?></option>
-                        <option value="invite_suggestions"><?php echo $txtglobali8 ?></option>
-                        <option value="new_accounts"><?php echo $txtglobali11 ?></option>
-                        <option value="invite_like">Invite from likes</option>
-                        <option value="invite_from_group"><?php echo $txtglobali9 ?></option>
-                        <option value="stop"><?php echo $txtglobali13 ?></option>
-
-                    </select>
+                    foreach ($fields as $name => $label): ?>
+                        <label for="<?= $name ?>"><?= $label ?></label>
+                        <select name="<?= $name ?>" id="<?= $name ?>" class="form-control">
+                            <?php foreach ($options as $value => $text): ?>
+                                <option value="<?= $value ?>" <?= fsel($name, $value) ?>>
+                                    <?= $text ?>
+                                </option>
+                            <?php endforeach ?>
+                        </select>
+                        <br>
+                    <?php endforeach ?>
 
                     <br>
-                    <label for="ti3" class="control-label"><?php echo $txtglobali5 ?></label>
 
-                    <select name="ti3" id="ti3" class="form-control">
-                        <option value="accept_friends"><?php echo $txttask21 ?></option>
-                        <option value="invite_suggestions"><?php echo $txtglobali8 ?></option>
-                        <option value="invite_like">Invite from likes</option>
-                        <option value="new_accounts"><?php echo $txtglobali11 ?></option>
-                        <option value="invite_from_group"><?php echo $txtglobali9 ?></option>
-                        <option value="stop"><?php echo $txtglobali13 ?></option>
-
-                    </select>
-                    <br>
-                    <label for="ti4" class="control-label">Fifth act</label>
-
-                    <select name="ti4" id="ti4" class="form-control">
-                        <option value="accept_friends"><?php echo $txttask21 ?></option>
-                        <option value="invite_suggestions"><?php echo $txtglobali8 ?></option>
-                        <option value="invite_like">Invite from likes</option>
-                        <option value="new_accounts"><?php echo $txtglobali11 ?></option>
-                        <option value="invite_from_group"><?php echo $txtglobali9 ?></option>
-                        <option value="stop"><?php echo $txtglobali13 ?></option>
-
-                    </select>
-
-
-
-
-
-                    <br>
-                    <br>
-
-                    <button class="btn btn-secondary" name="add_task" id="add_task" value="global_invite">ACTIVATE
+                    <button class="btn btn-secondary" name="add_task" value="global_invite">
+                        ✅ SAVE
                     </button>
 
-
                 </form>
+
             </div>
         </div>
     </div>
-
-
 </main>

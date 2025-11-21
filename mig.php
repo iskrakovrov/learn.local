@@ -54,6 +54,7 @@ if ($_SERVER['SERVER_NAME'] == 'localhost' || $_SERVER['SERVER_ADDR'] == '127.0.
 create($sql);
 
 // --- Структура таблиц и данные ---
+
 // 1. Группы Facebook
 if (!columnExists('groups_fb', 'url')) {
     $sql = "ALTER TABLE `groups_fb` 
@@ -207,12 +208,66 @@ $additionalTables = [
         `task` VARCHAR(25) NOT NULL,
         `setup` VARCHAR(1000) NOT NULL,
         PRIMARY KEY (`id`)
+    ) ENGINE = InnoDB",
+
+    'note' => "CREATE TABLE `note` (
+        `id` INT(11) NOT NULL AUTO_INCREMENT,
+        `created` INT(11) NOT NULL,
+        `text` TEXT(16000) NOT NULL,
+        PRIMARY KEY (`id`)
+    ) ENGINE = InnoDB",
+
+    'stat_share' => "CREATE TABLE `stat_share` (
+        `id` INT(11) NOT NULL AUTO_INCREMENT,
+        `created` INT(20) NOT NULL,
+        `url` VARCHAR(255) NOT NULL,
+        `id_fb` BIGINT(20) NOT NULL,
+        `id_acc` INT(11) NOT NULL,
+        PRIMARY KEY (`id`)
+    ) ENGINE = InnoDB",
+
+    'all_stat' => "CREATE TABLE `all_stat` (
+        `id` INT(11) NOT NULL AUTO_INCREMENT,
+        `all_friends` INT(11) NOT NULL,
+        `created` INT(11) NOT NULL,
+        `type` INT(11) NOT NULL,
+        PRIMARY KEY (`id`)
+    ) ENGINE = InnoDB",
+
+    'instagram' => "CREATE TABLE `instagram` (
+        `id` INT(11) NOT NULL AUTO_INCREMENT,
+        `login_i` VARCHAR(255) NOT NULL,
+        `pass_i` VARCHAR(255) NOT NULL,
+        `mail` VARCHAR(255) NULL,
+        `pass_mail` VARCHAR(255) NULL,
+        `cookies_i` LONGTEXT NULL,
+        `id_acc` INT(11) NULL,
+        `id_fb` BIGINT(255) NULL,
+        `created` INT(11) NULL,
+        `sch` INT(11) NULL,
+        PRIMARY KEY (`id`)
     ) ENGINE = InnoDB"
 ];
 
 foreach ($additionalTables as $tableName => $createSql) {
     if (!tableExists($tableName)) {
         create($createSql);
+    }
+}
+
+// Добавляем столбец step_order в таблицу template
+if (!columnExists('template', 'step_order')) {
+    $sql = "ALTER TABLE `template` ADD `step_order` INT(11) NOT NULL DEFAULT 0 AFTER `task`";
+    create($sql);
+    
+    // Обновляем существующие записи, устанавливая порядок по ID
+    $sql = "UPDATE `template` SET `step_order` = `id` WHERE `step_order` = 0";
+    create($sql);
+    
+    // Добавляем индекс для оптимизации сортировки
+    if (!indexExists('template', 'idx_step_order')) {
+        $sql = "ALTER TABLE `template` ADD INDEX `idx_step_order` (`id_template`, `step_order`)";
+        create($sql);
     }
 }
 
@@ -426,6 +481,17 @@ foreach ($emailTables as $tableName => $createSql) {
     }
 }
 
+// 35. Таблица использования почты
+if (!tableExists('use_mail')) {
+    $sql = "CREATE TABLE `use_mail` (
+        `id` INT(11) NOT NULL AUTO_INCREMENT,
+        `mail` VARCHAR(255) NOT NULL,
+        PRIMARY KEY (`id`),
+        UNIQUE KEY `unique_mail` (`mail`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci";
+    create($sql);
+}
+
 // 18. Группы и постинг
 if (!tableExists('groups')) {
     $sql = "CREATE TABLE `groups` (
@@ -541,3 +607,361 @@ if (!$row) {
     insert($sql);
 }
 
+// 27. Таблица IMAP настроек для почтовых серверов
+if (!tableExists('imap_settings')) {
+    $sql = "CREATE TABLE `imap_settings` (
+        `id` INT(11) NOT NULL AUTO_INCREMENT,
+        `name_mail` VARCHAR(255) NOT NULL COMMENT 'Название почтового сервиса',
+        `imap_server` VARCHAR(255) NOT NULL COMMENT 'IMAP сервер',
+        `port` INT(5) NOT NULL COMMENT 'Порт IMAP',
+        `encryption` VARCHAR(10) NOT NULL DEFAULT 'ssl' COMMENT 'Шифрование (ssl/tls/none)',
+        `catchall` TINYINT(1) NOT NULL DEFAULT 0 COMMENT '1 - catchall сервер, 0 - обычный сервер',
+        `catchall_login` VARCHAR(255) NULL COMMENT 'Логин для catchall ящика',
+        `catchall_password` VARCHAR(255) NULL COMMENT 'Пароль для catchall ящика',
+        `active` TINYINT(1) NOT NULL DEFAULT 1 COMMENT '1 - активно, 0 - неактивно',
+        `max_emails_per_hour` INT(11) DEFAULT 50 COMMENT 'Максимум писем в час',
+        `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        PRIMARY KEY (`id`),
+        INDEX `idx_active` (`active`),
+        INDEX `idx_catchall` (`catchall`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci";
+    create($sql);
+
+    // Добавляем примеры популярных IMAP серверов
+    $defaultImapSettings = [
+        [
+            'name_mail' => 'Gmail',
+            'imap_server' => 'imap.gmail.com',
+            'port' => 993,
+            'encryption' => 'ssl',
+            'catchall' => 0
+        ],
+        [
+            'name_mail' => 'Outlook',
+            'imap_server' => 'outlook.office365.com',
+            'port' => 993,
+            'encryption' => 'ssl',
+            'catchall' => 0
+        ],
+        [
+            'name_mail' => 'Yandex',
+            'imap_server' => 'imap.yandex.ru',
+            'port' => 993,
+            'encryption' => 'ssl',
+            'catchall' => 0
+        ]
+    ];
+
+    foreach ($defaultImapSettings as $setting) {
+        $sql = "INSERT INTO `imap_settings` 
+                (`name_mail`, `imap_server`, `port`, `encryption`, `catchall`) 
+                VALUES (?, ?, ?, ?, ?)";
+        insert($sql, [
+            $setting['name_mail'],
+            $setting['imap_server'],
+            $setting['port'],
+            $setting['encryption'],
+            $setting['catchall']
+        ]);
+    }
+}
+
+// 28. Дополнительные таблицы из второго файла
+$additionalTablesFromSecond = [
+    'post_group' => "CREATE TABLE `post_group` (
+        `id` INT(11) NOT NULL AUTO_INCREMENT,
+        `id_acc` INT(11) NOT NULL,
+        `id_gr` INT(11) NOT NULL,
+        `created` INT(25) NOT NULL,
+        `type` INT(11) NOT NULL,
+        PRIMARY KEY (`id`)
+    ) ENGINE = InnoDB",
+
+    'post_logs' => "CREATE TABLE post_logs (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        group_id INT NOT NULL,
+        project_id INT NOT NULL,
+        post_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (group_id) REFERENCES value_lists(id)
+    )",
+
+    'current_position' => "CREATE TABLE current_position (
+        project_id INT PRIMARY KEY,
+        last_group_id INT
+    )",
+
+    'group_locks' => "CREATE TABLE group_locks (
+        group_id INT NOT NULL,
+        project_id INT NOT NULL,
+        locked_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        PRIMARY KEY (group_id, project_id),
+        FOREIGN KEY (group_id) REFERENCES value_lists(id)
+    )",
+
+    'smsService' => "CREATE TABLE `smsService` (
+        `id` INT(11) NOT NULL AUTO_INCREMENT,
+        `service` VARCHAR(255) NOT NULL,
+        `domain` VARCHAR(255) NOT NULL,
+        `apikey` VARCHAR(255) NULL,
+        `type` VARCHAR(50) NULL,
+        PRIMARY KEY (`id`),
+        UNIQUE (`service`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci",
+
+    'country1' => "CREATE TABLE country1 (
+        id INT PRIMARY KEY,
+        name VARCHAR(255) NOT NULL
+    )",
+
+    'service_countries' => "CREATE TABLE `service_countries` (
+        `id` int(11) NOT NULL AUTO_INCREMENT,
+        `service_id` int(11) NOT NULL,
+        `country_code` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+        `country_name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+        PRIMARY KEY (`id`),
+        UNIQUE KEY `service_country` (`service_id`,`country_code`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci",
+
+    'proxy_usage' => "CREATE TABLE `proxy_usage` (
+        `id` int(11) NOT NULL AUTO_INCREMENT,
+        `proxy_id` int(11) NOT NULL,
+        `last_used` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        `usage_count` int(11) NOT NULL DEFAULT 0,
+        `is_active` tinyint(1) NOT NULL DEFAULT 1,
+        PRIMARY KEY (`id`),
+        UNIQUE KEY `proxy_id` (`proxy_id`),
+        FOREIGN KEY (`proxy_id`) REFERENCES `proxy`(`id`) ON DELETE CASCADE
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci",
+
+    'vm_work' => "CREATE TABLE `vm_work` (
+        `id` int(11) NOT NULL AUTO_INCREMENT,
+        `name_vm` varchar(255) NOT NULL,
+        `дата_создания` datetime DEFAULT current_timestamp(),
+        PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4",
+
+    'mail_is' => "CREATE TABLE `mail_is` (
+        `id` INT NOT NULL AUTO_INCREMENT,
+        `mail` INT NOT NULL,
+        PRIMARY KEY (`id`)
+    ) ENGINE = InnoDB"
+];
+
+foreach ($additionalTablesFromSecond as $tableName => $createSql) {
+    if (!tableExists($tableName)) {
+        create($createSql);
+    }
+}
+
+// 29. Таблицы устройств (выполняются через require)
+$deviceTables = [
+    'samsung_devices',
+    'google_devices', 
+    'huawei_devices',
+    'oneplus_devices',
+    'xiaomi_devices',
+    'oppo_devices'
+];
+
+foreach ($deviceTables as $tableName) {
+    if (!tableExists($tableName)) {
+        $phoneFile = 'phone/' . str_replace('_devices', '', $tableName) . '.php';
+        if (file_exists($phoneFile)) {
+            require $phoneFile;
+        }
+    }
+}
+
+// 30. Заполняем таблицу country1 данными
+$sql = "SELECT COUNT(*) as count FROM country1";
+$qw = select($sql);
+if ($qw['count'] == 0) {
+    $countriesData = [
+        0 => 'Russia', 1 => 'Ukraine', 2 => 'Kazakhstan', 3 => 'China', 4 => 'Philippines',
+        5 => 'Myanmar', 6 => 'Indonesia', 7 => 'Malaysia', 8 => 'Kenya', 9 => 'Tanzania',
+        10 => 'Vietnam', 11 => 'Kyrgyzstan', 13 => 'Israel', 14 => 'Hong Kong', 15 => 'Poland',
+        16 => 'United Kingdom', 17 => 'Madagascar', 18 => 'Dem. Congo', 19 => 'Nigeria',
+        20 => 'Macau', 21 => 'Egypt', 22 => 'India', 23 => 'Ireland', 24 => 'Cambodia',
+        25 => 'Laos', 26 => 'Haiti', 27 => 'Ivory Coast', 28 => 'Gambia', 29 => 'Serbia',
+        30 => 'Yemen', 31 => 'South Africa', 32 => 'Romania', 33 => 'Colombia', 34 => 'Estonia',
+        35 => 'Azerbaijan', 36 => 'Canada', 37 => 'Morocco', 38 => 'Ghana', 39 => 'Argentina',
+        40 => 'Uzbekistan', 41 => 'Cameroon', 42 => 'Chad', 43 => 'Germany', 44 => 'Lithuania',
+        45 => 'Croatia', 46 => 'Sweden', 47 => 'Iraq', 48 => 'Netherlands', 49 => 'Latvia',
+        50 => 'Austria', 51 => 'Belarus', 52 => 'Thailand', 53 => 'Saudi Arabia', 54 => 'Mexico',
+        55 => 'Taiwan', 56 => 'Spain', 57 => 'Iran', 58 => 'Algeria', 59 => 'Slovenia',
+        60 => 'Bangladesh', 61 => 'Senegal', 62 => 'Turkey', 63 => 'Czech Republic', 64 => 'Sri Lanka',
+        65 => 'Peru', 66 => 'Pakistan', 67 => 'New Zealand', 68 => 'Guinea', 69 => 'Mali',
+        70 => 'Venezuela', 71 => 'Ethiopia', 72 => 'Mongolia', 73 => 'Brazil', 74 => 'Afghanistan',
+        75 => 'Uganda', 76 => 'Angola', 77 => 'Cyprus', 78 => 'France', 79 => 'Papua New Guinea',
+        80 => 'Mozambique', 81 => 'Nepal', 82 => 'Belgium', 83 => 'Bulgaria', 84 => 'Hungary',
+        85 => 'Moldova', 86 => 'Italy', 87 => 'Paraguay', 88 => 'Honduras', 89 => 'Tunisia',
+        90 => 'Nicaragua', 91 => 'Timor-Leste', 92 => 'Bolivia', 93 => 'Costa Rica', 94 => 'Guatemala',
+        95 => 'UAE', 96 => 'Zimbabwe', 97 => 'Puerto Rico', 98 => 'Sudan', 99 => 'Togo',
+        100 => 'Kuwait', 101 => 'El Salvador', 102 => 'Libya', 103 => 'Jamaica', 104 => 'Trinidad and Tobago',
+        105 => 'Ecuador', 106 => 'Eswatini', 107 => 'Oman', 108 => 'Bosnia and Herzegovina', 109 => 'Dominican Republic',
+        110 => 'Syria', 111 => 'Qatar', 112 => 'Panama', 113 => 'Cuba', 114 => 'Mauritania',
+        115 => 'Sierra Leone', 116 => 'Jordan', 117 => 'Portugal', 118 => 'Barbados', 119 => 'Burundi',
+        120 => 'Benin', 121 => 'Brunei', 122 => 'Bahamas', 123 => 'Botswana', 124 => 'Belize',
+        125 => 'Central African Republic', 126 => 'Dominica', 127 => 'Grenada', 128 => 'Georgia',
+        129 => 'Greece', 130 => 'Guinea-Bissau', 131 => 'Guyana', 132 => 'Iceland', 133 => 'Comoros',
+        134 => 'Saint Kitts and Nevis', 135 => 'Liberia', 136 => 'Lesotho', 137 => 'Malawi',
+        138 => 'Namibia', 139 => 'Niger', 140 => 'Rwanda', 141 => 'Slovakia', 142 => 'Suriname',
+        143 => 'Tajikistan', 144 => 'Monaco', 145 => 'Bahrain', 146 => 'Reunion', 147 => 'Zambia',
+        148 => 'Armenia', 149 => 'Somalia', 150 => 'Congo', 151 => 'Chile', 152 => 'Burkina Faso',
+        153 => 'Lebanon', 154 => 'Gabon', 155 => 'Albania', 156 => 'Uruguay', 157 => 'Mauritius',
+        158 => 'Bhutan', 159 => 'Maldives', 160 => 'Guadeloupe', 161 => 'Turkmenistan', 162 => 'French Guiana',
+        163 => 'Finland', 164 => 'Saint Lucia', 165 => 'Luxembourg', 166 => 'Saint Vincent and the Grenadines',
+        167 => 'Equatorial Guinea', 168 => 'Djibouti', 169 => 'Antigua and Barbuda', 170 => 'Cayman Islands',
+        171 => 'Montenegro', 172 => 'Denmark', 173 => 'Switzerland', 174 => 'Norway', 175 => 'Australia',
+        176 => 'Eritrea', 177 => 'South Sudan', 178 => 'Sao Tome and Principe', 179 => 'Aruba',
+        180 => 'Montserrat', 181 => 'Anguilla', 182 => 'Japan', 183 => 'North Macedonia', 184 => 'Seychelles',
+        185 => 'New Caledonia', 186 => 'Cape Verde', 187 => 'USA', 188 => 'Palestine', 189 => 'Fiji',
+        196 => 'Singapore', 199 => 'Malta', 201 => 'Gibraltar', 203 => 'Kosovo', 204 => 'Niue'
+    ];
+
+    foreach ($countriesData as $id => $name) {
+        $sql = "INSERT INTO country1 (id, name) VALUES (?, ?)";
+        insert($sql, [$id, $name]);
+    }
+}
+
+// 31. Добавляем SMS сервисы по умолчанию
+$defaultServices = [
+    [
+        'name' => 'sms-activate',
+        'title' => 'SMS-Activate',
+        'api_url' => 'https://sms-activate.org/stubs/handler_api.php',
+        'is_active' => true
+    ],
+    [
+        'name' => 'sms-hub',
+        'title' => 'SMS-Hub',
+        'api_url' => 'https://smshub.org/stubs/handler_api.php',
+        'is_active' => true
+    ],
+    [
+        'name' => 'vak-sms',
+        'title' => 'VAK-SMS',
+        'api_url' => 'https://vak-sms.com/stubs/handler_api.php',
+        'is_active' => true
+    ],
+    [
+        'name' => 'grizzly-sms',
+        'title' => '7GrizzlySMS',
+        'api_url' => 'https://api.7grizzlysms.com/stubs/handler_api.php',
+        'is_active' => true
+    ],
+    [
+        'name' => 'api-365',
+        'title' => '365API',
+        'api_url' => 'https://365api.net/stubs/handler_api.php',
+        'is_active' => true
+    ],
+    [
+        'name' => 'sms-bower',
+        'title' => 'SMSBower',
+        'api_url' => 'https://smsbower.online/stubs/handler_api.php',
+        'is_active' => true
+    ],
+    [
+        'name' => 'sms-live',
+        'title' => 'SMSLive',
+        'api_url' => 'https://api.smslive.pro/stubs/handler_api.php',
+        'is_active' => true
+    ]
+];
+
+foreach ($defaultServices as $service) {
+    $sql = "SELECT id FROM sms_services WHERE name = ?";
+    $qw = select($sql, [$service['name']]);
+    if (empty($qw)) {
+        $sql = "INSERT INTO sms_services (name, title, api_url, is_active) VALUES (?, ?, ?, ?)";
+        insert($sql, [
+            $service['name'],
+            $service['title'], 
+            $service['api_url'],
+            (int)$service['is_active']
+        ]);
+    }
+}
+
+// 32. Заполняем таблицу service_countries
+$sql = "SELECT COUNT(*) as count FROM service_countries";
+$qw = select($sql);
+if ($qw['count'] == 0) {
+    $countriesMapping = [
+        "0" => "Russia", "1" => "Ukraine", "2" => "Kazakhstan", "3" => "China", "4" => "Philippines",
+        "5" => "Myanmar", "6" => "Indonesia", "7" => "Malaysia", "8" => "Kenya", "9" => "Tanzania",
+        "10" => "Vietnam", "11" => "Kyrgyzstan", "13" => "Israel", "14" => "Hong Kong", "15" => "Poland",
+        "16" => "United Kingdom", "17" => "Madagascar", "18" => "DR Congo", "19" => "Nigeria",
+        "20" => "Macau", "21" => "Egypt", "22" => "India", "23" => "Ireland", "24" => "Cambodia",
+        "25" => "Laos", "26" => "Haiti", "27" => "Ivory Coast", "28" => "Gambia", "29" => "Serbia",
+        "30" => "Yemen", "31" => "South Africa", "32" => "Romania", "33" => "Colombia", "34" => "Estonia",
+        "35" => "Azerbaijan", "36" => "Canada", "37" => "Morocco", "38" => "Ghana", "39" => "Argentina",
+        "40" => "Uzbekistan", "41" => "Cameroon", "42" => "Chad", "43" => "Germany", "44" => "Lithuania",
+        "45" => "Croatia", "46" => "Sweden", "47" => "Iraq", "48" => "Netherlands", "49" => "Latvia",
+        "50" => "Austria", "51" => "Belarus", "52" => "Thailand", "53" => "Saudi Arabia", "54" => "Mexico",
+        "55" => "Taiwan", "56" => "Spain", "57" => "Iran", "58" => "Algeria", "59" => "Slovenia",
+        "60" => "Bangladesh", "61" => "Senegal", "62" => "Turkey", "63" => "Czech Republic", "64" => "Sri Lanka",
+        "65" => "Peru", "66" => "Pakistan", "67" => "New Zealand", "68" => "Guinea", "69" => "Mali",
+        "70" => "Venezuela", "71" => "Ethiopia", "72" => "Mongolia", "73" => "Brazil", "74" => "Afghanistan",
+        "75" => "Uganda", "76" => "Angola", "77" => "Cyprus", "78" => "France", "79" => "Papua New Guinea",
+        "80" => "Mozambique", "81" => "Nepal", "82" => "Belgium", "83" => "Bulgaria", "84" => "Hungary",
+        "85" => "Moldova", "86" => "Italy", "87" => "Paraguay", "88" => "Honduras", "89" => "Tunisia",
+        "90" => "Nicaragua", "91" => "Timor-Leste", "92" => "Bolivia", "93" => "Costa Rica", "94" => "Guatemala",
+        "95" => "United Arab Emirates", "96" => "Zimbabwe", "97" => "Puerto Rico", "98" => "Sudan", "99" => "Togo",
+        "100" => "Kuwait", "101" => "El Salvador", "102" => "Libya", "103" => "Jamaica", "104" => "Trinidad and Tobago",
+        "105" => "Ecuador", "106" => "Eswatini", "107" => "Oman", "108" => "Bosnia and Herzegovina", "109" => "Dominican Republic",
+        "110" => "Syria", "111" => "Qatar", "112" => "Panama", "113" => "Cuba", "114" => "Mauritania",
+        "115" => "Sierra Leone", "116" => "Jordan", "117" => "Portugal", "118" => "Barbados", "119" => "Burundi",
+        "120" => "Benin", "121" => "Brunei", "122" => "Bahamas", "123" => "Botswana", "124" => "Belize",
+        "125" => "Central African Republic", "126" => "Dominica", "127" => "Grenada", "128" => "Georgia",
+        "129" => "Greece", "130" => "Guinea-Bissau", "131" => "Guyana", "132" => "Iceland", "133" => "Comoros",
+        "134" => "Saint Kitts and Nevis", "135" => "Liberia", "136" => "Lesotho", "137" => "Malawi",
+        "138" => "Namibia", "139" => "Niger", "140" => "Rwanda", "141" => "Slovakia", "142" => "Suriname",
+        "143" => "Tajikistan", "144" => "Monaco", "145" => "Bahrain", "146" => "Réunion", "147" => "Zambia",
+        "148" => "Armenia", "149" => "Somalia", "150" => "Congo", "151" => "Chile", "152" => "Burkina Faso",
+        "153" => "Lebanon", "154" => "Gabon", "155" => "Albania", "156" => "Uruguay", "157" => "Mauritius",
+        "158" => "Bhutan", "159" => "Maldives", "160" => "Guadeloupe", "161" => "Turkmenistan", "162" => "French Guiana",
+        "163" => "Finland", "164" => "Saint Lucia", "165" => "Luxembourg", "166" => "Saint Vincent and the Grenadines",
+        "167" => "Equatorial Guinea", "168" => "Djibouti", "169" => "Antigua and Barbuda", "170" => "Cayman Islands",
+        "171" => "Montenegro", "172" => "Denmark", "173" => "Switzerland", "174" => "Norway", "175" => "Australia",
+        "176" => "Eritrea", "177" => "South Sudan", "178" => "Sao Tome and Principe", "179" => "Aruba",
+        "180" => "Montserrat", "181" => "Anguilla", "182" => "Japan", "183" => "North Macedonia", "184" => "Seychelles",
+        "185" => "New Caledonia", "186" => "Cape Verde", "187" => "United States", "188" => "Palestine", "189" => "Fiji",
+        "196" => "Singapore", "199" => "Malta", "201" => "Gibraltar", "203" => "Kosovo", "204" => "Niue"
+    ];
+
+    foreach ($countriesMapping as $code => $name) {
+        $sql = "INSERT INTO service_countries (service_id, country_code, country_name) VALUES (0, ?, ?)";
+        insert($sql, [$code, $name]);
+    }
+}
+
+// 33. Проверяем и добавляем недостающие столбцы
+$missingColumns = [
+    'sms_services' => [
+        'balance' => "ALTER TABLE `sms_services` ADD `balance` DECIMAL(10,2) DEFAULT NULL AFTER `is_active`",
+        'balance_updated' => "ALTER TABLE `sms_services` ADD `balance_updated` DATETIME NULL AFTER `balance`",
+        'proxy_id' => "ALTER TABLE `sms_services` ADD COLUMN `proxy_id` INT(11) DEFAULT NULL AFTER `api_key`"
+    ],
+    'reg_options' => [
+        'mcc_mnc_source' => "ALTER TABLE `reg_options` ADD `mcc_mnc_source` TINYINT DEFAULT NULL AFTER `last_name`",
+        'bio' => "ALTER TABLE `reg_options` ADD `bio` INT(11) NOT NULL DEFAULT 0 AFTER `mode`"
+    ]
+];
+
+foreach ($missingColumns as $table => $columns) {
+    foreach ($columns as $column => $sql) {
+        if (!columnExists($table, $column)) {
+            create($sql);
+        }
+    }
+}
+
+// 34. Создаем таблицу mcc_mnc если нужно
+if (!tableExists('mcc_mnc')) {
+    require_once('function/mcc.php');
+}
+?>

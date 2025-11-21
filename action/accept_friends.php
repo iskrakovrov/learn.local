@@ -1,106 +1,120 @@
 <?php
+// Загружаем настройки, если редактируем шаблон
+$taskFile = basename(__FILE__);
+$setup = $_SESSION['setup'][$taskFile] ?? [];
+
+// Универсальная функция для предзаполнения значений
+function fv($name, $default = '') {
+    global $setup;
+    return htmlspecialchars($setup[$name] ?? $default);
+}
+
+// Данные списков
 $sql = 'SELECT * FROM lists WHERE cat = 2 OR cat = 9';
 $qw = selectAll($sql);
 
 $sql = 'SELECT * FROM lists WHERE cat = 3 OR cat = 9';
 $qw1 = selectAll($sql);
-
 ?>
 
-
-<main class="container-fluid ">
+<main class="container-fluid">
     <div class="row text-center">
-        <h2><?php echo $txtass ?> </h2>
+        <h2><?= $txtass ?></h2>
     </div>
-    <div class="col align-center">
 
-        <div class="row justify-content-center">
-            <div class="col-6 text-center">
-
-
-                <div class="alert alert-info" role="alert">
-                    <?php echo $txtass1 ?>
-                </div>
+    <div class="row justify-content-center">
+        <div class="col-6 text-center">
+            <div class="alert alert-info" role="alert">
+                <?= $txtass1 ?>
             </div>
         </div>
     </div>
 
     <div class="container-fluid">
         <div class="row justify-content-center">
-            <div class="col-sm-2 text-center">
-                <form method="post" onSubmit="return Complete();">
-                    <label for="cat" class="control-label"><?php echo $txtgeo ?></label> <!-- Выбрать ГЕО -->
+            <div class="col-sm-3 text-center">
+                <form method="post" onsubmit="return Complete();">
+
+                    <!-- Гео список -->
+                    <label for="cat"><?= $txtgeo ?></label>
                     <select name="cat" id="cat" class="form-control">
                         <option value="0">All</option>
-                        <?php
-                        $i = 0;
-                        foreach ($qw as $a) {
-                            $i++; ?>
-                            <option value="<?php echo $a['id'] ?>"><?php echo $a['name']; ?></option>
-                        <?php } ?>
+                        <?php foreach ($qw as $a): ?>
+                            <option value="<?= $a['id'] ?>" <?= fv('cat') == $a['id'] ? 'selected' : '' ?>>
+                                <?= htmlspecialchars($a['name']) ?>
+                            </option>
+                        <?php endforeach; ?>
                     </select>
                     <br>
-                    <label for="filter" class="control-label"><?php echo $txtfilter2 ?></label>
-                    <select class="form-select" id="filter" name="filter" aria-label="filter">
 
-                        <option value="all">All</option>
-                        <option value="cyr">Cyr</option>
-                        <option value="lat">Lat</option>
-                        <option value="cl">Cyr + Lat</option>
-                        <option value="black">Black</option>
-                        <option value="white">White</option>
-                        <option value="blackwhite">Black + White</option>
-                    </select>
-                    <br>
-                    <label for="black" class="control-label">Black list</label> <!-- Блек -->
-                    <select name="black" id="cat" class="form-control">
-                        <option value="0">No</option>
+                    <!-- Фильтр -->
+                    <label for="filter"><?= $txtfilter2 ?></label>
+                    <select class="form-select" id="filter" name="filter">
                         <?php
-                        $i = 0;
-                        foreach ($qw1 as $b) {
-                            $i++; ?>
-                            <option value="<?php echo $b['id'] ?>"><?php echo $b['name']; ?></option>
-                        <?php } ?>
+                        $filterOptions = [
+                            'all' => 'All',
+                            'cyr' => 'Cyr',
+                            'lat' => 'Lat',
+                            'cl' => 'Cyr + Lat',
+                            'black' => 'Black',
+                            'white' => 'White',
+                            'blackwhite' => 'Black + White'
+                        ];
+                        foreach ($filterOptions as $v => $txt):
+                            ?>
+                            <option value="<?= $v ?>" <?= fv('filter') == $v ? 'selected' : '' ?>>
+                                <?= $txt ?>
+                            </option>
+                        <?php endforeach; ?>
                     </select>
                     <br>
-                    <label for="white" class="control-label">White list</label> <!-- Вайт -->
+
+                    <!-- Black list -->
+                    <label for="black">Black list</label>
+                    <select name="black" id="black" class="form-control">
+                        <option value="0">No</option>
+                        <?php foreach ($qw1 as $b): ?>
+                            <option value="<?= $b['id'] ?>" <?= fv('black') == $b['id'] ? 'selected' : '' ?>>
+                                <?= htmlspecialchars($b['name']) ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                    <br>
+
+                    <!-- White list -->
+                    <label for="white">White list</label>
                     <select name="white" id="white" class="form-control">
                         <option value="0">No</option>
-                        <?php
-                        $i = 0;
-                        foreach ($qw1 as $c) {
-                            $i++; ?>
-                            <option value="<?php echo $c['id'] ?>"><?php echo $c['name']; ?></option>
-                        <?php } ?>
+                        <?php foreach ($qw1 as $c): ?>
+                            <option value="<?= $c['id'] ?>" <?= fv('white') == $c['id'] ? 'selected' : '' ?>>
+                                <?= htmlspecialchars($c['name']) ?>
+                            </option>
+                        <?php endforeach; ?>
                     </select>
                     <br>
 
-
-                    <label for="one_s"><?php echo $txtass2 ?></label>
+                    <label for="one_s"><?= $txtass2 ?></label>
                     <input type="text" name="one_s" id="one_s" class="form-control"
-                           value="20"  required>
+                           value="<?= fv('one_s', '20') ?>" required>
                     <br>
-                    <label for="pause"><?php echo $txtpause ?></label>
+
+                    <label for="pause"><?= $txtpause ?></label>
                     <input type="text" name="pause" id="pause" class="form-control"
-                           value="3-4" pattern="([0-9]{1,3})-([0-9]{1,3})" required>
+                           value="<?= fv('pause', '3-4') ?>"
+                           pattern="([0-9]{1,3})-([0-9]{1,3})" required>
                     <br>
 
-
-                    <label for="f24"><?php echo $txtfarmi11 ?></label>
+                    <label for="f24"><?= $txtfarmi11 ?></label>
                     <input type="number" name="f24" id="f24" class="form-control"
-                           value="3" required>
+                           value="<?= fv('f24', '3') ?>" required>
+                    <br><br>
 
-
-                    <br>
-
-                    <button class="btn btn-secondary" name="add_task" id="add_task" value="accept_friends">ACTIVATE
+                    <button class="btn btn-secondary" name="add_task" value="accept_friends">
+                        ✅ SAVE
                     </button>
 
-
+                </form>
             </div>
-
-            </form>
-
         </div>
     </div>
 </main>

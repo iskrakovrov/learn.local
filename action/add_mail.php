@@ -1,18 +1,22 @@
 <?php
+$taskFile = basename(__FILE__);
+$setup = $_SESSION['setup'][$taskFile] ?? [];
+
+function fv($name, $default = '') {
+    global $setup;
+    return htmlspecialchars($setup[$name] ?? $default);
+}
 ?>
-<main class="container-fluid ">
+
+<main class="container-fluid">
     <div class="row text-center">
         <h2>Add mail</h2>
     </div>
-    <div class="col align-center">
 
-        <div class="row justify-content-center">
-            <div class="col-6 text-center">
-
-
-                <div class="alert alert-info" role="alert">
-                    <?php echo $txtmail1 ?>
-                </div>
+    <div class="row justify-content-center">
+        <div class="col-6 text-center">
+            <div class="alert alert-info" role="alert">
+                <?= $txtmail1 ?>
             </div>
         </div>
     </div>
@@ -20,45 +24,28 @@
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-sm-2 text-center">
-                <form method="post" onSubmit="return Complete();">
+                <form method="post" onsubmit="return Complete();">
 
-
-                    <br>
-
-                    <label for="am"><?php echo $txtmail2 ?></label>
-
-
-                    <select class="form-select" id="am" name="am" aria-label="Floating label select example">
-
-                        <option value="yes">Yes</option>
-                        <option value="no">No</option>
-
+                    <label for="am"><?= $txtmail2 ?></label>
+                    <select class="form-select" id="am" name="am">
+                        <option value="yes" <?= fv('am') == 'yes' ? 'selected' : '' ?>>Yes</option>
+                        <option value="no"  <?= fv('am') == 'no'  ? 'selected' : '' ?>>No</option>
                     </select>
 
+                    <br><br>
 
-                        <br>
-                    <br>
                     <label for="cm">Check mail</label>
-
-                    <select class="form-select" id="cm" name="cm" aria-label="Floating label select example">
-
-                        <option value="yes">Yes</option>
-                        <option value="no">No</option>
-
+                    <select class="form-select" id="cm" name="cm">
+                        <option value="yes" <?= fv('cm') == 'yes' ? 'selected' : '' ?>>Yes</option>
+                        <option value="no"  <?= fv('cm') == 'no'  ? 'selected' : '' ?>>No</option>
                     </select>
 
-                        <br>
-                    <br>
+                    <br><br>
 
-                            <button class="btn btn-secondary" name="add_task" id="add_task" value="add_mail">ACTIVATE
-                            </button>
-
-
+                    <button class="btn btn-secondary" name="add_task" value="add_mail">✅ SAVE</button>
 
                 </form>
             </div>
         </div>
     </div>
-
-
 </main>

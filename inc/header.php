@@ -268,6 +268,9 @@ $homepage = file_get_contents('https://soft.fbcombo.com/ver.php');
                             <a class="nav-link active" aria-current="page" href="sms_services.php">SMS Services</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link active" href="imap_settings.php">Mail Settings</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link active" href="note.php"><strong>Note</strong></a>
                         </li>
                         <li class="nav-item">
@@ -296,7 +299,7 @@ $homepage = file_get_contents('https://soft.fbcombo.com/ver.php');
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="acc_creator.php">About the account creator</a></li>
                                 <li><a class="dropdown-item" href="acc_creator_settings.php">Settings</a></li>
-                                <li><a class="dropdown-item" href="res_bs.php">Blustacks service</a></li>
+                                <li><a class="dropdown-item" href="res_bs.php">Emulator service</a></li>
                                 <li><a class="dropdown-item" href="acc_creator_phone.php">Phone settings</a></li>
                             </ul>
                         </li>

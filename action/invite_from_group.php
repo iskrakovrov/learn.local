@@ -1,198 +1,178 @@
 <?php
-$sql = 'SELECT * FROM lists WHERE cat = 2 OR cat = 9';
-$geo1 = selectAll($sql);
-$sql = 'SELECT * FROM lists WHERE cat = 3 OR cat = 9';
-$name1 = selectAll($sql);
-$sql = 'SELECT * FROM lists WHERE cat = 1 OR cat = 9';
-$bl1 = selectAll($sql);
-$sql = 'SELECT * FROM lists WHERE cat = 10 OR cat = 9';
-$gr1 = selectAll($sql);
-$sql = 'SELECT * FROM lists WHERE cat = 4';
-$me1 = selectAll($sql);
+$taskFile = basename(__FILE__);
+$setup = $_SESSION['setup'][$taskFile] ?? [];
+
+// utils
+function fv($name, $default = '') {
+    global $setup;
+    return htmlspecialchars($setup[$name] ?? $default);
+}
+
+function fsel($name, $value) {
+    global $setup;
+    return (isset($setup[$name]) && $setup[$name] == $value) ? 'selected' : '';
+}
+
+// Lists
+$geo1 = selectAll('SELECT * FROM lists WHERE cat = 2 OR cat = 9');
+$name1 = selectAll('SELECT * FROM lists WHERE cat = 3 OR cat = 9');
+$bl1 = selectAll('SELECT * FROM lists WHERE cat = 1 OR cat = 9');
+$gr1 = selectAll('SELECT * FROM lists WHERE cat = 10 OR cat = 9');
+$me1 = selectAll('SELECT * FROM lists WHERE cat = 4');
 ?>
 
-<main class="container-fluid ">
+<main class="container-fluid">
     <div class="row text-center">
-        <h2><?php echo $txtglobali19 ?></h2>
+        <h2><?= $txtglobali19 ?></h2>
     </div>
-    <div class="col align-center">
 
+    <div class="col align-center">
         <div class="row justify-content-center">
             <div class="col-6 text-center">
-
-
                 <div class="alert alert-info" role="alert">
-                    <?php echo $txtglobali17 ?>
+                    <?= $txtglobali17 ?>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="container-fluid">
-        <div class="row justify-content-center">
-            <div class="col-sm-2 text-center">
-                <form method="post" onSubmit="return Complete();">
-                    <br>
-                    <!-- Список групп -->
-                    <label for="gr" class="control-label"><?php echo $txtglobali20 ?></label>
 
-                    <select name="gr" id="gr" class="form-control">
-                        <option value="in"><?php echo $txtglobali18 ?></option>
-                        <?php
-                        $i = 0;
-                        foreach ($gr1 as $r) {
-                            $i++; ?>
-                            <option value="<?php echo $r['id'] ?>"><?php echo $r['name']; ?></option>
-                        <?php } ?>
-                    </select>
+    <div class="row justify-content-center">
+        <div class="col-sm-2 text-center">
 
-                    <br>
-                    <!-- количество инвайтов -->
-                    <br>
+            <form method="post" onsubmit="return Complete();">
 
+                <label for="gr"><?= $txtglobali20 ?></label>
+                <select name="gr" id="gr" class="form-control">
+                    <option value="in" <?= fsel('gr', 'in') ?>><?= $txtglobali18 ?></option>
+                    <?php foreach ($gr1 as $r): ?>
+                        <option value="<?= $r['id'] ?>" <?= fsel('gr', $r['id']) ?>>
+                            <?= $r['name'] ?>
+                        </option>
+                    <?php endforeach ?>
+                </select>
 
-                    <label for="num_i"><?php echo $txtnewacc4 ?></label>
-                    <input type="number" name="num_i" id="num_i" class="form-control" value="20"
-                           required>
+                <br>
 
-                    <br>
+                <label for="num_i"><?= $txtnewacc4 ?></label>
+                <input type="number" name="num_i" id="num_i"
+                       class="form-control"
+                       value="<?= fv('num_i', '20') ?>" required>
 
-                    <!-- Pause  -->
+                <br>
 
-                    <label for="pause"><?php echo $txtnewacc5 ?></label>
-                    <input type="text" name="pause" id="pause" class="form-control" value="5-10"
-                           pattern="([0-9]{1,3})-([0-9]{1,3})" required>
+                <label for="pause"><?= $txtnewacc5 ?></label>
+                <input type="text" name="pause" id="pause"
+                       class="form-control"
+                       value="<?= fv('pause', '5-10') ?>"
+                       pattern="([0-9]{1,3})-([0-9]{1,3})" required>
 
-                    <br>
-                    <!-- Вид инвайтов-->
-                    <label for="mode" class="control-label"><?php echo $txtglobali21 ?></label>
+                <br>
 
-                    <select name="mode" id="mode" class="form-control">
-                        <option value="all">ALL</option>
-                        <option value="post"><?php echo $txtglobali14 ?></option>
-                        <option value="nyou"><?php echo $txtglobali15 ?></option>
+                <label for="mode"><?= $txtglobali21 ?></label>
+                <select name="mode" id="mode" class="form-control">
+                    <option value="all" <?= fsel('mode', 'all') ?>>ALL</option>
+                    <option value="post" <?= fsel('mode', 'post') ?>><?= $txtglobali14 ?></option>
+                    <option value="nyou" <?= fsel('mode', 'nyou') ?>><?= $txtglobali15 ?></option>
+                </select>
 
+                <br>
 
-                    </select>
+                <label for="geo"><?= $txtinv31 ?> <?= $txtinvg1 ?></label>
+                <select name="geo" id="geo" class="form-control">
+                    <option value="all" <?= fsel('geo', 'all') ?>>ALL</option>
+                    <?php foreach ($geo1 as $a): ?>
+                        <option value="<?= $a['id'] ?>" <?= fsel('geo', $a['id']) ?>>
+                            <?= $a['name'] ?>
+                        </option>
+                    <?php endforeach ?>
+                </select>
 
-                    <br>
-                    <!-- ГЕО -->
-                    <label for="geo" class="control-label"><?php echo $txtinv31 ?> <?php echo $txtinvg1 ?></label>
+                <br>
 
-                    <select name="geo" id="geo" class="form-control">
-                        <option value="all">ALL</option>
-                        <?php
-                        $i = 0;
-                        foreach ($geo1 as $a) {
-                            $i++; ?>
-                            <option value="<?php echo $a['id'] ?>"><?php echo $a['name']; ?></option>
-                        <?php } ?>
-                    </select>
+                <label for="filter">Name filter</label>
+                <select name="filter" id="filter" class="form-control">
+                    <?php
+                    $options_filter = [
+                        "all" => "All", "cyr" => "Cyr", "lat" => "Lat", "cl" => "Cyr + Lat",
+                        "black" => "Black", "white" => "White", "blackwhite" => "Black + White"
+                    ];
+                    foreach ($options_filter as $key => $label): ?>
+                        <option value="<?= $key ?>" <?= fsel('filter', $key) ?>><?= $label ?></option>
+                    <?php endforeach ?>
+                </select>
 
-                    <br>
+                <br>
 
-                    <!-- Фильтры -->
+                <label for="wln"><?= $txtinv32 ?></label>
+                <select name="wln" id="wln" class="form-control">
+                    <option value="all" <?= fsel('wln', 'all') ?>>ALL</option>
+                    <?php foreach ($name1 as $d): ?>
+                        <option value="<?= $d['id'] ?>" <?= fsel('wln', $d['id']) ?>><?= $d['name'] ?></option>
+                    <?php endforeach ?>
+                </select>
 
-                    <label for="filter">Name filter</label>
-                    <select class="form-select" id="filter" name="filter"
-                            aria-label="Floating label select example">
+                <br>
 
-                        <option value="all">All</option>
-                        <option value="cyr">Cyr</option>
-                        <option value="lat">Lat</option>
-                        <option value="cl">Cyr + Lat</option>
-                        <option value="black">Black</option>
-                        <option value="white">White</option>
-                        <option value="blackwhite">Black + White</option>
-                    </select>
-                    <br>
-                    <!-- WL -->
-                    <label for="wln" class="control-label"><?php echo $txtinv32 ?></label>
+                <label for="bln"><?= $txtinv33 ?></label>
+                <select name="bln" id="bln" class="form-control">
+                    <option value="all" <?= fsel('bln', 'all') ?>>ALL</option>
+                    <?php foreach ($name1 as $c): ?>
+                        <option value="<?= $c['id'] ?>" <?= fsel('bln', $c['id']) ?>><?= $c['name'] ?></option>
+                    <?php endforeach ?>
+                </select>
 
-                    <select name="wln" id="wln" class="form-control">
-                        <option value="all">ALL</option>
-                        <?php
-                        $i = 0;
-                        foreach ($name1 as $d) {
-                            $i++; ?>
-                            <option value="<?php echo $d['id'] ?>"><?php echo $d['name']; ?></option>
-                        <?php } ?>
-                    </select>
-                    <br>
-                    <!-- BL -->
-                    <label for="bln" class="control-label"><?php echo $txtinv33 ?></label>
+                <br>
 
-                    <select name="bln" id="bln" class="form-control">
-                        <option value="all">ALL</option>
-                        <?php
-                        $i = 0;
-                        foreach ($name1 as $c) {
-                            $i++; ?>
-                            <option value="<?php echo $c['id'] ?>"><?php echo $c['name']; ?></option>
-                        <?php } ?>
-                    </select>
-                    <br>
-                    <!-- GBL -->
-                    <label for="gbl" class="control-label"><?php echo $txtinv34 ?></label>
+                <label for="gbl"><?= $txtinv34 ?></label>
+                <select name="gbl" id="gbl" class="form-control">
+                    <option value="no" <?= fsel('gbl', 'no') ?>>No black list</option>
+                    <?php foreach ($bl1 as $b): ?>
+                        <option value="<?= $b['id'] ?>" <?= fsel('gbl', $b['id']) ?>><?= $b['name'] ?></option>
+                    <?php endforeach ?>
+                </select>
 
-                    <select name="gbl" id="gbl" class="form-control">
-                        <option value="no">No black list</option>
-                        <?php
-                        $i = 0;
-                        foreach ($bl1 as $b) {
-                            $i++; ?>
-                            <option value="<?php echo $b['id'] ?>"><?php echo $b['name']; ?></option>
-                        <?php } ?>
-                    </select>
-                    <br>
+                <br>
 
+                <label for="confirm">Confirm or Cancel</label>
+                <select name="confirm" id="confirm" class="form-control">
+                    <option value="1" <?= fsel('confirm', '1') ?>>Confirm</option>
+                    <option value="2" <?= fsel('confirm', '2') ?>>Cancel</option>
+                </select>
 
-                    <!-- конфирм -->
-                    <label for="confirm">Confirm or Cancel</label>
-                    <select class="form-select" id="confirm" name="confirm">
+                <br>
 
-                        <option value="1">Confirm</option>
-                        <option value="2">Cancel</option>
+                <label for="num_co"><?= $txtnewacc6 ?></label>
+                <input type="number" name="num_co" id="num_co"
+                       class="form-control"
+                       value="<?= fv('num_co', '5') ?>" required>
 
-                    </select>
-                    <br>
+                <br>
 
-                    <!-- количество конфирмов -->
-                    <label for="num_co"><?php echo $txtnewacc6 ?></label>
-                    <input type="number" name="num_co" id="num_co" class="form-control" value="5"
-                           required>
+                <label for="f24"><?= $txtfarmi11 ?></label>
+                <input type="number" name="f24" id="f24"
+                       class="form-control"
+                       value="<?= fv('f24', '5') ?>" required>
 
+                <br>
 
-                    <br>
-                    <!-- раз в день -->
-                    <label for="f24"><?php echo $txtfarmi11 ?></label>
-                    <input type="number" name="f24" id="f24" class="form-control"
-                           value="5" required>
+                <label for="parse">Parse member?</label>
+                <select name="parse" id="parse" class="form-control">
+                    <option value="no" <?= fsel('parse', 'no') ?>>No</option>
+                    <?php foreach ($me1 as $s): ?>
+                        <option value="<?= $s['id'] ?>" <?= fsel('parse', $s['id']) ?>>
+                            <?= $s['name'] ?>
+                        </option>
+                    <?php endforeach ?>
+                </select>
 
+                <br><br>
 
-                    <br>
-                    <label for="parse">Parse member?</label>
-                    <select class="form-select" id="parse" name="parse">
+                <button class="btn btn-secondary" name="add_task" value="invite_from_group">
+                    ✅ SAVE
+                </button>
 
-                        <option value="no">No</option>
-                        <?php
-                        $i = 0;
-                        foreach ($me1 as $s) {
-                            $i++; ?>
-                            <option value="<?php echo $s['id'] ?>"><?php echo $s['name']; ?></option>
-                        <?php } ?>
-
-                    </select>
-                    <br>
-
-                    <button class="btn btn-secondary" name="add_task" id="add_task" value="invite_from_group">ACTIVATE
-                    </button>
-
-
-                </form>
-            </div>
+            </form>
         </div>
     </div>
-
-
 </main>

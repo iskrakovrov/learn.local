@@ -242,7 +242,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <?php endforeach; ?>
                             </select>
 
-                            <label for="registrationMethod" class="form-label">What do we use for registration?</label>
+                            <label for="registrationMethod" class="form-label">What do we use for registration first?</label>
                             <select class="form-select" id="registrationMethod" name="registration_method" aria-label="Registration method select">
                                 <option selected disabled>Select registration method</option>
                                 <option value="1" <?= ($savedOptions['registration_method'] ?? null) == 1 ? 'selected' : '' ?>>Phone</option>

@@ -1182,3 +1182,12 @@ function log_to_file($message) {
     $message = is_array($message) ? print_r($message, true) : $message;
     file_put_contents($log_file, "$timestamp $message\n", FILE_APPEND);
 }
+
+
+/**
+ * Return all steps for template ordered by step_order
+ */
+function getTemplateSteps(int $templateId): array {
+    $sql = "SELECT id, id_template, task, setup, step_order FROM template WHERE id_template = ? ORDER BY step_order ASC";
+    return selectAll($sql, [$templateId]) ?: [];
+}

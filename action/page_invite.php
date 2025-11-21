@@ -1,74 +1,75 @@
 <?php
-$sql = 'SELECT * FROM lists WHERE cat = 11';
-$qw = selectAll($sql);
+$taskFile = basename(__FILE__);
+$setup = $_SESSION['setup'][$taskFile] ?? [];
 
+// Helpers
+function fv($name, $default = '') {
+    global $setup;
+    return htmlspecialchars($setup[$name] ?? $default);
+}
+function fsel($name, $value) {
+    global $setup;
+    return (isset($setup[$name]) && $setup[$name] == $value) ? 'selected' : '';
+}
+
+$qw = selectAll('SELECT * FROM lists WHERE cat = 11');
 ?>
 
-<main class="container-fluid ">
+<main class="container-fluid">
     <div class="row text-center">
-        <h2><?php echo $txtipage ?></h2>
+        <h2><?= $txtipage ?></h2>
     </div>
-    <div class="col align-center">
 
-        <div class="row justify-content-center">
-            <div class="col-6 text-center">
-
-
-                <div class="alert alert-info" role="alert">
-                    <?php echo $txtipage1 ?>
-                </div>
+    <div class="row justify-content-center">
+        <div class="col-6 text-center">
+            <div class="alert alert-info" role="alert">
+                <?= $txtipage1 ?>
             </div>
         </div>
     </div>
 
-    <div class="container-fluid">
-        <div class="row justify-content-center">
-            <div class="col-sm-2 text-center">
-                <form method="post" onSubmit="return Complete();">
+    <div class="row justify-content-center">
+        <div class="col-sm-2 text-center">
 
+            <form method="post" onsubmit="return Complete();">
 
-                    <label for="cat" class="control-label"><?php echo $txtipage2 ?></label>
+                <label for="cat"><?= $txtipage2 ?></label>
+                <select name="cat" id="cat" class="form-control">
+                    <?php foreach ($qw as $a): ?>
+                        <option value="<?= $a['id'] ?>" <?= fsel('cat', $a['id']) ?>>
+                            <?= htmlspecialchars($a['name']) ?>
+                        </option>
+                    <?php endforeach ?>
+                </select>
 
-                    <select name="cat" id="cat" class="form-control">
-                        <?php
-                        $i = 0;
-                        foreach ($qw as $a) {
-                            $i++; ?>
-                            <option value="<?php echo $a['id'] ?>"><?php echo $a['name']; ?></option>
-                        <?php } ?>
-                    </select>
+                <br>
 
-                    <br>
-                    <label for="inv" class="control-label">Invite type</label>
-                    <select name="inv" id="inv" class="form-control">
-                        <option value="0">40 invites at a time</option>
-                        <option value="1">All</option>
-                    </select>
+                <label for="inv">Invite type</label>
+                <select name="inv" id="inv" class="form-control">
+                    <option value="0" <?= fsel('inv', '0') ?>>40 invites at a time</option>
+                    <option value="1" <?= fsel('inv', '1') ?>>All</option>
+                </select>
 
-                    <br>
+                <br>
 
-                    <label for="n_inv">How many times if the mode is 40 invites</label>
-                    <input type="number" name="n_inv" id="n_inv" class="form-control"
-                           value="2">
-                    <br>
+                <label for="n_inv">How many times if the mode is 40 invites</label>
+                <input type="number" name="n_inv" id="n_inv" class="form-control"
+                       value="<?= fv('n_inv', 2) ?>">
 
-                    <label for="f24"><?php echo $txtfarmi11 ?></label>
-                    <input type="number" name="f24" id="f24" class="form-control"
-                           placeholder="3" required>
+                <br>
 
-                    <br>
+                <label for="f24"><?= $txtfarmi11 ?></label>
+                <input type="number" name="f24" id="f24" class="form-control"
+                       value="<?= fv('f24', 3) ?>" required>
 
+                <br><br>
 
-                    <button class="btn btn-secondary" name="add_task" id="add_task" value="page_invite">ACTIVATE
-                    </button>
+                <button class="btn btn-secondary" name="add_task" value="page_invite">
+                    ✅ SAVE
+                </button>
 
+            </form>
 
-
-                </form>
-            </div>
         </div>
     </div>
-
-
 </main>
-

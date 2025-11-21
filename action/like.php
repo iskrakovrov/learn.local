@@ -1,71 +1,74 @@
 <?php
-$sql = 'SELECT * FROM lists WHERE cat = 11';
-$qw = selectAll($sql);
+$taskFile = basename(__FILE__);
+$setup = $_SESSION['setup'][$taskFile] ?? [];
 
+// Helpers
+function fv($name, $default = '') {
+    global $setup;
+    return htmlspecialchars($setup[$name] ?? $default);
+}
+function fsel($name, $value) {
+    global $setup;
+    return (!empty($setup[$name]) && $setup[$name] == $value) ? 'selected' : '';
+}
+
+$qw = selectAll('SELECT * FROM lists WHERE cat = 11');
 ?>
 
-<main class="container-fluid ">
+<main class="container-fluid">
     <div class="row text-center">
         <h2>Likes</h2>
     </div>
-    <div class="col align-center">
 
-        <div class="row justify-content-center">
-            <div class="col-6 text-center">
-
-
-                <div class="alert alert-info" role="alert">
-                    <?php echo $txtlike ?>
-                </div>
+    <div class="row justify-content-center">
+        <div class="col-6 text-center">
+            <div class="alert alert-info" role="alert">
+                <?= $txtlike ?>
             </div>
         </div>
     </div>
 
-    <div class="container-fluid">
-        <div class="row justify-content-center">
-            <div class="col-sm-2 text-center">
-                <form method="post" onSubmit="return Complete();">
+    <div class="row justify-content-center">
+        <div class="col-sm-2 text-center">
 
-                    <label for="cat" class="control-label"><?php echo $txtlike1 ?></label>
+            <form method="post" onsubmit="return Complete();">
 
-                    <select name="cat" id="cat" class="form-control">
-                        <?php
-                        $i = 0;
-                        foreach ($qw as $a) {
-                            $i++; ?>
-                            <option value="<?php echo $a['id'] ?>"><?php echo $a['name']; ?></option>
-                        <?php } ?>
-                    </select>
+                <label for="cat"><?= $txtlike1 ?></label>
+                <select name="cat" id="cat" class="form-control">
+                    <?php foreach ($qw as $a): ?>
+                        <option value="<?= $a['id'] ?>" <?= fsel('cat', $a['id']) ?>>
+                            <?= $a['name'] ?>
+                        </option>
+                    <?php endforeach ?>
+                </select>
 
-                    <br>
+                <br>
 
+                <label for="num_l"><?= $txtlike2 ?></label>
+                <input type="text" name="num_l" id="num_l" class="form-control"
+                       value="<?= fv('num_l', '5') ?>" required>
 
-                    <label for="num_l"><?php echo $txtlike2 ?></label>
-                    <input type="text" name="num_l" id="num_l" class="form-control" value="5" required>
+                <br>
 
+                <label for="pause"><?= $txtnewacc5 ?></label>
+                <input type="text" name="pause" id="pause" class="form-control"
+                       value="<?= fv('pause', '5-10') ?>"
+                       pattern="([0-9]{1,3})-([0-9]{1,3})" required>
 
-                    <br>
-                    <label for="pause"><?php echo $txtnewacc5 ?></label>
-                    <input type="text" name="pause" id="pause" class="form-control" value="5-10"
-                           pattern="([0-9]{1,3})-([0-9]{1,3})" required>
-                    <br>
-                    <label for="f24"><?php echo $txtfarmi11 ?></label>
-                    <input type="number" name="f24" id="f24" class="form-control"
-                           value="3" required>
+                <br>
 
+                <label for="f24"><?= $txtfarmi11 ?></label>
+                <input type="number" name="f24" id="f24" class="form-control"
+                       value="<?= fv('f24', 3) ?>" required>
 
-                    <br>
+                <br><br>
 
+                <button class="btn btn-secondary" name="add_task" value="like">
+                    ✅ SAVE
+                </button>
 
-                    <button class="btn btn-secondary" name="add_task" id="add_task" value="like">ACTIVATE
-                    </button>
+            </form>
 
-
-                </form>
-            </div>
         </div>
     </div>
-
-
 </main>
-
